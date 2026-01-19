@@ -109,9 +109,10 @@
 
           <a
             class="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-cyan-500/15 px-4 py-3 text-sm font-semibold text-cyan-100 ring-1 ring-cyan-300/20 transition hover:bg-cyan-500/20"
-            href="https://github.com/illmedicine/LivePay"
+            href="http://localhost:8085/"
             target="_blank"
             rel="noopener noreferrer"
+            onclick="openLocalOrGithub('http://localhost:8085/','https://github.com/illmedicine/LivePay'); return false;"
           >
             Launch LivePay
             <span class="text-cyan-200/70 transition group-hover:translate-x-0.5">↗</span>
@@ -140,6 +141,20 @@
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      async function openLocalOrGithub(localUrl, githubUrl) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 900);
+
+        try {
+          await fetch(localUrl, { mode: "no-cors", signal: controller.signal });
+          window.open(localUrl, "_blank", "noopener");
+        } catch (e) {
+          window.open(githubUrl, "_blank", "noopener");
+        } finally {
+          clearTimeout(timeoutId);
+        }
+      }
     </script>
   </body>
 </html>
