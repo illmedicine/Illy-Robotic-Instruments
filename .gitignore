@@ -24,3 +24,7 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# workspace app folders
+Frontend/
+LivePay/
