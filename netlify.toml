@@ -6,6 +6,18 @@
   to = "/index.html"
   status = 200
 
+ [[redirects]]
+   from = "/illysocial/*"
+   to = "https://illysocialv2-app.netlify.app/:splat"
+   status = 200
+   force = true
+
+ [[redirects]]
+   from = "/livepay/*"
+   to = "https://livepay-app.netlify.app/:splat"
+   status = 200
+   force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
