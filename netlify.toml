@@ -1,10 +1,10 @@
 [build]
-  publish = "."
+  base = "site-next"
+  command = "npm run build"
+  publish = ".next"
 
-[[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
  [[redirects]]
    from = "/illysocial/*"
