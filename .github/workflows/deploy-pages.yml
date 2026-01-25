@@ -26,6 +26,66 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout LivePay
+        uses: actions/checkout@v4
+        with:
+          repository: illmedicine/LivePay
+          ref: main
+          path: _livepay
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: _livepay/package-lock.json
+
+      - name: Build LivePay for /livepay
+        working-directory: _livepay
+        run: |
+          npm ci
+          npx expo export --platform web
+
+      - name: Normalize LivePay routes for GitHub Pages
+        run: |
+          # GitHub Pages doesn't support extensionless rewrites by default.
+          # Convert generated route HTML files (e.g. settings.html) into folders (settings/index.html).
+          set -euo pipefail
+
+          # Provide a Pages-compatible 404 for the /livepay subtree.
+          if [ -f "_livepay/dist/+not-found.html" ]; then
+            cp "_livepay/dist/+not-found.html" "_livepay/dist/404.html"
+          fi
+
+          # Convert top-level routes.
+          for f in _livepay/dist/*.html; do
+            b="$(basename "$f")"
+            n="${b%.html}"
+            if [ "$b" = "index.html" ] || [ "$b" = "404.html" ] || [ "$b" = "+not-found.html" ] || [ "$b" = "_sitemap.html" ]; then
+              continue
+            fi
+            mkdir -p "_livepay/dist/$n"
+            mv "$f" "_livepay/dist/$n/index.html"
+          done
+
+          # Convert one-level deep routes (e.g. (tabs)/two.html -> (tabs)/two/index.html).
+          for f in _livepay/dist/*/*.html; do
+            d="$(dirname "$f")"
+            b="$(basename "$f")"
+            n="${b%.html}"
+            if [ "$b" = "index.html" ] || [ "$b" = "404.html" ] || [ "$b" = "+not-found.html" ] || [ "$b" = "_sitemap.html" ]; then
+              continue
+            fi
+            mkdir -p "$d/$n"
+            mv "$f" "$d/$n/index.html"
+          done
+
+      - name: Copy LivePay into Pages artifact
+        run: |
+          rm -rf site-next/public/livepay
+          mkdir -p site-next/public/livepay
+          cp -a _livepay/dist/. site-next/public/livepay/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
