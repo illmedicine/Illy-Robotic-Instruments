@@ -13,6 +13,36 @@
    force = true
 
  [[redirects]]
+   from = "/two"
+   to = "https://livepay-app.netlify.app/two"
+   status = 200
+   force = true
+
+ [[redirects]]
+   from = "/settings"
+   to = "https://livepay-app.netlify.app/settings"
+   status = 200
+   force = true
+
+ [[redirects]]
+   from = "/modal"
+   to = "https://livepay-app.netlify.app/modal"
+   status = 200
+   force = true
+
+ [[redirects]]
+   from = "/cashout"
+   to = "https://livepay-app.netlify.app/cashout"
+   status = 200
+   force = true
+
+ [[redirects]]
+   from = "/onboarding"
+   to = "https://livepay-app.netlify.app/onboarding"
+   status = 200
+   force = true
+
+ [[redirects]]
    from = "/livepay/*"
    to = "https://livepay-app.netlify.app/:splat"
    status = 200
