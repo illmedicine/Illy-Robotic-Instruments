@@ -52,6 +52,12 @@ jobs:
           # Convert generated route HTML files (e.g. settings.html) into folders (settings/index.html).
           set -euo pipefail
 
+          # Expo exports some assets with absolute URLs (e.g. /assets/... and /_expo/...).
+          # Since we're hosting under /livepay, rewrite these to relative URLs.
+          # This keeps asset loading working when the app is served from /livepay/.
+          find _livepay/dist -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) -print0 |
+            xargs -0 -I {} perl -0777 -pe 's#"/(_expo/)#"$1#g; s#"/(assets/)#"$1#g; s#url\(\"/(assets/)#url("$1#g; s#url\(/(assets/)#url($1#g' -i "{}"
+
           # Provide a Pages-compatible 404 for the /livepay subtree.
           if [ -f "_livepay/dist/+not-found.html" ]; then
             cp "_livepay/dist/+not-found.html" "_livepay/dist/404.html"
@@ -85,6 +91,10 @@ jobs:
           rm -rf site-next/public/livepay
           mkdir -p site-next/public/livepay
           cp -a _livepay/dist/. site-next/public/livepay/
+
+      - name: Verify /livepay artifact exists
+        run: |
+          test -f site-next/public/livepay/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
