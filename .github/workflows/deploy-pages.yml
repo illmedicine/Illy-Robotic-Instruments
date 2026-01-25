@@ -33,12 +33,21 @@ jobs:
           ref: main
           path: _livepay
 
+      - name: Checkout IllySocial
+        uses: actions/checkout@v4
+        with:
+          repository: illmedicine/illysocialV2
+          ref: main
+          path: _illysocial
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: _livepay/package-lock.json
+          cache-dependency-path: |
+            _livepay/package-lock.json
+            _illysocial/Frontend/package-lock.json
 
       - name: Build LivePay for /livepay
         working-directory: _livepay
@@ -91,6 +100,21 @@ jobs:
           rm -rf site-next/public/livepay
           mkdir -p site-next/public/livepay
           cp -a _livepay/dist/. site-next/public/livepay/
+
+      - name: Build IllySocial for /illysocial
+        working-directory: _illysocial/Frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copy IllySocial into Pages artifact
+        run: |
+          rm -rf site-next/public/illysocial
+          mkdir -p site-next/public/illysocial
+          cp -a _illysocial/Frontend/dist/. site-next/public/illysocial/
+
+          # SPA deep links on GitHub Pages should fall back to index.html.
+          cp site-next/public/illysocial/index.html site-next/public/illysocial/404.html
 
       - name: Verify /livepay artifact exists
         run: |
