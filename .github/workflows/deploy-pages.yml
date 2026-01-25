@@ -113,8 +113,37 @@ jobs:
           mkdir -p site-next/public/illysocial
           cp -a _illysocial/Frontend/dist/. site-next/public/illysocial/
 
-          # SPA deep links on GitHub Pages should fall back to index.html.
-          cp site-next/public/illysocial/index.html site-next/public/illysocial/404.html
+          # Support deep links like /illysocial/foo on GitHub Pages.
+          # GitHub Pages serves ONLY the site-root /404.html for unknown routes, so:
+          # 1) we generate a root 404.html that redirects /illysocial/* -> /illysocial/?p=<path>
+          # 2) we patch /illysocial/index.html to restore the original path.
+          perl -0777 -pe 's#</head>#<script>(function(){var p=new URLSearchParams(window.location.search);var r=p.get("p");if(r){if(r.startsWith("/")){r=r.slice(1);}window.history.replaceState(null,"",window.location.pathname.replace(/\/?$/,"/")+r+window.location.hash);p.delete("p");var q=p.toString();if(q){window.history.replaceState(null,"",window.location.pathname+"?"+q+window.location.hash);}else{window.history.replaceState(null,"",window.location.pathname+window.location.hash);}}})();</script></head>#s' -i site-next/public/illysocial/index.html
+
+          cat > site-next/public/404.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Not Found</title>
+              <script>
+                (function () {
+                  var path = window.location.pathname || '/';
+                  if (path.startsWith('/illysocial/')) {
+                    var rest = path.substring('/illysocial/'.length);
+                    var target = '/illysocial/?p=' + encodeURIComponent(rest) + window.location.search + window.location.hash;
+                    window.location.replace(target);
+                    return;
+                  }
+                })();
+              </script>
+            </head>
+            <body>
+              <h1>404</h1>
+              <p>Not found. Go to <a href="/">home</a>.</p>
+            </body>
+          </html>
+          EOF
 
       - name: Verify /livepay artifact exists
         run: |
