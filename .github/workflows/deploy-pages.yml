@@ -30,8 +30,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: illmedicine/LivePay
-          ref: main
+          ref: refs/heads/main
+          fetch-depth: 1
           path: _livepay
+
+      - name: Ensure LivePay is latest main
+        run: |
+          set -euo pipefail
+          cd _livepay
+          git remote -v
+          git fetch --depth=1 origin main
+          git reset --hard origin/main
+          echo "LivePay SHA: $(git rev-parse HEAD)"
 
       - name: Checkout IllySocial
         uses: actions/checkout@v4
