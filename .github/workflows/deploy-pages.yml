@@ -120,6 +120,32 @@ jobs:
           mkdir -p site-next/public/livepay
           cp -a _livepay/dist/. site-next/public/livepay/
 
+      - name: Redirect /livepay to LivePay GitHub Pages
+        run: |
+          cat > site-next/public/livepay/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Redirecting…</title>
+              <meta http-equiv="refresh" content="0; url=https://illmedicine.github.io/LivePay/" />
+              <script>
+                (function () {
+                  var target = 'https://illmedicine.github.io/LivePay/';
+                  window.location.replace(target);
+                })();
+              </script>
+            </head>
+            <body>
+              <p>
+                Redirecting to
+                <a href="https://illmedicine.github.io/LivePay/">https://illmedicine.github.io/LivePay/</a>
+              </p>
+            </body>
+          </html>
+          EOF
+
       - name: Build IllySocial for /illysocial
         working-directory: _illysocial/Frontend
         run: |
@@ -151,6 +177,12 @@ jobs:
                   if (path.startsWith('/illysocial/')) {
                     var rest = path.substring('/illysocial/'.length);
                     var target = '/illysocial/?p=' + encodeURIComponent(rest) + window.location.search + window.location.hash;
+                    window.location.replace(target);
+                    return;
+                  }
+                  if (path.startsWith('/livepay/')) {
+                    var rest = path.substring('/livepay/'.length);
+                    var target = 'https://illmedicine.github.io/LivePay/' + rest + window.location.search + window.location.hash;
                     window.location.replace(target);
                     return;
                   }
