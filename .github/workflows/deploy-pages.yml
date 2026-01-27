@@ -158,6 +158,32 @@ jobs:
           mkdir -p site-next/public/illysocial
           cp -a _illysocial/Frontend/dist/. site-next/public/illysocial/
 
+      - name: Redirect /illysocial to IllySocial GitHub Pages
+        run: |
+          cat > site-next/public/illysocial/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Redirecting…</title>
+              <meta http-equiv="refresh" content="0; url=https://illmedicine.github.io/illysocialV2/" />
+              <script>
+                (function () {
+                  var target = 'https://illmedicine.github.io/illysocialV2/';
+                  window.location.replace(target);
+                })();
+              </script>
+            </head>
+            <body>
+              <p>
+                Redirecting to
+                <a href="https://illmedicine.github.io/illysocialV2/">https://illmedicine.github.io/illysocialV2/</a>
+              </p>
+            </body>
+          </html>
+          EOF
+
           # Support deep links like /illysocial/foo on GitHub Pages.
           # GitHub Pages serves ONLY the site-root /404.html for unknown routes, so:
           # 1) we generate a root 404.html that redirects /illysocial/* -> /illysocial/?p=<path>
@@ -176,7 +202,7 @@ jobs:
                   var path = window.location.pathname || '/';
                   if (path.startsWith('/illysocial/')) {
                     var rest = path.substring('/illysocial/'.length);
-                    var target = '/illysocial/?p=' + encodeURIComponent(rest) + window.location.search + window.location.hash;
+                    var target = 'https://illmedicine.github.io/illysocialV2/' + rest + window.location.search + window.location.hash;
                     window.location.replace(target);
                     return;
                   }
