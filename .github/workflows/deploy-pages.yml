@@ -50,6 +50,15 @@ jobs:
           ref: main
           path: _illysocial
 
+      - name: Ensure IllySocial is latest main
+        run: |
+          set -euo pipefail
+          cd _illysocial
+          git remote -v
+          git fetch --depth=1 origin main
+          git reset --hard origin/main
+          echo "IllySocial SHA: $(git rev-parse HEAD)"
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
