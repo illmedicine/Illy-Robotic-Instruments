@@ -69,7 +69,7 @@
           <a href="#products" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
           <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
           <a href="#capabilities" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Capabilities</a>
-          <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+          <button onclick="openContactModal()" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</button>
         </div>
         <a href="#products" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity">
           Explore Solutions
@@ -382,14 +382,14 @@
       <h2 class="text-4xl lg:text-5xl font-black tracking-tight mb-6">READY TO TRANSFORM FINANCE?</h2>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">Join the movement building decentralized financial infrastructure for everyone.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer"
+        <a href="https://discord.gg/EdqbqPeusF" target="_blank" rel="noopener noreferrer"
            class="inline-flex items-center gap-3 bg-white text-navy-900 px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors">
           Start Exploring
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
-        <a href="#contact" class="inline-flex items-center gap-3 border-2 border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
+        <button onclick="openContactModal()" class="inline-flex items-center gap-3 border-2 border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-colors">
           Contact Us
-        </a>
+        </button>
       </div>
     </div>
   </section>
@@ -437,7 +437,7 @@
           <ul class="space-y-4 text-gray-400">
             <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
             <li><a href="#capabilities" class="hover:text-white transition-colors">Capabilities</a></li>
-            <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+            <li><button onclick="openContactModal()" class="hover:text-white transition-colors">Contact</button></li>
           </ul>
         </div>
       </div>
@@ -459,5 +459,193 @@
       </div>
     </div>
   </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeContactModal()"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative w-full max-w-lg bg-navy-800 border border-white/10 rounded-2xl p-8 max-h-[90vh] overflow-y-auto">
+      <!-- Close Button -->
+      <button onclick="closeContactModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      
+      <!-- Header -->
+      <div class="mb-8">
+        <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-2">Get In Touch</p>
+        <h3 class="text-2xl font-black tracking-tight">REQUEST CONSULTATION</h3>
+      </div>
+      
+      <!-- Form -->
+      <form id="contactForm" class="space-y-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+          <input type="text" id="name" name="name" required
+                 class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                 placeholder="John Doe">
+        </div>
+        
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
+          <input type="email" id="email" name="email" required
+                 class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                 placeholder="john@company.com">
+        </div>
+        
+        <!-- Company -->
+        <div>
+          <label for="company" class="block text-sm font-medium text-gray-300 mb-2">Company / Organization</label>
+          <input type="text" id="company" name="company"
+                 class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                 placeholder="Acme Inc.">
+        </div>
+        
+        <!-- Product Interest -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-3">Product Interest *</label>
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="products" value="IllySocial" class="w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
+              <span class="text-gray-300 group-hover:text-white transition-colors">IllySocial - Community & Engagement</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="products" value="LivePay" class="w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
+              <span class="text-gray-300 group-hover:text-white transition-colors">LivePay - Data Monetization</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="products" value="DisCryptoBank" class="w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
+              <span class="text-gray-300 group-hover:text-white transition-colors">DisCryptoBank - Crypto Payroll</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="products" value="SEO & Automation" class="w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
+              <span class="text-gray-300 group-hover:text-white transition-colors">SEO & Marketing Automation</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="products" value="Custom Development" class="w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
+              <span class="text-gray-300 group-hover:text-white transition-colors">Custom Development / Integration</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+          <textarea id="message" name="message" rows="4"
+                    class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors resize-none"
+                    placeholder="Tell us about your project or goals..."></textarea>
+        </div>
+        
+        <!-- Submit Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button type="submit"
+                  class="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:opacity-90 transition-opacity">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Send Message
+          </button>
+          <button type="button" onclick="scheduleConsultation()"
+                  class="flex-1 inline-flex items-center justify-center gap-2 border-2 border-cyan-500 text-cyan-400 px-6 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Schedule Call
+          </button>
+        </div>
+      </form>
+      
+      <!-- Success Message (hidden by default) -->
+      <div id="formSuccess" class="hidden text-center py-8">
+        <div class="h-16 w-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h4 class="text-xl font-bold mb-2">Message Sent!</h4>
+        <p class="text-gray-400">We'll get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal Functions
+    function openContactModal() {
+      const modal = document.getElementById('contactModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeContactModal() {
+      const modal = document.getElementById('contactModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      // Reset form
+      document.getElementById('contactForm').reset();
+      document.getElementById('contactForm').classList.remove('hidden');
+      document.getElementById('formSuccess').classList.add('hidden');
+    }
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeContactModal();
+    });
+    
+    // Schedule Consultation - Opens Google Calendar
+    function scheduleConsultation() {
+      const name = document.getElementById('name').value || 'Guest';
+      const email = document.getElementById('email').value || '';
+      const company = document.getElementById('company').value || '';
+      
+      // Get selected products
+      const products = Array.from(document.querySelectorAll('input[name="products"]:checked')).map(cb => cb.value).join(', ');
+      const message = document.getElementById('message').value || '';
+      
+      // Create event details
+      const title = encodeURIComponent(`Illy Robotic Consultation - ${name}`);
+      const details = encodeURIComponent(`Consultation Request\n\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nProducts of Interest: ${products || 'Not specified'}\n\nMessage:\n${message}`);
+      
+      // Google Calendar URL (30 min meeting)
+      const now = new Date();
+      const startTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Tomorrow
+      startTime.setHours(10, 0, 0, 0); // 10 AM
+      const endTime = new Date(startTime.getTime() + 30 * 60 * 1000); // 30 min later
+      
+      const formatDate = (date) => date.toISOString().replace(/-|:|\.\d{3}/g, '');
+      
+      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${formatDate(startTime)}/${formatDate(endTime)}&add=demarkuswilsone@gmail.com`;
+      
+      window.open(calendarUrl, '_blank');
+    }
+    
+    // Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const company = document.getElementById('company').value || 'Not provided';
+      const products = Array.from(document.querySelectorAll('input[name="products"]:checked')).map(cb => cb.value).join(', ') || 'Not specified';
+      const message = document.getElementById('message').value || 'No message';
+      
+      // Create mailto link
+      const subject = encodeURIComponent(`[Illy Robotic] Contact from ${name}`);
+      const body = encodeURIComponent(`New Contact Form Submission\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Company: ${company}\n` +
+        `Products of Interest: ${products}\n\n` +
+        `Message:\n${message}`);
+      
+      // Open email client
+      window.location.href = `mailto:demarkuswilsone@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Show success message
+      document.getElementById('contactForm').classList.add('hidden');
+      document.getElementById('formSuccess').classList.remove('hidden');
+      
+      // Auto close after 3 seconds
+      setTimeout(closeContactModal, 3000);
+    });
+  </script>
 </body>
 </html>
