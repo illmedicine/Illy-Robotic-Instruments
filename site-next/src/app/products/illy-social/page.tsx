@@ -1,7 +1,17 @@
 export default function IllySocialPage() {
   return (
     <div className="min-h-screen bg-ink-950 text-slate-100">
-      {/* Hero Section */}
+      {/* Meta redirect */}
+      <head>
+        <meta httpEquiv="refresh" content="0; url=https://illmedicine.github.io/illysocialV2/" />
+      </head>
+      
+      {/* Redirect Script */}
+      <script dangerouslySetInnerHTML={{
+        __html: `window.location.replace('https://illmedicine.github.io/illysocialV2/');`
+      }} />
+
+      {/* Hero Section - Fallback content while redirecting */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-40 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl"></div>
@@ -21,7 +31,7 @@ export default function IllySocialPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-violet-500/10 px-3 py-1 text-xs text-violet-300 ring-1 ring-violet-500/30">
                 <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse"></span>
-                Active Platform
+                Launching Platform...
               </div>
 
               <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight md:text-6xl">
@@ -29,22 +39,20 @@ export default function IllySocialPage() {
               </h1>
               
               <p className="mt-4 text-xl text-violet-400 font-semibold">
-                Multi-Channel Ecosystem for the Data-Sovereign Creator
+                Redirecting to Platform
               </p>
 
               <p className="mt-6 text-lg leading-relaxed text-slate-200">
-                A comprehensive social commerce platform that empowers creators with multi-channel presence, 
-                complete data sovereignty, and direct monetization—without platform dependency or value extraction.
+                You are being redirected to the Illy Social platform. If you are not redirected automatically, 
+                click the button below.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a 
                   href="https://illmedicine.github.io/illysocialV2/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-500 to-pink-500 px-6 py-3 text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-all"
                 >
-                  Launch Platform
+                  Launch Platform Manually
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
