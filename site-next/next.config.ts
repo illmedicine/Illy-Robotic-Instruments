@@ -64,11 +64,6 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: "/",
-        destination: "/index.html",
-        permanent: false,
-      },
-      {
         source: "/whitepaper",
         destination: "/whitepaper/index.html",
         permanent: false,
