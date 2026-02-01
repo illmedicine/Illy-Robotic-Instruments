@@ -226,6 +226,29 @@ jobs:
         run: |
           test -f site-next/public/livepay/index.html
 
+
+      - name: Setup Node for Next.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: site-next/package-lock.json
+
+      - name: Build Next.js site
+        working-directory: site-next
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copy Next.js build to public
+        run: |
+          # Copy Next.js static export to public folder
+          cp -r site-next/out/. site-next/public/
+          # Ensure CNAME file is present
+          if [ ! -f site-next/public/CNAME ]; then
+            echo "illyrobotic-ai.com" > site-next/public/CNAME
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
