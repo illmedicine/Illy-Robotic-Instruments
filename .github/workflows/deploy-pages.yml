@@ -226,10 +226,16 @@ jobs:
         run: |
           test -f site-next/public/livepay/index.html
 
+      - name: Build site-next
+        working-directory: site-next
+        run: |
+          npm ci
+          npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site-next/public
+          path: site-next/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
