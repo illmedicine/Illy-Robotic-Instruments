@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/products/illy-social",
+        destination: "https://illmedicine.github.io/illysocialV2/",
+        permanent: false,
+      },
+      {
         source: "/favicon.ico",
         destination: "/assets/illy-logo.png",
         permanent: false,
