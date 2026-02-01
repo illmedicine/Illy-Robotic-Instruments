@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/products/livepay",
+        destination: "https://illmedicine.github.io/LivePay/",
+        permanent: false,
+      },
+      {
         source: "/products/illy-social",
         destination: "https://illmedicine.github.io/illysocialV2/",
         permanent: false,
