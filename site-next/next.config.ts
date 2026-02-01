@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: "/products/discryptobank",
+        destination: "https://illmedicine.github.io/DisCryptoBankWebSite/",
+        permanent: false,
+      },
+      {
         source: "/favicon.ico",
         destination: "/assets/illy-logo.png",
         permanent: false,

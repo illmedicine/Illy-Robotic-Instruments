@@ -1,7 +1,17 @@
 export default function DiscryptobankPage() {
   return (
     <div className="min-h-screen bg-ink-950 text-slate-100">
-      {/* Hero Section */}
+      {/* Meta redirect */}
+      <head>
+        <meta httpEquiv="refresh" content="0; url=https://illmedicine.github.io/DisCryptoBankWebSite/" />
+      </head>
+      
+      {/* Redirect Script */}
+      <script dangerouslySetInnerHTML={{
+        __html: `window.location.replace('https://illmedicine.github.io/DisCryptoBankWebSite/');`
+      }} />
+
+      {/* Hero Section - Fallback content while redirecting */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-40 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl"></div>
@@ -21,7 +31,7 @@ export default function DiscryptobankPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-cyan-500/10 px-3 py-1 text-xs text-cyan-300 ring-1 ring-cyan-500/30">
                 <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                Active Platform
+                Launching Platform...
               </div>
 
               <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight md:text-6xl">
@@ -29,22 +39,20 @@ export default function DiscryptobankPage() {
               </h1>
               
               <p className="mt-4 text-xl text-cyan-400 font-semibold">
-                A Bank for Discord That Pays People for Real Work
+                Redirecting to Platform
               </p>
 
               <p className="mt-6 text-lg leading-relaxed text-slate-200">
-                Discord-native payroll engine that creates paid microtasks, verifies proof with URL + screenshot, 
-                and pays workers in SOL—automatically. Turn your community into an earning engine.
+                You are being redirected to the DisCryptoBank platform. If you are not redirected automatically, 
+                click the button below.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a 
-                  href="https://discord.com/oauth2/authorize?client_id=1465938334017912973" 
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="https://illmedicine.github.io/DisCryptoBankWebSite/" 
                   className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-all"
                 >
-                  Add to Discord
+                  Launch Platform Manually
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
