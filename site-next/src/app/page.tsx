@@ -247,7 +247,7 @@ export default function Home() {
                 Our mission is to create open, decentralized financial infrastructure that empowers individuals and communities worldwide.
               </p>
               <p className="text-lg text-slate-700">
-                Through products like IllySocial, LivePay, and DisCryptoBank, we're revolutionizing how people interact with money and data.
+                Through products like IllySocial, LivePay, and DisCryptoBank, we&apos;re revolutionizing how people interact with money and data.
               </p>
             </div>
           </div>
@@ -277,6 +277,40 @@ export default function Home() {
               Contact Us
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="px-4 py-12">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="mb-8 text-center text-2xl font-bold text-slate-900">Powered By Our Partners</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://www.gemini.com/share/v4prlvyt9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-white px-6 py-4 font-semibold text-slate-800 hover:border-[#2927FF] hover:shadow-lg hover:shadow-[#2927FF]/20 transition-all"
+            >
+              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0L6 8.5l6 3.5 6-3.5L12 0zm0 24l6-8.5-6-3.5-6 3.5L12 24z"/>
+              </svg>
+              <span>Get $15 Bitcoin on Gemini</span>
+            </a>
+            <a
+              href="https://railway.app?referralCode=illyrobotic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-white px-6 py-4 font-semibold text-slate-800 hover:border-[#6059f6] hover:shadow-lg hover:shadow-[#6059f6]/20 transition-all"
+            >
+              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h6v2H7v-2z"/>
+              </svg>
+              <span>Deploy on Railway ($20 credit)</span>
+            </a>
+          </div>
+          <p className="mt-4 text-center text-sm text-slate-500">
+            Supporting our mission to build open, decentralized financial infrastructure
+          </p>
         </div>
       </section>
 

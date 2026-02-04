@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Illy Robotic Instruments - Financial Infrastructure",
@@ -35,7 +24,7 @@ export default function RootLayout({
         }} />
         {/* End Google Tag Manager */}
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="font-sans antialiased">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MFRRBFP"
