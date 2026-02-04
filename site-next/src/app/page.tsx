@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+// Affiliate referral links - Replace with actual referral codes from partner programs
+const AFFILIATE_LINKS = {
+  gemini: "https://www.gemini.com/share/your-referral-code", // TODO: Replace with actual Gemini referral code
+  railway: "https://railway.app?referralCode=your-referral-code", // TODO: Replace with actual Railway referral code
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("products");
 
@@ -265,7 +271,7 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
             {/* Gemini Button */}
             <a
-              href="https://www.gemini.com/share/your-referral-code"
+              href={AFFILIATE_LINKS.gemini}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-2xl border border-cyan-200 bg-white p-8 transition-all hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-300/30"
@@ -307,7 +313,7 @@ export default function Home() {
 
             {/* Railway Button */}
             <a
-              href="https://railway.app?referralCode=your-referral-code"
+              href={AFFILIATE_LINKS.railway}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-2xl border border-violet-200 bg-white p-8 transition-all hover:border-violet-400 hover:shadow-2xl hover:shadow-violet-300/30"
@@ -379,7 +385,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-cyan-200 bg-white/50 px-4 py-12">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 grid gap-8 md:grid-cols-5">
+          <div className="mb-8 grid gap-8 md:grid-cols-3 lg:grid-cols-5">
             <div>
               <h3 className="mb-4 font-bold text-slate-900">Products</h3>
               <ul className="space-y-2 text-sm text-slate-600">
@@ -444,12 +450,12 @@ export default function Home() {
               <h3 className="mb-4 font-bold text-slate-900">Partners</h3>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li>
-                  <a href="https://www.gemini.com/share/your-referral-code" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
+                  <a href={AFFILIATE_LINKS.gemini} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
                     Gemini Exchange
                   </a>
                 </li>
                 <li>
-                  <a href="https://railway.app?referralCode=your-referral-code" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
+                  <a href={AFFILIATE_LINKS.railway} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
                     Railway Deploy
                   </a>
                 </li>
