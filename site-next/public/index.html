@@ -37,9 +37,13 @@
     .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .card-hover:hover { transform: translateY(-8px); }
     .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .phase-tab { border-color: rgba(255,255,255,0.15); color: #9ca3af; background: transparent; }
+    .phase-tab:hover { border-color: rgba(139,92,246,0.4); color: #c4b5fd; }
+    .phase-tab.active { border-color: #8b5cf6; color: #fff; background: rgba(139,92,246,0.15); }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
     .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
   </style>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -67,6 +71,7 @@
         </a>
         <div class="hidden md:flex items-center gap-8">
           <a href="#products" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+          <a href="#academy" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">IRAI Academy</a>
           <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
           <a href="#capabilities" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Capabilities</a>
           <button onclick="openContactModal()" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</button>
@@ -120,133 +125,89 @@
     </div>
   </section>
 
-  <!-- Products Section - Large Image Cards -->
+  <!-- Products Section - Ecosystem Banner -->
   <section id="products" class="relative bg-navy-800 py-24">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-16">
         <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Our Solutions</p>
         <h2 class="text-4xl lg:text-5xl font-black tracking-tight">PRODUCT ECOSYSTEM</h2>
       </div>
-      
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- IllySocial -->
-        <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer" 
-           class="group relative h-96 overflow-hidden card-hover">
-          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" 
-               alt="Social Network" 
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/70 to-transparent"></div>
-          <div class="absolute inset-0 bg-violet-600/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative h-full flex flex-col justify-end p-8">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="h-14 w-14 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
-                <span class="text-white font-bold text-xl">IS</span>
-              </div>
-              <div>
-                <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase">Community Platform</p>
-                <h3 class="text-2xl font-bold">IllySocial</h3>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Community & social media engagement scaler. Building wealth through collective action and data sovereignty.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Community Building</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Data Sovereignty</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Social Economics</span>
-            </div>
-            <div class="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-4 transition-all">
-              Launch Product <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </div>
-          </div>
-        </a>
 
-        <!-- LivePay -->
+      <!-- Interactive Ecosystem Banner -->
+      <div class="relative mx-auto" style="max-width: 1100px;">
+        <img src="/assets/ecosystem-banner.png" 
+             alt="Illy Robotic Instruments Product Ecosystem - DisCryptoBank, IllySocial, LivePay, I-RIS" 
+             class="w-full h-auto rounded-xl">
+
+        <!-- Clickable overlay regions positioned over each badge -->
+
+        <!-- LivePay - bottom-left -->
         <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer"
-           class="group relative h-96 overflow-hidden card-hover">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" 
-               alt="Data Analytics" 
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/70 to-transparent"></div>
-          <div class="absolute inset-0 bg-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative h-full flex flex-col justify-end p-8">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="h-14 w-14 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-                <span class="text-white font-bold text-xl">LP</span>
-              </div>
-              <div>
-                <p class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Data Monetization</p>
-                <h3 class="text-2xl font-bold">LivePay</h3>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Real-time Personal Data Monetization & Data Sovereignty. Own your data, earn your value.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Personalized Valuation</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Marketplace Matching</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Anonymized Trends</span>
-            </div>
-            <div class="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-4 transition-all">
-              Launch Product <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </div>
-          </div>
+           title="LivePay - Data Monetization"
+           class="absolute rounded-lg transition-all duration-300 hover:bg-cyan-400/20 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:ring-2 hover:ring-cyan-400/40"
+           style="left: 1%; top: 35%; width: 17%; height: 55%;">
+          <span class="sr-only">LivePay</span>
         </a>
 
-        <!-- DisCryptoBank -->
-        <a href="https://illmedicine.github.io/DisCryptoBankWebSite/" target="_blank" rel="noopener noreferrer"
-           class="group relative h-96 overflow-hidden card-hover">
-          <img src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&q=80" 
-               alt="Cryptocurrency" 
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/70 to-transparent"></div>
-          <div class="absolute inset-0 bg-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative h-full flex flex-col justify-end p-8">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="h-14 w-14 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
-                <span class="text-white font-bold text-xl">DC</span>
-              </div>
-              <div>
-                <p class="text-orange-400 text-xs font-semibold tracking-widest uppercase">Crypto Payroll</p>
-                <h3 class="text-2xl font-bold">DisCryptoBank</h3>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Discord Native Payroll Engine. Decentralized payments powered by Solana.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Decentralized</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Smart Banking</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">DeFi Integration</span>
-            </div>
-            <div class="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-4 transition-all">
-              Launch Product <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </div>
-          </div>
+        <!-- DisCryptoBank - top-left -->
+        <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer"
+           title="DisCryptoBank - Crypto Payroll"
+           class="absolute rounded-lg transition-all duration-300 hover:bg-violet-400/20 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:ring-2 hover:ring-violet-400/40"
+           style="left: 16%; top: 2%; width: 22%; height: 60%;">
+          <span class="sr-only">DisCryptoBank</span>
         </a>
 
-        <!-- Fair Credit Act Petition -->
-        <a href="https://illmedicine.github.io/LivePay-Petition-Suppot/#top" target="_blank" rel="noopener noreferrer"
-           class="group relative h-96 overflow-hidden card-hover">
-          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" 
-               alt="Policy Advocacy" 
-               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/70 to-transparent"></div>
-          <div class="absolute inset-0 bg-emerald-600/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative h-full flex flex-col justify-end p-8">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="h-14 w-14 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
-                <span class="text-white font-bold text-xl">⚖</span>
-              </div>
-              <div>
-                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase">Policy Initiative</p>
-                <h3 class="text-2xl font-bold">Fair Credit Act Petition</h3>
-              </div>
-            </div>
-            <p class="text-gray-300 mb-4">Support fair credit practices and financial equity through collaborative advocacy.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Fair Lending</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Consumer Rights</span>
-              <span class="px-3 py-1 bg-white/10 text-xs font-medium rounded-full">Policy Advocacy</span>
-            </div>
-            <div class="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-4 transition-all">
-              Sign Petition <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </div>
-          </div>
+        <!-- Illy Robotic Instruments - center -->
+        <a href="https://www.illyrobotic-ai.com/"
+           title="Illy Robotic Instruments - Home"
+           class="absolute rounded-lg transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:ring-2 hover:ring-white/30"
+           style="left: 33%; top: 2%; width: 34%; height: 80%;">
+          <span class="sr-only">Illy Robotic Instruments</span>
+        </a>
+
+        <!-- IllySocial - top-right -->
+        <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer"
+           title="IllySocial - Community Platform"
+           class="absolute rounded-lg transition-all duration-300 hover:bg-green-400/20 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] hover:ring-2 hover:ring-green-400/40"
+           style="left: 62%; top: 2%; width: 20%; height: 58%;">
+          <span class="sr-only">IllySocial</span>
+        </a>
+
+        <!-- I-RIS - bottom-right -->
+        <a href="https://illmedicine.github.io/LivePay-Petition-Suppot/movie.html" target="_blank" rel="noopener noreferrer"
+           title="I-RIS - Illy Robotic Instruments Studios"
+           class="absolute rounded-lg transition-all duration-300 hover:bg-purple-400/20 hover:shadow-[0_0_30px_rgba(192,132,252,0.3)] hover:ring-2 hover:ring-purple-400/40"
+           style="left: 78%; top: 15%; width: 20%; height: 70%;">
+          <span class="sr-only">I-RIS</span>
+        </a>
+      </div>
+
+      <!-- Product labels below the banner -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-10 text-center text-sm">
+        <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-3 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition-colors">
+          <span class="text-cyan-400 font-semibold">LivePay</span>
+          <p class="text-gray-400 text-xs mt-1">Data Monetization</p>
+        </a>
+        <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-3 border border-violet-500/30 rounded-lg hover:bg-violet-500/10 transition-colors">
+          <span class="text-violet-400 font-semibold">DisCryptoBank</span>
+          <p class="text-gray-400 text-xs mt-1">Crypto Payroll</p>
+        </a>
+        <a href="https://www.illyrobotic-ai.com/"
+           class="px-4 py-3 border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
+          <span class="text-white font-semibold">Illy Robotic</span>
+          <p class="text-gray-400 text-xs mt-1">Home</p>
+        </a>
+        <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-3 border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-colors">
+          <span class="text-green-400 font-semibold">IllySocial</span>
+          <p class="text-gray-400 text-xs mt-1">Community Platform</p>
+        </a>
+        <a href="https://illmedicine.github.io/LivePay-Petition-Suppot/movie.html" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-3 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors col-span-2 sm:col-span-1">
+          <span class="text-purple-400 font-semibold">I-RIS</span>
+          <p class="text-gray-400 text-xs mt-1">Studios</p>
         </a>
       </div>
     </div>
@@ -346,6 +307,371 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- IRAI ACADEMY SECTION -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section id="academy" class="relative bg-navy-900 py-24 overflow-hidden">
+    <!-- Subtle grid background -->
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.15) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- ── Hero Header ── -->
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-full px-5 py-2 mb-6">
+          <span class="h-2 w-2 rounded-full bg-violet-400 animate-pulse"></span>
+          <span class="text-violet-400 text-xs font-semibold tracking-widest uppercase">Now Enrolling</span>
+        </div>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4">
+          IRAI ACADEMY
+        </h2>
+        <p class="text-xl lg:text-2xl font-light text-gray-300 max-w-3xl mx-auto mb-2">
+          <span class="text-gradient font-semibold">From Legacy to Liquid:</span> Mastering AI-Driven SDLC &amp; Infrastructure
+        </p>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          We aren't just teaching coding — we're teaching <strong class="text-white">AI Orchestration</strong>: the ability to manage multiple AI agents to build enterprise-grade systems.
+        </p>
+      </div>
+
+      <!-- ── Quick Stats Bar ── -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div class="text-center p-6 bg-white/5 border border-white/10 rounded-xl">
+          <div class="text-3xl font-black text-violet-400">12</div>
+          <div class="text-sm text-gray-400 mt-1">Weeks Intensive</div>
+        </div>
+        <div class="text-center p-6 bg-white/5 border border-white/10 rounded-xl">
+          <div class="text-3xl font-black text-cyan-400">4 hrs</div>
+          <div class="text-sm text-gray-400 mt-1">Per Day &bull; Flexible</div>
+        </div>
+        <div class="text-center p-6 bg-white/5 border border-white/10 rounded-xl">
+          <div class="text-3xl font-black text-emerald-400">$299</div>
+          <div class="text-sm text-gray-400 mt-1">One-Time Fee</div>
+        </div>
+        <div class="text-center p-6 bg-white/5 border border-white/10 rounded-xl">
+          <div class="text-3xl font-black text-amber-400">100%</div>
+          <div class="text-sm text-gray-400 mt-1">Working Product Guaranteed</div>
+        </div>
+      </div>
+
+      <!-- ── What's Included ── -->
+      <div class="mb-20">
+        <h3 class="text-2xl font-bold text-center mb-10">What's Included</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-violet-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Coursework &amp; Training Materials</h4>
+              <p class="text-gray-400 text-sm">Comprehensive modules, hands-on labs, and real-world project templates.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-cyan-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Quizzes &amp; Exams</h4>
+              <p class="text-gray-400 text-sm">Regular assessments to validate your understanding at every phase.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-emerald-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Industry-Recognized Badge</h4>
+              <p class="text-gray-400 text-sm">Earn an official Illy Robotic Instruments completion badge upon graduation.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-amber-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Guaranteed Working Product</h4>
+              <p class="text-gray-400 text-sm">Graduate with a fully functional prototype you designed &amp; built end-to-finish.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-pink-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Exclusive Discord Video Channel</h4>
+              <p class="text-gray-400 text-sm">Direct access to course instructor <strong class="text-white">DeMarkus Wilson</strong> for live guidance, code reviews &amp; architecture help.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 p-6 bg-white/5 border border-white/10 rounded-xl hover:border-sky-500/40 transition-colors">
+            <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Build Your Own App Idea</h4>
+              <p class="text-gray-400 text-sm">Already have a project? Graduate with a working prototype of your current app or website concept.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Curriculum Phases (Tabbed Timeline) ── -->
+      <div class="mb-20">
+        <h3 class="text-2xl font-bold text-center mb-4">12-Week Curriculum Roadmap</h3>
+        <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">Four intensive phases that transform the Release Train Engineer mindset into AI-Augmented full-stack delivery.</p>
+
+        <!-- Phase tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10" id="phaseTabs">
+          <button onclick="showPhase(1)" class="phase-tab active px-5 py-2.5 rounded-full text-sm font-semibold border transition-all" data-phase="1">Phase 1 &bull; The Blueprint</button>
+          <button onclick="showPhase(2)" class="phase-tab px-5 py-2.5 rounded-full text-sm font-semibold border transition-all" data-phase="2">Phase 2 &bull; The Forge</button>
+          <button onclick="showPhase(3)" class="phase-tab px-5 py-2.5 rounded-full text-sm font-semibold border transition-all" data-phase="3">Phase 3 &bull; Infrastructure</button>
+          <button onclick="showPhase(4)" class="phase-tab px-5 py-2.5 rounded-full text-sm font-semibold border transition-all" data-phase="4">Phase 4 &bull; The Launch</button>
+        </div>
+
+        <!-- Phase 1 -->
+        <div id="phase-1" class="phase-content">
+          <div class="max-w-4xl mx-auto bg-white/5 border border-violet-500/30 rounded-2xl p-8 lg:p-10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-2xl font-black">1</div>
+              <div>
+                <h4 class="text-xl font-bold">The Blueprint <span class="text-violet-400">&mdash; Weeks 1&ndash;3</span></h4>
+                <p class="text-gray-400 text-sm">Transitioning the RTE mindset to AI-Augmented Planning</p>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 1</p>
+                <h5 class="font-bold mb-2">The AI-First SDLC</h5>
+                <p class="text-gray-400 text-sm">Re-imagining waterfall and agile lifecycles through the lens of Generative AI.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 2</p>
+                <h5 class="font-bold mb-2">Prompt Engineering for Architects</h5>
+                <p class="text-gray-400 text-sm">Moving beyond "chatting" to creating System Personas in Claude and Gemini.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 3</p>
+                <h5 class="font-bold mb-2">AI-Driven User Stories</h5>
+                <p class="text-gray-400 text-sm">Using AI to draft INVEST-compliant stories, acceptance criteria, and technical debt mapping.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div id="phase-2" class="phase-content hidden">
+          <div class="max-w-4xl mx-auto bg-white/5 border border-cyan-500/30 rounded-2xl p-8 lg:p-10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl font-black">2</div>
+              <div>
+                <h4 class="text-xl font-bold">The Forge <span class="text-cyan-400">&mdash; Weeks 4&ndash;6</span></h4>
+                <p class="text-gray-400 text-sm">Hands-on development using the "Holy Trinity" (VS Code + Copilot + Gemini/Claude)</p>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 4</p>
+                <h5 class="font-bold mb-2">Pair Programming with Copilot</h5>
+                <p class="text-gray-400 text-sm">Setting up a professional VS Code environment for maximum AI-assisted efficiency.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 5</p>
+                <h5 class="font-bold mb-2">Cross-Model Orchestration</h5>
+                <p class="text-gray-400 text-sm">When to use Claude for complex logic vs. Gemini for ecosystem integration (Google Cloud/Firebase).</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 6</p>
+                <h5 class="font-bold mb-2">Code Auditing &amp; Refactoring</h5>
+                <p class="text-gray-400 text-sm">The "Reviewer" mindset — ensuring AI-generated code meets enterprise security and scalability standards.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div id="phase-3" class="phase-content hidden">
+          <div class="max-w-4xl mx-auto bg-white/5 border border-emerald-500/30 rounded-2xl p-8 lg:p-10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-2xl font-black">3</div>
+              <div>
+                <h4 class="text-xl font-bold">The Infrastructure <span class="text-emerald-400">&mdash; Weeks 7&ndash;9</span></h4>
+                <p class="text-gray-400 text-sm">Cloud Transformation and System Architecture</p>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 7</p>
+                <h5 class="font-bold mb-2">On-Prem to Cloud Migration</h5>
+                <p class="text-gray-400 text-sm">Using AI to map legacy hardware dependencies to AWS/Azure/GCP cloud services.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 8</p>
+                <h5 class="font-bold mb-2">Infrastructure as Code (IaC)</h5>
+                <p class="text-gray-400 text-sm">Prompting AI to generate Terraform or CloudFormation templates for rapid environment provisioning.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 9</p>
+                <h5 class="font-bold mb-2">Database &amp; API Design</h5>
+                <p class="text-gray-400 text-sm">Building sophisticated backends using AI to model complex data relationships and RESTful APIs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div id="phase-4" class="phase-content hidden">
+          <div class="max-w-4xl mx-auto bg-white/5 border border-amber-500/30 rounded-2xl p-8 lg:p-10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-2xl font-black">4</div>
+              <div>
+                <h4 class="text-xl font-bold">The Launch <span class="text-amber-400">&mdash; Weeks 10&ndash;12</span></h4>
+                <p class="text-gray-400 text-sm">Full-Stack Delivery and Business Strategy</p>
+              </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 10</p>
+                <h5 class="font-bold mb-2">AI-Assisted UI/UX</h5>
+                <p class="text-gray-400 text-sm">From wireframes to functional React/Flutter code in record time.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 11</p>
+                <h5 class="font-bold mb-2">Capstone Project</h5>
+                <p class="text-gray-400 text-sm">Build a complex, data-driven system from scratch using the Illy Robotic proprietary methodology.</p>
+              </div>
+              <div class="p-5 bg-navy-900/60 rounded-xl border border-white/5">
+                <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Module 12</p>
+                <h5 class="font-bold mb-2">The Business of AI</h5>
+                <p class="text-gray-400 text-sm">How to lead an AI Transformation within an existing corporation as a consultant or coach.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── The Orchestrator's Workspace (Visualization) ── -->
+      <div class="mb-20">
+        <h3 class="text-2xl font-bold text-center mb-4">The Orchestrator's Workspace</h3>
+        <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">Three visualization maps that define the high-speed AI developer workflow you'll master.</p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Triple Monitor -->
+          <div class="group relative p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-violet-500/50 transition-all text-center">
+            <div class="h-16 w-16 mx-auto mb-5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h4 class="text-lg font-bold mb-3">The "Triple Monitor" Flow</h4>
+            <div class="space-y-2 text-sm text-gray-400">
+              <p><span class="text-violet-400 font-semibold">Screen 1:</span> VS Code (Execution)</p>
+              <p><span class="text-cyan-400 font-semibold">Screen 2:</span> Claude/Gemini (Logic &amp; Architecture)</p>
+              <p><span class="text-emerald-400 font-semibold">Screen 3:</span> Documentation/Browser (Verification)</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">The physical/digital layout of a high-speed developer.</p>
+          </div>
+
+          <!-- SDLC Loop -->
+          <div class="group relative p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 transition-all text-center">
+            <div class="h-16 w-16 mx-auto mb-5 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            </div>
+            <h4 class="text-lg font-bold mb-3">The SDLC Loop</h4>
+            <div class="flex flex-wrap justify-center gap-2 text-xs font-semibold">
+              <span class="px-3 py-1 bg-violet-500/20 text-violet-300 rounded-full">Plan</span>
+              <span class="text-gray-500">&rarr;</span>
+              <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full">Code</span>
+              <span class="text-gray-500">&rarr;</span>
+              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full">Test</span>
+              <span class="text-gray-500">&rarr;</span>
+              <span class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full">Deploy</span>
+              <span class="text-gray-500">&rarr;</span>
+              <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full">Monitor</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">AI intervenes at every stage — not just coding, but the entire release train.</p>
+          </div>
+
+          <!-- Migration Bridge -->
+          <div class="group relative p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 transition-all text-center">
+            <div class="h-16 w-16 mx-auto mb-5 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+            </div>
+            <h4 class="text-lg font-bold mb-3">The "Migration Bridge"</h4>
+            <div class="flex items-center justify-center gap-3 text-sm">
+              <span class="text-gray-400">Server Rack</span>
+              <div class="flex gap-1">
+                <span class="h-1 w-3 bg-emerald-500/60 rounded-full"></span>
+                <span class="h-1 w-3 bg-emerald-500/80 rounded-full"></span>
+                <span class="h-1 w-3 bg-emerald-500 rounded-full"></span>
+              </div>
+              <span class="text-emerald-400 font-semibold">Cloud</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">AI "Scouts" handle the data transfer from on-prem to cloud.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Who Is This For ── -->
+      <div class="mb-20">
+        <h3 class="text-2xl font-bold text-center mb-10">Who Is This For?</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-6 bg-white/5 border border-white/10 rounded-xl text-center">
+            <div class="text-3xl mb-3">🌐</div>
+            <h4 class="font-bold mb-2">Aspiring Web Developers</h4>
+            <p class="text-gray-400 text-sm">Learn to design and build professional websites from scratch.</p>
+          </div>
+          <div class="p-6 bg-white/5 border border-white/10 rounded-xl text-center">
+            <div class="text-3xl mb-3">📱</div>
+            <h4 class="font-bold mb-2">Mobile App Builders</h4>
+            <p class="text-gray-400 text-sm">Build cross-platform mobile applications with AI-assisted workflows.</p>
+          </div>
+          <div class="p-6 bg-white/5 border border-white/10 rounded-xl text-center">
+            <div class="text-3xl mb-3">💡</div>
+            <h4 class="font-bold mb-2">Entrepreneurs with Ideas</h4>
+            <p class="text-gray-400 text-sm">Turn your app idea into a working prototype — guaranteed.</p>
+          </div>
+          <div class="p-6 bg-white/5 border border-white/10 rounded-xl text-center">
+            <div class="text-3xl mb-3">🏢</div>
+            <h4 class="font-bold mb-2">Enterprise Leaders</h4>
+            <p class="text-gray-400 text-sm">Lead AI Transformation as a consultant or coach within organizations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Pricing CTA ── -->
+      <div class="max-w-3xl mx-auto">
+        <div class="relative bg-gradient-to-br from-violet-600/20 to-cyan-600/20 border border-violet-500/30 rounded-2xl p-10 lg:p-14 text-center overflow-hidden">
+          <!-- Decorative glow -->
+          <div class="absolute -top-20 -right-20 h-60 w-60 bg-violet-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-20 -left-20 h-60 w-60 bg-cyan-600/20 rounded-full blur-3xl"></div>
+
+          <div class="relative">
+            <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-3">Enrollment Open</p>
+            <h3 class="text-3xl lg:text-4xl font-black mb-4">Start Your AI Architect Journey</h3>
+            <p class="text-gray-300 mb-6 max-w-xl mx-auto">12 weeks. 4 hours/day. Flexible schedule. One working product. One industry badge. Unlimited potential.</p>
+
+            <div class="inline-flex items-baseline gap-1 mb-8">
+              <span class="text-5xl lg:text-6xl font-black text-white">$299</span>
+              <span class="text-gray-400 text-lg">one-time entrance fee</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+              <button onclick="openContactModal()" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-violet-600 to-cyan-500 px-10 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:opacity-90 transition-opacity">
+                Enroll Now
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </button>
+              <a href="https://discord.gg/EdqbqPeusF" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center justify-center gap-3 border-2 border-white/30 px-10 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-white/10 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
+                Join Discord
+              </a>
+            </div>
+
+            <p class="text-gray-500 text-xs mt-6">Buffalo, NY &bull; Remote-Friendly &bull; Powered by Illy Robotic Instruments</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Stats Section -->
   <section class="relative bg-gradient-to-r from-cyan-600 to-violet-600 py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -436,6 +762,7 @@
           <h3 class="text-sm font-bold uppercase tracking-wider mb-6">Company</h3>
           <ul class="space-y-4 text-gray-400">
             <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#academy" class="hover:text-white transition-colors">IRAI Academy</a></li>
             <li><a href="#capabilities" class="hover:text-white transition-colors">Capabilities</a></li>
             <li><button onclick="openContactModal()" class="hover:text-white transition-colors">Contact</button></li>
           </ul>
@@ -646,6 +973,14 @@
       // Auto close after 3 seconds
       setTimeout(closeContactModal, 3000);
     });
+
+    // Academy Phase Tabs
+    function showPhase(num) {
+      document.querySelectorAll('.phase-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.phase-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById('phase-' + num).classList.remove('hidden');
+      document.querySelector('.phase-tab[data-phase="' + num + '"]').classList.add('active');
+    }
   </script>
 </body>
 </html>
