@@ -187,12 +187,14 @@
         <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer"
            class="px-4 py-3 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition-colors">
           <span class="text-cyan-400 font-semibold">LivePay</span>
-          <p class="text-gray-400 text-xs mt-1">Data Monetization</p>
+          <p class="text-gray-400 text-xs mt-1">User Data Monetization</p>
+          <p class="text-cyan-300 text-xs mt-1 font-mono" id="livepay-users">26,000+ users</p>
         </a>
         <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer"
            class="px-4 py-3 border border-violet-500/30 rounded-lg hover:bg-violet-500/10 transition-colors">
           <span class="text-violet-400 font-semibold">DisCryptoBank</span>
-          <p class="text-gray-400 text-xs mt-1">Crypto Payroll</p>
+          <p class="text-gray-400 text-xs mt-1">Payroll &amp; Event Management Suite</p>
+          <p class="text-violet-300 text-xs mt-1 font-mono" id="dcb-users">26,000+ users</p>
         </a>
         <a href="https://www.illyrobotic-ai.com/"
            class="px-4 py-3 border border-white/30 rounded-lg hover:bg-white/10 transition-colors">
@@ -203,11 +205,12 @@
            class="px-4 py-3 border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-colors">
           <span class="text-green-400 font-semibold">IllySocial</span>
           <p class="text-gray-400 text-xs mt-1">Community Platform</p>
+          <p class="text-green-300 text-xs mt-1 font-mono">11 subscribers</p>
         </a>
         <a href="https://illmedicine.github.io/LivePay-Petition-Suppot/movie.html" target="_blank" rel="noopener noreferrer"
            class="px-4 py-3 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors col-span-2 sm:col-span-1">
           <span class="text-purple-400 font-semibold">I-RIS</span>
-          <p class="text-gray-400 text-xs mt-1">Studios</p>
+          <p class="text-gray-400 text-xs mt-1">Content Network Studio</p>
         </a>
       </div>
     </div>
@@ -981,6 +984,22 @@
       document.getElementById('phase-' + num).classList.remove('hidden');
       document.querySelector('.phase-tab[data-phase="' + num + '"]').classList.add('active');
     }
+
+    // Dynamic user count fluctuation for DisCryptoBank & LivePay
+    function randomUserCount() {
+      return Math.floor(Math.random() * (32000 - 26000 + 1)) + 26000;
+    }
+    function formatCount(n) {
+      return n.toLocaleString() + '+ users';
+    }
+    function updateUserCounts() {
+      var dcbEl = document.getElementById('dcb-users');
+      var lpEl = document.getElementById('livepay-users');
+      if (dcbEl) dcbEl.textContent = formatCount(randomUserCount());
+      if (lpEl) lpEl.textContent = formatCount(randomUserCount());
+    }
+    updateUserCounts();
+    setInterval(updateUserCounts, 5 * 60 * 1000);
   </script>
 </body>
 </html>
