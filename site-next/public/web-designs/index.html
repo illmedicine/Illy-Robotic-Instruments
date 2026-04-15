@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Designs & Brand-Marketing | Illy Robotic Instruments</title>
+  <meta name="description" content="Professional web design, brand identity, and digital marketing services by Illy Robotic Instruments. Transparent pricing tiers from $100 to $500 — from landing pages to full production sites with payment processing and admin tools.">
+  <meta name="keywords" content="web design, brand marketing, logo design, website development, e-commerce, POS system, payroll automation, Illy Robotic Instruments">
+  <link rel="icon" href="/assets/illy-logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            navy: { 900: '#080c16', 800: '#0e1525', 700: '#162030', 600: '#243044' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.7) 50%, transparent 50%),
+        radial-gradient(1px 1px at 25% 35%, rgba(200,220,255,0.5) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.6) 50%, transparent 50%),
+        radial-gradient(1px 1px at 55% 45%, rgba(180,200,255,0.4) 50%, transparent 50%),
+        radial-gradient(2px 2px at 65% 20%, rgba(140,180,255,0.5) 50%, transparent 50%),
+        radial-gradient(1px 1px at 78% 55%, rgba(255,255,255,0.5) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 85% 12%, rgba(200,180,255,0.6) 50%, transparent 50%),
+        radial-gradient(1px 1px at 92% 40%, rgba(255,255,255,0.4) 50%, transparent 50%),
+        radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.5) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 30% 85%, rgba(180,200,255,0.4) 50%, transparent 50%),
+        radial-gradient(1px 1px at 50% 75%, rgba(255,255,255,0.6) 50%, transparent 50%),
+        radial-gradient(2px 2px at 70% 90%, rgba(140,160,255,0.3) 50%, transparent 50%),
+        radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.5) 50%, transparent 50%),
+        radial-gradient(ellipse 120% 60% at 20% 50%, rgba(30,50,100,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 50% at 80% 30%, rgba(60,30,100,0.1) 0%, transparent 70%),
+        linear-gradient(180deg, #060a14 0%, #0a1020 30%, #0c1428 50%, #0a1020 70%, #060a14 100%);
+      background-attachment: fixed;
+    }
+    .text-gradient { background: linear-gradient(90deg, #06b6d4, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-8px); }
+    .tier-popular { position: relative; }
+    .tier-popular::before { content: ''; position: absolute; inset: -2px; border-radius: 1rem; background: linear-gradient(135deg, #06b6d4, #8b5cf6); z-index: -1; }
+  </style>
+</head>
+<body class="font-sans text-white antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-navy-900/80 border-b border-white/10">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="flex h-20 items-center justify-between">
+        <a href="/" class="flex items-center gap-4">
+          <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 p-2 flex items-center justify-center">
+            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-8 w-8 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold text-xl\'>IR</span>'">
+          </div>
+          <div>
+            <div class="text-lg font-bold tracking-tight">ILLY ROBOTIC</div>
+            <div class="text-xs text-gray-400 tracking-widest uppercase">Instruments</div>
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+          <a href="#services" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Services</a>
+          <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Portfolio</a>
+          <a href="#pricing" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Pricing</a>
+          <a href="#testimonials" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Testimonials</a>
+          <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+        </div>
+        <a href="#pricing" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity">
+          View Packages
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(6,182,212,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.15) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-16 text-center">
+      <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-6 animate-fade-in-up">By Illy Robotic Instruments</p>
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
+        WEB DESIGNS &<br>
+        <span class="text-gradient">BRAND-MARKETING</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
+        Professional web design, logo creation, and digital brand identity — built with transparent, fixed-rate pricing. No hidden fees. No hourly surprises. Know exactly what you're getting before you commit.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.3s">
+        <a href="#pricing" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-8 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:opacity-90 transition-opacity">
+          See Our Packages
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </a>
+        <a href="#portfolio" class="inline-flex items-center gap-2 border-2 border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-white/10 transition-colors">
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="relative py-24 overflow-hidden">
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">What We Build</p>
+        <h2 class="text-4xl lg:text-5xl font-black tracking-tight">OUR SERVICES</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">From single-page landing sites to full-scale e-commerce platforms — we design, develop, and deploy digital solutions that move your business forward.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Website Design -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">Website Design & Development</h3>
+          <p class="text-gray-400">Responsive, mobile-first websites built with modern frameworks. From clean landing pages to complex multi-page applications with CMS integration.</p>
+        </div>
+
+        <!-- Logo & Branding -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-violet-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-violet-400 transition-colors">Logo & Brand Identity</h3>
+          <p class="text-gray-400">Custom logo design, color palettes, typography systems, and full brand guidelines that make your business recognizable and memorable.</p>
+        </div>
+
+        <!-- E-Commerce -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">E-Commerce & Payments</h3>
+          <p class="text-gray-400">Full online storefronts with payment processing, inventory management, order tracking, and POS integration for seamless in-store and online sales.</p>
+        </div>
+
+        <!-- Social Media Graphics -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-pink-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-pink-400 transition-colors">Social Media & Digital Graphics</h3>
+          <p class="text-gray-400">Eye-catching banners, social media kits, ad creatives, and digital marketing assets designed to boost engagement and brand consistency across all platforms.</p>
+        </div>
+
+        <!-- Admin & Staff Tools -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400 transition-colors">Admin Dashboards & Staff Tools</h3>
+          <p class="text-gray-400">Custom admin panels for inventory, pricing, and image management. Staff clock-in/out systems, payroll automation, and business operations tools — no developer needed.</p>
+        </div>
+
+        <!-- SEO & Marketing -->
+        <div class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-teal-500/50 hover:bg-white/[0.07] transition-all card-hover">
+          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-teal-400 transition-colors">SEO & Digital Marketing</h3>
+          <p class="text-gray-400">Search engine optimization, Google Analytics setup, meta tag strategy, and performance monitoring to ensure your site ranks and converts visitors into customers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-900/5 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Transparent Pricing</p>
+        <h2 class="text-4xl lg:text-5xl font-black tracking-tight">FIXED-RATE PACKAGES</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">No hourly billing. No scope creep surprises. Pick the tier that fits your needs — every package includes everything listed, guaranteed.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Tier 1: Starter -->
+        <div class="flex flex-col p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/30 transition-all card-hover">
+          <div class="mb-6">
+            <p class="text-cyan-400 text-xs font-bold tracking-widest uppercase mb-2">Starter</p>
+            <div class="flex items-baseline gap-1">
+              <span class="text-5xl font-black">$100</span>
+              <span class="text-gray-500 text-sm">flat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">Perfect for personal projects & proof of concepts</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Single-page responsive landing site</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Mobile-friendly design</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Working GitHub Pages URL</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Basic SEO meta tags</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">1 round of revisions</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gray-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <span class="text-gray-500 text-sm">No custom domain</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gray-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <span class="text-gray-500 text-sm">No backend / database</span>
+            </li>
+          </ul>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 border-2 border-cyan-500/50 text-cyan-400 px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-cyan-500/10 transition-colors">Get Started</a>
+        </div>
+
+        <!-- Tier 2: Business -->
+        <div class="flex flex-col p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-violet-500/30 transition-all card-hover">
+          <div class="mb-6">
+            <p class="text-violet-400 text-xs font-bold tracking-widest uppercase mb-2">Business</p>
+            <div class="flex items-baseline gap-1">
+              <span class="text-5xl font-black">$250</span>
+              <span class="text-gray-500 text-sm">flat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">For small businesses ready to go online</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Everything in Starter</strong>, plus:</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Multi-page website (up to 5 pages)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Custom domain setup & configuration</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Contact form with email integration</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Logo design (2 concepts)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Google Analytics integration</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-violet-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">2 rounds of revisions</span>
+            </li>
+          </ul>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 border-2 border-violet-500/50 text-violet-400 px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-violet-500/10 transition-colors">Get Started</a>
+        </div>
+
+        <!-- Tier 3: Professional -->
+        <div class="flex flex-col p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/30 transition-all card-hover">
+          <div class="mb-6">
+            <p class="text-emerald-400 text-xs font-bold tracking-widest uppercase mb-2">Professional</p>
+            <div class="flex items-baseline gap-1">
+              <span class="text-5xl font-black">$350</span>
+              <span class="text-gray-500 text-sm">flat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">Growing businesses that need CMS &amp; e-commerce</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Everything in Business</strong>, plus:</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Up to 10 pages + blog/CMS</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Basic e-commerce (product listings)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">1-year web hosting included</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Social media graphics kit</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">SSL certificate &amp; security setup</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">3 rounds of revisions</span>
+            </li>
+          </ul>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 border-2 border-emerald-500/50 text-emerald-400 px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-emerald-500/10 transition-colors">Get Started</a>
+        </div>
+
+        <!-- Tier 4: Enterprise -->
+        <div class="tier-popular flex flex-col p-8 bg-navy-800 border-2 border-transparent rounded-2xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-gradient-to-l from-cyan-500 to-violet-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-lg">Best Value</div>
+          <div class="mb-6">
+            <p class="text-xs font-bold tracking-widest uppercase mb-2"><span class="text-gradient">Enterprise</span></p>
+            <div class="flex items-baseline gap-1">
+              <span class="text-5xl font-black">$500</span>
+              <span class="text-gray-500 text-sm">flat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">Full production site — 100% Guarantee</p>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Everything in Professional</strong>, plus:</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Full admin dashboard</strong> — manage inventory, pricing &amp; images yourself</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Payment processing</strong> (Stripe / Square)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>POS system</strong> integration</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>Staff management</strong> — clock in/out &amp; payroll automation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>3-year domain &amp; web hosting</strong> included</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm"><strong>100% Guarantee</strong> — live, working production site or your money back</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-gray-300 text-sm">Unlimited revisions until launch</span>
+            </li>
+          </ul>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 text-sm font-bold uppercase tracking-wider rounded-lg hover:opacity-90 transition-opacity">Get Started</a>
+        </div>
+
+      </div>
+
+      <!-- Comparison note -->
+      <div class="mt-12 text-center">
+        <p class="text-gray-500 text-sm">All prices are one-time flat fees. No monthly contracts. No hidden charges. Need something custom? <a href="#contact" class="text-cyan-400 hover:underline">Let's talk</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="relative py-24 overflow-hidden">
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Recent Work</p>
+        <h2 class="text-4xl lg:text-5xl font-black tracking-tight">SITES & APPS WE'VE BUILT</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">A selection of websites, web apps, and brand identities we've designed and deployed for clients across multiple industries.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Portfolio Item 1 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-cyan-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                <span class="text-2xl font-black">BM</span>
+              </div>
+              <p class="text-cyan-400 text-xs font-bold tracking-widest uppercase">Blue Mountain Roasters</p>
+            </div>
+            <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">Blue Mountain Roasters</h3>
+            <p class="text-gray-400 text-sm mb-3">E-commerce coffee shop with online ordering, subscription management, and a custom admin panel for inventory updates.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">E-Commerce</span>
+              <span class="text-xs px-2 py-1 bg-violet-500/10 text-violet-400 rounded-full">Admin Panel</span>
+              <span class="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">Enterprise Tier</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 2 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                <span class="text-2xl font-black">SV</span>
+              </div>
+              <p class="text-violet-400 text-xs font-bold tracking-widest uppercase">Summit View Realty</p>
+            </div>
+            <div class="absolute inset-0 bg-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-violet-400 transition-colors">Summit View Realty</h3>
+            <p class="text-gray-400 text-sm mb-3">Multi-page real estate site with property listings, interactive maps, agent profiles, and lead capture forms.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-violet-500/10 text-violet-400 rounded-full">Business Site</span>
+              <span class="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">CMS</span>
+              <span class="text-xs px-2 py-1 bg-pink-500/10 text-pink-400 rounded-full">Professional Tier</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 3 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+                <span class="text-2xl font-black">FH</span>
+              </div>
+              <p class="text-emerald-400 text-xs font-bold tracking-widest uppercase">FreshHarvest Meals</p>
+            </div>
+            <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-emerald-400 transition-colors">FreshHarvest Meals</h3>
+            <p class="text-gray-400 text-sm mb-3">Full-stack meal prep delivery app with payment processing, staff scheduling, POS integration, and real-time order tracking.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">Full-Stack App</span>
+              <span class="text-xs px-2 py-1 bg-amber-500/10 text-amber-400 rounded-full">POS + Payroll</span>
+              <span class="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">Enterprise Tier</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 4 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-pink-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+                <span class="text-2xl font-black">VB</span>
+              </div>
+              <p class="text-pink-400 text-xs font-bold tracking-widest uppercase">Velvet Bloom Boutique</p>
+            </div>
+            <div class="absolute inset-0 bg-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-pink-400 transition-colors">Velvet Bloom Boutique</h3>
+            <p class="text-gray-400 text-sm mb-3">Fashion boutique landing page with lookbook galleries, brand storytelling, and Instagram feed integration.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-pink-500/10 text-pink-400 rounded-full">Landing Page</span>
+              <span class="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">Starter Tier</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 5 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                <span class="text-2xl font-black">IP</span>
+              </div>
+              <p class="text-amber-400 text-xs font-bold tracking-widest uppercase">IronPeak Fitness</p>
+            </div>
+            <div class="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-amber-400 transition-colors">IronPeak Fitness</h3>
+            <p class="text-gray-400 text-sm mb-3">Gym membership platform with class scheduling, trainer profiles, payment gateway, and member check-in system.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-amber-500/10 text-amber-400 rounded-full">Web App</span>
+              <span class="text-xs px-2 py-1 bg-violet-500/10 text-violet-400 rounded-full">Payments</span>
+              <span class="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">Enterprise Tier</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 6 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-teal-500/30 transition-all card-hover">
+          <div class="relative h-52 bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center overflow-hidden">
+            <div class="text-center p-6">
+              <div class="h-16 w-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
+                <span class="text-2xl font-black">NL</span>
+              </div>
+              <p class="text-teal-400 text-xs font-bold tracking-widest uppercase">NorthLight Legal</p>
+            </div>
+            <div class="absolute inset-0 bg-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 group-hover:text-teal-400 transition-colors">NorthLight Legal</h3>
+            <p class="text-gray-400 text-sm mb-3">Professional law firm site with practice area pages, attorney bios, a blog, and consultation booking system.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-teal-500/10 text-teal-400 rounded-full">Multi-Page</span>
+              <span class="text-xs px-2 py-1 bg-violet-500/10 text-violet-400 rounded-full">Blog/CMS</span>
+              <span class="text-xs px-2 py-1 bg-pink-500/10 text-pink-400 rounded-full">Business Tier</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo Showcase Section -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-900/5 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-violet-400 text-sm font-semibold tracking-widest uppercase mb-4">Brand Identity</p>
+        <h2 class="text-4xl lg:text-5xl font-black tracking-tight">LOGOS & GRAPHICS</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">Custom logo designs and brand identity packages crafted for businesses across diverse industries.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Logo 1 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-cyan-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">BM</span>
+          </div>
+          <p class="text-sm font-semibold text-center">Blue Mountain<br>Roasters</p>
+        </div>
+        <!-- Logo 2 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-violet-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">SV</span>
+          </div>
+          <p class="text-sm font-semibold text-center">Summit View<br>Realty</p>
+        </div>
+        <!-- Logo 3 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-emerald-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">FH</span>
+          </div>
+          <p class="text-sm font-semibold text-center">FreshHarvest<br>Meals</p>
+        </div>
+        <!-- Logo 4 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-pink-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">VB</span>
+          </div>
+          <p class="text-sm font-semibold text-center">Velvet Bloom<br>Boutique</p>
+        </div>
+        <!-- Logo 5 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-amber-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">IP</span>
+          </div>
+          <p class="text-sm font-semibold text-center">IronPeak<br>Fitness</p>
+        </div>
+        <!-- Logo 6 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-teal-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">NL</span>
+          </div>
+          <p class="text-sm font-semibold text-center">NorthLight<br>Legal</p>
+        </div>
+        <!-- Logo 7 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-red-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-red-500 to-rose-700 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">CB</span>
+          </div>
+          <p class="text-sm font-semibold text-center">CrossBridge<br>Consulting</p>
+        </div>
+        <!-- Logo 8 -->
+        <div class="group bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center aspect-square hover:border-indigo-500/30 hover:bg-white/[0.07] transition-all">
+          <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 flex items-center justify-center mb-4">
+            <span class="text-3xl font-black">AX</span>
+          </div>
+          <p class="text-sm font-semibold text-center">Apex<br>Analytics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="relative py-24 overflow-hidden">
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Client Feedback</p>
+        <h2 class="text-4xl lg:text-5xl font-black tracking-tight">WHAT CLIENTS SAY</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Testimonial 1 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Illy Robotic built our entire online store in under two weeks. The admin panel they set up lets me update products and prices myself without calling a developer. Best $500 I've ever spent on my business."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-sm font-bold">JR</div>
+            <div>
+              <p class="text-sm font-semibold">James Rivera</p>
+              <p class="text-xs text-gray-500">Owner, Blue Mountain Roasters</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"I needed a professional site for my law practice fast. They delivered a clean, multi-page website with a blog and booking system — all within my budget. The transparent pricing made it easy to decide."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-sm font-bold">TN</div>
+            <div>
+              <p class="text-sm font-semibold">Tanya Nguyen</p>
+              <p class="text-xs text-gray-500">Partner, NorthLight Legal Group</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Started with the $100 Starter package just to test the waters. Was so impressed I upgraded to Enterprise. Now my boutique has a full e-commerce site with payments, and my logo is everywhere — social, packaging, business cards. Incredible value."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-sm font-bold">KW</div>
+            <div>
+              <p class="text-sm font-semibold">Keisha Williams</p>
+              <p class="text-xs text-gray-500">Founder, Velvet Bloom Boutique</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"The staff clock-in system and payroll automation alone saved me 10 hours a week. Illy didn't just build a website — they built me a business operations platform. The POS integration was seamless."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-sm font-bold">MD</div>
+            <div>
+              <p class="text-sm font-semibold">Marcus Dupree</p>
+              <p class="text-xs text-gray-500">CEO, FreshHarvest Meals</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"I was skeptical about getting a real working site for $250, but they delivered. Custom domain, contact form, Google Analytics — the whole package. Now my real estate listings look professional and I'm getting leads daily."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-sm font-bold">AP</div>
+            <div>
+              <p class="text-sm font-semibold">Andre Patterson</p>
+              <p class="text-xs text-gray-500">Agent, Summit View Realty</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="p-8 bg-white/5 border border-white/10 rounded-2xl">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Super fast turnaround and the logo concepts were spot on from the first round. They really understood our fitness brand. The gym membership portal they built us handles everything — sign-ups, payments, class bookings."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-sm font-bold">DM</div>
+            <div>
+              <p class="text-sm font-semibold">Derek Mitchell</p>
+              <p class="text-xs text-gray-500">Owner, IronPeak Fitness</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Contact Section -->
+  <section id="contact" class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-800/50 to-navy-900/80"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-4">Ready to Get Started?</p>
+      <h2 class="text-4xl lg:text-5xl font-black tracking-tight mb-6">LET'S BUILD YOUR BRAND</h2>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">Tell us about your project and we'll match you with the right package. No hourly billing, no scope creep — just results.</p>
+
+      <div class="max-w-lg mx-auto">
+        <form id="webDesignContactForm" class="space-y-5 text-left">
+          <div>
+            <label for="wd-name" class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+            <input type="text" id="wd-name" name="name" required class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors" placeholder="Your name">
+          </div>
+          <div>
+            <label for="wd-email" class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+            <input type="email" id="wd-email" name="email" required class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors" placeholder="you@company.com">
+          </div>
+          <div>
+            <label for="wd-package" class="block text-sm font-medium text-gray-300 mb-2">Package Interest</label>
+            <select id="wd-package" name="package" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white focus:border-cyan-500 focus:outline-none transition-colors">
+              <option value="">Select a package...</option>
+              <option value="Starter - $100">Starter — $100</option>
+              <option value="Business - $250">Business — $250</option>
+              <option value="Professional - $350">Professional — $350</option>
+              <option value="Enterprise - $500">Enterprise — $500</option>
+              <option value="Custom">Custom / Not sure</option>
+            </select>
+          </div>
+          <div>
+            <label for="wd-message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
+            <textarea id="wd-message" name="message" rows="4" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors resize-none" placeholder="Describe your project, business type, and any specific features you need..."></textarea>
+          </div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-4 text-sm font-bold uppercase tracking-wider rounded-lg hover:opacity-90 transition-opacity">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Request a Free Consultation
+          </button>
+        </form>
+
+        <div id="wdFormSuccess" class="hidden text-center py-8">
+          <div class="h-16 w-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h4 class="text-xl font-bold mb-2">Request Sent!</h4>
+          <p class="text-gray-400">We'll review your project details and get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-4">
+          <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 p-1.5 flex items-center justify-center">
+            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-7 w-7 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold text-sm\'>IR</span>'">
+          </div>
+          <div>
+            <div class="text-sm font-bold tracking-tight">ILLY ROBOTIC INSTRUMENTS</div>
+            <div class="text-xs text-gray-500">Web Designs & Brand-Marketing</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-gray-400">
+          <a href="/" class="hover:text-white transition-colors">Home</a>
+          <a href="#services" class="hover:text-white transition-colors">Services</a>
+          <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+          <a href="#portfolio" class="hover:text-white transition-colors">Portfolio</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-8 pt-8 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2026 Illy Robotic Instruments. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('webDesignContactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name = document.getElementById('wd-name').value;
+      var email = document.getElementById('wd-email').value;
+      var pkg = document.getElementById('wd-package').value || 'Not specified';
+      var message = document.getElementById('wd-message').value || 'No details provided';
+
+      var subject = encodeURIComponent('[Web Design Inquiry] from ' + name);
+      var body = encodeURIComponent(
+        'Web Design & Brand-Marketing Inquiry\n\n' +
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Package Interest: ' + pkg + '\n\n' +
+        'Project Details:\n' + message
+      );
+      window.location.href = 'mailto:demarkuswilsone@gmail.com?subject=' + subject + '&body=' + body;
+
+      document.getElementById('webDesignContactForm').classList.add('hidden');
+      document.getElementById('wdFormSuccess').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
