@@ -69,47 +69,82 @@
     .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
 
-    /* Hero Carousel Styles */
-    .hero-carousel { position: relative; width: 100%; overflow: hidden; }
-    .hero-track { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
+    /* Hero Carousel - 3-up Coverflow */
+    .hero-carousel { position: relative; width: 100%; overflow: visible; padding: 2rem 0; }
+    .hero-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 480px;
+    }
     .hero-slide {
-      min-width: 100%;
+      position: absolute;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: scale(0.5) translateX(0);
+      pointer-events: none;
+      z-index: 1;
     }
-    .hero-slide-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.5s ease;
+    .hero-slide.slide-left {
+      opacity: 0.5;
+      transform: scale(0.65) translateX(-110%);
+      pointer-events: auto;
+      z-index: 5;
     }
-    .hero-slide:hover .hero-slide-inner { transform: translateY(-12px) scale(1.03); }
+    .hero-slide.slide-center {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+    .hero-slide.slide-right {
+      opacity: 0.5;
+      transform: scale(0.65) translateX(110%);
+      pointer-events: auto;
+      z-index: 5;
+    }
+    .hero-slide.slide-far-left {
+      opacity: 0;
+      transform: scale(0.4) translateX(-220%);
+      z-index: 1;
+    }
+    .hero-slide.slide-far-right {
+      opacity: 0;
+      transform: scale(0.4) translateX(220%);
+      z-index: 1;
+    }
+    .hero-slide.slide-center:hover { transform: scale(1.05) translateX(0); }
+    .hero-slide.slide-left:hover { opacity: 0.7; }
+    .hero-slide.slide-right:hover { opacity: 0.7; }
     .hero-slide-img {
-      max-height: 340px;
-      max-width: 460px;
+      max-height: 300px;
+      max-width: 400px;
       width: auto;
       height: auto;
       object-fit: contain;
       mix-blend-mode: screen;
-      filter: drop-shadow(0 25px 50px rgba(100, 140, 255, 0.25)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
-      transition: filter 0.5s ease, transform 0.5s ease;
+      filter: drop-shadow(0 20px 40px rgba(100, 140, 255, 0.2)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+      transition: filter 0.5s ease;
     }
-    .hero-slide:hover .hero-slide-img {
+    .hero-slide.slide-center .hero-slide-img {
       filter: drop-shadow(0 30px 60px rgba(100, 160, 255, 0.4)) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
     }
     .hero-slide-label {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       text-align: center;
-      opacity: 0.9;
-      transition: opacity 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.2s;
     }
-    .hero-slide:hover .hero-slide-label { opacity: 1; }
+    .hero-slide.slide-center .hero-slide-label { opacity: 1; }
     .hero-slide-title {
       font-size: 1.75rem;
       font-weight: 800;
@@ -121,6 +156,27 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
+    }
+
+    /* Side slides get slight desaturation */
+    .hero-slide.slide-left .hero-slide-img,
+    .hero-slide.slide-right .hero-slide-img {
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)) saturate(0.6);
+    }
+
+    /* Glowing ring on center slide */
+    .hero-slide.slide-center::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      transform: translate(-50%, -55%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.08) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* Carousel navigation arrows */
@@ -144,15 +200,15 @@
       transition: all 0.3s ease;
     }
     .carousel-arrow:hover { background: rgba(139,92,246,0.3); border-color: rgba(139,92,246,0.6); }
-    .carousel-arrow.prev { left: 1.5rem; }
-    .carousel-arrow.next { right: 1.5rem; }
+    .carousel-arrow.prev { left: 0; }
+    .carousel-arrow.next { right: 0; }
 
     /* Carousel dots */
     .carousel-dots {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
     .carousel-dot {
       width: 12px;
@@ -182,11 +238,13 @@
     }
 
     @media (max-width: 768px) {
-      .hero-slide-img { max-height: 220px; max-width: 300px; }
+      .hero-track { height: 360px; }
+      .hero-slide-img { max-height: 180px; max-width: 240px; }
       .hero-slide-title { font-size: 1.25rem; }
+      .hero-slide.slide-left { transform: scale(0.55) translateX(-90%); opacity: 0.35; }
+      .hero-slide.slide-right { transform: scale(0.55) translateX(90%); opacity: 0.35; }
       .carousel-arrow { width: 40px; height: 40px; }
-      .carousel-arrow.prev { left: 0.5rem; }
-      .carousel-arrow.next { right: 0.5rem; }
+      .hero-slide.slide-center::before { width: 220px; height: 220px; }
     }
   </style>
   <!-- Google Tag Manager -->
@@ -249,84 +307,70 @@
         Data sovereignty. Community wealth. Intelligent automation.
       </p>
 
-      <!-- Interactive Hero Carousel -->
+      <!-- Interactive Hero Carousel - 3-up Coverflow -->
       <div class="hero-carousel animate-fade-in-up" style="animation-delay: 0.3s" id="heroCarousel">
         <div class="hero-track" id="heroTrack">
 
-          <!-- Slide 1: Illy Robotic Instruments -->
+          <!-- Slide 0: Illy Robotic Instruments -->
           <a href="#about" class="hero-slide" data-slide="0">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/illy-instruments.png" alt="Illy Robotic Instruments - AI Mesh Architecture Solutions" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">Illy Robotic Instruments</div>
-                <div class="hero-slide-subtitle text-gradient">AI Mesh Architecture Solutions</div>
-              </div>
+            <img src="/assets/hero/illy-instruments.png" alt="Illy Robotic Instruments - AI Mesh Architecture Solutions" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">Illy Robotic Instruments</div>
+              <div class="hero-slide-subtitle text-gradient">AI Mesh Architecture Solutions</div>
             </div>
           </a>
 
-          <!-- Slide 2: Echo Vue -->
+          <!-- Slide 1: Echo Vue -->
           <a href="#" class="hero-slide" data-slide="1">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/echovue.png" alt="Echo Vue by Illy Robotics" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">Echo Vue</div>
-                <div class="hero-slide-subtitle" style="color: #06b6d4;">Smart Home AI Vision & Audio</div>
-              </div>
+            <img src="/assets/hero/echovue.png" alt="Echo Vue by Illy Robotics" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">Echo Vue</div>
+              <div class="hero-slide-subtitle" style="color: #06b6d4;">Smart Home AI Vision & Audio</div>
             </div>
           </a>
 
-          <!-- Slide 3: DisCryptoBank -->
+          <!-- Slide 2: DisCryptoBank -->
           <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="2">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank - Decentralized Cryptocurrency Banking" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">DisCryptoBank</div>
-                <div class="hero-slide-subtitle" style="color: #a78bfa;">Decentralized Cryptocurrency Banking</div>
-              </div>
+            <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank - Decentralized Cryptocurrency Banking" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">DisCryptoBank</div>
+              <div class="hero-slide-subtitle" style="color: #a78bfa;">Decentralized Cryptocurrency Banking</div>
             </div>
           </a>
 
-          <!-- Slide 4: IRAI Academy -->
+          <!-- Slide 3: IRAI Academy -->
           <a href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="3">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/irai-academy.png" alt="IRAI - Illy Robotics AI Academy" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">IRAI Academy</div>
-                <div class="hero-slide-subtitle" style="color: #22d3ee;">AI Engineering Education</div>
-              </div>
+            <img src="/assets/hero/irai-academy.png" alt="IRAI - Illy Robotics AI Academy" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">IRAI Academy</div>
+              <div class="hero-slide-subtitle" style="color: #22d3ee;">AI Engineering Education</div>
             </div>
           </a>
 
-          <!-- Slide 5: Web Designs -->
+          <!-- Slide 4: Web Designs -->
           <a href="/web-designs/" class="hero-slide" data-slide="4">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/webdesigns.png" alt="Web Designs - AI Powered Creation & Full Stack Engineering" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">Web Designs</div>
-                <div class="hero-slide-subtitle" style="color: #60a5fa;">AI Powered Creation & Full Stack Engineering</div>
-              </div>
+            <img src="/assets/hero/webdesigns.png" alt="Web Designs - AI Powered Creation & Full Stack Engineering" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">Web Designs</div>
+              <div class="hero-slide-subtitle" style="color: #60a5fa;">AI Powered Creation & Full Stack Engineering</div>
             </div>
           </a>
 
-          <!-- Slide 6: IllySocial -->
+          <!-- Slide 5: IllySocial -->
           <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="5">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/illysocial.png" alt="IllySocial - Connect. Collaborate. Grow." class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">IllySocial</div>
-                <div class="hero-slide-subtitle" style="color: #4ade80;">Connect. Collaborate. Grow.</div>
-              </div>
+            <img src="/assets/hero/illysocial.png" alt="IllySocial - Connect. Collaborate. Grow." class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">IllySocial</div>
+              <div class="hero-slide-subtitle" style="color: #4ade80;">Connect. Collaborate. Grow.</div>
             </div>
           </a>
 
-          <!-- Slide 7: LivePay -->
+          <!-- Slide 6: LivePay -->
           <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="6">
-            <div class="hero-slide-inner">
-              <img src="/assets/hero/livepay.png" alt="LivePay - Secure Live Commerce Platform" class="hero-slide-img">
-              <div class="hero-slide-label">
-                <div class="hero-slide-title text-white">LivePay</div>
-                <div class="hero-slide-subtitle" style="color: #2dd4bf;">Monetizing Organic Digital Imprints</div>
-              </div>
+            <img src="/assets/hero/livepay.png" alt="LivePay - Secure Live Commerce Platform" class="hero-slide-img">
+            <div class="hero-slide-label">
+              <div class="hero-slide-title text-white">LivePay</div>
+              <div class="hero-slide-subtitle" style="color: #2dd4bf;">Monetizing Organic Digital Imprints</div>
             </div>
           </a>
 
@@ -421,8 +465,8 @@
         <!-- IRAI Academy -->
         <a href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/irai-academy.png" alt="IRAI" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">IRAI Academy</h3>
@@ -435,8 +479,8 @@
         <!-- DisCryptoBank -->
         <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-violet-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-violet-400 transition-colors">DisCryptoBank</h3>
@@ -449,8 +493,8 @@
         <!-- IllySocial -->
         <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-green-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/illysocial.png" alt="IllySocial" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-green-400 transition-colors">IllySocial</h3>
@@ -463,8 +507,8 @@
         <!-- LivePay -->
         <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/livepay.png" alt="LivePay" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">LivePay</h3>
@@ -477,8 +521,8 @@
         <!-- IRG - Illy Rush Gaming -->
         <a href="https://yry--hishbstest.replit.app/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/illy-instruments.png" alt="IRG" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-emerald-400 transition-colors">Illy Rush Gaming</h3>
@@ -491,8 +535,8 @@
         <!-- I-RIS -->
         <a href="http://illy-ris.com/movie.html" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-purple-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/illy-instruments.png" alt="I-RIS" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-purple-400 transition-colors">I-RIS</h3>
@@ -505,8 +549,8 @@
         <!-- Web Designs & Brand-Marketing -->
         <a href="/web-designs/" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-pink-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/webdesigns.png" alt="Web Designs" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-pink-400 transition-colors">Web Designs & Brand-Marketing</h3>
@@ -519,8 +563,8 @@
         <!-- Illy Beast Gaming - Full Width -->
         <a href="https://dcb-games.com/#beast" target="_blank" rel="noopener noreferrer" class="group md:col-span-2 lg:col-span-3 p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
+              <img src="/assets/hero/illy-instruments.png" alt="Illy Beast Gaming" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-amber-400 transition-colors">Illy Beast Gaming</h3>
@@ -855,24 +899,44 @@
     updateUserCounts();
     setInterval(updateUserCounts, 5 * 60 * 1000);
 
-    // ── Hero Carousel Engine ──
+    // ── Hero Carousel Engine (3-up Coverflow) ──
     (function() {
-      const track = document.getElementById('heroTrack');
-      const dots = document.querySelectorAll('#carouselDots .carousel-dot');
-      const progress = document.getElementById('carouselProgress');
-      const totalSlides = 7;
-      let current = 0;
-      let autoplayInterval = null;
-      let progressInterval = null;
-      const AUTOPLAY_MS = 5000; // 5 seconds per slide
-      const PROGRESS_STEP = 50; // update every 50ms
+      var slides = document.querySelectorAll('#heroTrack .hero-slide');
+      var dots = document.querySelectorAll('#carouselDots .carousel-dot');
+      var progress = document.getElementById('carouselProgress');
+      var totalSlides = slides.length;
+      var current = 0;
+      var autoplayInterval = null;
+      var progressInterval = null;
+      var AUTOPLAY_MS = 5000;
+      var PROGRESS_STEP = 50;
 
-      function goTo(index) {
-        current = ((index % totalSlides) + totalSlides) % totalSlides;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      function mod(n, m) { return ((n % m) + m) % m; }
+
+      function updateSlides() {
+        var leftIdx = mod(current - 1, totalSlides);
+        var rightIdx = mod(current + 1, totalSlides);
+        var farLeftIdx = mod(current - 2, totalSlides);
+        var farRightIdx = mod(current + 2, totalSlides);
+
+        for (var i = 0; i < totalSlides; i++) {
+          var s = slides[i];
+          s.className = 'hero-slide';
+          if (i === current) { s.classList.add('slide-center'); }
+          else if (i === leftIdx) { s.classList.add('slide-left'); }
+          else if (i === rightIdx) { s.classList.add('slide-right'); }
+          else if (i === farLeftIdx) { s.classList.add('slide-far-left'); }
+          else if (i === farRightIdx) { s.classList.add('slide-far-right'); }
+        }
+
         dots.forEach(function(d, i) {
           d.classList.toggle('active', i === current);
         });
+      }
+
+      function goTo(index) {
+        current = mod(index, totalSlides);
+        updateSlides();
         resetProgress();
       }
 
@@ -901,39 +965,46 @@
         clearInterval(progressInterval);
       }
 
-      // Expose to global scope for inline onclick handlers
+      // Click on side slides to navigate
+      slides.forEach(function(slide) {
+        slide.addEventListener('click', function(e) {
+          var idx = parseInt(slide.getAttribute('data-slide'));
+          if (idx !== current) {
+            e.preventDefault();
+            goTo(idx);
+            startAutoplay();
+          }
+        });
+      });
+
       window.carouselNext = function() { next(); startAutoplay(); };
       window.carouselPrev = function() { prev(); startAutoplay(); };
       window.carouselGoTo = function(i) { goTo(i); startAutoplay(); };
 
-      // Pause on hover
       var carousel = document.getElementById('heroCarousel');
       carousel.addEventListener('mouseenter', stopAutoplay);
       carousel.addEventListener('mouseleave', startAutoplay);
 
-      // Touch / swipe support
       var touchStartX = 0;
-      var touchEndX = 0;
       carousel.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
         stopAutoplay();
       }, { passive: true });
       carousel.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        var diff = touchStartX - touchEndX;
+        var diff = touchStartX - e.changedTouches[0].screenX;
         if (Math.abs(diff) > 50) {
           if (diff > 0) next(); else prev();
         }
         startAutoplay();
       }, { passive: true });
 
-      // Keyboard navigation
       document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowRight') { window.carouselNext(); }
         else if (e.key === 'ArrowLeft') { window.carouselPrev(); }
       });
 
-      // Start autoplay
+      // Initialize and start
+      updateSlides();
       startAutoplay();
     })();
   </script>
