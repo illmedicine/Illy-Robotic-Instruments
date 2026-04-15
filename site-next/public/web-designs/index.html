@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Designs & Brand-Marketing | Illy Robotic Instruments</title>
-  <meta name="description" content="Professional web design, brand identity, and digital marketing services by Illy Robotic Instruments. Transparent pricing tiers from $100 to $500 â€” from landing pages to full production sites with payment processing and admin tools.">
+  <title>Web Designs &amp; Brand-Marketing | Illy Robotic Instruments</title>
+  <meta name="description" content="Professional web design, brand identity, and digital marketing services by Illy Robotic Instruments. Transparent pricing tiers from $100 to $500 — from landing pages to full production sites with payment processing and admin tools.">
   <meta name="keywords" content="web design, brand marketing, logo design, website development, e-commerce, POS system, payroll automation, Illy Robotic Instruments">
   <link rel="icon" href="/assets/illy-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,8 +18,9 @@
         extend: {
           fontFamily: { sans: ['Montserrat', 'sans-serif'], display: ['Playfair Display', 'serif'] },
           colors: {
-            charcoal: { 950: '#0a0a0f', 900: '#111118', 800: '#1a1a24', 700: '#23232f', 600: '#2d2d3a' },
-            gold: { 50: '#fdf8e8', 100: '#f9edcc', 200: '#f3db99', 300: '#edc966', 400: '#d4a843', 500: '#c9a227', 600: '#a8851f', 700: '#876a19', 800: '#665012' }
+            brand: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a5f' },
+            navy: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' },
+            warm: { 50: '#fefdfb', 100: '#fdf9f3', 200: '#faf3e8' }
           }
         }
       }
@@ -27,103 +28,96 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
-    body { background: #0a0a0f; }
-    .text-gold-gradient { background: linear-gradient(135deg, #d4a843, #f3db99, #c9a227); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .glass { background: rgba(26,26,36,0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(212,168,67,0.15); }
-    .glass-dark { background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .gold-border { border: 1px solid rgba(212,168,67,0.25); }
-    .gold-border-hover:hover { border-color: rgba(212,168,67,0.6); }
-    .gold-glow { box-shadow: 0 0 30px rgba(212,168,67,0.1); }
-    .gold-glow-hover:hover { box-shadow: 0 0 40px rgba(212,168,67,0.2); }
+    body { background: #ffffff; color: #1e293b; }
+    .text-accent-gradient { background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .card-shadow { box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04); }
+    .card-shadow-hover:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06); }
+    .card-hover { transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-6px); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-    .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .card-hover:hover { transform: translateY(-8px); }
     .tier-popular { position: relative; }
-    .tier-popular::before { content: ''; position: absolute; inset: -2px; border-radius: 1rem; background: linear-gradient(135deg, #d4a843, #c9a227); z-index: -1; }
+    .tier-popular::before { content: ''; position: absolute; inset: -2px; border-radius: 1.25rem; background: linear-gradient(135deg, #2563eb, #7c3aed); z-index: -1; }
     .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
     .carousel-slide { min-width: 100%; padding: 0 12px; box-sizing: border-box; }
     @media(min-width:768px) { .carousel-slide { min-width: 50%; } }
     @media(min-width:1024px) { .carousel-slide { min-width: 33.333%; } }
-    .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(212,168,67,0.3); border: none; cursor: pointer; transition: all 0.3s; margin: 0 4px; }
-    .carousel-dot.active { background: #d4a843; box-shadow: 0 0 8px rgba(212,168,67,0.5); }
+    .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; border: none; cursor: pointer; transition: all 0.3s; margin: 0 4px; }
+    .carousel-dot.active { background: #2563eb; box-shadow: 0 0 8px rgba(37,99,235,0.4); }
     .hero-bg { position: relative; overflow: hidden; }
-    .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,15,0.4) 0%, rgba(10,10,15,0.7) 50%, #0a0a0f 100%); z-index: 1; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(239,246,255,0.88) 50%, rgba(255,255,255,0.90) 100%); z-index: 1; }
     .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .section-bg { position: relative; overflow: hidden; }
-    .section-bg::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,15,0.88); z-index: 1; }
-    .section-bg > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .section-bg > .content { position: relative; z-index: 2; }
-    .divider-gold { height: 2px; background: linear-gradient(90deg, transparent, #d4a843, transparent); }
-    .btn-gold { background: linear-gradient(135deg, #d4a843, #c9a227); color: #0a0a0f; font-weight: 700; transition: all 0.3s; }
-    .btn-gold:hover { background: linear-gradient(135deg, #f3db99, #d4a843); box-shadow: 0 0 25px rgba(212,168,67,0.35); }
-    .btn-outline-gold { border: 2px solid #d4a843; color: #d4a843; font-weight: 700; transition: all 0.3s; }
-    .btn-outline-gold:hover { background: rgba(212,168,67,0.1); box-shadow: 0 0 25px rgba(212,168,67,0.15); }
-    .portfolio-thumb { position: relative; overflow: hidden; }
+    .section-alt { background: #f8fafc; }
+    .divider-accent { height: 3px; background: linear-gradient(90deg, transparent, #2563eb, #7c3aed, transparent); }
+    .btn-primary { background: #2563eb; color: #fff; font-weight: 700; transition: all 0.3s; }
+    .btn-primary:hover { background: #1d4ed8; box-shadow: 0 4px 20px rgba(37,99,235,0.35); }
+    .btn-outline { border: 2px solid #2563eb; color: #2563eb; font-weight: 700; transition: all 0.3s; }
+    .btn-outline:hover { background: #eff6ff; box-shadow: 0 4px 20px rgba(37,99,235,0.15); }
+    .portfolio-thumb { position: relative; overflow: hidden; border-radius: 0.75rem 0.75rem 0 0; }
     .portfolio-thumb img { transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
-    .portfolio-thumb:hover img { transform: scale(1.08); }
-    .portfolio-thumb .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(10,10,15,0.95) 100%); }
+    .portfolio-thumb:hover img { transform: scale(1.05); }
+    .icon-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
-<body class="font-sans text-white antialiased">
+<body class="font-sans antialiased">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-charcoal-950/85 border-b border-gold-500/15">
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/90 border-b border-gray-200/60">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
-        <a href="/" class="flex items-center gap-4">
-          <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 p-2 flex items-center justify-center">
-            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-8 w-8 object-contain" onerror="this.outerHTML='<span class=\'text-charcoal-950 font-bold text-xl\'>IR</span>'">
+        <a href="/" class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl bg-brand-600 p-1.5 flex items-center justify-center shadow-sm">
+            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-7 w-7 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold text-lg\'>IR</span>'">
           </div>
           <div>
-            <div class="text-lg font-bold tracking-tight text-white">ILLY ROBOTIC</div>
-            <div class="text-xs text-gold-400 tracking-widest uppercase">Instruments</div>
+            <div class="text-base font-bold tracking-tight text-navy-900">ILLY ROBOTIC</div>
+            <div class="text-[11px] text-brand-600 tracking-widest uppercase font-semibold">Instruments</div>
           </div>
         </a>
-        <button id="mobileMenuBtn" class="md:hidden text-gold-400 text-2xl"><i class="fa-solid fa-bars"></i></button>
+        <button id="mobileMenuBtn" class="md:hidden text-navy-800 text-2xl"><i class="fa-solid fa-bars"></i></button>
         <div class="hidden md:flex items-center gap-8">
-          <a href="/" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Home</a>
-          <a href="#services" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Services</a>
-          <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Portfolio</a>
-          <a href="#pricing" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Pricing</a>
-          <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Contact</a>
+          <a href="/" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Home</a>
+          <a href="#services" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Services</a>
+          <a href="#portfolio" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Portfolio</a>
+          <a href="#pricing" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Pricing</a>
+          <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Contact</a>
         </div>
-        <a href="#pricing" class="hidden sm:inline-flex items-center gap-2 btn-gold px-6 py-3 text-sm rounded-lg uppercase tracking-wider">
-          View Packages
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 btn-primary px-6 py-3 text-sm rounded-lg uppercase tracking-wider">
+          Free Consultation
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
       </div>
-      <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2">
-        <a href="/" class="block text-sm text-gray-300 hover:text-gold-400 py-2">Home</a>
-        <a href="#services" class="block text-sm text-gray-300 hover:text-gold-400 py-2">Services</a>
-        <a href="#portfolio" class="block text-sm text-gray-300 hover:text-gold-400 py-2">Portfolio</a>
-        <a href="#pricing" class="block text-sm text-gray-300 hover:text-gold-400 py-2">Pricing</a>
-        <a href="#contact" class="block text-sm text-gray-300 hover:text-gold-400 py-2">Contact</a>
+      <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 mt-2 pt-3">
+        <a href="/" class="block text-sm text-gray-600 hover:text-brand-600 py-2">Home</a>
+        <a href="#services" class="block text-sm text-gray-600 hover:text-brand-600 py-2">Services</a>
+        <a href="#portfolio" class="block text-sm text-gray-600 hover:text-brand-600 py-2">Portfolio</a>
+        <a href="#pricing" class="block text-sm text-gray-600 hover:text-brand-600 py-2">Pricing</a>
+        <a href="#contact" class="block text-sm text-gray-600 hover:text-brand-600 py-2">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-bg min-h-screen flex items-center pt-20">
-    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&auto=format" alt="Digital technology background" loading="eager">
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
-      <div class="max-w-4xl animate-fade-in-up">
+  <section class="hero-bg min-h-[90vh] flex items-center pt-20">
+    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80&auto=format" alt="Creative workspace with laptop and coffee" loading="eager">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+      <div class="max-w-3xl animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
-          <div class="w-12 h-[2px] bg-gold-400"></div>
-          <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Illy Robotic Instruments</p>
+          <div class="w-10 h-[3px] bg-brand-600 rounded-full"></div>
+          <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Illy Robotic Instruments</p>
         </div>
-        <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-8">
-          WEB DESIGNS<br>&amp; <span class="text-gold-gradient">BRAND-MARKETING</span>
+        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6 text-navy-900">
+          Web Designs &amp;<br><span class="text-accent-gradient">Brand-Marketing</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-10 leading-relaxed">Professional websites, brand identity, and digital marketing â€” from single-page sites to full production platforms with payment processing and admin tools.</p>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-10 leading-relaxed">Professional websites, brand identity, and digital marketing — from single-page sites to full production platforms with payment processing and admin tools.</p>
         <div class="flex flex-wrap gap-4">
-          <a href="#pricing" class="btn-gold px-8 py-4 text-sm uppercase tracking-widest rounded-lg inline-flex items-center gap-3">
+          <a href="#pricing" class="btn-primary px-8 py-4 text-sm uppercase tracking-widest rounded-xl inline-flex items-center gap-3">
             <i class="fa-solid fa-layer-group"></i>
             View Packages
           </a>
-          <a href="#portfolio" class="btn-outline-gold px-8 py-4 text-sm uppercase tracking-widest rounded-lg inline-flex items-center gap-3">
+          <a href="#portfolio" class="btn-outline px-8 py-4 text-sm uppercase tracking-widest rounded-xl inline-flex items-center gap-3">
             <i class="fa-solid fa-images"></i>
             See Our Work
           </a>
@@ -132,219 +126,98 @@
     </div>
   </section>
 
-  <div class="divider-gold"></div>
-
   <!-- Services Section -->
-  <section id="services" class="section-bg py-28">
-    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=80&auto=format" alt="Technology workspace" loading="lazy">
-    <div class="content max-w-7xl mx-auto px-6 lg:px-8">
+  <section id="services" class="section-alt py-24 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-16">
         <div class="inline-flex items-center gap-2 mb-4">
-          <div class="w-8 h-[2px] bg-gold-400"></div>
-          <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">What We Offer</p>
-          <div class="w-8 h-[2px] bg-gold-400"></div>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+          <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">What We Offer</p>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
         </div>
-        <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight">OUR SERVICES</h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">End-to-end digital solutions â€” from concept to deployment and beyond.</p>
+        <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900">Our Services</h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto mt-4">End-to-end digital solutions — from concept to deployment and beyond.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Service 1 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-palette text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-blue-50 mb-6">
+            <i class="fa-solid fa-palette text-2xl text-brand-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">Brand Identity & Logo</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Custom logo design, color palettes, typography systems, and complete brand guidelines tailored to your industry and audience.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">Brand Identity &amp; Logo</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Custom logo design, color palettes, typography systems, and complete brand guidelines tailored to your industry and audience.</p>
         </div>
-        <!-- Service 2 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-code text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-purple-50 mb-6">
+            <i class="fa-solid fa-code text-2xl text-purple-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">Website Development</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Responsive, fast-loading websites built from scratch â€” landing pages, multi-page sites, blogs, and full web applications.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">Website Development</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Responsive, fast-loading websites built from scratch — landing pages, multi-page sites, blogs, and full web applications.</p>
         </div>
-        <!-- Service 3 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-cart-shopping text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-emerald-50 mb-6">
+            <i class="fa-solid fa-cart-shopping text-2xl text-emerald-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">E-Commerce & Payments</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Online stores with product catalogs, shopping carts, secure payment processing, inventory tracking, and order management.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">E-Commerce &amp; Payments</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Online stores with product catalogs, shopping carts, secure payment processing, inventory tracking, and order management.</p>
         </div>
-        <!-- Service 4 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-gear text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-amber-50 mb-6">
+            <i class="fa-solid fa-gear text-2xl text-amber-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">Admin & Operations</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Custom dashboards, staff management with clock-in/out, payroll automation, POS integration, and owner portals with PIN security.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">Admin &amp; Operations</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Custom dashboards, staff management with clock-in/out, payroll automation, POS integration, and owner portals with PIN security.</p>
         </div>
-        <!-- Service 5 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-chart-line text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-rose-50 mb-6">
+            <i class="fa-solid fa-chart-line text-2xl text-rose-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">SEO & Analytics</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Search engine optimization, Google Analytics integration, performance monitoring, and data-driven growth strategies.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">SEO &amp; Analytics</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Search engine optimization, Google Analytics integration, performance monitoring, and data-driven growth strategies.</p>
         </div>
-        <!-- Service 6 -->
-        <div class="glass rounded-2xl p-8 card-hover gold-border-hover gold-glow-hover">
-          <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 flex items-center justify-center mb-6">
-            <i class="fa-solid fa-bullhorn text-2xl text-gold-400"></i>
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+          <div class="icon-circle bg-sky-50 mb-6">
+            <i class="fa-solid fa-bullhorn text-2xl text-sky-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-3">Digital Marketing</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Social media strategy, content creation, email campaigns, and digital advertising to grow your brand's online presence.</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-3">Digital Marketing</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Social media strategy, content creation, email campaigns, and digital advertising to grow your brand's online presence.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="divider-gold"></div>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="relative py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-charcoal-950 via-charcoal-900 to-charcoal-950"></div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-2 mb-4">
-          <div class="w-8 h-[2px] bg-gold-400"></div>
-          <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Transparent Pricing</p>
-          <div class="w-8 h-[2px] bg-gold-400"></div>
-        </div>
-        <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight">CHOOSE YOUR PACKAGE</h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">Flat-rate packages with no hidden fees. Every tier includes a free consultation and revisions.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- Tier 1: Starter -->
-        <div class="glass rounded-2xl p-8 gold-border card-hover gold-border-hover gold-glow-hover flex flex-col">
-          <div class="mb-6">
-            <h3 class="text-lg font-bold mb-1">Starter</h3>
-            <p class="text-xs text-gray-500 uppercase tracking-wider">Single Page</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-gold-gradient text-5xl font-black">$100</span>
-            <span class="text-gray-500 text-sm ml-1">flat</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-grow">
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Custom single-page / landing page</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Mobile-responsive design</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Contact form</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">1 round of revisions</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-600 mt-0.5"></i><span class="text-gray-500">Custom domain setup</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-600 mt-0.5"></i><span class="text-gray-500">Logo design</span></li>
-          </ul>
-          <a href="#contact" class="btn-outline-gold text-center py-3 rounded-lg text-sm uppercase tracking-wider">Get Started</a>
-        </div>
-
-        <!-- Tier 2: Business -->
-        <div class="glass rounded-2xl p-8 gold-border card-hover gold-border-hover gold-glow-hover flex flex-col">
-          <div class="mb-6">
-            <h3 class="text-lg font-bold mb-1">Business</h3>
-            <p class="text-xs text-gray-500 uppercase tracking-wider">Multi-Page</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-gold-gradient text-5xl font-black">$250</span>
-            <span class="text-gray-500 text-sm ml-1">flat</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-grow">
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Up to 5 custom pages</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Mobile-responsive design</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Contact form + Google Analytics</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Custom domain setup</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">2 rounds of revisions</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-600 mt-0.5"></i><span class="text-gray-500">Logo design</span></li>
-          </ul>
-          <a href="#contact" class="btn-outline-gold text-center py-3 rounded-lg text-sm uppercase tracking-wider">Get Started</a>
-        </div>
-
-        <!-- Tier 3: Professional (Popular) -->
-        <div class="tier-popular glass rounded-2xl p-8 card-hover gold-glow flex flex-col">
-          <div class="inline-flex items-center gap-1 self-start bg-gold-400 text-charcoal-950 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
-            <i class="fa-solid fa-star text-[10px]"></i> Most Popular
-          </div>
-          <div class="mb-6">
-            <h3 class="text-lg font-bold mb-1">Professional</h3>
-            <p class="text-xs text-gray-500 uppercase tracking-wider">Full-Stack</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-gold-gradient text-5xl font-black">$350</span>
-            <span class="text-gray-500 text-sm ml-1">flat</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-grow">
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Up to 8 custom pages</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Logo design + brand guide</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Blog / CMS integration</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">SEO optimization</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Custom domain + SSL</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">3 rounds of revisions</span></li>
-          </ul>
-          <a href="#contact" class="btn-gold text-center py-3 rounded-lg text-sm uppercase tracking-wider">Get Started</a>
-        </div>
-
-        <!-- Tier 4: Enterprise -->
-        <div class="glass rounded-2xl p-8 gold-border card-hover gold-border-hover gold-glow-hover flex flex-col">
-          <div class="mb-6">
-            <h3 class="text-lg font-bold mb-1">Enterprise</h3>
-            <p class="text-xs text-gray-500 uppercase tracking-wider">Production Platform</p>
-          </div>
-          <div class="mb-6">
-            <span class="text-gold-gradient text-5xl font-black">$500</span>
-            <span class="text-gray-500 text-sm ml-1">flat</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-grow">
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Unlimited pages</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">E-commerce + payment processing</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Admin dashboard + POS</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Staff portal + payroll</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Logo + full brand package</span></li>
-            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-gold-400 mt-0.5"></i><span class="text-gray-300">Unlimited revisions + 30-day support</span></li>
-          </ul>
-          <a href="#contact" class="btn-outline-gold text-center py-3 rounded-lg text-sm uppercase tracking-wider">Get Started</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider-gold"></div>
 
   <!-- Portfolio Section -->
-  <section id="portfolio" class="section-bg py-28">
-    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&auto=format" alt="Analytics dashboard" loading="lazy">
-    <div class="content max-w-7xl mx-auto px-6 lg:px-8">
+  <section id="portfolio" class="py-24 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-16">
         <div class="inline-flex items-center gap-2 mb-4">
-          <div class="w-8 h-[2px] bg-gold-400"></div>
-          <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Real Projects</p>
-          <div class="w-8 h-[2px] bg-gold-400"></div>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+          <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Real Projects</p>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
         </div>
-        <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight">OUR PORTFOLIO</h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto mt-6">Live production sites and applications designed, developed, and deployed by Illy Robotic Instruments.</p>
+        <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900">Our Portfolio</h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto mt-4">Live production sites and applications designed, developed, and deployed by Illy Robotic Instruments.</p>
       </div>
 
-      <!-- Carousel Container -->
+      <!-- Carousel -->
       <div class="relative">
         <div class="overflow-hidden rounded-2xl">
           <div id="carouselTrack" class="carousel-track">
 
             <!-- Slide 1: Couch Buddies -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gray-50">
                   <img src="/assets/CouchBuddies.png" alt="Couch Buddies" class="w-full h-full object-cover">
-                  <div class="overlay"></div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">E-Commerce</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">POS</span>
+                    <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-medium">E-Commerce</span>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">POS</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">Couch Buddies</h3>
-                  <p class="text-gray-400 text-sm mb-4">CBD wellness e-commerce platform with product catalog, shopping cart, blog, owner portal, staff management, and POS system.</p>
-                  <a href="https://illmedicine.github.io/Couch-Buddies/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">Couch Buddies</h3>
+                  <p class="text-gray-500 text-sm mb-4">CBD wellness e-commerce platform with product catalog, shopping cart, blog, owner portal, staff management, and POS system.</p>
+                  <a href="https://illmedicine.github.io/Couch-Buddies/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -353,21 +226,21 @@
 
             <!-- Slide 2: Peachy Pals Playground -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800 flex items-center justify-center">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gradient-to-br from-pink-50 to-orange-50 flex items-center justify-center">
                   <div class="text-center">
-                    <i class="fa-solid fa-children text-5xl text-gold-400 mb-2"></i>
-                    <p class="text-gold-400 font-bold">Peachy Pals</p>
+                    <i class="fa-solid fa-children text-5xl text-pink-400 mb-2"></i>
+                    <p class="text-pink-600 font-bold text-sm">Peachy Pals</p>
                   </div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Business</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Booking</span>
+                    <span class="text-xs bg-pink-50 text-pink-700 px-2.5 py-1 rounded-full font-medium">Business</span>
+                    <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">Booking</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">Peachy Pals Playground</h3>
-                  <p class="text-gray-400 text-sm mb-4">Indoor play space business site with booking system, party packages, membership plans, and location info.</p>
-                  <a href="https://illmedicine.github.io/Peachy-Pals-Playground/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">Peachy Pals Playground</h3>
+                  <p class="text-gray-500 text-sm mb-4">Indoor play space business site with booking system, party packages, membership plans, and location info.</p>
+                  <a href="https://illmedicine.github.io/Peachy-Pals-Playground/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -376,21 +249,21 @@
 
             <!-- Slide 3: 6IXX Lending Partners -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800 flex items-center justify-center">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
                   <div class="text-center">
-                    <i class="fa-solid fa-hand-holding-dollar text-5xl text-gold-400 mb-2"></i>
-                    <p class="text-gold-400 font-bold">6IXX Lending</p>
+                    <i class="fa-solid fa-hand-holding-dollar text-5xl text-emerald-400 mb-2"></i>
+                    <p class="text-emerald-700 font-bold text-sm">6IXX Lending</p>
                   </div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Finance</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Portal</span>
+                    <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-medium">Finance</span>
+                    <span class="text-xs bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full font-medium">Portal</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">6IXX Lending Partners</h3>
-                  <p class="text-gray-400 text-sm mb-4">Fast cash lending platform with loan applications, qualification calculator, partner portal, and document management.</p>
-                  <a href="https://illmedicine.github.io/6IXX-Lending-Partners-Inc/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">6IXX Lending Partners</h3>
+                  <p class="text-gray-500 text-sm mb-4">Fast cash lending platform with loan applications, qualification calculator, partner portal, and document management.</p>
+                  <a href="https://illmedicine.github.io/6IXX-Lending-Partners-Inc/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -399,21 +272,21 @@
 
             <!-- Slide 4: Blissful Yoga Miami -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800 flex items-center justify-center">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
                   <div class="text-center">
-                    <i class="fa-solid fa-spa text-5xl text-gold-400 mb-2"></i>
-                    <p class="text-gold-400 font-bold">Blissful Yoga</p>
+                    <i class="fa-solid fa-spa text-5xl text-purple-400 mb-2"></i>
+                    <p class="text-purple-700 font-bold text-sm">Blissful Yoga</p>
                   </div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Wellness</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Classes</span>
+                    <span class="text-xs bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full font-medium">Wellness</span>
+                    <span class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-medium">Classes</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">Blissful Yoga Miami</h3>
-                  <p class="text-gray-400 text-sm mb-4">Yoga studio site with class schedules, instructor profiles, membership tiers, online booking, and wellness blog.</p>
-                  <a href="https://illmedicine.github.io/blissfulyogamiami/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">Blissful Yoga Miami</h3>
+                  <p class="text-gray-500 text-sm mb-4">Yoga studio site with class schedules, instructor profiles, membership tiers, online booking, and wellness blog.</p>
+                  <a href="https://illmedicine.github.io/blissfulyogamiami/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -422,19 +295,18 @@
 
             <!-- Slide 5: DisCryptoBank -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gray-50">
                   <img src="/assets/discryptobank-logo.png" alt="DisCryptoBank" class="w-full h-full object-contain p-8">
-                  <div class="overlay"></div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Crypto</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Bot</span>
+                    <span class="text-xs bg-violet-50 text-violet-700 px-2.5 py-1 rounded-full font-medium">Discord</span>
+                    <span class="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-medium">Bot</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">DisCryptoBank</h3>
-                  <p class="text-gray-400 text-sm mb-4">Discord-integrated crypto task payroll bot with wallet management, task bounties, and automated payment distribution.</p>
-                  <a href="https://illmedicine.github.io/discord-crypto-task-payroll-bot/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">DisCryptoBank</h3>
+                  <p class="text-gray-500 text-sm mb-4">Discord-integrated crypto task payroll bot with wallet management, task bounties, and automated payment distribution.</p>
+                  <a href="https://illmedicine.github.io/discord-crypto-task-payroll-bot/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -443,19 +315,18 @@
 
             <!-- Slide 6: IllySocial V2 -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gray-50">
                   <img src="/assets/illysocial-logo.png" alt="IllySocial" class="w-full h-full object-contain p-8">
-                  <div class="overlay"></div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Social</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">SaaS</span>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Social</span>
+                    <span class="text-xs bg-cyan-50 text-cyan-700 px-2.5 py-1 rounded-full font-medium">SaaS</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">IllySocial V2</h3>
-                  <p class="text-gray-400 text-sm mb-4">AI-powered social media growth platform with analytics dashboards, content scheduling, and audience engagement tools.</p>
-                  <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">IllySocial V2</h3>
+                  <p class="text-gray-500 text-sm mb-4">AI-powered social media growth platform with analytics dashboards, content scheduling, and audience engagement tools.</p>
+                  <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -464,19 +335,18 @@
 
             <!-- Slide 7: LivePay -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gray-50">
                   <img src="/assets/livepay-logo.png" alt="LivePay" class="w-full h-full object-contain p-8">
-                  <div class="overlay"></div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">FinTech</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Data</span>
+                    <span class="text-xs bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full font-medium">FinTech</span>
+                    <span class="text-xs bg-lime-50 text-lime-700 px-2.5 py-1 rounded-full font-medium">Data</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">LivePay</h3>
-                  <p class="text-gray-400 text-sm mb-4">Data monetization and real-time payment platform with user dashboards, earnings tracking, and payout management.</p>
-                  <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">LivePay</h3>
+                  <p class="text-gray-500 text-sm mb-4">Data monetization and real-time payment platform with user dashboards, earnings tracking, and payout management.</p>
+                  <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -485,21 +355,21 @@
 
             <!-- Slide 8: ECHO-MAPS -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800 flex items-center justify-center">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gradient-to-br from-sky-50 to-blue-50 flex items-center justify-center">
                   <div class="text-center">
-                    <i class="fa-solid fa-map-location-dot text-5xl text-gold-400 mb-2"></i>
-                    <p class="text-gold-400 font-bold">ECHO-MAPS</p>
+                    <i class="fa-solid fa-map-location-dot text-5xl text-sky-400 mb-2"></i>
+                    <p class="text-sky-700 font-bold text-sm">ECHO-MAPS</p>
                   </div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">IoT</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Dashboard</span>
+                    <span class="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-medium">IoT</span>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Dashboard</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">ECHO-MAPS</h3>
-                  <p class="text-gray-400 text-sm mb-4">Smart environment sensing platform with real-time maps, sensor data visualization, and environmental monitoring dashboards.</p>
-                  <a href="https://illmedicine.github.io/ECHO-MAPS/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">ECHO-MAPS</h3>
+                  <p class="text-gray-500 text-sm mb-4">Smart environment sensing platform with real-time maps, sensor data visualization, and environmental monitoring dashboards.</p>
+                  <a href="https://illmedicine.github.io/ECHO-MAPS/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -508,19 +378,18 @@
 
             <!-- Slide 9: HCMN -->
             <div class="carousel-slide">
-              <div class="glass rounded-2xl overflow-hidden gold-border card-hover gold-border-hover gold-glow-hover h-full">
-                <div class="portfolio-thumb aspect-video bg-charcoal-800">
+              <div class="bg-white rounded-2xl overflow-hidden card-shadow card-hover card-shadow-hover border border-gray-100 h-full">
+                <div class="portfolio-thumb aspect-video bg-gray-50">
                   <img src="/assets/hcmn.jpg" alt="HCMN" class="w-full h-full object-cover">
-                  <div class="overlay"></div>
                 </div>
                 <div class="p-6">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Media</span>
-                    <span class="text-xs bg-gold-400/10 text-gold-400 px-2 py-1 rounded-full">Video</span>
+                    <span class="text-xs bg-red-50 text-red-700 px-2.5 py-1 rounded-full font-medium">Media</span>
+                    <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">Video</span>
                   </div>
-                  <h3 class="text-lg font-bold mb-2">HCMN</h3>
-                  <p class="text-gray-400 text-sm mb-4">Video observational deck and media network with content streaming, channel management, and community engagement features.</p>
-                  <a href="https://illmedicine.github.io/HCMN/" target="_blank" rel="noopener" class="text-gold-400 text-sm font-semibold inline-flex items-center gap-2 hover:text-gold-300 transition-colors">
+                  <h3 class="text-lg font-bold text-navy-900 mb-2">HCMN</h3>
+                  <p class="text-gray-500 text-sm mb-4">Video observational deck and media network with content streaming, channel management, and community engagement features.</p>
+                  <a href="https://illmedicine.github.io/HCMN/" target="_blank" rel="noopener" class="text-brand-600 text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700 transition-colors">
                     Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   </a>
                 </div>
@@ -532,176 +401,277 @@
 
         <!-- Carousel Controls -->
         <div class="flex items-center justify-center gap-6 mt-8">
-          <button id="carouselPrev" class="h-12 w-12 rounded-full glass gold-border flex items-center justify-center text-gold-400 hover:bg-gold-400/10 transition-colors" aria-label="Previous slide">
-            <i class="fa-solid fa-chevron-left"></i>
+          <button id="carouselPrev" class="h-11 w-11 rounded-full bg-white card-shadow border border-gray-200 flex items-center justify-center text-gray-500 hover:text-brand-600 hover:border-brand-300 transition-all" aria-label="Previous slide">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
           </button>
           <div id="carouselDots" class="flex items-center"></div>
-          <button id="carouselNext" class="h-12 w-12 rounded-full glass gold-border flex items-center justify-center text-gold-400 hover:bg-gold-400/10 transition-colors" aria-label="Next slide">
-            <i class="fa-solid fa-chevron-right"></i>
+          <button id="carouselNext" class="h-11 w-11 rounded-full bg-white card-shadow border border-gray-200 flex items-center justify-center text-gray-500 hover:text-brand-600 hover:border-brand-300 transition-all" aria-label="Next slide">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider-gold"></div>
-
   <!-- Featured Project: Couch Buddies -->
-  <section class="relative py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-charcoal-950 via-charcoal-900 to-charcoal-950"></div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+  <section class="section-alt py-24 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div class="inline-flex items-center gap-2 mb-4">
-            <i class="fa-solid fa-fire text-gold-400"></i>
-            <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Featured Project</p>
+            <i class="fa-solid fa-fire text-orange-500"></i>
+            <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Featured Project</p>
           </div>
-          <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight mb-6">COUCH BUDDIES</h2>
-          <p class="text-lg text-gray-300 mb-6">A full-stack CBD wellness e-commerce platform featuring product catalog, shopping cart, blog, owner portal with PIN-secured admin, staff management, and POS â€” all designed and deployed by Illy Robotic Instruments.</p>
+          <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900 mb-6">Couch Buddies</h2>
+          <p class="text-lg text-gray-600 mb-6">A full-stack CBD wellness e-commerce platform featuring product catalog, shopping cart, blog, owner portal with PIN-secured admin, staff management, and POS — all designed and deployed by Illy Robotic Instruments.</p>
           <ul class="space-y-3 mb-8">
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i><span class="text-gray-300">Full product catalog with categories &amp; filtering</span></li>
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i><span class="text-gray-300">Shopping cart with checkout &amp; payment processing</span></li>
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i><span class="text-gray-300">PIN-secured owner portal with admin dashboard</span></li>
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i><span class="text-gray-300">Staff portal with clock-in/out &amp; payroll</span></li>
-            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i><span class="text-gray-300">Blog with articles &amp; SEO optimization</span></li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i><span class="text-gray-700">Full product catalog with categories &amp; filtering</span></li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i><span class="text-gray-700">Shopping cart with checkout &amp; payment processing</span></li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i><span class="text-gray-700">PIN-secured owner portal with admin dashboard</span></li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i><span class="text-gray-700">Staff portal with clock-in/out &amp; payroll</span></li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i><span class="text-gray-700">Blog with articles &amp; SEO optimization</span></li>
           </ul>
-          <a href="https://illmedicine.github.io/Couch-Buddies/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 btn-gold px-8 py-4 text-sm uppercase tracking-widest rounded-lg">
+          <a href="https://illmedicine.github.io/Couch-Buddies/" target="_blank" rel="noopener" class="inline-flex items-center gap-3 btn-primary px-8 py-4 text-sm uppercase tracking-widest rounded-xl">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             Visit Live Site
           </a>
         </div>
         <div class="relative">
-          <div class="glass rounded-2xl gold-border overflow-hidden gold-glow">
-            <img src="/assets/CouchBuddies.png" alt="Couch Buddies Website" class="w-full h-auto rounded-2xl">
+          <div class="bg-white rounded-2xl card-shadow overflow-hidden border border-gray-100">
+            <img src="/assets/CouchBuddies.png" alt="Couch Buddies Website" class="w-full h-auto">
           </div>
-          <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-gold-400/20 to-transparent rounded-full blur-3xl"></div>
-          <div class="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-gold-400/15 to-transparent rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-100 rounded-full blur-2xl opacity-60"></div>
+          <div class="absolute -top-4 -left-4 w-20 h-20 bg-purple-100 rounded-full blur-2xl opacity-60"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider-gold"></div>
+  <div class="divider-accent"></div>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="section-bg py-28">
-    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80&auto=format" alt="Office background" loading="lazy">
-    <div class="content max-w-7xl mx-auto px-6 lg:px-8">
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-24 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-16">
         <div class="inline-flex items-center gap-2 mb-4">
-          <div class="w-8 h-[2px] bg-gold-400"></div>
-          <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Client Feedback</p>
-          <div class="w-8 h-[2px] bg-gold-400"></div>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+          <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Transparent Pricing</p>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
         </div>
-        <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight">WHAT CLIENTS SAY</h2>
+        <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900">Choose Your Package</h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto mt-4">Flat-rate packages with no hidden fees. Every tier includes a free consultation and revisions.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Starter -->
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-navy-900 mb-1">Starter</h3>
+            <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Single Page</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-black text-navy-900">$100</span>
+            <span class="text-gray-400 text-sm ml-1">flat</span>
+          </div>
+          <ul class="space-y-3 mb-8 flex-grow">
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Custom single-page / landing page</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Mobile-responsive design</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Contact form</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">1 round of revisions</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-300 mt-0.5"></i><span class="text-gray-400">Custom domain setup</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-300 mt-0.5"></i><span class="text-gray-400">Logo design</span></li>
+          </ul>
+          <a href="#contact" class="btn-outline text-center py-3 rounded-xl text-sm uppercase tracking-wider">Get Started</a>
+        </div>
+
+        <!-- Business -->
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-navy-900 mb-1">Business</h3>
+            <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Multi-Page</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-black text-navy-900">$250</span>
+            <span class="text-gray-400 text-sm ml-1">flat</span>
+          </div>
+          <ul class="space-y-3 mb-8 flex-grow">
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Up to 5 custom pages</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Mobile-responsive design</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Contact form + Google Analytics</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Custom domain setup</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">2 rounds of revisions</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-xmark text-gray-300 mt-0.5"></i><span class="text-gray-400">Logo design</span></li>
+          </ul>
+          <a href="#contact" class="btn-outline text-center py-3 rounded-xl text-sm uppercase tracking-wider">Get Started</a>
+        </div>
+
+        <!-- Professional (Popular) -->
+        <div class="tier-popular bg-white rounded-2xl p-8 card-shadow card-hover flex flex-col">
+          <div class="inline-flex items-center gap-1 self-start bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+            <i class="fa-solid fa-star text-[10px]"></i> Most Popular
+          </div>
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-navy-900 mb-1">Professional</h3>
+            <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Full-Stack</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-black text-navy-900">$350</span>
+            <span class="text-gray-400 text-sm ml-1">flat</span>
+          </div>
+          <ul class="space-y-3 mb-8 flex-grow">
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Up to 8 custom pages</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Logo design + brand guide</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Blog / CMS integration</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">SEO optimization</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Custom domain + SSL</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">3 rounds of revisions</span></li>
+          </ul>
+          <a href="#contact" class="btn-primary text-center py-3 rounded-xl text-sm uppercase tracking-wider">Get Started</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-navy-900 mb-1">Enterprise</h3>
+            <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Production Platform</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-black text-navy-900">$500</span>
+            <span class="text-gray-400 text-sm ml-1">flat</span>
+          </div>
+          <ul class="space-y-3 mb-8 flex-grow">
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Unlimited pages</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">E-commerce + payment processing</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Admin dashboard + POS</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Staff portal + payroll</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Logo + full brand package</span></li>
+            <li class="flex items-start gap-3 text-sm"><i class="fa-solid fa-check text-brand-500 mt-0.5"></i><span class="text-gray-600">Unlimited revisions + 30-day support</span></li>
+          </ul>
+          <a href="#contact" class="btn-outline text-center py-3 rounded-xl text-sm uppercase tracking-wider">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section-alt py-24 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 mb-4">
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+          <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Client Feedback</p>
+          <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+        </div>
+        <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900">What Clients Say</h2>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Testimonial 1 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"Illy Robotic built our entire online store in under two weeks. The admin panel they set up lets me update products and prices myself without calling a developer. Best investment I've ever made for my business."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Illy Robotic built our entire online store in under two weeks. The admin panel they set up lets me update products and prices myself without calling a developer. Best investment I've ever made for my business."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">JR</div>
+            <div class="h-10 w-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">JR</div>
             <div>
-              <p class="text-sm font-semibold">James Rivera</p>
-              <p class="text-xs text-gray-500">E-Commerce Client</p>
+              <p class="text-sm font-semibold text-navy-900">James Rivera</p>
+              <p class="text-xs text-gray-400">E-Commerce Client</p>
             </div>
           </div>
         </div>
         <!-- Testimonial 2 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"I needed a professional site for my practice fast. They delivered a clean, multi-page website with a blog and booking system â€” all within my budget. The transparent pricing made it easy to decide."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"I needed a professional site for my practice fast. They delivered a clean, multi-page website with a blog and booking system — all within my budget. The transparent pricing made it easy to decide."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">TN</div>
+            <div class="h-10 w-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-sm font-bold">TN</div>
             <div>
-              <p class="text-sm font-semibold">Tanya Nguyen</p>
-              <p class="text-xs text-gray-500">Wellness Professional</p>
+              <p class="text-sm font-semibold text-navy-900">Tanya Nguyen</p>
+              <p class="text-xs text-gray-400">Wellness Professional</p>
             </div>
           </div>
         </div>
         <!-- Testimonial 3 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"Started with the $100 Starter package just to test the waters. Was so impressed I upgraded to Enterprise. Now my boutique has a full e-commerce site with payments, and my logo is everywhere."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Started with the $100 Starter package just to test the waters. Was so impressed I upgraded to Enterprise. Now my boutique has a full e-commerce site with payments, and my logo is everywhere."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">KW</div>
+            <div class="h-10 w-10 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center text-sm font-bold">KW</div>
             <div>
-              <p class="text-sm font-semibold">Keisha Williams</p>
-              <p class="text-xs text-gray-500">Boutique Owner</p>
+              <p class="text-sm font-semibold text-navy-900">Keisha Williams</p>
+              <p class="text-xs text-gray-400">Boutique Owner</p>
             </div>
           </div>
         </div>
         <!-- Testimonial 4 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"The staff clock-in system and payroll automation alone saved me 10 hours a week. Illy didn't just build a website â€” they built me a business operations platform. The POS integration was seamless."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"The staff clock-in system and payroll automation alone saved me 10 hours a week. Illy didn't just build a website — they built me a business operations platform. The POS integration was seamless."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">MD</div>
+            <div class="h-10 w-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">MD</div>
             <div>
-              <p class="text-sm font-semibold">Marcus Dupree</p>
-              <p class="text-xs text-gray-500">Restaurant Owner</p>
+              <p class="text-sm font-semibold text-navy-900">Marcus Dupree</p>
+              <p class="text-xs text-gray-400">Restaurant Owner</p>
             </div>
           </div>
         </div>
         <!-- Testimonial 5 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"I was skeptical about getting a real working site for $250, but they delivered. Custom domain, contact form, Google Analytics â€” the whole package. Now I'm getting leads daily."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"I was skeptical about getting a real working site for $250, but they delivered. Custom domain, contact form, Google Analytics — the whole package. Now I'm getting leads daily."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">AP</div>
+            <div class="h-10 w-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">AP</div>
             <div>
-              <p class="text-sm font-semibold">Andre Patterson</p>
-              <p class="text-xs text-gray-500">Real Estate Professional</p>
+              <p class="text-sm font-semibold text-navy-900">Andre Patterson</p>
+              <p class="text-xs text-gray-400">Real Estate Professional</p>
             </div>
           </div>
         </div>
         <!-- Testimonial 6 -->
-        <div class="glass rounded-2xl p-8 gold-border">
+        <div class="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
           <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
-            <i class="fa-solid fa-star text-gold-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-star text-amber-400"></i>
           </div>
-          <p class="text-gray-300 mb-6 italic">"Super fast turnaround and the logo concepts were spot on from the first round. They really understood our brand. The membership portal handles everything â€” sign-ups, payments, class bookings."</p>
+          <p class="text-gray-600 mb-6 italic leading-relaxed">"Super fast turnaround and the logo concepts were spot on from the first round. They really understood our brand. The membership portal handles everything — sign-ups, payments, class bookings."</p>
           <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-sm font-bold text-charcoal-950">DM</div>
+            <div class="h-10 w-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">DM</div>
             <div>
-              <p class="text-sm font-semibold">Derek Mitchell</p>
-              <p class="text-xs text-gray-500">Fitness Studio Owner</p>
+              <p class="text-sm font-semibold text-navy-900">Derek Mitchell</p>
+              <p class="text-xs text-gray-400">Fitness Studio Owner</p>
             </div>
           </div>
         </div>
@@ -709,94 +679,93 @@
     </div>
   </section>
 
-  <div class="divider-gold"></div>
+  <div class="divider-accent"></div>
 
   <!-- CTA / Contact Section -->
-  <section id="contact" class="section-bg py-28">
-    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80&auto=format" alt="Team working" loading="lazy">
-    <div class="content max-w-4xl mx-auto px-6 lg:px-8 text-center">
+  <section id="contact" class="py-24 lg:py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
       <div class="inline-flex items-center gap-2 mb-4">
-        <div class="w-8 h-[2px] bg-gold-400"></div>
-        <p class="text-gold-400 text-sm font-semibold tracking-widest uppercase">Ready to Get Started?</p>
-        <div class="w-8 h-[2px] bg-gold-400"></div>
+        <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
+        <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Ready to Get Started?</p>
+        <div class="w-8 h-[3px] bg-brand-600 rounded-full"></div>
       </div>
-      <h2 class="font-display text-4xl lg:text-5xl font-black tracking-tight mb-6">LET'S BUILD YOUR BRAND</h2>
-      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">Tell us about your project and we'll match you with the right package. No hourly billing, no scope creep â€” just results.</p>
+      <h2 class="font-display text-3xl lg:text-5xl font-black tracking-tight text-navy-900 mb-4">Let's Build Your Brand</h2>
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-10">Tell us about your project and we'll match you with the right package. No hourly billing, no scope creep — just results.</p>
 
       <div class="max-w-lg mx-auto">
-        <form id="webDesignContactForm" class="glass rounded-2xl gold-border p-8 space-y-5 text-left">
+        <form id="webDesignContactForm" class="bg-white rounded-2xl card-shadow border border-gray-100 p-8 space-y-5 text-left">
           <div>
-            <label for="wd-name" class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
-            <input type="text" id="wd-name" name="name" required class="w-full px-4 py-3 bg-charcoal-900/80 border border-gold-400/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-400 focus:outline-none transition-colors" placeholder="Your name">
+            <label for="wd-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+            <input type="text" id="wd-name" name="name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition-all" placeholder="Your name">
           </div>
           <div>
-            <label for="wd-email" class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
-            <input type="email" id="wd-email" name="email" required class="w-full px-4 py-3 bg-charcoal-900/80 border border-gold-400/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-400 focus:outline-none transition-colors" placeholder="you@company.com">
+            <label for="wd-email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+            <input type="email" id="wd-email" name="email" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition-all" placeholder="you@company.com">
           </div>
           <div>
-            <label for="wd-package" class="block text-sm font-medium text-gray-300 mb-2">Package Interest</label>
-            <select id="wd-package" name="package" class="w-full px-4 py-3 bg-charcoal-900/80 border border-gold-400/20 rounded-lg text-white focus:border-gold-400 focus:outline-none transition-colors">
+            <label for="wd-package" class="block text-sm font-medium text-gray-700 mb-2">Package Interest</label>
+            <select id="wd-package" name="package" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition-all">
               <option value="">Select a package...</option>
-              <option value="Starter - $100">Starter â€” $100</option>
-              <option value="Business - $250">Business â€” $250</option>
-              <option value="Professional - $350">Professional â€” $350</option>
-              <option value="Enterprise - $500">Enterprise â€” $500</option>
+              <option value="Starter - $100">Starter — $100</option>
+              <option value="Business - $250">Business — $250</option>
+              <option value="Professional - $350">Professional — $350</option>
+              <option value="Enterprise - $500">Enterprise — $500</option>
               <option value="Custom">Custom / Not sure</option>
             </select>
           </div>
           <div>
-            <label for="wd-message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
-            <textarea id="wd-message" name="message" rows="4" class="w-full px-4 py-3 bg-charcoal-900/80 border border-gold-400/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-400 focus:outline-none transition-colors resize-none" placeholder="Describe your project, business type, and any specific features you need..."></textarea>
+            <label for="wd-message" class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+            <textarea id="wd-message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition-all resize-none" placeholder="Describe your project, business type, and any specific features you need..."></textarea>
           </div>
-          <button type="submit" class="w-full btn-gold inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-wider rounded-lg">
+          <button type="submit" class="w-full btn-primary inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-wider rounded-xl">
             <i class="fa-solid fa-paper-plane"></i>
             Request a Free Consultation
           </button>
         </form>
 
         <div id="wdFormSuccess" class="hidden text-center py-8">
-          <div class="h-16 w-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
-            <i class="fa-solid fa-check text-3xl text-charcoal-950"></i>
+          <div class="h-16 w-16 mx-auto mb-6 rounded-full bg-emerald-100 flex items-center justify-center">
+            <i class="fa-solid fa-check text-3xl text-emerald-600"></i>
           </div>
-          <h4 class="text-xl font-bold mb-2">Request Sent!</h4>
-          <p class="text-gray-400">We'll review your project details and get back to you within 24 hours.</p>
+          <h4 class="text-xl font-bold text-navy-900 mb-2">Request Sent!</h4>
+          <p class="text-gray-500">We'll review your project details and get back to you within 24 hours.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-gold-400/20 bg-charcoal-950">
+  <footer class="border-t border-gray-200 bg-gray-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex items-center gap-4">
-          <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 p-1.5 flex items-center justify-center">
-            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-7 w-7 object-contain" onerror="this.outerHTML='<span class=\'text-charcoal-950 font-bold text-sm\'>IR</span>'">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-lg bg-brand-600 p-1.5 flex items-center justify-center">
+            <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-7 w-7 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold text-sm\'>IR</span>'">
           </div>
           <div>
-            <div class="text-sm font-bold tracking-tight">ILLY ROBOTIC INSTRUMENTS</div>
-            <div class="text-xs text-gray-500">Web Designs & Brand-Marketing</div>
+            <div class="text-sm font-bold tracking-tight text-navy-900">ILLY ROBOTIC INSTRUMENTS</div>
+            <div class="text-xs text-gray-400">Web Designs &amp; Brand-Marketing</div>
           </div>
         </div>
-        <div class="flex items-center gap-6 text-sm text-gray-400">
-          <a href="/" class="hover:text-gold-400 transition-colors">Home</a>
-          <a href="#services" class="hover:text-gold-400 transition-colors">Services</a>
-          <a href="#pricing" class="hover:text-gold-400 transition-colors">Pricing</a>
-          <a href="#portfolio" class="hover:text-gold-400 transition-colors">Portfolio</a>
-          <a href="#contact" class="hover:text-gold-400 transition-colors">Contact</a>
+        <div class="flex items-center gap-6 text-sm text-gray-500">
+          <a href="/" class="hover:text-brand-600 transition-colors">Home</a>
+          <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
+          <a href="#pricing" class="hover:text-brand-600 transition-colors">Pricing</a>
+          <a href="#portfolio" class="hover:text-brand-600 transition-colors">Portfolio</a>
+          <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
         </div>
         <div class="flex items-center gap-4">
-          <a href="https://github.com/illmedicine" target="_blank" rel="noopener" class="text-gray-400 hover:text-gold-400 transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
+          <a href="https://github.com/illmedicine" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-600 transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
         </div>
       </div>
-      <div class="border-t border-gold-400/10 mt-8 pt-8 text-center">
-        <p class="text-gray-500 text-sm">&copy; 2026 Illy Robotic Instruments. All rights reserved.</p>
+      <div class="border-t border-gray-200 mt-8 pt-8 text-center">
+        <p class="text-gray-400 text-sm">&copy; 2026 Illy Robotic Instruments. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    /* â”€â”€ Portfolio Carousel â”€â”€ */
+    /* Portfolio Carousel */
     (function() {
       var track = document.getElementById('carouselTrack');
       var prevBtn = document.getElementById('carouselPrev');
@@ -847,7 +816,6 @@
       prevBtn.addEventListener('click', function() { current--; update(); });
       nextBtn.addEventListener('click', function() { current++; update(); });
 
-      // Touch/swipe support
       var startX = 0;
       track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
       track.addEventListener('touchend', function(e) {
@@ -860,7 +828,7 @@
       window.addEventListener('resize', function() { buildDots(); update(); });
     })();
 
-    /* â”€â”€ Mobile Menu Toggle â”€â”€ */
+    /* Mobile Menu Toggle */
     (function() {
       var btn = document.getElementById('mobileMenuBtn');
       var menu = document.getElementById('mobileMenu');
@@ -873,7 +841,7 @@
       });
     })();
 
-    /* â”€â”€ Contact Form (mailto) â”€â”€ */
+    /* Contact Form (mailto) */
     document.getElementById('webDesignContactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var name = document.getElementById('wd-name').value;
@@ -895,7 +863,7 @@
       document.getElementById('wdFormSuccess').classList.remove('hidden');
     });
 
-    /* â”€â”€ Smooth scroll for anchor links â”€â”€ */
+    /* Smooth scroll for anchor links */
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       a.addEventListener('click', function(e) {
         var target = document.querySelector(this.getAttribute('href'));
