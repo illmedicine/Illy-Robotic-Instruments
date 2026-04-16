@@ -59,6 +59,17 @@
     .portfolio-thumb img { transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
     .portfolio-thumb:hover img { transform: scale(1.05); }
     .icon-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+    /* Scroll float-in animation */
+    .float-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .float-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -100,17 +111,22 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-bg min-h-[90vh] flex items-center pt-20">
+  <section class="hero-bg min-h-[90vh] flex items-center pt-20 relative">
     <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80&auto=format" alt="Creative workspace with laptop and coffee" loading="eager">
+    <!-- Matrix Code Rain Canvas -->
+    <canvas id="matrixCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
       <div class="max-w-3xl animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
           <div class="w-10 h-[3px] bg-brand-600 rounded-full"></div>
           <p class="text-brand-600 text-sm font-bold tracking-widest uppercase">Illy Robotic Instruments</p>
         </div>
-        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6 text-navy-900">
-          Web Designs &amp;<br><span class="text-accent-gradient">Brand-Marketing</span>
-        </h1>
+        <div class="flex items-center gap-5 mb-6">
+          <img src="/assets/hero/webdesigns.png" alt="Web Designs Logo" class="h-20 w-20 object-contain">
+          <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-navy-900">
+            Web Designs &amp;<br><span class="text-accent-gradient">Brand-Marketing</span>
+          </h1>
+        </div>
         <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-10 leading-relaxed">Professional websites, brand identity, and digital marketing — from single-page sites to full production platforms with payment processing and admin tools.</p>
         <div class="flex flex-wrap gap-4">
           <a href="#pricing" class="btn-primary px-8 py-4 text-sm uppercase tracking-widest rounded-xl inline-flex items-center gap-3">
@@ -140,42 +156,42 @@
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-blue-50 mb-6">
             <i class="fa-solid fa-palette text-2xl text-brand-600"></i>
           </div>
           <h3 class="text-lg font-bold text-navy-900 mb-3">Brand Identity &amp; Logo</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Custom logo design, color palettes, typography systems, and complete brand guidelines tailored to your industry and audience.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-purple-50 mb-6">
             <i class="fa-solid fa-code text-2xl text-purple-600"></i>
           </div>
           <h3 class="text-lg font-bold text-navy-900 mb-3">Website Development</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Responsive, fast-loading websites built from scratch — landing pages, multi-page sites, blogs, and full web applications.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-emerald-50 mb-6">
             <i class="fa-solid fa-cart-shopping text-2xl text-emerald-600"></i>
           </div>
           <h3 class="text-lg font-bold text-navy-900 mb-3">E-Commerce &amp; Payments</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Online stores with product catalogs, shopping carts, secure payment processing, inventory tracking, and order management.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-amber-50 mb-6">
             <i class="fa-solid fa-gear text-2xl text-amber-600"></i>
           </div>
           <h3 class="text-lg font-bold text-navy-900 mb-3">Admin &amp; Operations</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Custom dashboards, staff management with clock-in/out, payroll automation, POS integration, and owner portals with PIN security.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-rose-50 mb-6">
             <i class="fa-solid fa-chart-line text-2xl text-rose-600"></i>
           </div>
           <h3 class="text-lg font-bold text-navy-900 mb-3">SEO &amp; Analytics</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Search engine optimization, Google Analytics integration, performance monitoring, and data-driven growth strategies.</p>
         </div>
-        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 card-shadow card-hover card-shadow-hover border border-gray-100 float-in">
           <div class="icon-circle bg-sky-50 mb-6">
             <i class="fa-solid fa-bullhorn text-2xl text-sky-600"></i>
           </div>
@@ -861,6 +877,85 @@
         }
       });
     });
+
+    /* Scroll float-in observer */
+    (function() {
+      var floatEls = document.querySelectorAll('.float-in');
+      if (!floatEls.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Stagger based on position in grid
+            var siblings = Array.from(entry.target.parentElement.children);
+            var idx = siblings.indexOf(entry.target);
+            entry.target.style.transitionDelay = (idx * 0.1) + 's';
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      floatEls.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* Matrix Code Rain - matching homepage blue/purple on white */
+    (function() {
+      var canvas = document.getElementById('matrixCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var hero = canvas.parentElement;
+
+      function resize() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+        // Clear to match hero overlay
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      var fontSize = 14;
+      var columns = Math.floor(canvas.width / fontSize);
+      var drops = [];
+      for (var i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+      }
+
+      var colors = [
+        'rgba(96, 165, 250, ',
+        'rgba(59, 130, 246, ',
+        'rgba(147, 130, 250, ',
+        'rgba(167, 139, 250, ',
+        'rgba(139, 92, 246, ',
+        'rgba(99, 102, 241, ',
+      ];
+
+      function draw() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = fontSize + 'px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+          if (drops[i] < 0) { drops[i] += 0.5; continue; }
+          var char = chars[Math.floor(Math.random() * chars.length)];
+          var color = colors[Math.floor(Math.random() * colors.length)];
+          var headAlpha = 0.3 + Math.random() * 0.15;
+          ctx.fillStyle = color + headAlpha + ')';
+          ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+          if (Math.random() > 0.97) {
+            ctx.fillStyle = color + '0.55)';
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+          }
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) { drops[i] = 0; }
+          drops[i] += 0.5 + Math.random() * 0.5;
+        }
+      }
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      setInterval(draw, 50);
+    })();
   </script>
 </body>
 </html>
