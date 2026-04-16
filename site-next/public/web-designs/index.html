@@ -48,7 +48,7 @@
     .carousel-dot.active { background: #2563eb; box-shadow: 0 0 8px rgba(37,99,235,0.4); }
     .hero-bg { position: relative; overflow: hidden; }
     .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(239,246,255,0.88) 50%, rgba(255,255,255,0.90) 100%); z-index: 1; }
-    .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg > img.hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .section-alt { background: rgba(248,250,252,0.85); }
     .divider-accent { height: 3px; background: linear-gradient(90deg, transparent, #2563eb, #7c3aed, transparent); }
     .btn-primary { background: #2563eb; color: #fff; font-weight: 700; transition: all 0.3s; }
@@ -63,6 +63,7 @@
     /* Ensure all page sections sit above the fixed matrix canvas */
     nav { z-index: 50; }
     section, footer, .divider-accent { position: relative; z-index: 1; }
+    #matrixCanvas { z-index: 2; }
 
     /* Scroll float-in animation */
     .float-in {
@@ -114,12 +115,12 @@
     </div>
   </nav>
 
-  <!-- Full-page Matrix Code Rain Canvas (z-index above content, pointer-events:none so clicks pass through) -->
-  <canvas id="matrixCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+  <!-- Full-page Matrix Code Rain Canvas -->
+  <canvas id="matrixCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
 
   <!-- Hero Section -->
   <section class="hero-bg min-h-[90vh] flex items-center pt-20 relative">
-    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80&auto=format" alt="Creative workspace with laptop and coffee" loading="eager">
+    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80&auto=format" alt="Creative workspace with laptop and coffee" loading="eager" class="hero-bg-img">
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
       <!-- Centered logo above hero text -->
       <div class="flex justify-center mb-10 animate-fade-in-up">
@@ -949,8 +950,6 @@
         for (var i = 0; i < columns; i++) {
           drops[i] = Math.random() * -100;
         }
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
       resize();
       window.addEventListener('resize', resize);
@@ -965,8 +964,15 @@
       ];
 
       function draw() {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        // Fade previous frame using transparent compositing (no white buildup)
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.globalAlpha = 0.92;
+        ctx.fillStyle = 'rgba(0,0,0,1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+
+        ctx.globalCompositeOperation = 'source-over';
         ctx.font = fontSize + 'px monospace';
 
         for (var i = 0; i < drops.length; i++) {
@@ -985,8 +991,6 @@
         }
       }
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
       setInterval(draw, 50);
     })();
   </script>
