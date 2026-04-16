@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DisCryptoBank — Discord Crypto Payroll + Engagement Tasks</title>
   <meta name="description" content="DisCryptoBank is a Discord-native crypto payroll engine that fulfills IllySocial engagement packages by generating microtasks across Discord servers, verifying proof, and paying workers in SOL." />
-  <link rel="icon" type="image/png" href="../assets/discryptobank-logo.png" />
-  <link rel="apple-touch-icon" href="../assets/discryptobank-logo.png" />
+  <link rel="icon" type="image/png" href="assets/discryptobank.png" />
+  <link rel="apple-touch-icon" href="assets/discryptobank.png" />
   <!-- Favicon (preview-safe). Uses inline SVG fallback + your PNG when available -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='20%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%2322d3ee' stop-opacity='.55'/%3E%3Cstop offset='60%25' stop-color='%230b1226'/%3E%3Cstop offset='100%25' stop-color='%23000000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M32 10l16 8v14c0 12-8 18-16 22C24 50 16 44 16 32V18l16-8z' fill='%230b1226' stroke='%2322d3ee' stroke-width='2'/%3E%3Cpath d='M24 30h16M24 36h16' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/discryptobank-logo.png" />
-  <link rel="apple-touch-icon" href="../assets/discryptobank-logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/discryptobank.png" />
+  <link rel="apple-touch-icon" href="assets/discryptobank.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root { --bg1:#020617; --bg2:#000000; }
@@ -35,8 +35,7 @@
 <header class="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
   <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <img src="../assets/discryptobank-logo.png" alt="DisCryptoBank Logo"
-           onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\'%3E%3Cdefs%3E%3CradialGradient id=\'g\' cx=\'30%25\' cy=\'20%25\' r=\'80%25\'%3E%3Cstop offset=\'0%25\' stop-color=\'%2322d3ee\' stop-opacity=\'.55\'/%3E%3Cstop offset=\'60%25\' stop-color=\'%230b1226\'/%3E%3Cstop offset=\'100%25\' stop-color=\'%23000000\'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=\'64\' height=\'64\' rx=\'14\' fill=\'url(%23g)\'/%3E%3Cpath d=\'M32 10l16 8v14c0 12-8 18-16 22C24 50 16 44 16 32V18l16-8z\' fill=\'%230b1226\' stroke=\'%2322d3ee\' stroke-width=\'2\'/%3E%3Cpath d=\'M24 30h16M24 36h16\' stroke=\'%2322d3ee\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3C/svg%3E';"
+      <img src="assets/discryptobank.png" alt="DisCryptoBank Logo"
            class="h-9 w-9 rounded-xl object-cover border border-cyan-400/20 transition hover:scale-[1.03]" />
       <div>
         <div class="font-bold tracking-wide text-lg">DisCryptoBank</div>
@@ -73,8 +72,7 @@
         Live task fulfillment • SOL payouts • Proof verification
       </div>
       <div class="mb-6 flex items-center gap-4">
-        <img src="../assets/discryptobank-logo.png" alt="DisCryptoBank Logo"
-             onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\'%3E%3Cdefs%3E%3CradialGradient id=\'g\' cx=\'30%25\' cy=\'20%25\' r=\'80%25\'%3E%3Cstop offset=\'0%25\' stop-color=\'%2322d3ee\' stop-opacity=\'.55\'/%3E%3Cstop offset=\'60%25\' stop-color=\'%230b1226\'/%3E%3Cstop offset=\'100%25\' stop-color=\'%23000000\'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=\'64\' height=\'64\' rx=\'14\' fill=\'url(%23g)\'/%3E%3Cpath d=\'M32 10l16 8v14c0 12-8 18-16 22C24 50 16 44 16 32V18l16-8z\' fill=\'%230b1226\' stroke=\'%2322d3ee\' stroke-width=\'2\'/%3E%3Cpath d=\'M24 30h16M24 36h16\' stroke=\'%2322d3ee\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3C/svg%3E';"
+        <img src="assets/discryptobank.png" alt="DisCryptoBank Logo"
              class="h-16 w-16 object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]" />
         <span class="text-sm uppercase tracking-widest text-cyan-300">Official Payroll Bank for Discord</span>
       </div>
@@ -324,7 +322,7 @@
 
   <div class="mt-8 grid lg:grid-cols-3 gap-6">
     <div class="glass rounded-3xl p-6">
-      <div class="font-semibold text-cyan-300"><img src="../assets/discryptobank-logo.png" alt="DisCryptoBank logo" class="h-9 w-9 rounded-xl object-cover" onerror="this.style.display='none'" /> Treasury & Wallets</div>
+      <div class="font-semibold text-cyan-300"><img src="assets/discryptobank.png" alt="DisCryptoBank logo" class="h-9 w-9 rounded-xl object-cover" /> Treasury & Wallets</div>
       <div class="mt-4 space-y-3 text-sm">
         <div><span class="mono text-cyan-200">/wallet connect &lt;address&gt;</span><div class="text-slate-400">Connect the server treasury (one-time, immutable).</div></div>
         <div><span class="mono text-cyan-200">/wallet balance</span><div class="text-slate-400">View treasury balance (SOL + USD).</div></div>
