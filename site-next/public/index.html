@@ -131,12 +131,11 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 20px 40px rgba(100, 140, 255, 0.2)) drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+      background: white;
       transition: filter 0.5s ease;
     }
     .hero-slide.slide-center .hero-slide-img {
-      filter: drop-shadow(0 30px 60px rgba(100, 160, 255, 0.4)) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.08));
     }
     .hero-slide-label {
       margin-top: 1.5rem;
@@ -161,22 +160,7 @@
     /* Side slides get slight desaturation */
     .hero-slide.slide-left .hero-slide-img,
     .hero-slide.slide-right .hero-slide-img {
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)) saturate(0.6);
-    }
-
-    /* Glowing ring on center slide */
-    .hero-slide.slide-center::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 320px;
-      height: 320px;
-      transform: translate(-50%, -55%);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.08) 50%, transparent 70%);
-      pointer-events: none;
-      z-index: -1;
+      filter: saturate(0.6) opacity(0.7);
     }
 
     /* Carousel navigation arrows */
@@ -188,18 +172,19 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(10, 16, 32, 0.6);
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      color: #fff;
+      color: #374151;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    .carousel-arrow:hover { background: rgba(139,92,246,0.3); border-color: rgba(139,92,246,0.6); }
+    .carousel-arrow:hover { background: #f3f4f6; border-color: rgba(139,92,246,0.4); color: #6d28d9; }
     .carousel-arrow.prev { left: 0; }
     .carousel-arrow.next { right: 0; }
 
@@ -214,12 +199,12 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.08);
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    .carousel-dot:hover { background: rgba(255,255,255,0.4); }
+    .carousel-dot:hover { background: rgba(0,0,0,0.25); }
     .carousel-dot.active {
       background: linear-gradient(135deg, #06b6d4, #8b5cf6);
       border-color: transparent;
@@ -244,7 +229,6 @@
       .hero-slide.slide-left { transform: scale(0.55) translateX(-90%); opacity: 0.35; }
       .hero-slide.slide-right { transform: scale(0.55) translateX(90%); opacity: 0.35; }
       .carousel-arrow { width: 40px; height: 40px; }
-      .hero-slide.slide-center::before { width: 220px; height: 220px; }
     }
   </style>
   <!-- Google Tag Manager -->
@@ -287,22 +271,16 @@
   </nav>
 
   <!-- Hero Section - Full Screen Interactive Card Carousel -->
-  <section id="products" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Subtle circuit grid overlay -->
-    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(6,182,212,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.15) 1px, transparent 1px); background-size: 60px 60px;"></div>
-    <!-- Ambient glow -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10" style="background: radial-gradient(circle, rgba(139,92,246,0.4) 0%, rgba(6,182,212,0.2) 40%, transparent 70%);"></div>
-    </div>
+  <section id="products" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
     
     <!-- Content -->
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-16 text-center">
-      <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-6 animate-fade-in-up">Accelerating Financial Innovation</p>
-      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-4 animate-fade-in-up" style="animation-delay: 0.1s">
+      <p class="text-cyan-600 text-sm font-semibold tracking-widest uppercase mb-6 animate-fade-in-up">Accelerating Financial Innovation</p>
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-4 animate-fade-in-up text-gray-900" style="animation-delay: 0.1s">
         BUILDING THE FUTURE OF<br>
         <span class="text-gradient">FINANCIAL INFRASTRUCTURE</span>
       </h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10 animate-fade-in-up" style="animation-delay: 0.2s">
+      <p class="text-xl text-gray-500 max-w-3xl mx-auto mb-10 animate-fade-in-up" style="animation-delay: 0.2s">
         Open-source, decentralized technology powering the next generation of fintech. 
         Data sovereignty. Community wealth. Intelligent automation.
       </p>
@@ -315,7 +293,7 @@
           <a href="#about" class="hero-slide" data-slide="0">
             <img src="/assets/hero/illy-instruments.png" alt="Illy Robotic Instruments - AI Mesh Architecture Solutions" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">Illy Robotic Instruments</div>
+              <div class="hero-slide-title text-gray-900">Illy Robotic Instruments</div>
               <div class="hero-slide-subtitle text-gradient">AI Mesh Architecture Solutions</div>
             </div>
           </a>
@@ -324,7 +302,7 @@
           <a href="#" class="hero-slide" data-slide="1">
             <img src="/assets/hero/echovue.png" alt="Echo Vue by Illy Robotics" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">Echo Vue</div>
+              <div class="hero-slide-title text-gray-900">Echo Vue</div>
               <div class="hero-slide-subtitle" style="color: #06b6d4;">Smart Home AI Vision & Audio</div>
             </div>
           </a>
@@ -333,7 +311,7 @@
           <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="2">
             <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank - Decentralized Cryptocurrency Banking" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">DisCryptoBank</div>
+              <div class="hero-slide-title text-gray-900">DisCryptoBank</div>
               <div class="hero-slide-subtitle" style="color: #a78bfa;">Decentralized Cryptocurrency Banking</div>
             </div>
           </a>
@@ -342,7 +320,7 @@
           <a href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="3">
             <img src="/assets/hero/irai-academy.png" alt="IRAI - Illy Robotics AI Academy" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">IRAI Academy</div>
+              <div class="hero-slide-title text-gray-900">IRAI Academy</div>
               <div class="hero-slide-subtitle" style="color: #22d3ee;">AI Engineering Education</div>
             </div>
           </a>
@@ -351,7 +329,7 @@
           <a href="/web-designs/" class="hero-slide" data-slide="4">
             <img src="/assets/hero/webdesigns.png" alt="Web Designs - AI Powered Creation & Full Stack Engineering" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">Web Designs</div>
+              <div class="hero-slide-title text-gray-900">Web Designs</div>
               <div class="hero-slide-subtitle" style="color: #60a5fa;">AI Powered Creation & Full Stack Engineering</div>
             </div>
           </a>
@@ -360,7 +338,7 @@
           <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="5">
             <img src="/assets/hero/illysocial.png" alt="IllySocial - Connect. Collaborate. Grow." class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">IllySocial</div>
+              <div class="hero-slide-title text-gray-900">IllySocial</div>
               <div class="hero-slide-subtitle" style="color: #4ade80;">Connect. Collaborate. Grow.</div>
             </div>
           </a>
@@ -369,7 +347,7 @@
           <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer" class="hero-slide" data-slide="6">
             <img src="/assets/hero/livepay.png" alt="LivePay - Secure Live Commerce Platform" class="hero-slide-img">
             <div class="hero-slide-label">
-              <div class="hero-slide-title text-white">LivePay</div>
+              <div class="hero-slide-title text-gray-900">LivePay</div>
               <div class="hero-slide-subtitle" style="color: #2dd4bf;">Monetizing Organic Digital Imprints</div>
             </div>
           </a>
@@ -418,7 +396,7 @@
           <div class="space-y-6 text-gray-300 text-lg">
             <p>Illy Robotic Instruments is building the future of financial technology with a focus on human-centered design and data sovereignty.</p>
             <p>Our mission is to create open, decentralized financial infrastructure that empowers individuals and communities worldwide.</p>
-            <p>Through products like DisCryptoBank, IllySocial, LivePay, Illy Beast Gaming, IRG, I-RIS, and IRAI Academy, we're building a diverse ecosystem that spans fintech, gaming, social, and AI education.</p>
+            <p>Through products like DisCryptoBank, IllySocial, LivePay, Echo Vue, IRG, I-RIS, and IRAI Academy, we're building a diverse ecosystem that spans fintech, gaming, social, and AI education.</p>
           </div>
         </div>
       </div>
@@ -465,8 +443,8 @@
         <!-- IRAI Academy -->
         <a href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/irai-academy.png" alt="IRAI" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/irai-academy.png" alt="IRAI" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">IRAI Academy</h3>
@@ -479,8 +457,8 @@
         <!-- DisCryptoBank -->
         <a href="https://dcb-gm.com/#" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-violet-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/discryptobank.png" alt="DisCryptoBank" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-violet-400 transition-colors">DisCryptoBank</h3>
@@ -493,8 +471,8 @@
         <!-- IllySocial -->
         <a href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-green-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/illysocial.png" alt="IllySocial" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/illysocial.png" alt="IllySocial" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-green-400 transition-colors">IllySocial</h3>
@@ -507,8 +485,8 @@
         <!-- LivePay -->
         <a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/livepay.png" alt="LivePay" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/livepay.png" alt="LivePay" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">LivePay</h3>
@@ -521,8 +499,8 @@
         <!-- IRG - Illy Rush Gaming -->
         <a href="https://yry--hishbstest.replit.app/" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/illy-instruments.png" alt="IRG" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/illy-instruments.png" alt="IRG" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-emerald-400 transition-colors">Illy Rush Gaming</h3>
@@ -535,8 +513,8 @@
         <!-- I-RIS -->
         <a href="http://illy-ris.com/movie.html" target="_blank" rel="noopener noreferrer" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-purple-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/illy-instruments.png" alt="I-RIS" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/illy-instruments.png" alt="I-RIS" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-purple-400 transition-colors">I-RIS</h3>
@@ -549,8 +527,8 @@
         <!-- Web Designs & Brand-Marketing -->
         <a href="/web-designs/" class="group p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-pink-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/webdesigns.png" alt="Web Designs" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/webdesigns.png" alt="Web Designs" class="h-14 w-14 object-contain">
             </div>
             <div>
               <h3 class="text-xl font-bold group-hover:text-pink-400 transition-colors">Web Designs & Brand-Marketing</h3>
@@ -560,18 +538,18 @@
           <p class="text-gray-400">Professional web design, logo creation, and digital brand identity with transparent fixed-rate pricing from $100 to $500. From landing pages to full production sites with payment processing, POS, and admin tools.</p>
         </a>
 
-        <!-- Illy Beast Gaming - Full Width -->
-        <a href="https://dcb-games.com/#beast" target="_blank" rel="noopener noreferrer" class="group md:col-span-2 lg:col-span-3 p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/50 hover:bg-white/[0.07] transition-all">
+        <!-- Echo Vue - Full Width -->
+        <a href="#" class="group md:col-span-2 lg:col-span-3 p-8 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 hover:bg-white/[0.07] transition-all">
           <div class="flex items-center gap-4 mb-4">
-            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent">
-              <img src="/assets/hero/illy-instruments.png" alt="Illy Beast Gaming" class="h-14 w-14 object-contain" style="mix-blend-mode: screen;">
+            <div class="h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center bg-white">
+              <img src="/assets/hero/echovue.png" alt="Echo Vue" class="h-14 w-14 object-contain">
             </div>
             <div>
-              <h3 class="text-xl font-bold group-hover:text-amber-400 transition-colors">Illy Beast Gaming</h3>
-              <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Sportsbook, Casino &amp; Tournament Network</p>
+              <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">Echo Vue</h3>
+              <p class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Smart Home AI Vision &amp; Audio</p>
             </div>
           </div>
-          <p class="text-gray-400 max-w-3xl">The newest addition to the ecosystem — a full-scale sportsbook, casino, and tournament network built on decentralized infrastructure. Illy Beast Gaming combines competitive wagering, live tournament brackets, and community-driven gaming experiences into one unified platform.</p>
+          <p class="text-gray-400 max-w-3xl">Smart home AI vision and audio system delivering intelligent environmental awareness, voice-activated control, and seamless device integration — bringing next-generation AI into everyday living spaces.</p>
         </a>
 
       </div>
@@ -653,7 +631,7 @@
             <li><a href="https://illmedicine.github.io/LivePay/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LivePay</a></li>
             <li><a href="https://yry--hishbstest.replit.app/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Illy Rush Gaming</a></li>
             <li><a href="http://illy-ris.com/movie.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">I-RIS</a></li>
-            <li><a href="https://dcb-games.com/#beast" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Illy Beast Gaming</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Echo Vue</a></li>
             <li><a href="/web-designs/" class="hover:text-white transition-colors">Web Designs & Brand-Marketing</a></li>
           </ul>
         </div>
