@@ -1015,7 +1015,7 @@
 
       function draw() {
         // White wash with high opacity for fading trail effect
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.font = fontSize + 'px monospace';
@@ -1029,13 +1029,13 @@
           var color = colors[Math.floor(Math.random() * colors.length)];
 
           // Head character - brighter
-          var headAlpha = 0.18 + Math.random() * 0.12;
+          var headAlpha = 0.3 + Math.random() * 0.15;
           ctx.fillStyle = color + headAlpha + ')';
           ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
           // Occasional flicker - extra bright
           if (Math.random() > 0.97) {
-            ctx.fillStyle = color + '0.4)';
+            ctx.fillStyle = color + '0.55)';
             ctx.fillText(char, i * fontSize, drops[i] * fontSize);
           }
 
