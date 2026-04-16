@@ -76,7 +76,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      height: 700px;
+      height: 500px;
     }
     .hero-slide {
       position: absolute;
@@ -129,8 +129,8 @@
     .hero-slide.slide-left:hover { opacity: 0.7; }
     .hero-slide.slide-right:hover { opacity: 0.7; }
     .hero-slide-img {
-      width: 800px;
-      height: 500px;
+      width: 600px;
+      height: 380px;
       object-fit: contain;
       transition: filter 0.5s ease, transform 0.5s ease;
     }
@@ -223,8 +223,8 @@
     }
 
     @media (max-width: 768px) {
-      .hero-track { height: 480px; }
-      .hero-slide-img { width: 480px; height: 320px; }
+      .hero-track { height: 360px; }
+      .hero-slide-img { width: 380px; height: 250px; }
       .hero-slide-title { font-size: 1.25rem; }
       .hero-slide.slide-left { transform: scale(0.55) translateX(-90%); opacity: 0.35; }
       .hero-slide.slide-right { transform: scale(0.55) translateX(90%); opacity: 0.35; }
@@ -271,10 +271,13 @@
   </nav>
 
   <!-- Hero Section - Full Screen Interactive Card Carousel -->
-  <section id="products" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+  <section id="products" class="relative flex items-center justify-center overflow-hidden bg-white" style="min-height: 85vh;">
     
+    <!-- Matrix Code Rain Canvas -->
+    <canvas id="matrixCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
     <!-- Content -->
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-16 text-center">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-12 text-center">
       <p class="text-cyan-600 text-sm font-semibold tracking-widest uppercase mb-6 animate-fade-in-up">Accelerating Financial Innovation</p>
       <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-4 animate-fade-in-up text-gray-900" style="animation-delay: 0.1s">
         BUILDING THE FUTURE OF<br>
@@ -977,6 +980,77 @@
       // Initialize and start
       updateSlides();
       startAutoplay();
+    })();
+
+    // Matrix Code Rain - light blue & purple on white
+    (function() {
+      var canvas = document.getElementById('matrixCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var hero = canvas.parentElement;
+
+      function resize() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      var fontSize = 14;
+      var columns = Math.floor(canvas.width / fontSize);
+      var drops = [];
+      for (var i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+      }
+
+      var colors = [
+        'rgba(96, 165, 250, ',   // blue-400
+        'rgba(59, 130, 246, ',   // blue-500
+        'rgba(147, 130, 250, ',  // purple blend
+        'rgba(167, 139, 250, ',  // violet-400
+        'rgba(139, 92, 246, ',   // violet-500
+        'rgba(99, 102, 241, ',   // indigo-500
+      ];
+
+      function draw() {
+        // White wash with high opacity for fading trail effect
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = fontSize + 'px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+          if (drops[i] < 0) {
+            drops[i] += 0.5;
+            continue;
+          }
+          var char = chars[Math.floor(Math.random() * chars.length)];
+          var color = colors[Math.floor(Math.random() * colors.length)];
+
+          // Head character - brighter
+          var headAlpha = 0.18 + Math.random() * 0.12;
+          ctx.fillStyle = color + headAlpha + ')';
+          ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+          // Occasional flicker - extra bright
+          if (Math.random() > 0.97) {
+            ctx.fillStyle = color + '0.4)';
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+          }
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+            drops[i] = 0;
+          }
+          drops[i] += 0.5 + Math.random() * 0.5;
+        }
+      }
+
+      // Clear to white first
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      setInterval(draw, 50);
     })();
   </script>
 </body>
