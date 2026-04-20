@@ -17,7 +17,8 @@
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            navy: { 900: '#080c16', 800: '#0e1525', 700: '#162030', 600: '#243044' }
+            ink:    { 900: '#1a1340', 800: '#2a1f6b', 700: '#3b2fa0' },
+            marine: { 900: '#0b2a6b', 800: '#123f9a', 700: '#1e56c8' }
           }
         }
       }
@@ -25,67 +26,68 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
-    body {
-      background:
-        radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.7) 50%, transparent 50%),
-        radial-gradient(1px 1px at 25% 35%, rgba(200,220,255,0.5) 50%, transparent 50%),
-        radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.6) 50%, transparent 50%),
-        radial-gradient(1px 1px at 55% 45%, rgba(180,200,255,0.4) 50%, transparent 50%),
-        radial-gradient(2px 2px at 65% 20%, rgba(140,180,255,0.5) 50%, transparent 50%),
-        radial-gradient(1px 1px at 78% 55%, rgba(255,255,255,0.5) 50%, transparent 50%),
-        radial-gradient(1.5px 1.5px at 85% 12%, rgba(200,180,255,0.6) 50%, transparent 50%),
-        radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.5) 50%, transparent 50%),
-        radial-gradient(1.5px 1.5px at 30% 85%, rgba(180,200,255,0.4) 50%, transparent 50%),
-        radial-gradient(1px 1px at 50% 75%, rgba(255,255,255,0.6) 50%, transparent 50%),
-        radial-gradient(2px 2px at 70% 90%, rgba(140,160,255,0.3) 50%, transparent 50%),
-        radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.5) 50%, transparent 50%),
-        radial-gradient(ellipse 120% 60% at 20% 50%, rgba(30,50,100,0.15) 0%, transparent 70%),
-        radial-gradient(ellipse 100% 50% at 80% 30%, rgba(60,30,100,0.1) 0%, transparent 70%),
-        linear-gradient(180deg, #060a14 0%, #0a1020 30%, #0c1428 50%, #0a1020 70%, #060a14 100%);
-      background-attachment: fixed;
-      color: #e5e7eb;
+    body { background: #ffffff; color: #1a1340; }
+    .text-title   { color: #1a1340; }
+    .text-body    { color: #2a1f6b; }
+    .text-blue-ink{ color: #0b2a6b; }
+    .text-accent-gradient {
+      background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .text-gradient { background: linear-gradient(90deg, #06b6d4, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .nav-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .card-hover { transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
-    .card-hover:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.5); }
+    .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .card-shadow { box-shadow: 0 4px 24px rgba(26,19,64,0.06), 0 1px 4px rgba(26,19,64,0.04); }
+    .card-hover { transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(26,19,64,0.12); }
+    .btn-primary { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; font-weight: 700; transition: all .3s; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 8px 24px rgba(109,40,217,.35); }
+    .btn-outline { border: 2px solid #1d4ed8; color: #1d4ed8; font-weight: 700; transition: all .3s; background: #fff; }
+    .btn-outline:hover { background: #eef2ff; box-shadow: 0 4px 18px rgba(29,78,216,.15); }
     .tier-featured { position: relative; }
     .tier-featured::before {
-      content: ''; position: absolute; inset: -1px; border-radius: 1rem;
-      background: linear-gradient(135deg, #06b6d4, #8b5cf6); z-index: -1;
+      content: ''; position: absolute; inset: -2px; border-radius: 1.1rem;
+      background: linear-gradient(135deg, #1d4ed8, #6d28d9); z-index: -1;
     }
-    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 0 rgba(16,185,129,0.7); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.7);} 70% { box-shadow: 0 0 0 12px rgba(16,185,129,0);} 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0);} }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-    .industry-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); }
-    .industry-card:hover { background: rgba(255,255,255,0.07); }
-    input, select, textarea { color-scheme: dark; }
+    .pulse-dot { width:8px; height:8px; border-radius:50%; background:#10b981; box-shadow:0 0 0 0 rgba(16,185,129,.7); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(16,185,129,.7);} 70%{box-shadow:0 0 0 12px rgba(16,185,129,0);} 100%{box-shadow:0 0 0 0 rgba(16,185,129,0);} }
+    @keyframes fadeInUp { from { opacity:0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
+    .animate-fade-in-up { animation: fadeInUp .8s ease-out forwards; }
+    .soft-panel { background: #faf9ff; border: 1px solid rgba(109,40,217,.10); }
+    .divider-accent { height: 3px; background: linear-gradient(90deg, transparent, #1d4ed8, #6d28d9, transparent); }
+
+    .gallery-item { overflow: hidden; border-radius: 0.9rem; position: relative; box-shadow: 0 4px 20px rgba(26,19,64,.08); cursor: pointer; background:#f5f3ff; border:none; padding:0; }
+    .gallery-item img { transition: transform .6s cubic-bezier(0.4,0,0.2,1); width: 100%; height: 100%; object-fit: cover; display:block; }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    #lightbox { position: fixed; inset: 0; background: rgba(10,6,30,0.88); display: none; align-items: center; justify-content: center; z-index: 100; padding: 2rem; }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 0.75rem; box-shadow: 0 24px 60px rgba(0,0,0,.6); }
+    #lightbox .close-btn { position: absolute; top: 1.25rem; right: 1.25rem; background: #fff; color: #1a1340; border-radius: 9999px; width: 44px; height: 44px; font-weight: 900; font-size: 1.25rem; border: none; cursor: pointer; }
   </style>
 </head>
 <body class="font-sans antialiased">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-navy-900/80 border-b border-white/10">
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/85 border-b border-indigo-100">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <a href="/" class="flex items-center gap-4">
-          <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 p-2 flex items-center justify-center">
+          <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-marine-700 to-ink-700 p-2 flex items-center justify-center">
             <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-8 w-8 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold text-xl\'>IR</span>'">
           </div>
           <div>
-            <div class="text-lg font-bold tracking-tight text-white">ILLY ROBOTIC</div>
-            <div class="text-xs text-gray-400 tracking-widest uppercase">Instruments</div>
+            <div class="text-lg font-bold tracking-tight text-title">ILLY ROBOTIC</div>
+            <div class="text-xs tracking-widest uppercase" style="color:#2a1f6b;opacity:.7">Instruments</div>
           </div>
         </a>
         <div class="hidden md:flex items-center gap-8">
-          <a href="/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
-          <a href="#industries" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Industries</a>
-          <a href="#pricing" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Packages</a>
-          <a href="#insurance" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Insurance</a>
-          <a href="#book" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Book Demo</a>
+          <a href="/" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Home</a>
+          <a href="#industries" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Industries</a>
+          <a href="#gallery" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Gallery</a>
+          <a href="#pricing" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Packages</a>
+          <a href="#insurance" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Insurance</a>
+          <a href="#book" class="text-sm font-semibold text-body hover:opacity-70 transition-opacity">Book Demo</a>
         </div>
-        <a href="#book" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity">
+        <a href="#book" class="hidden sm:inline-flex items-center gap-2 btn-primary px-6 py-3 text-sm rounded-lg">
           Reserve a Demo
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
@@ -95,70 +97,70 @@
 
   <!-- Hero -->
   <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-indigo-50 via-white to-white"></div>
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="animate-fade-in-up">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 mb-6">
             <span class="pulse-dot"></span>
-            <span class="text-xs font-semibold uppercase tracking-widest text-gray-300">Serving Western New York &amp; Beyond</span>
+            <span class="text-xs font-semibold uppercase tracking-widest text-blue-ink">Serving Western New York &amp; Beyond</span>
           </div>
-          <h1 class="text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.05] mb-6">
-            Book a Live <span class="text-gradient">Unitree G1</span> Humanoid Robot Demonstration
+          <h1 class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+            <span class="text-title">Book a Live </span>
+            <span class="text-accent-gradient">Unitree G1</span>
+            <span class="text-title"> Humanoid Robot Demonstration</span>
           </h1>
-          <p class="text-lg text-gray-300 max-w-xl mb-8">
+          <p class="text-lg text-body max-w-xl mb-8">
             Bring a fully mobile, AI-powered humanoid robot directly to your facility, campus, conference, or agency.
-            Every demo is <strong class="text-white">personally programmed by the developer</strong> to match your industry,
+            Every demo is <strong class="text-title">personally programmed by the developer</strong> to match your industry,
             use case, and audience — no generic scripts, no canned routines.
           </p>
           <div class="flex flex-wrap gap-4 mb-10">
-            <a href="#book" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-violet-600 px-8 py-4 text-sm font-bold rounded-lg hover:opacity-90 transition-opacity uppercase tracking-wider">
-              Reserve Your Date
-            </a>
-            <a href="#pricing" class="inline-flex items-center gap-2 border-2 border-white/20 text-white px-8 py-4 text-sm font-bold rounded-lg hover:bg-white/5 transition-colors uppercase tracking-wider">
-              View Packages
-            </a>
+            <a href="#book" class="btn-primary px-8 py-4 text-sm rounded-lg uppercase tracking-wider">Reserve Your Date</a>
+            <a href="#pricing" class="btn-outline px-8 py-4 text-sm rounded-lg uppercase tracking-wider inline-flex items-center justify-center">View Packages</a>
           </div>
-          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-indigo-100">
             <div>
-              <div class="text-2xl font-black text-white">G1 EDU</div>
-              <div class="text-xs text-gray-400 uppercase tracking-wider">Standard U3 Platform</div>
+              <div class="text-2xl font-black text-blue-ink">G1 EDU</div>
+              <div class="text-xs uppercase tracking-wider" style="color:#2a1f6b;opacity:.7">Standard U3 Platform</div>
             </div>
             <div>
-              <div class="text-2xl font-black text-white">$1M</div>
-              <div class="text-xs text-gray-400 uppercase tracking-wider">CGL Per-Incident Coverage</div>
+              <div class="text-2xl font-black text-blue-ink">$1M</div>
+              <div class="text-xs uppercase tracking-wider" style="color:#2a1f6b;opacity:.7">CGL Per-Incident</div>
             </div>
             <div>
-              <div class="text-2xl font-black text-white">100%</div>
-              <div class="text-xs text-gray-400 uppercase tracking-wider">Custom Programmed</div>
+              <div class="text-2xl font-black text-blue-ink">100%</div>
+              <div class="text-xs uppercase tracking-wider" style="color:#2a1f6b;opacity:.7">Custom Programmed</div>
             </div>
           </div>
         </div>
         <div class="relative">
-          <div class="aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-navy-800 to-navy-900 card-hover">
-            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&q=80"
-                 alt="Humanoid robot demonstration"
-                 class="w-full h-full object-cover opacity-90"
-                 onerror="this.style.display='none'">
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden card-shadow card-hover bg-indigo-50">
+            <img src="https://www.futurobots.com/wp-content/uploads/unitree-g1-humanoid-robot-2-595x595.webp"
+                 alt="Unitree G1 humanoid robot"
+                 class="w-full h-full object-cover">
           </div>
-          <div class="absolute -bottom-6 -left-6 bg-navy-800 border border-white/10 rounded-xl p-5 max-w-xs shadow-2xl">
+          <div class="absolute -bottom-6 -left-6 bg-white border border-indigo-100 rounded-xl p-5 max-w-xs card-shadow">
             <div class="flex items-center gap-2 mb-2">
               <span class="pulse-dot"></span>
-              <span class="text-xs font-bold uppercase tracking-wider text-green-400">Now Booking</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Now Booking</span>
             </div>
-            <p class="text-sm text-gray-300">Live, on-site demonstrations across Buffalo, Rochester, Niagara Falls &amp; all of WNY.</p>
+            <p class="text-sm text-body">Live, on-site demonstrations across Buffalo, Rochester, Niagara Falls &amp; all of WNY.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="divider-accent"></div>
+
   <!-- The Robot -->
-  <section class="py-20 border-t border-white/5">
+  <section class="py-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl mb-12">
-        <div class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-3">Meet the Robot</div>
-        <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">Unitree G1 EDU — Standard U3</h2>
-        <p class="text-lg text-gray-300">
+        <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:#6d28d9">Meet the Robot</div>
+        <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-6">Unitree G1 EDU — Standard U3</h2>
+        <p class="text-lg text-body">
           The G1 is a full-size bipedal humanoid built for research, education, and real-world demonstration. With 23+ degrees of freedom,
           high-torque actuators, LiDAR + depth perception, and an on-board AI compute stack, it walks, runs, balances on uneven terrain,
           manipulates objects, and interacts with people in real time. I own the U3 (Standard EDU) configuration personally and tune every
@@ -166,75 +168,119 @@
         </p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="industry-card rounded-xl p-6 card-hover">
+        <div class="soft-panel rounded-xl p-6 card-hover">
           <div class="text-3xl mb-3">🤖</div>
-          <div class="text-sm font-bold text-white mb-1">Bipedal Locomotion</div>
-          <div class="text-xs text-gray-400">Walking, running, stair climbing, recovery from pushes.</div>
+          <div class="text-sm font-bold text-title mb-1">Bipedal Locomotion</div>
+          <div class="text-xs" style="color:#2a1f6b;opacity:.85">Walking, running, stair climbing, recovery from pushes.</div>
         </div>
-        <div class="industry-card rounded-xl p-6 card-hover">
+        <div class="soft-panel rounded-xl p-6 card-hover">
           <div class="text-3xl mb-3">🧠</div>
-          <div class="text-sm font-bold text-white mb-1">On-Board AI</div>
-          <div class="text-xs text-gray-400">LLM-driven speech, vision, and contextual responses.</div>
+          <div class="text-sm font-bold text-title mb-1">On-Board AI</div>
+          <div class="text-xs" style="color:#2a1f6b;opacity:.85">LLM-driven speech, vision, and contextual responses.</div>
         </div>
-        <div class="industry-card rounded-xl p-6 card-hover">
+        <div class="soft-panel rounded-xl p-6 card-hover">
           <div class="text-3xl mb-3">👁️</div>
-          <div class="text-sm font-bold text-white mb-1">LiDAR + Depth Sensing</div>
-          <div class="text-xs text-gray-400">3D mapping, obstacle avoidance, person tracking.</div>
+          <div class="text-sm font-bold text-title mb-1">LiDAR + Depth Sensing</div>
+          <div class="text-xs" style="color:#2a1f6b;opacity:.85">3D mapping, obstacle avoidance, person tracking.</div>
         </div>
-        <div class="industry-card rounded-xl p-6 card-hover">
+        <div class="soft-panel rounded-xl p-6 card-hover">
           <div class="text-3xl mb-3">✋</div>
-          <div class="text-sm font-bold text-white mb-1">Dexterous Manipulation</div>
-          <div class="text-xs text-gray-400">Object pick-and-place, handoffs, gesture performance.</div>
+          <div class="text-sm font-bold text-title mb-1">Dexterous Manipulation</div>
+          <div class="text-xs" style="color:#2a1f6b;opacity:.85">Object pick-and-place, handoffs, gesture performance.</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Gallery -->
+  <section id="gallery" class="py-20 bg-gradient-to-b from-white via-indigo-50/40 to-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-10">
+        <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:#1d4ed8">Gallery</div>
+        <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-4">See the Unitree G1 in action.</h2>
+        <p class="text-lg text-body">Real photography of the G1 humanoid platform. Click any image to enlarge.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/52688de58de044358e4792a5b7c1593d_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/52688de58de044358e4792a5b7c1593d_2740x1720-350x220.jpg" alt="Unitree G1 humanoid robot" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/a7458205b63e4ff5a501c1ae84d0988b_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/a7458205b63e4ff5a501c1ae84d0988b_2740x1720-350x220.jpg" alt="Unitree G1 full body" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/a0e8042bd2df4c47af28ff371bb6b4fa_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/a0e8042bd2df4c47af28ff371bb6b4fa_2740x1720-350x220.jpg" alt="Unitree G1 walking" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/5d03fc0c0d894b47ba7a08ec9c76a773_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/5d03fc0c0d894b47ba7a08ec9c76a773_2740x1720-350x220.jpg" alt="Unitree G1 closeup" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/b3e6ff3a8b9740da9b1176bd84867d3c_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/b3e6ff3a8b9740da9b1176bd84867d3c_2740x1720-350x220.jpg" alt="Unitree G1 demonstration" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/fe964a180b8a45c2944dabf980d6a80a_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/fe964a180b8a45c2944dabf980d6a80a_2740x1720-350x220.jpg" alt="Unitree G1 interaction" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/a26acb69e9cc4613886897b6f2fbdab3_2740x1720.jpg')">
+          <img src="https://www.futurobots.com/wp-content/uploads/a26acb69e9cc4613886897b6f2fbdab3_2740x1720-350x220.jpg" alt="Unitree G1 on stage" loading="lazy">
+        </button>
+        <button type="button" class="gallery-item aspect-square" onclick="openLightbox('https://www.futurobots.com/wp-content/uploads/unitree-g1-humanoid-robot-2-595x595.webp')">
+          <img src="https://www.futurobots.com/wp-content/uploads/unitree-g1-humanoid-robot-2-595x595.webp" alt="Unitree G1 studio" loading="lazy">
+        </button>
+      </div>
+      <p class="text-xs italic mt-4" style="color:#2a1f6b;opacity:.65">Images courtesy of Futurobots / Unitree Robotics — representative of the G1 platform.</p>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button type="button" class="close-btn" onclick="closeLightbox(event, true)" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="Expanded image">
+  </div>
+
   <!-- Why Customized Demos -->
-  <section class="py-20 border-t border-white/5 bg-white/[0.015]">
+  <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="text-xs font-bold uppercase tracking-widest text-violet-400 mb-3">Fully Customized, Every Time</div>
-          <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">No two demos are the same.</h2>
-          <p class="text-lg text-gray-300 mb-6">
+          <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:#6d28d9">Fully Customized, Every Time</div>
+          <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-6">No two demos are the same.</h2>
+          <p class="text-lg text-body mb-6">
             Before your event, I sit down with your team — in person, by phone, or over video — to understand exactly what
             you want the robot to <em>do</em>, <em>say</em>, and <em>show</em>. Then I program the G1 from the ground up
             for your audience: scripted dialogue in your brand voice, custom motion sequences, industry-specific
             walk-throughs, interactive Q&amp;A, product handoffs, branded intros, and choreographed routines.
           </p>
-          <p class="text-lg text-gray-300">
+          <p class="text-lg text-body">
             You don't get a canned robot show. You get a bespoke engineering deliverable, presented live, by the
             person who built it.
           </p>
         </div>
         <div class="space-y-4">
-          <div class="flex gap-4 industry-card rounded-xl p-5">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">1</div>
+          <div class="flex gap-4 soft-panel rounded-xl p-5">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-blue-ink font-bold">1</div>
             <div>
-              <div class="font-bold text-white mb-1">Discovery Call</div>
-              <div class="text-sm text-gray-400">We define goals, audience, environment, and any branding or messaging requirements.</div>
+              <div class="font-bold text-title mb-1">Discovery Call</div>
+              <div class="text-sm" style="color:#2a1f6b;opacity:.85">We define goals, audience, environment, and any branding or messaging requirements.</div>
             </div>
           </div>
-          <div class="flex gap-4 industry-card rounded-xl p-5">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">2</div>
+          <div class="flex gap-4 soft-panel rounded-xl p-5">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-blue-ink font-bold">2</div>
             <div>
-              <div class="font-bold text-white mb-1">Custom Programming</div>
-              <div class="text-sm text-gray-400">Motion sequences, dialogue, interactions, and sensor behavior are built specifically for your demo.</div>
+              <div class="font-bold text-title mb-1">Custom Programming</div>
+              <div class="text-sm" style="color:#2a1f6b;opacity:.85">Motion sequences, dialogue, interactions, and sensor behavior are built specifically for your demo.</div>
             </div>
           </div>
-          <div class="flex gap-4 industry-card rounded-xl p-5">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">3</div>
+          <div class="flex gap-4 soft-panel rounded-xl p-5">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-blue-ink font-bold">3</div>
             <div>
-              <div class="font-bold text-white mb-1">On-Site Rehearsal</div>
-              <div class="text-sm text-gray-400">I arrive early to survey the space, re-calibrate for terrain and lighting, and run a dry pass.</div>
+              <div class="font-bold text-title mb-1">On-Site Rehearsal</div>
+              <div class="text-sm" style="color:#2a1f6b;opacity:.85">I arrive early to survey the space, re-calibrate for terrain and lighting, and run a dry pass.</div>
             </div>
           </div>
-          <div class="flex gap-4 industry-card rounded-xl p-5">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">4</div>
+          <div class="flex gap-4 soft-panel rounded-xl p-5">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-blue-ink font-bold">4</div>
             <div>
-              <div class="font-bold text-white mb-1">Live Demonstration</div>
-              <div class="text-sm text-gray-400">The full custom demo is performed live, with me present as operator and engineer throughout.</div>
+              <div class="font-bold text-title mb-1">Live Demonstration</div>
+              <div class="text-sm" style="color:#2a1f6b;opacity:.85">The full custom demo is performed live, with me present as operator and engineer throughout.</div>
             </div>
           </div>
         </div>
@@ -243,12 +289,12 @@
   </section>
 
   <!-- Industries -->
-  <section id="industries" class="py-20 border-t border-white/5">
+  <section id="industries" class="py-20" style="background:rgba(238,242,255,0.5)">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl mb-14">
-        <div class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-3">Who Should Book</div>
-        <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">Built for the industries shaping Western New York.</h2>
-        <p class="text-lg text-gray-300">
+        <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:#1d4ed8">Who Should Book</div>
+        <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-6">Built for the industries shaping Western New York.</h2>
+        <p class="text-lg text-body">
           Humanoid robotics is no longer theoretical — it's being deployed in factories, hospitals, classrooms, and public-safety
           operations right now. A live demo is the fastest, lowest-risk way to see how this technology fits <em>your</em> mission.
         </p>
@@ -256,78 +302,73 @@
 
       <div class="grid md:grid-cols-2 gap-6">
 
-        <!-- Manufacturing -->
-        <div class="industry-card rounded-2xl p-8 card-hover">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center text-2xl">🏭</div>
-            <h3 class="text-xl font-bold text-white">Manufacturing &amp; Industrial</h3>
+            <div class="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center text-2xl">🏭</div>
+            <h3 class="text-xl font-bold text-title">Manufacturing &amp; Industrial</h3>
           </div>
-          <p class="text-gray-300 mb-4">
+          <p class="text-body mb-4">
             See firsthand how a humanoid platform moves through a real shop floor — inspecting equipment, retrieving parts,
             performing repetitive pick-and-place, and navigating around operators. A live demo helps plant managers, safety officers,
             and automation engineers evaluate ROI, ergonomics impact, and integration potential with existing PLC and SCADA systems
             <em>before</em> committing to a capital-expense pilot.
           </p>
-          <div class="text-xs font-bold uppercase tracking-wider text-orange-400">Ideal for: Plant Managers • Ops Directors • Safety &amp; Automation Teams</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-orange-700">Ideal for: Plant Managers • Ops Directors • Safety &amp; Automation Teams</div>
         </div>
 
-        <!-- Hospitals -->
-        <div class="industry-card rounded-2xl p-8 card-hover">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center text-2xl">🏥</div>
-            <h3 class="text-xl font-bold text-white">Hospitals &amp; Healthcare Systems</h3>
+            <div class="w-12 h-12 rounded-lg bg-rose-100 flex items-center justify-center text-2xl">🏥</div>
+            <h3 class="text-xl font-bold text-title">Hospitals &amp; Healthcare Systems</h3>
           </div>
-          <p class="text-gray-300 mb-4">
+          <p class="text-body mb-4">
             Humanoids are entering healthcare as logistics couriers, patient-companionship platforms, and staff-assist devices.
             A live demo shows nursing leadership, facilities, and innovation teams how a G1 can carry supplies between units,
             perform rounding walk-bys, offer patient check-ins, and integrate with EHR workflows — all while giving clinicians
             direct, hands-on exposure to the technology reshaping their next decade of care delivery.
           </p>
-          <div class="text-xs font-bold uppercase tracking-wider text-red-400">Ideal for: Hospital Administrators • CNOs • Innovation Labs • Patient-Experience Teams</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-rose-700">Ideal for: Hospital Administrators • CNOs • Innovation Labs • Patient-Experience Teams</div>
         </div>
 
-        <!-- Schools & Universities -->
-        <div class="industry-card rounded-2xl p-8 card-hover">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center text-2xl">🎓</div>
-            <h3 class="text-xl font-bold text-white">Schools &amp; Universities</h3>
+            <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center text-2xl">🎓</div>
+            <h3 class="text-xl font-bold text-title">Schools &amp; Universities</h3>
           </div>
-          <p class="text-gray-300 mb-4">
+          <p class="text-body mb-4">
             From K–12 STEM assemblies to university engineering, CS, and robotics programs, nothing inspires like a real,
             walking, talking humanoid in the room. I tailor each demo to the grade level or curriculum — introductory
             robotics for middle schoolers, ROS/AI architecture deep-dives for undergrads, or interactive research discussions
             for faculty. Perfect for career days, open houses, STEAM nights, accreditation showcases, and donor events.
           </p>
-          <div class="text-xs font-bold uppercase tracking-wider text-blue-400">Ideal for: Superintendents • Deans • STEM Coordinators • Robotics &amp; CS Departments</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-blue-ink">Ideal for: Superintendents • Deans • STEM Coordinators • Robotics &amp; CS Departments</div>
         </div>
 
-        <!-- Police & FBI -->
-        <div class="industry-card rounded-2xl p-8 card-hover">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-lg bg-slate-500/20 flex items-center justify-center text-2xl">🛡️</div>
-            <h3 class="text-xl font-bold text-white">Police, Federal &amp; Public Safety</h3>
+            <div class="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-2xl">🛡️</div>
+            <h3 class="text-xl font-bold text-title">Police, Federal &amp; Public Safety</h3>
           </div>
-          <p class="text-gray-300 mb-4">
+          <p class="text-body mb-4">
             Law-enforcement and federal agencies are actively evaluating bipedal platforms for reconnaissance, hazardous-entry
             support, training scenarios, and community-engagement outreach. A controlled, hands-on demo gives tactical teams,
             training divisions, and command staff a safe environment to assess capability, understand operational limits, and
             explore future procurement — without the overhead of a national RFP visit.
           </p>
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Ideal for: Chiefs • SWAT &amp; Tactical • Training Divisions • Federal Field Offices</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-700">Ideal for: Chiefs • SWAT &amp; Tactical • Training Divisions • Federal Field Offices</div>
         </div>
 
-        <!-- Corporate / Events -->
-        <div class="industry-card rounded-2xl p-8 card-hover md:col-span-2 tier-featured">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow md:col-span-2 tier-featured">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-lg bg-violet-500/20 flex items-center justify-center text-2xl">🎉</div>
-            <h3 class="text-xl font-bold text-white">Corporate Events, Conferences &amp; Brand Activations</h3>
+            <div class="w-12 h-12 rounded-lg bg-violet-100 flex items-center justify-center text-2xl">🎉</div>
+            <h3 class="text-xl font-bold text-title">Corporate Events, Conferences &amp; Brand Activations</h3>
           </div>
-          <p class="text-gray-300 mb-4">
+          <p class="text-body mb-4">
             Product launches, sales kickoffs, trade-show booths, executive retreats, grand openings, and team-building sessions —
             a live humanoid robot is the single most memorable moment your guests will take home. I program the robot's personality,
             voice, and movement around your brand, theme, and goals, so it becomes a living extension of your event.
           </p>
-          <div class="text-xs font-bold uppercase tracking-wider text-violet-400">Ideal for: CMOs • Event Producers • Agencies • HR &amp; Culture Leads</div>
+          <div class="text-xs font-bold uppercase tracking-wider" style="color:#6d28d9">Ideal for: CMOs • Event Producers • Agencies • HR &amp; Culture Leads</div>
         </div>
 
       </div>
@@ -335,26 +376,26 @@
   </section>
 
   <!-- Pricing -->
-  <section id="pricing" class="py-20 border-t border-white/5 bg-white/[0.015]">
+  <section id="pricing" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="max-w-3xl mb-14">
-        <div class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-3">Packages &amp; Pricing</div>
-        <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">Transparent pricing. Tailored packages.</h2>
-        <p class="text-lg text-gray-300">
+        <div class="text-xs font-bold uppercase tracking-widest mb-3" style="color:#6d28d9">Packages &amp; Pricing</div>
+        <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-6">Transparent pricing. Tailored packages.</h2>
+        <p class="text-lg text-body">
           Each package below is a starting point — every booking is scoped and customized to your environment, audience, and goals.
           Travel outside the immediate Buffalo / WNY region may add mileage; multi-day engagements receive preferred pricing.
         </p>
       </div>
 
       <!-- Corporate -->
-      <h3 class="text-2xl font-black text-white tracking-tight mb-6">🎉 Corporate Events &amp; Gatherings</h3>
-      <p class="text-gray-400 mb-6 max-w-3xl"><strong class="text-white">Jayla — Premium Humanoid Robot Experience.</strong> Elevate your corporate event, conference, product launch, or team-building session with Jayla, a fully mobile, AI-powered humanoid robot. High-impact, memorable experiences that wow clients, employees, and executives.</p>
+      <h3 class="text-2xl font-black text-title tracking-tight mb-6">🎉 Corporate Events &amp; Gatherings</h3>
+      <p class="text-body mb-6 max-w-3xl"><strong class="text-title">Jayla — Premium Humanoid Robot Experience.</strong> Elevate your corporate event, conference, product launch, or team-building session with Jayla, a fully mobile, AI-powered humanoid robot. High-impact, memorable experiences that wow clients, employees, and executives.</p>
       <div class="grid md:grid-cols-2 gap-6 mb-16">
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-violet-400 mb-2">Signature Appearance</div>
-          <div class="text-4xl font-black text-white mb-1">$2,000</div>
-          <div class="text-sm text-gray-400 mb-5">45-minute live appearance &amp; interaction</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest mb-2" style="color:#6d28d9">Signature Appearance</div>
+          <div class="text-4xl font-black text-title mb-1">$2,000</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">45-minute live appearance &amp; interaction</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Custom-programmed personality &amp; dialogue</li>
             <li>✓ Branded intro &amp; messaging</li>
             <li>✓ Live audience interaction &amp; Q&amp;A</li>
@@ -362,12 +403,12 @@
             <li>✓ Developer on-site as operator</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover tier-featured">
-          <div class="inline-block text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-cyan-500 to-violet-600 text-white px-3 py-1 rounded-full mb-3">Most Popular</div>
-          <div class="text-sm font-bold uppercase tracking-widest text-violet-400 mb-2">Premium Event Package</div>
-          <div class="text-4xl font-black text-white mb-1">$3,500</div>
-          <div class="text-sm text-gray-400 mb-5">2-hour premium event experience</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow tier-featured">
+          <div class="inline-block text-[10px] font-black uppercase tracking-widest btn-primary px-3 py-1 rounded-full mb-3">Most Popular</div>
+          <div class="text-sm font-bold uppercase tracking-widest mb-2" style="color:#6d28d9">Premium Event Package</div>
+          <div class="text-4xl font-black text-title mb-1">$3,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">2-hour premium event experience</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Everything in Signature, extended</li>
             <li>✓ Multiple choreographed routines</li>
             <li>✓ Meet-and-greet stations with attendees</li>
@@ -379,36 +420,36 @@
       </div>
 
       <!-- Manufacturing -->
-      <h3 class="text-2xl font-black text-white tracking-tight mb-6">🏭 Manufacturing &amp; Industrial Demos</h3>
+      <h3 class="text-2xl font-black text-title tracking-tight mb-6">🏭 Manufacturing &amp; Industrial Demos</h3>
       <div class="grid md:grid-cols-3 gap-6 mb-16">
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-orange-400 mb-2">Shop-Floor Intro</div>
-          <div class="text-4xl font-black text-white mb-1">$1,500</div>
-          <div class="text-sm text-gray-400 mb-5">60-minute on-site demo</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-orange-700 mb-2">Shop-Floor Intro</div>
+          <div class="text-4xl font-black text-title mb-1">$1,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">60-minute on-site demo</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Walk-through of mobility &amp; perception</li>
             <li>✓ Basic pick-and-place demonstration</li>
             <li>✓ Q&amp;A with your ops team</li>
             <li>✓ Safety briefing &amp; PPE compliance</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover tier-featured">
-          <div class="inline-block text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-cyan-500 to-violet-600 text-white px-3 py-1 rounded-full mb-3">Recommended</div>
-          <div class="text-sm font-bold uppercase tracking-widest text-orange-400 mb-2">Use-Case Evaluation</div>
-          <div class="text-4xl font-black text-white mb-1">$3,000</div>
-          <div class="text-sm text-gray-400 mb-5">Half-day (4 hours) engagement</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow tier-featured">
+          <div class="inline-block text-[10px] font-black uppercase tracking-widest btn-primary px-3 py-1 rounded-full mb-3">Recommended</div>
+          <div class="text-sm font-bold uppercase tracking-widest text-orange-700 mb-2">Use-Case Evaluation</div>
+          <div class="text-4xl font-black text-title mb-1">$3,000</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Half-day (4 hours) engagement</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Customized to 1–2 target workflows</li>
             <li>✓ Live scenario runs on your floor</li>
             <li>✓ Integration &amp; ROI discussion</li>
             <li>✓ Written summary / findings handed off</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-orange-400 mb-2">Full Day Pilot Preview</div>
-          <div class="text-4xl font-black text-white mb-1">$5,500</div>
-          <div class="text-sm text-gray-400 mb-5">Full 8-hour engagement</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-orange-700 mb-2">Full Day Pilot Preview</div>
+          <div class="text-4xl font-black text-title mb-1">$5,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Full 8-hour engagement</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Deep workflow programming</li>
             <li>✓ Multiple stations &amp; shift coverage</li>
             <li>✓ Leadership briefing session</li>
@@ -418,25 +459,25 @@
       </div>
 
       <!-- Healthcare -->
-      <h3 class="text-2xl font-black text-white tracking-tight mb-6">🏥 Hospitals &amp; Healthcare</h3>
+      <h3 class="text-2xl font-black text-title tracking-tight mb-6">🏥 Hospitals &amp; Healthcare</h3>
       <div class="grid md:grid-cols-2 gap-6 mb-16">
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-red-400 mb-2">Innovation Showcase</div>
-          <div class="text-4xl font-black text-white mb-1">$2,500</div>
-          <div class="text-sm text-gray-400 mb-5">90-minute demo for leadership &amp; staff</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-rose-700 mb-2">Innovation Showcase</div>
+          <div class="text-4xl font-black text-title mb-1">$2,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">90-minute demo for leadership &amp; staff</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Patient-facing interaction demo</li>
             <li>✓ Supply-transport walk-through</li>
             <li>✓ Clinical staff Q&amp;A</li>
             <li>✓ HIPAA-conscious scripting</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover tier-featured">
-          <div class="inline-block text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-cyan-500 to-violet-600 text-white px-3 py-1 rounded-full mb-3">Best for Systems</div>
-          <div class="text-sm font-bold uppercase tracking-widest text-red-400 mb-2">Multi-Unit Tour</div>
-          <div class="text-4xl font-black text-white mb-1">$4,500</div>
-          <div class="text-sm text-gray-400 mb-5">Half-day across multiple departments</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow tier-featured">
+          <div class="inline-block text-[10px] font-black uppercase tracking-widest btn-primary px-3 py-1 rounded-full mb-3">Best for Systems</div>
+          <div class="text-sm font-bold uppercase tracking-widest text-rose-700 mb-2">Multi-Unit Tour</div>
+          <div class="text-4xl font-black text-title mb-1">$4,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Half-day across multiple departments</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Up to 3 unit visits (ED, Med-Surg, Admin, etc.)</li>
             <li>✓ Custom scenarios per unit</li>
             <li>✓ Executive briefing at close</li>
@@ -446,35 +487,35 @@
       </div>
 
       <!-- Education -->
-      <h3 class="text-2xl font-black text-white tracking-tight mb-6">🎓 Schools &amp; Universities</h3>
+      <h3 class="text-2xl font-black text-title tracking-tight mb-6">🎓 Schools &amp; Universities</h3>
       <div class="grid md:grid-cols-3 gap-6 mb-16">
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-blue-400 mb-2">Classroom Visit</div>
-          <div class="text-4xl font-black text-white mb-1">$800</div>
-          <div class="text-sm text-gray-400 mb-5">Single 45-min classroom/period</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-blue-ink mb-2">Classroom Visit</div>
+          <div class="text-4xl font-black text-title mb-1">$800</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Single 45-min classroom/period</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Grade-appropriate script</li>
             <li>✓ Live interaction with students</li>
             <li>✓ Q&amp;A with the developer</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover tier-featured">
-          <div class="inline-block text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-cyan-500 to-violet-600 text-white px-3 py-1 rounded-full mb-3">Assembly Favorite</div>
-          <div class="text-sm font-bold uppercase tracking-widest text-blue-400 mb-2">School Assembly</div>
-          <div class="text-4xl font-black text-white mb-1">$1,800</div>
-          <div class="text-sm text-gray-400 mb-5">Full-school assembly + STEM talk</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow tier-featured">
+          <div class="inline-block text-[10px] font-black uppercase tracking-widest btn-primary px-3 py-1 rounded-full mb-3">Assembly Favorite</div>
+          <div class="text-sm font-bold uppercase tracking-widest text-blue-ink mb-2">School Assembly</div>
+          <div class="text-4xl font-black text-title mb-1">$1,800</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Full-school assembly + STEM talk</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Large-audience show routine</li>
             <li>✓ STEM / career-path messaging</li>
             <li>✓ Pre-event teacher coordination</li>
             <li>✓ Optional follow-up classroom session</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-blue-400 mb-2">University Program</div>
-          <div class="text-4xl font-black text-white mb-1">$3,500</div>
-          <div class="text-sm text-gray-400 mb-5">Half-day program visit</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-blue-ink mb-2">University Program</div>
+          <div class="text-4xl font-black text-title mb-1">$3,500</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Half-day program visit</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Engineering / CS / Robotics deep-dive</li>
             <li>✓ Research-grade architecture Q&amp;A</li>
             <li>✓ Open-house / donor event version available</li>
@@ -483,25 +524,25 @@
       </div>
 
       <!-- Public Safety -->
-      <h3 class="text-2xl font-black text-white tracking-tight mb-6">🛡️ Police, Federal &amp; Public Safety</h3>
+      <h3 class="text-2xl font-black text-title tracking-tight mb-6">🛡️ Police, Federal &amp; Public Safety</h3>
       <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <div class="industry-card rounded-2xl p-8 card-hover">
-          <div class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Command Briefing</div>
-          <div class="text-4xl font-black text-white mb-1">$2,200</div>
-          <div class="text-sm text-gray-400 mb-5">90-minute closed-door capability brief</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="soft-panel rounded-2xl p-8 card-hover">
+          <div class="text-sm font-bold uppercase tracking-widest text-slate-700 mb-2">Command Briefing</div>
+          <div class="text-4xl font-black text-title mb-1">$2,200</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">90-minute closed-door capability brief</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Platform capability walkthrough</li>
             <li>✓ Use-case discussion (recon, training, community)</li>
             <li>✓ Confidential environment respected</li>
             <li>✓ Full insurance &amp; liability packet provided</li>
           </ul>
         </div>
-        <div class="industry-card rounded-2xl p-8 card-hover tier-featured">
-          <div class="inline-block text-[10px] font-black uppercase tracking-widest bg-gradient-to-r from-cyan-500 to-violet-600 text-white px-3 py-1 rounded-full mb-3">Training Divisions</div>
-          <div class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Tactical / Training Day</div>
-          <div class="text-4xl font-black text-white mb-1">$4,800</div>
-          <div class="text-sm text-gray-400 mb-5">Half-day scenario-based demonstration</div>
-          <ul class="space-y-2 text-sm text-gray-300">
+        <div class="bg-white rounded-2xl p-8 card-hover card-shadow tier-featured">
+          <div class="inline-block text-[10px] font-black uppercase tracking-widest btn-primary px-3 py-1 rounded-full mb-3">Training Divisions</div>
+          <div class="text-sm font-bold uppercase tracking-widest text-slate-700 mb-2">Tactical / Training Day</div>
+          <div class="text-4xl font-black text-title mb-1">$4,800</div>
+          <div class="text-sm mb-5" style="color:#2a1f6b;opacity:.8">Half-day scenario-based demonstration</div>
+          <ul class="space-y-2 text-sm text-body">
             <li>✓ Scripted scenario runs (entry support, recon, community outreach)</li>
             <li>✓ Controlled environment, full operator oversight</li>
             <li>✓ After-action review with command staff</li>
@@ -509,76 +550,76 @@
           </ul>
         </div>
       </div>
-      <p class="text-sm text-gray-400 italic">Custom, multi-day, and agency-wide engagements available on request.</p>
+      <p class="text-sm italic" style="color:#2a1f6b;opacity:.7">Custom, multi-day, and agency-wide engagements available on request.</p>
     </div>
   </section>
 
   <!-- Insurance / Liability -->
-  <section id="insurance" class="py-20 border-t border-white/5">
+  <section id="insurance" class="py-20" style="background:rgba(238,242,255,0.5)">
     <div class="max-w-5xl mx-auto px-6 lg:px-8">
-      <div class="text-xs font-bold uppercase tracking-widest text-green-400 mb-3">Fully Insured &amp; Documented</div>
-      <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">$1M CGL coverage — because professionalism matters.</h2>
-      <p class="text-lg text-gray-300 mb-10">
-        Illy Robotic Instruments carries a current <strong class="text-white">Commercial General Liability (CGL) policy with
+      <div class="text-xs font-bold uppercase tracking-widest mb-3 text-emerald-700">Fully Insured &amp; Documented</div>
+      <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-6">$1M CGL coverage — because professionalism matters.</h2>
+      <p class="text-lg text-body mb-10">
+        Illy Robotic Instruments carries a current <strong class="text-title">Commercial General Liability (CGL) policy with
         $1,000,000 per-incident coverage</strong>. A certificate of insurance (COI) naming your organization as an
         additional insured can be provided upon request prior to the event. All demonstrations are performed with the
         developer-operator on site, in a controlled, supervised environment, with appropriate safety perimeters.
       </p>
 
-      <div class="industry-card rounded-2xl p-8 mb-6">
-        <h3 class="text-xl font-bold text-white mb-4">Liability &amp; Scope-of-Coverage Language (included in every booking agreement)</h3>
-        <div class="prose prose-invert max-w-none text-sm text-gray-300 leading-relaxed space-y-4">
-          <p><strong class="text-white">1. Insurance.</strong> Illy Robotic Instruments ("Provider") maintains Commercial General Liability insurance of not less than $1,000,000 per occurrence, covering third-party bodily injury and property damage arising out of the on-site operation of the Unitree G1 humanoid platform ("Equipment") during the scheduled demonstration.</p>
-          <p><strong class="text-white">2. Operator Control.</strong> The Equipment shall at all times remain under the direct supervision and operational control of Provider or an authorized Provider operator. Client, its employees, guests, or invitees shall not operate the Equipment except under Provider's express direction and supervision.</p>
-          <p><strong class="text-white">3. Safety Perimeter.</strong> Client agrees to provide a reasonable, obstruction-free operating area and to respect the safety perimeter designated by Provider prior to the demonstration. Client will reasonably ensure that attendees follow Provider's verbal safety instructions.</p>
-          <p><strong class="text-white">4. Exclusions.</strong> Coverage does not extend to: (a) damage caused by Client's willful interference with the Equipment; (b) losses arising from environmental conditions not disclosed to Provider in advance (e.g., live electrical hazards, unmarked drop-offs, hazardous chemicals); (c) cyber, data, or intellectual-property claims; or (d) consequential or indirect damages.</p>
-          <p><strong class="text-white">5. Indemnification.</strong> Each party shall indemnify and hold the other harmless for claims arising from its own negligence or willful misconduct. Provider's aggregate liability under this agreement shall not exceed the limits of its CGL policy.</p>
-          <p><strong class="text-white">6. Media &amp; Likeness.</strong> Unless otherwise agreed in writing, Provider may photograph or record the demonstration for portfolio and marketing purposes, excluding any confidential client information, minors without parental consent, or restricted facility areas.</p>
-          <p><strong class="text-white">7. Cancellation.</strong> Cancellations made more than 14 days prior to the scheduled date receive a full refund less any custom-programming work already performed. Cancellations inside 14 days forfeit a 50% deposit. Weather- or safety-driven rescheduling is handled without penalty.</p>
-          <p class="text-xs text-gray-400 italic">The foregoing is a summary. The full executed service agreement, including Certificate of Insurance, is delivered to Client upon booking confirmation and must be signed prior to the demonstration.</p>
+      <div class="bg-white rounded-2xl p-8 card-shadow mb-6">
+        <h3 class="text-xl font-bold text-title mb-4">Liability &amp; Scope-of-Coverage Language (included in every booking agreement)</h3>
+        <div class="text-sm text-body leading-relaxed space-y-4">
+          <p><strong class="text-title">1. Insurance.</strong> Illy Robotic Instruments ("Provider") maintains Commercial General Liability insurance of not less than $1,000,000 per occurrence, covering third-party bodily injury and property damage arising out of the on-site operation of the Unitree G1 humanoid platform ("Equipment") during the scheduled demonstration.</p>
+          <p><strong class="text-title">2. Operator Control.</strong> The Equipment shall at all times remain under the direct supervision and operational control of Provider or an authorized Provider operator. Client, its employees, guests, or invitees shall not operate the Equipment except under Provider's express direction and supervision.</p>
+          <p><strong class="text-title">3. Safety Perimeter.</strong> Client agrees to provide a reasonable, obstruction-free operating area and to respect the safety perimeter designated by Provider prior to the demonstration. Client will reasonably ensure that attendees follow Provider's verbal safety instructions.</p>
+          <p><strong class="text-title">4. Exclusions.</strong> Coverage does not extend to: (a) damage caused by Client's willful interference with the Equipment; (b) losses arising from environmental conditions not disclosed to Provider in advance (e.g., live electrical hazards, unmarked drop-offs, hazardous chemicals); (c) cyber, data, or intellectual-property claims; or (d) consequential or indirect damages.</p>
+          <p><strong class="text-title">5. Indemnification.</strong> Each party shall indemnify and hold the other harmless for claims arising from its own negligence or willful misconduct. Provider's aggregate liability under this agreement shall not exceed the limits of its CGL policy.</p>
+          <p><strong class="text-title">6. Media &amp; Likeness.</strong> Unless otherwise agreed in writing, Provider may photograph or record the demonstration for portfolio and marketing purposes, excluding any confidential client information, minors without parental consent, or restricted facility areas.</p>
+          <p><strong class="text-title">7. Cancellation.</strong> Cancellations made more than 14 days prior to the scheduled date receive a full refund less any custom-programming work already performed. Cancellations inside 14 days forfeit a 50% deposit. Weather- or safety-driven rescheduling is handled without penalty.</p>
+          <p class="text-xs italic" style="color:#2a1f6b;opacity:.6">The foregoing is a summary. The full executed service agreement, including Certificate of Insurance, is delivered to Client upon booking confirmation and must be signed prior to the demonstration.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Booking Form -->
-  <section id="book" class="py-20 border-t border-white/5 bg-white/[0.015]">
+  <section id="book" class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-6 lg:px-8">
-      <div class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-3 text-center">Reserve Your Demo</div>
-      <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight mb-4 text-center">Book a Live G1 Demonstration</h2>
-      <p class="text-lg text-gray-300 mb-10 text-center">
+      <div class="text-xs font-bold uppercase tracking-widest mb-3 text-center" style="color:#1d4ed8">Reserve Your Demo</div>
+      <h2 class="text-4xl lg:text-5xl font-black text-title tracking-tight mb-4 text-center">Book a Live G1 Demonstration</h2>
+      <p class="text-lg text-body mb-10 text-center">
         Submit the form below and I'll personally follow up within 1–2 business days with availability,
         a discovery-call invite, and your custom quote &amp; service agreement.
       </p>
 
-      <form id="bookingForm" class="industry-card rounded-2xl p-8 space-y-6"
+      <form id="bookingForm" class="bg-white rounded-2xl p-8 space-y-6 card-shadow border border-indigo-100"
             action="https://formspree.io/f/xxxxxxx" method="POST" onsubmit="return handleBookingSubmit(event)">
 
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Full Name <span class="text-red-400">*</span></label>
-            <input required type="text" name="name" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none" placeholder="Jane Doe">
+            <label class="block text-sm font-bold text-title mb-2">Full Name <span class="text-red-600">*</span></label>
+            <input required type="text" name="name" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none" placeholder="Jane Doe">
           </div>
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Organization <span class="text-red-400">*</span></label>
-            <input required type="text" name="organization" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none" placeholder="Company, school, hospital, agency…">
+            <label class="block text-sm font-bold text-title mb-2">Organization <span class="text-red-600">*</span></label>
+            <input required type="text" name="organization" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none" placeholder="Company, school, hospital, agency…">
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Email <span class="text-red-400">*</span></label>
-            <input required type="email" name="email" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none" placeholder="you@company.com">
+            <label class="block text-sm font-bold text-title mb-2">Email <span class="text-red-600">*</span></label>
+            <input required type="email" name="email" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none" placeholder="you@company.com">
           </div>
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Phone</label>
-            <input type="tel" name="phone" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none" placeholder="(716) 555-0123">
+            <label class="block text-sm font-bold text-title mb-2">Phone</label>
+            <input type="tel" name="phone" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none" placeholder="(716) 555-0123">
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-bold text-white mb-2">Industry <span class="text-red-400">*</span></label>
-          <select required name="industry" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white focus:border-cyan-500 focus:outline-none">
+          <label class="block text-sm font-bold text-title mb-2">Industry <span class="text-red-600">*</span></label>
+          <select required name="industry" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none">
             <option value="">Select one…</option>
             <option>Manufacturing / Industrial</option>
             <option>Hospital / Healthcare</option>
@@ -592,8 +633,8 @@
         </div>
 
         <div>
-          <label class="block text-sm font-bold text-white mb-2">Package Interest</label>
-          <select name="package" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white focus:border-cyan-500 focus:outline-none">
+          <label class="block text-sm font-bold text-title mb-2">Package Interest</label>
+          <select name="package" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none">
             <option value="">Not sure yet / need recommendation</option>
             <option>Corporate — Signature Appearance ($2,000)</option>
             <option>Corporate — Premium Event Package ($3,500)</option>
@@ -613,80 +654,89 @@
 
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Preferred Date</label>
-            <input type="date" name="preferred_date" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white focus:border-cyan-500 focus:outline-none">
+            <label class="block text-sm font-bold text-title mb-2">Preferred Date</label>
+            <input type="date" name="preferred_date" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none">
           </div>
           <div>
-            <label class="block text-sm font-bold text-white mb-2">Event Location (City, State)</label>
-            <input type="text" name="location" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none" placeholder="Buffalo, NY">
+            <label class="block text-sm font-bold text-title mb-2">Event Location (City, State)</label>
+            <input type="text" name="location" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none" placeholder="Buffalo, NY">
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-bold text-white mb-2">Tell me about your goals for this demo</label>
-          <textarea name="goals" rows="4" class="w-full px-4 py-3 bg-navy-900 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none resize-none" placeholder="Audience, key messages, spaces involved, any specific capabilities you want highlighted…"></textarea>
+          <label class="block text-sm font-bold text-title mb-2">Tell me about your goals for this demo</label>
+          <textarea name="goals" rows="4" class="w-full px-4 py-3 bg-white border border-indigo-200 rounded-lg text-title focus:border-blue-600 focus:outline-none resize-none" placeholder="Audience, key messages, spaces involved, any specific capabilities you want highlighted…"></textarea>
         </div>
 
-        <!-- Agreement acknowledgment -->
-        <div class="rounded-lg border border-white/10 bg-navy-900/60 p-5">
+        <div class="rounded-lg border border-indigo-200 bg-indigo-50/60 p-5">
           <label class="flex items-start gap-3 cursor-pointer">
-            <input required type="checkbox" name="agreement" class="mt-1 w-5 h-5 rounded border-white/20 bg-navy-900 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0">
-            <span class="text-sm text-gray-300">
-              I have reviewed the <a href="#insurance" class="text-cyan-400 underline">Liability &amp; Scope-of-Coverage language</a>
+            <input required type="checkbox" name="agreement" class="mt-1 w-5 h-5 rounded border-indigo-300 bg-white text-blue-600 focus:ring-blue-500 focus:ring-offset-0">
+            <span class="text-sm text-body">
+              I have reviewed the <a href="#insurance" class="underline" style="color:#1d4ed8">Liability &amp; Scope-of-Coverage language</a>
               above. I understand this booking request will be followed by a full service agreement (including Provider's
               $1M CGL Certificate of Insurance, operator-control clause, safety-perimeter terms, indemnification, media
               consent, and cancellation policy) that must be executed prior to the demonstration.
-              <span class="text-red-400">*</span>
+              <span class="text-red-600">*</span>
             </span>
           </label>
         </div>
 
-        <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-violet-600 text-white font-bold uppercase tracking-wider py-4 rounded-lg hover:opacity-90 transition-opacity">
+        <button type="submit" class="w-full btn-primary uppercase tracking-wider py-4 rounded-lg">
           Submit Booking Request
         </button>
 
-        <p class="text-xs text-gray-500 text-center">No payment is collected at this stage. A deposit invoice is sent only after we confirm scope, date, and sign the service agreement.</p>
+        <p class="text-xs text-center" style="color:#2a1f6b;opacity:.6">No payment is collected at this stage. A deposit invoice is sent only after we confirm scope, date, and sign the service agreement.</p>
       </form>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-white/10 mt-10">
+  <footer class="border-t border-indigo-100 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
         <div class="flex items-center gap-4">
-          <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 p-2 flex items-center justify-center">
+          <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-marine-700 to-ink-700 p-2 flex items-center justify-center">
             <img src="/assets/illy-logo.png" alt="Illy Logo" class="h-6 w-6 object-contain" onerror="this.outerHTML='<span class=\'text-white font-bold\'>IR</span>'">
           </div>
           <div>
-            <div class="text-sm font-bold tracking-tight text-white">ILLY ROBOTIC INSTRUMENTS</div>
-            <div class="text-xs text-gray-400 tracking-widest uppercase">Robotics Division — WNY</div>
+            <div class="text-sm font-bold tracking-tight text-title">ILLY ROBOTIC INSTRUMENTS</div>
+            <div class="text-xs tracking-widest uppercase" style="color:#2a1f6b;opacity:.7">Robotics Division — WNY</div>
           </div>
         </div>
-        <div class="flex items-center gap-6 text-sm text-gray-400">
-          <a href="/" class="hover:text-white transition-colors">Home</a>
-          <a href="/web-designs/" class="hover:text-white transition-colors">Web Designs</a>
-          <a href="#book" class="hover:text-white transition-colors">Book Demo</a>
+        <div class="flex items-center gap-6 text-sm">
+          <a href="/" style="color:#2a1f6b" class="hover:opacity-70 transition-opacity">Home</a>
+          <a href="/web-designs/" style="color:#2a1f6b" class="hover:opacity-70 transition-opacity">Web Designs</a>
+          <a href="#book" style="color:#2a1f6b" class="hover:opacity-70 transition-opacity">Book Demo</a>
         </div>
       </div>
-      <div class="mt-8 pt-6 border-t border-white/10 text-center text-xs text-gray-500">
+      <div class="mt-8 pt-6 border-t border-indigo-100 text-center text-xs" style="color:#2a1f6b;opacity:.6">
         © 2026 Illy Robotic Instruments. All rights reserved. Commercial General Liability insured — $1,000,000 per-incident coverage.
       </div>
     </div>
   </footer>
 
   <script>
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightboxImg').src = src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e, force) {
+      if (!force && e && e.target && e.target.tagName === 'IMG') return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(null, true); });
+
     function handleBookingSubmit(e) {
-      // Placeholder: if Formspree endpoint is not yet configured, fall back to a mailto
       const form = e.target;
       if (form.action.includes('xxxxxxx')) {
         e.preventDefault();
         const data = new FormData(form);
         const subject = encodeURIComponent('G1 Robot Demo Booking — ' + (data.get('organization') || ''));
         const body = encodeURIComponent(
-          Array.from(data.entries())
-            .map(([k,v]) => k + ': ' + v)
-            .join('\n')
+          Array.from(data.entries()).map(([k,v]) => k + ': ' + v).join('\n')
         );
         window.location.href = 'mailto:hello@illyrobotic-ai.com?subject=' + subject + '&body=' + body;
         return false;
