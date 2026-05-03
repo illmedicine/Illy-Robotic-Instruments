@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Illy Robotic Instruments - Financial Infrastructure",
   description: "Next-generation financial infrastructure platform with IllySocial, LivePay, and DisCryptoBank",
+  verification: {
+    google: "kXiwt4wwQhrGmiq9HxTOVBp56QrdiI4zvsWB1Xr0Boc",
+  },
 };
 
 export default function RootLayout({
