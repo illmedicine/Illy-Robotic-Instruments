@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+// Affiliate referral links - Replace with actual referral codes from partner programs
+const AFFILIATE_LINKS = {
+  gemini: "https://www.gemini.com/share/your-referral-code", // TODO: Replace with actual Gemini referral code
+  railway: "https://railway.app?referralCode=your-referral-code", // TODO: Replace with actual Railway referral code
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("products");
 
@@ -247,12 +253,108 @@ export default function Home() {
                 Our mission is to create open, decentralized financial infrastructure that empowers individuals and communities worldwide.
               </p>
               <p className="text-lg text-slate-700">
-                Through products like IllySocial, LivePay, and DisCryptoBank, we're revolutionizing how people interact with money and data.
+                Through products like IllySocial, LivePay, and DisCryptoBank, we&apos;re revolutionizing how people interact with money and data.
               </p>
             </div>
           </div>
         </section>
       )}
+
+      {/* Affiliate Partners Section */}
+      <section className="px-4 py-16">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="mb-4 text-center text-3xl font-bold text-slate-900">Our Partners</h2>
+          <p className="mb-12 text-center text-lg text-slate-600">
+            Trusted platforms we use and recommend for crypto and deployment
+          </p>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
+            {/* Gemini Button */}
+            <a
+              href={AFFILIATE_LINKS.gemini}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-2xl border border-cyan-200 bg-white p-8 transition-all hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-300/30"
+            >
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-0 transition-opacity group-hover:opacity-5"></div>
+
+              {/* Content */}
+              <div className="relative">
+                <div className="mb-4 flex items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-100 to-cyan-100 text-3xl ring-1 ring-cyan-300">
+                    💎
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-900">Gemini</h3>
+                    <p className="text-sm text-slate-500">Cryptocurrency Exchange</p>
+                  </div>
+                </div>
+
+                <p className="mb-6 text-slate-600">
+                  Trade cryptocurrency with confidence. Trusted, secure, and regulated platform for buying, selling, and storing digital assets.
+                </p>
+
+                <div className="mb-6 space-y-2">
+                  {["Secure Trading", "Low Fees", "Regulated Platform", "Get $50 Bonus"].map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-sm text-slate-500">
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"></span>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 text-sm font-semibold text-cyan-600 group-hover:text-cyan-700">
+                  Join Gemini
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Railway Button */}
+            <a
+              href={AFFILIATE_LINKS.railway}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-2xl border border-violet-200 bg-white p-8 transition-all hover:border-violet-400 hover:shadow-2xl hover:shadow-violet-300/30"
+            >
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-purple-500 opacity-0 transition-opacity group-hover:opacity-5"></div>
+
+              {/* Content */}
+              <div className="relative">
+                <div className="mb-4 flex items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 text-3xl ring-1 ring-violet-300">
+                    🚀
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-900">Railway</h3>
+                    <p className="text-sm text-slate-500">Cloud Deployment Platform</p>
+                  </div>
+                </div>
+
+                <p className="mb-6 text-slate-600">
+                  Deploy your apps in seconds. Modern infrastructure platform for developers with zero-config deployments and built-in CI/CD.
+                </p>
+
+                <div className="mb-6 space-y-2">
+                  {["Zero-Config Deployment", "Automatic Scaling", "Built-in Databases", "Get $20 Credits"].map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-sm text-slate-500">
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-500 to-purple-500"></span>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 text-sm font-semibold text-violet-600 group-hover:text-violet-700">
+                  Deploy on Railway
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="px-4 py-16">
@@ -283,7 +385,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-cyan-200 bg-white/50 px-4 py-12">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 grid gap-8 md:grid-cols-4">
+          <div className="mb-8 grid gap-8 md:grid-cols-3 lg:grid-cols-5">
             <div>
               <h3 className="mb-4 font-bold text-slate-900">Products</h3>
               <ul className="space-y-2 text-sm text-slate-600">
@@ -340,6 +442,21 @@ export default function Home() {
                 <li>
                   <a href="#contact" className="hover:text-slate-900 transition-colors">
                     Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 font-bold text-slate-900">Partners</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>
+                  <a href={AFFILIATE_LINKS.gemini} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
+                    Gemini Exchange
+                  </a>
+                </li>
+                <li>
+                  <a href={AFFILIATE_LINKS.railway} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
+                    Railway Deploy
                   </a>
                 </li>
               </ul>
