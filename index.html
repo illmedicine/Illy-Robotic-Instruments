@@ -441,7 +441,94 @@
       opacity: 1;
     }
 
-    /* Musical Band — each product plays in rhythm at 120 BPM (2s per measure) */
+    /* Lightning Storm — Illy Robotic fires bolts to selected sub-products */
+    .product-tree-container {
+      position: relative;
+    }
+    .lightning-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .product-tree { position: relative; z-index: 2; }
+
+    /* Idle pulse on every product circle */
+    @keyframes electric-idle {
+      0%, 100% { box-shadow: 0 0 12px rgba(100, 200, 255, 0.35); }
+      50%      { box-shadow: 0 0 22px rgba(100, 200, 255, 0.6), 0 0 35px rgba(100, 200, 255, 0.2); }
+    }
+    .tree-product .tree-product-logo {
+      animation: electric-idle 3s ease-in-out infinite;
+    }
+
+    /* Leader (Illy Robotic at top) — stronger pulse */
+    @keyframes leader-pulse {
+      0%, 100% { box-shadow: 0 0 28px rgba(0, 255, 136, 0.55), 0 0 50px rgba(100, 200, 255, 0.3); }
+      50%      { box-shadow: 0 0 45px rgba(0, 255, 136, 0.95), 0 0 90px rgba(100, 200, 255, 0.55), 0 0 130px rgba(0, 255, 136, 0.35); }
+    }
+    .tree-center .tree-product-logo {
+      animation: leader-pulse 2.5s ease-in-out infinite;
+      border-color: #00ff88;
+    }
+
+    /* Strike highlight on selected sub-product */
+    @keyframes strike-flash {
+      0%   { box-shadow: 0 0 35px rgba(255, 255, 255, 1), 0 0 80px rgba(100, 200, 255, 0.95); border-color: #ffffff; }
+      40%  { box-shadow: 0 0 28px rgba(0, 255, 136, 0.9), 0 0 60px rgba(100, 200, 255, 0.7); border-color: #00ff88; }
+      100% { box-shadow: 0 0 22px rgba(0, 255, 136, 0.7), 0 0 45px rgba(100, 200, 255, 0.45); border-color: #00ff88; }
+    }
+    .tree-product.is-struck .tree-product-logo {
+      animation: strike-flash 0.7s ease-out forwards;
+    }
+
+    /* Lightning bolt SVG path */
+    .lightning-bolt {
+      stroke: #ffffff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 10px #00ff88) drop-shadow(0 0 18px #64c8ff);
+    }
+    .lightning-bolt.layer-2 {
+      stroke: #00ff88;
+      stroke-width: 4;
+      opacity: 0.55;
+      filter: drop-shadow(0 0 8px #00ff88) blur(1px);
+    }
+    .lightning-bolt.layer-3 {
+      stroke: #64c8ff;
+      stroke-width: 7;
+      opacity: 0.25;
+      filter: blur(3px);
+    }
+    @keyframes bolt-strike {
+      0%   { stroke-dashoffset: 600; opacity: 0; }
+      30%  { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0.9; }
+    }
+    @keyframes bolt-fade {
+      from { opacity: 0.9; }
+      to   { opacity: 0; }
+    }
+
+    /* Storm background flash when striking */
+    .product-tree-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(100, 200, 255, 0.15) 0%, transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .product-tree-container.storming::before { opacity: 1; }
+
+    /* (Legacy unused) */
     @keyframes band-bass {
       0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(180, 100, 255, 0.4); }
       25%      { transform: scale(1.05); box-shadow: 0 0 35px rgba(180, 100, 255, 0.9); }
@@ -575,84 +662,88 @@
 
     /* Product Card Slider */
     .product-slider-section {
-      max-width: 1300px;
-      margin: 4rem auto 2rem;
+      max-width: 1100px;
+      margin: 2.5rem auto 1.5rem;
       padding: 0 1.5rem;
     }
     .product-slider-section .section-eyebrow {
       display: block;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 3px;
       color: #00ff88;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
     .product-slider-section h2 {
-      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
       font-weight: 800;
       text-align: center;
       background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.5px;
     }
     .product-slider-section .section-sub {
       text-align: center;
       color: #a0b0d0;
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+      font-size: 0.92rem;
     }
 
     .product-slider {
       position: relative;
       overflow: hidden;
-      border-radius: 24px;
+      border-radius: 20px;
       background: rgba(10, 14, 39, 0.6);
       border: 1px solid rgba(100, 200, 255, 0.18);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 255, 136, 0.06);
+      width: 100%;
     }
     .product-slider-track {
       display: flex;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      width: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
     }
     .product-slide {
-      min-width: 100%;
-      flex-shrink: 0;
+      flex: 0 0 100%;
+      width: 100%;
+      box-sizing: border-box;
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      min-height: 480px;
+      grid-template-columns: 1fr 1fr;
+      min-height: 360px;
     }
     .product-slide-media {
       position: relative;
       background: #0a0e27;
       overflow: hidden;
+      min-height: 220px;
     }
     .product-slide-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 1.2s ease;
+      transition: transform 1s ease;
     }
-    .product-slide.active .product-slide-media img { transform: scale(1.05); }
+    .product-slide.active .product-slide-media img { transform: scale(1.04); }
     .product-slide-media::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(10, 14, 39, 0.2) 60%, rgba(10, 14, 39, 0.8) 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(10, 14, 39, 0.2) 60%, rgba(10, 14, 39, 0.85) 100%);
       pointer-events: none;
     }
     .product-slide-content {
-      padding: 3rem 2.5rem;
+      padding: 2rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       background: linear-gradient(135deg, rgba(10, 14, 39, 0.95), rgba(26, 31, 58, 0.85));
     }
     .product-slide-header {
@@ -661,11 +752,11 @@
       gap: 1rem;
     }
     .product-slide-logo {
-      width: 64px; height: 64px;
-      border-radius: 14px;
+      width: 52px; height: 52px;
+      border-radius: 12px;
       background: rgba(100, 200, 255, 0.08);
       border: 1px solid rgba(100, 200, 255, 0.25);
-      padding: 6px;
+      padding: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -677,37 +768,37 @@
       object-fit: contain;
     }
     .product-slide-name {
-      font-size: 1.85rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: #fff;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
       line-height: 1.1;
     }
     .product-slide-tagline {
       color: #00ff88;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
     }
     .product-slide-desc {
       color: #c0d0f0;
-      font-size: 1.05rem;
-      line-height: 1.7;
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
     .product-slide-features {
       list-style: none;
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
     }
     .product-slide-features li {
       color: #a0b0d0;
-      font-size: 0.95rem;
-      padding-left: 1.5rem;
+      font-size: 0.85rem;
+      padding-left: 1.25rem;
       position: relative;
     }
     .product-slide-features li::before {
@@ -719,12 +810,12 @@
     }
     .product-slide-cta {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.85rem 1.75rem;
+      margin-top: 0.5rem;
+      padding: 0.65rem 1.4rem;
       background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
       color: #0a0e27;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       text-decoration: none;
       border-radius: 999px;
       letter-spacing: 0.5px;
@@ -995,37 +1086,7 @@
       margin-left: 0.25rem;
     }
 
-    /* Reveal instrument name on hover */
-    .tree-product::after {
-      content: '🎵 ' attr(data-instrument);
-      position: absolute;
-      top: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.75rem;
-      color: #00ff88;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease, top 0.3s ease;
-      pointer-events: none;
-      text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-    .tree-product:hover::after {
-      opacity: 1;
-      top: -36px;
-    }
-
-    .tree-center::after {
-      font-size: 0.85rem;
-      top: -38px;
-    }
-    .tree-center:hover::after {
-      top: -46px;
-    }
-
-    /* Pause animation on hover so user can focus on the logo */
+    /* Pause idle pulse on hover so user can focus on the logo */
     .tree-product:hover .tree-product-logo {
       animation-play-state: paused;
     }
@@ -1493,16 +1554,6 @@
   </nav>
 
   <a id="top"></a>
-  <!-- Interactive Musical Band Hero -->
-  <div class="band-hero">
-    <div class="band-hero-inner">
-      <div class="band-tagline">
-        <span class="band-tagline-badge">🎵 The Band is Playing</span>
-        <h1 class="band-hero-title">A Symphony of <span class="grad">Decentralized Instruments</span></h1>
-        <p class="band-hero-sub">Each product is a different instrument — together, they're an open-source band rewriting the future of fintech. Click any instrument to hear it solo.</p>
-      </div>
-    </div>
-  </div>
 
   <div class="hero">
     <div class="circuit-board-container">
@@ -1513,76 +1564,78 @@
           <p>Open-source, decentralized technology powering the next generation of fintech.<br>Data sovereignty. Community wealth. Intelligent automation.</p>
         </div>
 
-        <!-- Interactive Product Tree Menu -->
+        <!-- Interactive Product Tree Menu with Lightning Storm Effect -->
         <div class="product-tree-container">
-          <div class="product-tree">
-            <!-- Top Row -->
-            <div class="tree-product instrument-piano" onclick="navigateTo('https://illyrobotics.github.io/IRAI-Academy/')" data-instrument="Piano">
-              <div class="tree-product-logo">
-                <img src="assets/irai-academy.png" alt="IRAI Academy" />
-              </div>
-              <div class="tree-product-name">IRAI Academy</div>
-            </div>
+          <!-- Lightning canvas overlay (drawn behind product circles) -->
+          <svg class="lightning-canvas" id="lightningCanvas" aria-hidden="true"></svg>
 
-            <div class="tree-product instrument-bass" onclick="navigateTo('/products/discryptobank/')" data-instrument="Bass">
-              <div class="tree-product-logo">
-                <img src="assets/discryptobank.png" alt="DisCryptoBank" />
-              </div>
-              <div class="tree-product-name">DisCryptoBank</div>
-            </div>
-
-            <div class="tree-product instrument-drums" onclick="navigateTo('https://coindrop.in/')" data-instrument="Drums">
-              <div class="tree-product-logo">
-                <img src="assets/coindrop.png" alt="Coindrop" />
-              </div>
-              <div class="tree-product-name">Coindrop</div>
-            </div>
-
-            <div class="tree-product instrument-cello" onclick="navigateTo('https://illmedicine.github.io/IR-SAR-VUE/')" data-instrument="Cello">
-              <div class="tree-product-logo">
-                <img src="assets/worldsar.png" alt="WorldSAR" />
-              </div>
-              <div class="tree-product-name">WorldSAR</div>
-            </div>
-
-            <!-- Center: Lead Guitar / Band Leader -->
-            <div class="tree-product tree-center instrument-guitar" onclick="navigateTo('#')" data-instrument="Lead Guitar">
+          <div class="product-tree" id="productTree">
+            <!-- Center: Illy Robotic at top, fires lightning to sub-products -->
+            <div class="tree-product tree-center" id="leaderNode" data-leader onclick="navigateTo('#products')">
               <div class="tree-product-logo">
                 <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
               </div>
               <div class="tree-product-name">ILLY ROBOTIC</div>
             </div>
 
-            <!-- Bottom Row -->
-            <div class="tree-product instrument-tambourine" onclick="navigateTo('https://illmedicine.github.io/SocialPlug/')" data-instrument="Tambourine">
+            <!-- Sub-products: clicking/hovering fires lightning from leader -->
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/irai-academy.png" alt="IRAI Academy" />
+              </div>
+              <div class="tree-product-name">IRAI Academy</div>
+            </div>
+
+            <div class="tree-product sub-product" data-product onclick="strike(this, '/products/discryptobank/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/discryptobank.png" alt="DisCryptoBank" />
+              </div>
+              <div class="tree-product-name">DisCryptoBank</div>
+            </div>
+
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://coindrop.in/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/coindrop.png" alt="Coindrop" />
+              </div>
+              <div class="tree-product-name">Coindrop</div>
+            </div>
+
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/IR-SAR-VUE/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/worldsar.png" alt="WorldSAR" />
+              </div>
+              <div class="tree-product-name">WorldSAR</div>
+            </div>
+
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/SocialPlug/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/socialplug.png" alt="SocialPlug" />
               </div>
               <div class="tree-product-name">SocialPlug</div>
             </div>
 
-            <div class="tree-product instrument-synth" onclick="navigateTo('https://www.illysocial.io/')" data-instrument="Synth">
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.illysocial.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/illysocial.png" alt="IllySocial" />
               </div>
               <div class="tree-product-name">IllySocial</div>
             </div>
 
-            <div class="tree-product instrument-saxophone" onclick="navigateTo('https://www.livepay.io/')" data-instrument="Saxophone">
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.livepay.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/livepay.png" alt="LivePay" />
               </div>
               <div class="tree-product-name">LivePay</div>
             </div>
 
-            <div class="tree-product instrument-trumpet" onclick="navigateTo('https://www.squad-ren.com/')" data-instrument="Trumpet">
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.squad-ren.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/squad-ren-logo.png" alt="Squadron" />
               </div>
               <div class="tree-product-name">Squadron</div>
             </div>
 
-            <div class="tree-product instrument-violin" onclick="navigateTo('https://www.iris-ecosystem.com/')" data-instrument="Violin">
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.iris-ecosystem.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/i-ris.png" alt="I-RIS" />
               </div>
@@ -1741,7 +1794,7 @@
         <!-- Coindrop -->
         <div class="product-slide" data-product="coindrop">
           <div class="product-slide-media">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80" alt="Coindrop" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt="Coindrop" loading="lazy" />
           </div>
           <div class="product-slide-content">
             <div class="product-slide-header">
@@ -2042,6 +2095,122 @@
       window.location.href = url;
     }
 
+    /* Lightning Storm — Illy Robotic fires bolts to selected sub-products */
+    let strikeTimer = null;
+    let strikeClearTimer = null;
+
+    function buildBoltPath(x1, y1, x2, y2) {
+      const dx = x2 - x1, dy = y2 - y1;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const segments = Math.max(6, Math.round(dist / 18));
+      const perpX = -dy / dist, perpY = dx / dist;
+      const maxOffset = Math.max(8, Math.min(28, dist * 0.07));
+      let d = `M ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+      for (let i = 1; i < segments; i++) {
+        const t = i / segments;
+        const baseX = x1 + dx * t;
+        const baseY = y1 + dy * t;
+        // bigger jitter in the middle, near zero at ends
+        const wobble = Math.sin(Math.PI * t) * maxOffset;
+        const offset = (Math.random() - 0.5) * 2 * wobble;
+        const jx = baseX + perpX * offset;
+        const jy = baseY + perpY * offset;
+        d += ` L ${jx.toFixed(1)} ${jy.toFixed(1)}`;
+      }
+      d += ` L ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+      return d;
+    }
+
+    function strike(targetEl, url) {
+      const leader = document.getElementById('leaderNode');
+      const canvas = document.getElementById('lightningCanvas');
+      const container = document.querySelector('.product-tree-container');
+      if (!leader || !canvas || !container || !targetEl) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const leaderLogo = leader.querySelector('.tree-product-logo');
+      const targetLogo = targetEl.querySelector('.tree-product-logo');
+      const leaderRect = (leaderLogo || leader).getBoundingClientRect();
+      const targetRect = (targetLogo || targetEl).getBoundingClientRect();
+
+      const x1 = leaderRect.left - containerRect.left + leaderRect.width / 2;
+      const y1 = leaderRect.top  - containerRect.top  + leaderRect.height / 2;
+      const x2 = targetRect.left - containerRect.left + targetRect.width / 2;
+      const y2 = targetRect.top  - containerRect.top  + targetRect.height / 2;
+
+      canvas.setAttribute('viewBox', `0 0 ${containerRect.width} ${containerRect.height}`);
+      canvas.setAttribute('width',  containerRect.width);
+      canvas.setAttribute('height', containerRect.height);
+      canvas.innerHTML = '';
+      container.classList.add('storming');
+
+      // 3 stacked bolts: blurred wide blue + green glow + sharp white core
+      for (const layer of ['layer-3', 'layer-2', '']) {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const d = buildBoltPath(x1, y1, x2, y2);
+        path.setAttribute('d', d);
+        path.setAttribute('class', 'lightning-bolt ' + layer);
+        path.style.strokeDasharray = '600';
+        path.style.strokeDashoffset = '600';
+        path.style.animation = 'bolt-strike 0.55s ease-out forwards';
+        canvas.appendChild(path);
+      }
+
+      // Mark the target as struck (white flash → green pulse)
+      document.querySelectorAll('.tree-product.is-struck').forEach(el => el.classList.remove('is-struck'));
+      targetEl.classList.add('is-struck');
+
+      // Schedule a re-strike with new jagged path for crackle effect
+      clearTimeout(strikeTimer);
+      strikeTimer = setTimeout(() => {
+        if (!targetEl.classList.contains('is-struck')) return;
+        canvas.querySelectorAll('.lightning-bolt').forEach(p => {
+          p.setAttribute('d', buildBoltPath(x1, y1, x2, y2));
+          p.style.animation = 'none';
+          // force reflow then re-apply animation
+          void p.getBoundingClientRect();
+          p.style.animation = 'bolt-strike 0.4s ease-out forwards';
+        });
+      }, 300);
+
+      if (url) {
+        clearTimeout(strikeClearTimer);
+        strikeClearTimer = setTimeout(() => navigateTo(url), 420);
+      }
+    }
+
+    function clearStrike() {
+      const canvas = document.getElementById('lightningCanvas');
+      const container = document.querySelector('.product-tree-container');
+      clearTimeout(strikeTimer);
+      if (canvas) {
+        canvas.querySelectorAll('.lightning-bolt').forEach(p => {
+          p.style.animation = 'bolt-fade 0.35s ease-out forwards';
+        });
+        setTimeout(() => { if (canvas) canvas.innerHTML = ''; }, 380);
+      }
+      if (container) container.classList.remove('storming');
+      document.querySelectorAll('.tree-product.is-struck').forEach(el => el.classList.remove('is-struck'));
+    }
+
+    // Periodic ambient bolt to selected-at-random product so it feels like a storm
+    function ambientStorm() {
+      const subs = document.querySelectorAll('.tree-product.sub-product');
+      if (!subs.length) return;
+      const pick = subs[Math.floor(Math.random() * subs.length)];
+      strike(pick);
+      setTimeout(clearStrike, 450);
+    }
+    let ambientInterval = null;
+    function startAmbientStorm() {
+      stopAmbientStorm();
+      ambientInterval = setInterval(ambientStorm, 4200);
+    }
+    function stopAmbientStorm() {
+      clearInterval(ambientInterval);
+      ambientInterval = null;
+    }
+
     /* Mobile menu */
     function toggleMenu() {
       const menu = document.getElementById('navMenu');
@@ -2098,6 +2267,14 @@
         el.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.1)'; });
         el.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
       });
+
+      // Kick off the ambient lightning storm so visitors immediately see the effect
+      startAmbientStorm();
+      const tree = document.querySelector('.product-tree-container');
+      if (tree) {
+        tree.addEventListener('mouseenter', stopAmbientStorm);
+        tree.addEventListener('mouseleave', startAmbientStorm);
+      }
 
       const track = document.getElementById('psliderTrack');
       if (track) {
