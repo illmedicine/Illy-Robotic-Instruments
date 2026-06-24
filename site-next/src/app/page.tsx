@@ -249,8 +249,8 @@ export default function Home() {
               </a>
 
               <a href="https://coindrop.in/" className="group relative">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all overflow-hidden">
-                  <span className="text-lg">💰</span>
+                <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all overflow-hidden p-1">
+                  <img src="/assets/coindrop.png" alt="Coindrop" className="w-full h-full object-contain" />
                 </div>
                 <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">Coindrop</p>
               </a>
