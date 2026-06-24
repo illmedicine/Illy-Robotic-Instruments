@@ -27,6 +27,120 @@
       color: #e0e6ff;
       overflow-x: hidden;
       min-height: 100vh;
+      padding-top: 64px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    /* Sticky Top Nav */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10, 14, 39, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(100, 200, 255, 0.18);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .topnav.scrolled {
+      background: rgba(10, 14, 39, 0.92);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 30px rgba(0, 255, 136, 0.08);
+    }
+    .topnav-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .topnav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: #fff;
+    }
+    .topnav-brand img {
+      width: 42px; height: 42px; object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.55));
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-line1 { font-weight: 800; font-size: 1rem; color: #fff; letter-spacing: 0.5px; }
+    .brand-line2 {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .topnav-menu {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .topnav-menu a {
+      color: #c0d0f0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .topnav-menu a:hover {
+      color: #00ff88;
+      background: rgba(0, 255, 136, 0.08);
+    }
+    .topnav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid rgba(100, 200, 255, 0.3);
+      padding: 0.55rem 0.7rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .topnav-burger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #64c8ff;
+      transition: all 0.25s ease;
+    }
+    .topnav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .topnav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .topnav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 820px) {
+      .topnav-burger { display: flex; }
+      .topnav-menu {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(10, 14, 39, 0.97);
+        backdrop-filter: blur(14px);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 1rem;
+        border-top: 1px solid rgba(100, 200, 255, 0.18);
+        border-bottom: 1px solid rgba(100, 200, 255, 0.18);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+      .topnav-menu.open {
+        max-height: 400px;
+        padding: 0.75rem 1rem 1rem;
+      }
+      .topnav-menu a {
+        padding: 0.8rem 0.5rem;
+        border-bottom: 1px solid rgba(100, 200, 255, 0.08);
+        font-size: 1rem;
+      }
+      .topnav-menu a:last-child { border-bottom: none; }
+      .brand-line2 { font-size: 0.6rem; }
     }
 
     .hero {
@@ -457,6 +571,369 @@
       max-width: 680px;
       margin: 0 auto;
       line-height: 1.7;
+    }
+
+    /* Product Card Slider */
+    .product-slider-section {
+      max-width: 1300px;
+      margin: 4rem auto 2rem;
+      padding: 0 1.5rem;
+    }
+    .product-slider-section .section-eyebrow {
+      display: block;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #00ff88;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .product-slider-section h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+    .product-slider-section .section-sub {
+      text-align: center;
+      color: #a0b0d0;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .product-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(10, 14, 39, 0.6);
+      border: 1px solid rgba(100, 200, 255, 0.18);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 255, 136, 0.06);
+    }
+    .product-slider-track {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+    }
+    .product-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      min-height: 480px;
+    }
+    .product-slide-media {
+      position: relative;
+      background: #0a0e27;
+      overflow: hidden;
+    }
+    .product-slide-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s ease;
+    }
+    .product-slide.active .product-slide-media img { transform: scale(1.05); }
+    .product-slide-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(10, 14, 39, 0.2) 60%, rgba(10, 14, 39, 0.8) 100%);
+      pointer-events: none;
+    }
+    .product-slide-content {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, rgba(10, 14, 39, 0.95), rgba(26, 31, 58, 0.85));
+    }
+    .product-slide-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .product-slide-logo {
+      width: 64px; height: 64px;
+      border-radius: 14px;
+      background: rgba(100, 200, 255, 0.08);
+      border: 1px solid rgba(100, 200, 255, 0.25);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .product-slide-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .product-slide-name {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .product-slide-tagline {
+      color: #00ff88;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+    .product-slide-desc {
+      color: #c0d0f0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .product-slide-features {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .product-slide-features li {
+      color: #a0b0d0;
+      font-size: 0.95rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .product-slide-features li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #00ff88;
+      font-weight: 700;
+    }
+    .product-slide-cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.85rem 1.75rem;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      color: #0a0e27;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+    }
+    .product-slide-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+    }
+    .pslider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(10, 14, 39, 0.7);
+      border: 1px solid rgba(100, 200, 255, 0.4);
+      color: #64c8ff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.25s ease;
+      z-index: 5;
+      backdrop-filter: blur(8px);
+    }
+    .pslider-nav:hover {
+      background: rgba(0, 255, 136, 0.18);
+      border-color: #00ff88;
+      color: #00ff88;
+    }
+    .pslider-prev { left: 1rem; }
+    .pslider-next { right: 1rem; }
+    .pslider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .pslider-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(100, 200, 255, 0.35);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      padding: 0;
+    }
+    .pslider-dot.active {
+      width: 32px;
+      border-radius: 5px;
+      background: #00ff88;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.8);
+    }
+    @media (max-width: 820px) {
+      .product-slide { grid-template-columns: 1fr; min-height: auto; }
+      .product-slide-media { height: 240px; }
+      .product-slide-media::after {
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 39, 0.3) 60%, rgba(10, 14, 39, 0.85) 100%);
+      }
+      .product-slide-content { padding: 2rem 1.5rem; }
+      .product-slide-name { font-size: 1.5rem; }
+      .pslider-nav { width: 36px; height: 36px; font-size: 1rem; }
+    }
+
+    /* Clients Section */
+    .clients-section {
+      max-width: 1200px;
+      margin: 4rem auto 2rem;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(100, 200, 255, 0.12);
+    }
+    .clients-section .section-eyebrow {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #00ff88;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .clients-section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .clients-section .section-sub {
+      color: #a0b0d0;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      align-items: center;
+      justify-items: center;
+    }
+    .client-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 220px;
+      height: 110px;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 12px;
+      border: 1px solid rgba(100, 200, 255, 0.18);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .client-logo:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+      border-color: rgba(0, 255, 136, 0.45);
+    }
+    .client-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .client-logo .client-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #0a0e27;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      letter-spacing: 0.3px;
+    }
+    .client-logo img.broken + .client-fallback { display: flex; }
+
+    /* About / Contact / Web Designs sections */
+    .info-section {
+      max-width: 1100px;
+      margin: 4rem auto 2rem;
+      padding: 3rem 1.5rem;
+      background: rgba(10, 14, 39, 0.5);
+      border: 1px solid rgba(100, 200, 255, 0.15);
+      border-radius: 20px;
+    }
+    .info-section .section-eyebrow {
+      display: block;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #00ff88;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .info-section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    .info-section p {
+      color: #c0d0f0;
+      max-width: 760px;
+      margin: 0 auto 1.25rem;
+      line-height: 1.8;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    .info-section .info-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .info-cta {
+      display: inline-block;
+      padding: 0.85rem 1.75rem;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      color: #0a0e27;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .info-cta.secondary {
+      background: transparent;
+      border: 1px solid rgba(100, 200, 255, 0.4);
+      color: #64c8ff;
+    }
+    .info-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+    }
+    .info-cta.secondary:hover {
+      border-color: #00ff88;
+      color: #00ff88;
+      box-shadow: 0 10px 30px rgba(100, 200, 255, 0.2);
     }
 
     /* Compact Affiliate Strip */
@@ -995,6 +1472,27 @@
   </style>
 </head>
 <body>
+  <!-- Sticky Top Nav -->
+  <nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="#top" onclick="closeMenu()">
+        <img src="assets/illy-robotic.png" alt="Illy Robotic" />
+        <span class="brand-text"><span class="brand-line1">Illy Robotic</span><span class="brand-line2">Instruments</span></span>
+      </a>
+      <button class="topnav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav-menu" id="navMenu">
+        <a href="#products" onclick="closeMenu()">Products</a>
+        <a href="#about" onclick="closeMenu()">About Us</a>
+        <a href="#clients" onclick="closeMenu()">Clients</a>
+        <a href="#webdesigns" onclick="closeMenu()">Web Designs</a>
+        <a href="#contact" onclick="closeMenu()">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <a id="top"></a>
   <!-- Interactive Musical Band Hero -->
   <div class="band-hero">
     <div class="band-hero-inner">
@@ -1224,52 +1722,289 @@
           </svg>
         </div>
 
-        <div class="content-below">
+        <div class="content-below" id="products">
           <h2>Connected Financial Infrastructure</h2>
           <p>Our integrated ecosystem of decentralized applications creates a seamless experience for users, builders, and communities. Each product connects through our AI mesh architecture.</p>
-
-          <div class="product-grid">
-            <div class="product-card" onclick="navigateTo('https://coindrop.in/')">
-              <div class="product-card-name">Coindrop</div>
-              <div class="product-card-desc">Earn SOL for Social Tasks</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://www.squad-ren.com/')">
-              <div class="product-card-name">Squadron</div>
-              <div class="product-card-desc">Group Transit Redefined</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://www.livepay.io/')">
-              <div class="product-card-name">LivePay</div>
-              <div class="product-card-desc">Commerce Platform</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('/products/discryptobank/')">
-              <div class="product-card-name">DisCryptoBank</div>
-              <div class="product-card-desc">Discord Payroll Engine</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://illyrobotics.github.io/IRAI-Academy/')">
-              <div class="product-card-name">IRAI</div>
-              <div class="product-card-desc">AI Academy</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://www.illysocial.io/')">
-              <div class="product-card-name">IllySocial</div>
-              <div class="product-card-desc">Social Platform</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://www.iris-ecosystem.com/')">
-              <div class="product-card-name">I-RIS</div>
-              <div class="product-card-desc">Illy Robotic Studios</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://illmedicine.github.io/IR-SAR-VUE/')">
-              <div class="product-card-name">WorldSAR</div>
-              <div class="product-card-desc">Search & Rescue Vue</div>
-            </div>
-            <div class="product-card" onclick="navigateTo('https://illmedicine.github.io/SocialPlug/')">
-              <div class="product-card-name">SocialPlug</div>
-              <div class="product-card-desc">Social Marketing Engine</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Product Card Slider -->
+  <section class="product-slider-section">
+    <span class="section-eyebrow">Explore the Ecosystem</span>
+    <h2>Flagship Products</h2>
+    <p class="section-sub">A closer look at every instrument in the band. Swipe through to see what each product does, why it matters, and how to get started.</p>
+
+    <div class="product-slider">
+      <div class="product-slider-track" id="psliderTrack">
+        <!-- Coindrop -->
+        <div class="product-slide" data-product="coindrop">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80" alt="Coindrop" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/coindrop.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">Coindrop</div>
+                <div class="product-slide-tagline">Watch · Engage · Earn</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">Turn your screen time into Solana cryptocurrency. Complete short social tasks — watch videos, like posts, subscribe to channels — and get paid daily to your Phantom wallet.</p>
+            <ul class="product-slide-features">
+              <li>Available in 190+ countries</li>
+              <li>Daily SOL payouts with no minimum withdrawal</li>
+              <li>Passive residuals on subscriptions &amp; follows</li>
+            </ul>
+            <a class="product-slide-cta" href="https://coindrop.in/" target="_blank" rel="noopener">Start Earning →</a>
+          </div>
+        </div>
+
+        <!-- Squadron -->
+        <div class="product-slide" data-product="squadron">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80" alt="Squadron" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/squad-ren-logo.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">Squadron</div>
+                <div class="product-slide-tagline">Your Squad · Your Ride</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">Group transit, redefined. Squadron merges live-presence social networking with dynamic, high-capacity shared transportation. Book a seat on a shared route or charter a full van and ride with your squad.</p>
+            <ul class="product-slide-features">
+              <li>Live route &amp; seat booking</li>
+              <li>Charter full vans for events &amp; teams</li>
+              <li>Real-time squad presence</li>
+            </ul>
+            <a class="product-slide-cta" href="https://www.squad-ren.com/" target="_blank" rel="noopener">Book Your Ride →</a>
+          </div>
+        </div>
+
+        <!-- DisCryptoBank -->
+        <div class="product-slide" data-product="discryptobank">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80" alt="DisCryptoBank" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/discryptobank.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">DisCryptoBank</div>
+                <div class="product-slide-tagline">Discord Native Payroll Engine</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">A Discord-native crypto payroll engine that creates microtasks across servers, verifies proof, and automatically pays workers in Solana. Fulfills engagement packages with real-time transparency.</p>
+            <ul class="product-slide-features">
+              <li>Autonomous proof verification (URL + screenshot)</li>
+              <li>SOL payouts directly from server treasury</li>
+              <li>Per-server treasury isolation for safety</li>
+            </ul>
+            <a class="product-slide-cta" href="/products/discryptobank/">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- IRAI Academy -->
+        <div class="product-slide" data-product="irai">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="IRAI Academy" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/irai-academy.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">IRAI Academy</div>
+                <div class="product-slide-tagline">Illy Robotic AI Academy</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">Hands-on AI and automation training for the next generation of builders. Curriculum spans prompt engineering, agent design, growth automation, and applied robotics.</p>
+            <ul class="product-slide-features">
+              <li>Project-based learning paths</li>
+              <li>From beginner to production-ready</li>
+              <li>Connect curriculum to real Illy Robotic products</li>
+            </ul>
+            <a class="product-slide-cta" href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener">Enroll →</a>
+          </div>
+        </div>
+
+        <!-- LivePay -->
+        <div class="product-slide" data-product="livepay">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="LivePay" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/livepay.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">LivePay</div>
+                <div class="product-slide-tagline">Real-time Data Monetization</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">Own your data, earn your value. LivePay lets individuals monetize their personal data with sovereignty and transparency — instant transfers, low fees, global reach.</p>
+            <ul class="product-slide-features">
+              <li>Personalized data valuation</li>
+              <li>Anonymized marketplace matching</li>
+              <li>24/7 instant transfers</li>
+            </ul>
+            <a class="product-slide-cta" href="https://www.livepay.io/" target="_blank" rel="noopener">Explore LivePay →</a>
+          </div>
+        </div>
+
+        <!-- IllySocial -->
+        <div class="product-slide" data-product="illysocial">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80" alt="IllySocial" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/illysocial.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">IllySocial</div>
+                <div class="product-slide-tagline">Community Engagement Scaler</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">A community-first social platform with built-in wealth distribution and data sovereignty. Buy authentic engagement packages fulfilled by real workers through DisCryptoBank.</p>
+            <ul class="product-slide-features">
+              <li>Verified-engagement testimonials</li>
+              <li>Community wealth distribution</li>
+              <li>Native integration with the ecosystem</li>
+            </ul>
+            <a class="product-slide-cta" href="https://www.illysocial.io/" target="_blank" rel="noopener">Visit IllySocial →</a>
+          </div>
+        </div>
+
+        <!-- I-RIS -->
+        <div class="product-slide" data-product="iris">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80" alt="I-RIS" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/i-ris.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">I-RIS</div>
+                <div class="product-slide-tagline">Illy Robotic Studios</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">A creative studio brand and production engine for music, podcasts, video, and original IP that powers the Illy Robotic ecosystem.</p>
+            <ul class="product-slide-features">
+              <li>Music &amp; podcast production</li>
+              <li>Visual storytelling for products</li>
+              <li>Original IP &amp; ecosystem media</li>
+            </ul>
+            <a class="product-slide-cta" href="https://www.iris-ecosystem.com/" target="_blank" rel="noopener">Enter the Studio →</a>
+          </div>
+        </div>
+
+        <!-- WorldSAR -->
+        <div class="product-slide" data-product="worldsar">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=1200&q=80" alt="WorldSAR" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/worldsar.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">WorldSAR</div>
+                <div class="product-slide-tagline">Search &amp; Rescue Vue</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">A real-time search-and-rescue intelligence layer that aggregates open incident data, volunteer coordination, and live situational vue for first responders.</p>
+            <ul class="product-slide-features">
+              <li>Live incident aggregation</li>
+              <li>Volunteer dispatch &amp; coordination</li>
+              <li>Open data, open response</li>
+            </ul>
+            <a class="product-slide-cta" href="https://illmedicine.github.io/IR-SAR-VUE/" target="_blank" rel="noopener">Open WorldSAR →</a>
+          </div>
+        </div>
+
+        <!-- SocialPlug -->
+        <div class="product-slide" data-product="socialplug">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=1200&q=80" alt="SocialPlug" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/socialplug.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">SocialPlug</div>
+                <div class="product-slide-tagline">Social Marketing Engine</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">A growth-driven social marketing engine that orchestrates content distribution, SEO, and engagement across platforms — built for low-to-zero cost scale.</p>
+            <ul class="product-slide-features">
+              <li>Programmatic content distribution</li>
+              <li>Technical SEO + creative growth</li>
+              <li>Plug &amp; play with the ecosystem</li>
+            </ul>
+            <a class="product-slide-cta" href="https://illmedicine.github.io/SocialPlug/" target="_blank" rel="noopener">Plug In →</a>
+          </div>
+        </div>
+      </div>
+      <button class="pslider-nav pslider-prev" aria-label="Previous product" onclick="pSlide(-1)">❮</button>
+      <button class="pslider-nav pslider-next" aria-label="Next product" onclick="pSlide(1)">❯</button>
+    </div>
+    <div class="pslider-dots" id="psliderDots"></div>
+  </section>
+
+  <!-- About Us -->
+  <section class="info-section" id="about">
+    <span class="section-eyebrow">Who We Are</span>
+    <h2>About Illy Robotic Instruments</h2>
+    <p>Illy Robotic Instruments is a growth-driven studio building open-source, decentralized financial infrastructure. We design intelligent automation systems and creative growth engines that empower individuals and communities to own their data, capture their value, and scale without bloated ad spend.</p>
+    <p>From Discord-native payroll to social-engagement microtasks to AI education — our products are different instruments in the same band. Together, they're rewriting how money, attention, and community connect.</p>
+  </section>
+
+  <!-- Clients -->
+  <section class="clients-section" id="clients">
+    <span class="section-eyebrow">Trusted By</span>
+    <h2>Clients We've Worked With</h2>
+    <p class="section-sub">Brands and institutions that have partnered with Illy Robotic on automation, web, and creative engagements.</p>
+    <div class="clients-grid">
+      <a class="client-logo" href="https://www.delawarenorth.com" target="_blank" rel="noopener" aria-label="Delaware North">
+        <img src="https://logo.clearbit.com/delawarenorth.com" alt="Delaware North" onerror="this.classList.add('broken')" />
+        <span class="client-fallback">Delaware North</span>
+      </a>
+      <a class="client-logo" href="https://www.mhskids.org" target="_blank" rel="noopener" aria-label="Milton Hershey School">
+        <img src="https://logo.clearbit.com/mhskids.org" alt="Milton Hershey School" onerror="this.classList.add('broken')" />
+        <span class="client-fallback">Milton Hershey School</span>
+      </a>
+      <a class="client-logo" href="https://www.rich.com" target="_blank" rel="noopener" aria-label="Rich's Products">
+        <img src="https://logo.clearbit.com/rich.com" alt="Rich's Products" onerror="this.classList.add('broken')" />
+        <span class="client-fallback">Rich's Products</span>
+      </a>
+      <a class="client-logo" href="https://www.sherwoodelectromotion.com" target="_blank" rel="noopener" aria-label="Sherwood Electromotion">
+        <img src="https://logo.clearbit.com/sherwoodelectromotion.com" alt="Sherwood Electromotion" onerror="this.classList.add('broken')" />
+        <span class="client-fallback">Sherwood Electromotion</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Web Designs -->
+  <section class="info-section" id="webdesigns">
+    <span class="section-eyebrow">Studio Services</span>
+    <h2>Web Designs by Illy Robotic</h2>
+    <p>We design and ship modern, high-converting websites for brands and creators — fast, custom, and built on the same automation stack that powers our own ecosystem. From landing pages to full marketing sites.</p>
+    <div class="info-cta-row">
+      <a class="info-cta" href="mailto:dwilson@illyrobotic-ai.com?subject=Web%20Design%20Inquiry">Start a Project</a>
+      <a class="info-cta secondary" href="#products">See Our Work</a>
+    </div>
+  </section>
+
+  <!-- Contact Us -->
+  <section class="info-section" id="contact">
+    <span class="section-eyebrow">Get in Touch</span>
+    <h2>Contact Us</h2>
+    <p>Have a project, partnership, or just want to say hi? We'd love to hear from you. Drop a line and a real human on our team will get back within one business day.</p>
+    <div class="info-cta-row">
+      <a class="info-cta" href="mailto:dwilson@illyrobotic-ai.com">Email Us</a>
+      <a class="info-cta secondary" href="https://github.com/illmedicine" target="_blank" rel="noopener">Follow on GitHub</a>
+    </div>
+  </section>
 
   <!-- Compact Affiliate Strip -->
   <section class="affiliate-strip" aria-label="Featured Partners">
@@ -1307,11 +2042,87 @@
       window.location.href = url;
     }
 
+    /* Mobile menu */
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      const burger = document.getElementById('navBurger');
+      const isOpen = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    function closeMenu() {
+      const menu = document.getElementById('navMenu');
+      const burger = document.getElementById('navBurger');
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    /* Sticky-nav scroll shadow */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('topnav');
+      if (!nav) return;
+      if (window.scrollY > 20) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    /* Product Card Slider */
+    let pCurrent = 0;
+    let pTotal = 0;
+    let pAuto;
+    function pUpdate() {
+      const track = document.getElementById('psliderTrack');
+      if (!track) return;
+      track.style.transform = `translateX(-${pCurrent * 100}%)`;
+      const slides = track.querySelectorAll('.product-slide');
+      slides.forEach((s, i) => s.classList.toggle('active', i === pCurrent));
+      const dots = document.querySelectorAll('.pslider-dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === pCurrent));
+    }
+    function pSlide(dir) {
+      pCurrent = (pCurrent + dir + pTotal) % pTotal;
+      pUpdate();
+      pResetAuto();
+    }
+    function pGoTo(i) {
+      pCurrent = i;
+      pUpdate();
+      pResetAuto();
+    }
+    function pResetAuto() {
+      clearInterval(pAuto);
+      pAuto = setInterval(() => pSlide(1), 8000);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const logoElements = document.querySelectorAll('.product-logo, .product-shield');
       logoElements.forEach(el => {
         el.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.1)'; });
         el.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
+      });
+
+      const track = document.getElementById('psliderTrack');
+      if (track) {
+        const slides = track.querySelectorAll('.product-slide');
+        pTotal = slides.length;
+        const dotsBox = document.getElementById('psliderDots');
+        for (let i = 0; i < pTotal; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'pslider-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => pGoTo(i));
+          dotsBox.appendChild(dot);
+        }
+        pUpdate();
+        pResetAuto();
+        const slider = document.querySelector('.product-slider');
+        slider.addEventListener('mouseenter', () => clearInterval(pAuto));
+        slider.addEventListener('mouseleave', () => pResetAuto());
+      }
+
+      /* Keyboard navigation for product slider */
+      document.addEventListener('keydown', (e) => {
+        if (!track) return;
+        if (e.key === 'ArrowLeft') pSlide(-1);
+        if (e.key === 'ArrowRight') pSlide(1);
       });
     });
   </script>
