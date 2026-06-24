@@ -251,7 +251,11 @@
     .tree-center {
       position: relative;
       z-index: 10;
-      order: 5;
+      flex-basis: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 0;
     }
 
     .tree-product {
@@ -375,6 +379,22 @@
       80%      { transform: scale(1.02) rotate(-0.5deg); box-shadow: 0 0 20px rgba(180, 220, 255, 0.6); }
     }
 
+    @keyframes band-cello {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(150, 80, 40, 0.4); }
+      45%      { transform: scale(1.05); box-shadow: 0 0 35px rgba(200, 120, 60, 0.9); }
+      90%      { transform: scale(1.02); box-shadow: 0 0 22px rgba(180, 100, 50, 0.6); }
+    }
+    @keyframes band-tambourine {
+      0%, 100% { transform: scale(1) rotate(0); box-shadow: 0 0 15px rgba(255, 100, 100, 0.4); }
+      10%      { transform: scale(1.05) rotate(-2deg); box-shadow: 0 0 32px rgba(255, 100, 100, 0.95); }
+      20%      { transform: scale(1) rotate(2deg); box-shadow: 0 0 15px rgba(255, 100, 100, 0.4); }
+      35%      { transform: scale(1.05) rotate(-2deg); box-shadow: 0 0 32px rgba(255, 100, 100, 0.95); }
+      45%      { transform: scale(1) rotate(0); box-shadow: 0 0 15px rgba(255, 100, 100, 0.4); }
+      60%      { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 32px rgba(255, 100, 100, 0.95); }
+      70%      { transform: scale(1) rotate(-2deg); box-shadow: 0 0 15px rgba(255, 100, 100, 0.4); }
+      85%      { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 32px rgba(255, 100, 100, 0.95); }
+    }
+
     /* Apply each instrument to its product (all sync to a 2s bar) */
     .instrument-bass       .tree-product-logo { animation: band-bass       2s ease-in-out infinite; border-color: #b464ff; }
     .instrument-drums      .tree-product-logo { animation: band-drums      2s linear      infinite; border-color: #ffb464; }
@@ -384,6 +404,119 @@
     .instrument-saxophone  .tree-product-logo { animation: band-saxophone  2s ease-in-out infinite; border-color: #00ff88; }
     .instrument-trumpet    .tree-product-logo { animation: band-trumpet    2s ease-in-out infinite; border-color: #ffdc64; }
     .instrument-violin     .tree-product-logo { animation: band-violin     2s ease-in-out infinite; border-color: #b4dcff; }
+    .instrument-cello      .tree-product-logo { animation: band-cello      2s ease-in-out infinite; border-color: #c87838; }
+    .instrument-tambourine .tree-product-logo { animation: band-tambourine 2s linear      infinite; border-color: #ff6464; }
+
+    /* Band Hero (replaces the slider) */
+    .band-hero {
+      position: relative;
+      width: 100%;
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(26, 31, 58, 0.7) 100%);
+      overflow: hidden;
+    }
+    .band-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(0, 255, 136, 0.12) 0%, transparent 60%);
+      animation: pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .band-hero-inner { position: relative; max-width: 1100px; margin: 0 auto; z-index: 2; }
+    .band-tagline-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      border-radius: 999px;
+      color: #00ff88;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 1.25rem;
+    }
+    .band-hero-title {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(100, 200, 255, 0.4);
+    }
+    .band-hero-title .grad {
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .band-hero-sub {
+      font-size: 1.05rem;
+      color: #a0b0d0;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Compact Affiliate Strip */
+    .affiliate-strip {
+      max-width: 1100px;
+      margin: 3rem auto 2rem;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid rgba(100, 200, 255, 0.15);
+      border-bottom: 1px solid rgba(100, 200, 255, 0.15);
+      text-align: center;
+    }
+    .affiliate-strip h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #64c8ff;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .affiliate-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .affiliate-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem 0.35rem 0.4rem;
+      background: rgba(100, 200, 255, 0.06);
+      border: 1px solid rgba(100, 200, 255, 0.18);
+      border-radius: 999px;
+      color: #c0d0f0;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+    .affiliate-pill:hover {
+      background: rgba(100, 200, 255, 0.15);
+      border-color: rgba(0, 255, 136, 0.5);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);
+    }
+    .affiliate-pill img {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      object-fit: contain;
+      background: #fff;
+      padding: 1px;
+    }
+    .affiliate-pill .aff-disclaimer {
+      font-size: 0.65rem;
+      color: #708099;
+      margin-left: 0.25rem;
+    }
 
     /* Reveal instrument name on hover */
     .tree-product::after {
@@ -862,64 +995,13 @@
   </style>
 </head>
 <body>
-  <!-- Flagship Products Hero Slider -->
-  <div class="flagship-slider-container">
-    <div class="flagship-slider">
-      <div class="slider-wrapper" id="sliderWrapper">
-        <!-- DisCryptoBank Slide -->
-        <div class="slider-item">
-          <div class="slider-content">
-            <span class="slider-badge">Flagship Product #1</span>
-            <h2>DisCryptoBank</h2>
-            <p>Discord-native crypto payroll engine that creates microtasks, verifies proof, and automatically pays workers in Solana. Fulfills engagement packages with real-time transparency and autonomous verification.</p>
-            <p style="font-size: 0.95rem; color: #64c8ff;"><strong>✓ Now Available on Google Play Store</strong></p>
-            <a href="https://play.google.com/store/apps/dev?id=6954025191697949571&hl=en_US" class="slider-cta" target="_blank">Download App</a>
-          </div>
-          <div class="slider-image">
-            <img src="assets/discryptobank.png" alt="DisCryptoBank" />
-          </div>
-        </div>
-
-        <!-- Coindrop Slide -->
-        <div class="slider-item">
-          <div class="slider-content">
-            <span class="slider-badge">Flagship Product #2</span>
-            <h2>Coindrop</h2>
-            <p>Watch. Engage. Earn. Complete social media tasks—watch videos, like posts, subscribe to channels—and earn Solana cryptocurrency. Available in 190+ countries with no minimum withdrawal.</p>
-            <p style="font-size: 0.95rem; color: #00ff88;"><strong>✓ 100% free, global side hustle</strong></p>
-            <a href="https://coindrop.in/" class="slider-cta">Start Earning</a>
-          </div>
-          <div class="slider-image">
-            <img src="assets/coindrop.png" alt="Coindrop" />
-          </div>
-        </div>
-
-        <!-- Squadron Slide -->
-        <div class="slider-item">
-          <div class="slider-content">
-            <span class="slider-badge">Flagship Product #3</span>
-            <h2>Squadron</h2>
-            <p>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad. Squadron merges live-presence social networking with dynamic, high-capacity shared transportation.</p>
-            <p style="font-size: 0.95rem; color: #64c8ff;"><strong>✓ Your squad. Your ride.</strong></p>
-            <a href="https://www.squad-ren.com/" class="slider-cta">Book Your Ride</a>
-          </div>
-          <div class="slider-image">
-            <img src="assets/squad-ren-logo.png" alt="Squadron" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Navigation Controls -->
-      <div class="slider-nav">
-        <button onclick="previousSlide()" aria-label="Previous slide">❮</button>
-        <button onclick="nextSlide()" aria-label="Next slide">❯</button>
-      </div>
-
-      <!-- Dot Indicators -->
-      <div class="slider-controls">
-        <div class="slider-dot active" onclick="goToSlide(0)"></div>
-        <div class="slider-dot" onclick="goToSlide(1)"></div>
-        <div class="slider-dot" onclick="goToSlide(2)"></div>
+  <!-- Interactive Musical Band Hero -->
+  <div class="band-hero">
+    <div class="band-hero-inner">
+      <div class="band-tagline">
+        <span class="band-tagline-badge">🎵 The Band is Playing</span>
+        <h1 class="band-hero-title">A Symphony of <span class="grad">Decentralized Instruments</span></h1>
+        <p class="band-hero-sub">Each product is a different instrument — together, they're an open-source band rewriting the future of fintech. Click any instrument to hear it solo.</p>
       </div>
     </div>
   </div>
@@ -958,6 +1040,13 @@
               <div class="tree-product-name">Coindrop</div>
             </div>
 
+            <div class="tree-product instrument-cello" onclick="navigateTo('https://illmedicine.github.io/IR-SAR-VUE/')" data-instrument="Cello">
+              <div class="tree-product-logo">
+                <img src="assets/worldsar.png" alt="WorldSAR" />
+              </div>
+              <div class="tree-product-name">WorldSAR</div>
+            </div>
+
             <!-- Center: Lead Guitar / Band Leader -->
             <div class="tree-product tree-center instrument-guitar" onclick="navigateTo('#')" data-instrument="Lead Guitar">
               <div class="tree-product-logo">
@@ -967,6 +1056,13 @@
             </div>
 
             <!-- Bottom Row -->
+            <div class="tree-product instrument-tambourine" onclick="navigateTo('https://illmedicine.github.io/SocialPlug/')" data-instrument="Tambourine">
+              <div class="tree-product-logo">
+                <img src="assets/socialplug.png" alt="SocialPlug" />
+              </div>
+              <div class="tree-product-name">SocialPlug</div>
+            </div>
+
             <div class="tree-product instrument-synth" onclick="navigateTo('https://www.illysocial.io/')" data-instrument="Synth">
               <div class="tree-product-logo">
                 <img src="assets/illysocial.png" alt="IllySocial" />
@@ -1161,89 +1257,61 @@
               <div class="product-card-name">I-RIS</div>
               <div class="product-card-desc">Illy Robotic Studios</div>
             </div>
+            <div class="product-card" onclick="navigateTo('https://illmedicine.github.io/IR-SAR-VUE/')">
+              <div class="product-card-name">WorldSAR</div>
+              <div class="product-card-desc">Search & Rescue Vue</div>
+            </div>
+            <div class="product-card" onclick="navigateTo('https://illmedicine.github.io/SocialPlug/')">
+              <div class="product-card-name">SocialPlug</div>
+              <div class="product-card-desc">Social Marketing Engine</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Compact Affiliate Strip -->
+  <section class="affiliate-strip" aria-label="Featured Partners">
+    <h3>Featured Partners <span class="aff-disclaimer">· affiliate links</span></h3>
+    <div class="affiliate-list">
+      <a class="affiliate-pill" href="https://gemini.sjv.io/c/6899214/2794807/11829" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.com&sz=64" alt="" loading="lazy" />Gemini
+      </a>
+      <a class="affiliate-pill" href="https://railway.com?referralCode=1fQrRb" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=railway.com&sz=64" alt="" loading="lazy" />Railway
+      </a>
+      <a class="affiliate-pill" href="https://gamba.com/?c=Veteran" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=gamba.com&sz=64" alt="" loading="lazy" />Gamba
+      </a>
+      <a class="affiliate-pill" href="https://tucanbit.io/?affcode=PbiDQqKnnx6cK" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=tucanbit.io&sz=64" alt="" loading="lazy" />TucanBit
+      </a>
+      <a class="affiliate-pill" href="https://yeet.com/register?aff=Hassaan" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=yeet.com&sz=64" alt="" loading="lazy" />Yeet
+      </a>
+      <a class="affiliate-pill" href="https://rugs.fun/?start=REF_86M50DBUGK7F" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=rugs.fun&sz=64" alt="" loading="lazy" />Rugs.fun
+      </a>
+      <a class="affiliate-pill" href="https://solpump.io/a/HASSAAN" target="_blank" rel="sponsored noopener noreferrer">
+        <img src="https://www.google.com/s2/favicons?domain=solpump.io&sz=64" alt="" loading="lazy" />SolPump
+      </a>
+    </div>
+    <!-- Gemini Impact tracking pixel -->
+    <img height="0" width="0" src="https://imp.pxf.io/i/6899214/2794807/11829" style="position:absolute;visibility:hidden;" border="0" alt="" />
+  </section>
+
   <script>
-    let currentSlide = 0;
-    const totalSlides = 3;
-    let autoPlayInterval;
-
-    function updateSlider() {
-      const sliderWrapper = document.getElementById('sliderWrapper');
-      const offset = -currentSlide * 100;
-      sliderWrapper.style.transform = `translateX(${offset}%)`;
-
-      // Update dots
-      document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlider();
-      resetAutoPlay();
-    }
-
-    function previousSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlider();
-      resetAutoPlay();
-    }
-
-    function goToSlide(index) {
-      currentSlide = index;
-      updateSlider();
-      resetAutoPlay();
-    }
-
-    function resetAutoPlay() {
-      clearInterval(autoPlayInterval);
-      startAutoPlay();
-    }
-
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(nextSlide, 7000);
-    }
-
     function navigateTo(url) {
       if (url === '#') return;
       window.location.href = url;
     }
 
-    // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
-      // Start auto-play
-      startAutoPlay();
-
-      // Pause auto-play on hover
-      const slider = document.querySelector('.flagship-slider');
-      slider.addEventListener('mouseenter', () => {
-        clearInterval(autoPlayInterval);
-      });
-      slider.addEventListener('mouseleave', () => {
-        startAutoPlay();
-      });
-
-      // Smooth interactions for circuit board
       const logoElements = document.querySelectorAll('.product-logo, .product-shield');
       logoElements.forEach(el => {
-        el.addEventListener('mouseenter', function() {
-          this.style.transform = 'scale(1.1)';
-        });
-        el.addEventListener('mouseleave', function() {
-          this.style.transform = 'scale(1)';
-        });
-      });
-
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') previousSlide();
-        if (e.key === 'ArrowRight') nextSlide();
+        el.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.1)'; });
+        el.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
       });
     });
   </script>
