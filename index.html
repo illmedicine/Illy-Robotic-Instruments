@@ -323,6 +323,103 @@
       opacity: 1;
     }
 
+    /* Musical Band — each product plays in rhythm at 120 BPM (2s per measure) */
+    @keyframes band-bass {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(180, 100, 255, 0.4); }
+      25%      { transform: scale(1.05); box-shadow: 0 0 35px rgba(180, 100, 255, 0.9); }
+      50%      { transform: scale(1); box-shadow: 0 0 15px rgba(180, 100, 255, 0.4); }
+      75%      { transform: scale(1.03); box-shadow: 0 0 25px rgba(180, 100, 255, 0.7); }
+    }
+    @keyframes band-drums {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+      12%      { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 180, 100, 1); }
+      25%      { transform: scale(1); box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+      37%      { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 180, 100, 0.9); }
+      50%      { transform: scale(1); box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+      62%      { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 180, 100, 1); }
+      75%      { transform: scale(1); box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+      87%      { transform: scale(1.06); box-shadow: 0 0 35px rgba(255, 180, 100, 0.9); }
+    }
+    @keyframes band-piano {
+      0%, 100% { transform: scale(1) rotate(0); box-shadow: 0 0 15px rgba(100, 200, 255, 0.4); }
+      30%      { transform: scale(1.04) rotate(-1deg); box-shadow: 0 0 30px rgba(100, 200, 255, 0.85); }
+      60%      { transform: scale(1.02) rotate(1deg); box-shadow: 0 0 22px rgba(100, 200, 255, 0.7); }
+    }
+    @keyframes band-guitar {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), 0 0 60px rgba(100, 200, 255, 0.4); }
+      20%      { transform: scale(1.06); box-shadow: 0 0 55px rgba(0, 255, 136, 1), 0 0 100px rgba(100, 200, 255, 0.85), 0 0 140px rgba(0, 255, 136, 0.5); }
+      40%      { transform: scale(1.02); box-shadow: 0 0 40px rgba(0, 255, 136, 0.8), 0 0 80px rgba(100, 200, 255, 0.6); }
+      60%      { transform: scale(1.07); box-shadow: 0 0 60px rgba(0, 255, 136, 1), 0 0 110px rgba(100, 200, 255, 0.9), 0 0 150px rgba(0, 255, 136, 0.6); }
+      80%      { transform: scale(1.03); box-shadow: 0 0 45px rgba(0, 255, 136, 0.85), 0 0 85px rgba(100, 200, 255, 0.7); }
+    }
+    @keyframes band-synth {
+      0%, 100% { transform: scale(1) translateY(0); box-shadow: 0 0 15px rgba(255, 100, 200, 0.4); }
+      25%      { transform: scale(1.04) translateY(-3px); box-shadow: 0 0 32px rgba(255, 100, 200, 0.9); }
+      50%      { transform: scale(1.02) translateY(0); box-shadow: 0 0 22px rgba(255, 100, 200, 0.6); }
+      75%      { transform: scale(1.04) translateY(3px); box-shadow: 0 0 32px rgba(255, 100, 200, 0.9); }
+    }
+    @keyframes band-saxophone {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
+      35%      { transform: scale(1.05); box-shadow: 0 0 35px rgba(0, 255, 136, 0.95); }
+      70%      { transform: scale(1.02); box-shadow: 0 0 22px rgba(0, 255, 136, 0.6); }
+    }
+    @keyframes band-trumpet {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 220, 100, 0.4); }
+      15%      { transform: scale(1.07); box-shadow: 0 0 38px rgba(255, 220, 100, 1); }
+      30%      { transform: scale(1); box-shadow: 0 0 15px rgba(255, 220, 100, 0.4); }
+      65%      { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 220, 100, 0.85); }
+    }
+    @keyframes band-violin {
+      0%, 100% { transform: scale(1) rotate(0); box-shadow: 0 0 15px rgba(180, 220, 255, 0.4); }
+      40%      { transform: scale(1.04) rotate(0.5deg); box-shadow: 0 0 28px rgba(180, 220, 255, 0.85); }
+      80%      { transform: scale(1.02) rotate(-0.5deg); box-shadow: 0 0 20px rgba(180, 220, 255, 0.6); }
+    }
+
+    /* Apply each instrument to its product (all sync to a 2s bar) */
+    .instrument-bass       .tree-product-logo { animation: band-bass       2s ease-in-out infinite; border-color: #b464ff; }
+    .instrument-drums      .tree-product-logo { animation: band-drums      2s linear      infinite; border-color: #ffb464; }
+    .instrument-piano      .tree-product-logo { animation: band-piano      2s ease-in-out infinite; border-color: #64c8ff; }
+    .instrument-guitar     .tree-product-logo { animation: band-guitar     2s ease-in-out infinite; border-color: #00ff88; }
+    .instrument-synth      .tree-product-logo { animation: band-synth      2s ease-in-out infinite; border-color: #ff64c8; }
+    .instrument-saxophone  .tree-product-logo { animation: band-saxophone  2s ease-in-out infinite; border-color: #00ff88; }
+    .instrument-trumpet    .tree-product-logo { animation: band-trumpet    2s ease-in-out infinite; border-color: #ffdc64; }
+    .instrument-violin     .tree-product-logo { animation: band-violin     2s ease-in-out infinite; border-color: #b4dcff; }
+
+    /* Reveal instrument name on hover */
+    .tree-product::after {
+      content: '🎵 ' attr(data-instrument);
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: #00ff88;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease, top 0.3s ease;
+      pointer-events: none;
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .tree-product:hover::after {
+      opacity: 1;
+      top: -36px;
+    }
+
+    .tree-center::after {
+      font-size: 0.85rem;
+      top: -38px;
+    }
+    .tree-center:hover::after {
+      top: -46px;
+    }
+
+    /* Pause animation on hover so user can focus on the logo */
+    .tree-product:hover .tree-product-logo {
+      animation-play-state: paused;
+    }
+
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -774,12 +871,12 @@
           <div class="slider-content">
             <span class="slider-badge">Flagship Product #1</span>
             <h2>DisCryptoBank</h2>
-            <p>Decentralized cryptocurrency banking platform powered by AI mesh architecture. Secure, transparent, and user-controlled financial infrastructure for the future of fintech.</p>
+            <p>Discord-native crypto payroll engine that creates microtasks, verifies proof, and automatically pays workers in Solana. Fulfills engagement packages with real-time transparency and autonomous verification.</p>
             <p style="font-size: 0.95rem; color: #64c8ff;"><strong>✓ Now Available on Google Play Store</strong></p>
             <a href="https://play.google.com/store/apps/dev?id=6954025191697949571&hl=en_US" class="slider-cta" target="_blank">Download App</a>
           </div>
           <div class="slider-image">
-            <img src="assets/discryptobank-hero.png" alt="DisCryptoBank" />
+            <img src="assets/discryptobank.png" alt="DisCryptoBank" />
           </div>
         </div>
 
@@ -788,29 +885,26 @@
           <div class="slider-content">
             <span class="slider-badge">Flagship Product #2</span>
             <h2>Coindrop</h2>
-            <p>Revolutionary cryptocurrency payment solution designed for creators and communities. Monetize content, manage digital assets, and build sustainable income streams with ease.</p>
-            <p style="font-size: 0.95rem; color: #00ff88;"><strong>✓ Trusted by creators worldwide</strong></p>
-            <a href="https://coindrop.in/" class="slider-cta">Explore Coindrop</a>
+            <p>Watch. Engage. Earn. Complete social media tasks—watch videos, like posts, subscribe to channels—and earn Solana cryptocurrency. Available in 190+ countries with no minimum withdrawal.</p>
+            <p style="font-size: 0.95rem; color: #00ff88;"><strong>✓ 100% free, global side hustle</strong></p>
+            <a href="https://coindrop.in/" class="slider-cta">Start Earning</a>
           </div>
           <div class="slider-image">
-            <div class="slider-image-text">
-              <h3>💰 Coindrop</h3>
-              <p>Crypto Payment Solutions<br>for Modern Creators</p>
-            </div>
+            <img src="assets/coindrop.png" alt="Coindrop" />
           </div>
         </div>
 
-        <!-- Squad REN Slide -->
+        <!-- Squadron Slide -->
         <div class="slider-item">
           <div class="slider-content">
             <span class="slider-badge">Flagship Product #3</span>
-            <h2>Squad REN</h2>
-            <p>Collaborative team platform built for the future of work. Connect squads, manage projects, and achieve goals together with AI-powered insights and real-time collaboration tools.</p>
-            <p style="font-size: 0.95rem; color: #64c8ff;"><strong>✓ The future of team collaboration</strong></p>
-            <a href="https://www.squad-ren.com/" class="slider-cta">Join Squad REN</a>
+            <h2>Squadron</h2>
+            <p>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad. Squadron merges live-presence social networking with dynamic, high-capacity shared transportation.</p>
+            <p style="font-size: 0.95rem; color: #64c8ff;"><strong>✓ Your squad. Your ride.</strong></p>
+            <a href="https://www.squad-ren.com/" class="slider-cta">Book Your Ride</a>
           </div>
           <div class="slider-image">
-            <img src="assets/squad-ren-logo.png" alt="Squad REN" />
+            <img src="assets/squad-ren-logo.png" alt="Squadron" />
           </div>
         </div>
       </div>
@@ -843,36 +937,29 @@
         <div class="product-tree-container">
           <div class="product-tree">
             <!-- Top Row -->
-            <div class="tree-product" onclick="navigateTo('https://www.iralacademy.com/')">
+            <div class="tree-product instrument-piano" onclick="navigateTo('https://illyrobotics.github.io/IRAI-Academy/')" data-instrument="Piano">
               <div class="tree-product-logo">
-                <span style="color: #64c8ff; font-weight: bold;">IRAL</span>
+                <img src="assets/irai-academy.png" alt="IRAI Academy" />
               </div>
-              <div class="tree-product-name">IRAL Academy</div>
+              <div class="tree-product-name">IRAI Academy</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('/products/discryptobank/')">
+            <div class="tree-product instrument-bass" onclick="navigateTo('/products/discryptobank/')" data-instrument="Bass">
               <div class="tree-product-logo">
                 <img src="assets/discryptobank.png" alt="DisCryptoBank" />
               </div>
               <div class="tree-product-name">DisCryptoBank</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('https://coindrop.in/')">
+            <div class="tree-product instrument-drums" onclick="navigateTo('https://coindrop.in/')" data-instrument="Drums">
               <div class="tree-product-logo">
                 <img src="assets/coindrop.png" alt="Coindrop" />
               </div>
               <div class="tree-product-name">Coindrop</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('https://www.illyrushcasino.com/')">
-              <div class="tree-product-logo">
-                <span style="color: #64c8ff; font-weight: bold;">IRC</span>
-              </div>
-              <div class="tree-product-name">IRC Gaming</div>
-            </div>
-
-            <!-- Center -->
-            <div class="tree-product tree-center" onclick="navigateTo('#')">
+            <!-- Center: Lead Guitar / Band Leader -->
+            <div class="tree-product tree-center instrument-guitar" onclick="navigateTo('#')" data-instrument="Lead Guitar">
               <div class="tree-product-logo">
                 <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
               </div>
@@ -880,28 +967,28 @@
             </div>
 
             <!-- Bottom Row -->
-            <div class="tree-product" onclick="navigateTo('https://www.illysocial.io/')">
+            <div class="tree-product instrument-synth" onclick="navigateTo('https://www.illysocial.io/')" data-instrument="Synth">
               <div class="tree-product-logo">
                 <img src="assets/illysocial.png" alt="IllySocial" />
               </div>
               <div class="tree-product-name">IllySocial</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('https://www.livepay.io/')">
+            <div class="tree-product instrument-saxophone" onclick="navigateTo('https://www.livepay.io/')" data-instrument="Saxophone">
               <div class="tree-product-logo">
-                <span style="color: #00ff88; font-weight: bold; font-size: 0.9rem;">LIVEPAY</span>
+                <img src="assets/livepay.png" alt="LivePay" />
               </div>
-              <div class="tree-product-name">LIVEPAY</div>
+              <div class="tree-product-name">LivePay</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('https://www.squad-ren.com/')">
+            <div class="tree-product instrument-trumpet" onclick="navigateTo('https://www.squad-ren.com/')" data-instrument="Trumpet">
               <div class="tree-product-logo">
-                <img src="assets/squad-ren-logo.png" alt="Squad REN" />
+                <img src="assets/squad-ren-logo.png" alt="Squadron" />
               </div>
-              <div class="tree-product-name">Squad REN</div>
+              <div class="tree-product-name">Squadron</div>
             </div>
 
-            <div class="tree-product" onclick="navigateTo('https://www.iris-ecosystem.com/')">
+            <div class="tree-product instrument-violin" onclick="navigateTo('https://www.iris-ecosystem.com/')" data-instrument="Violin">
               <div class="tree-product-logo">
                 <img src="assets/i-ris.png" alt="I-RIS" />
               </div>
