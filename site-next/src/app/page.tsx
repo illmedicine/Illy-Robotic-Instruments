@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [activeTab, setActiveTab] = useState("products");
 
   const products = [
@@ -44,10 +46,103 @@ export default function Home() {
     },
   ];
 
+  const slides = [
+    {
+      title: "DisCryptoBank",
+      badge: "Flagship Product #1",
+      description: "Decentralized cryptocurrency banking platform powered by AI mesh architecture. Secure, transparent, and user-controlled financial infrastructure for the future of fintech.",
+      cta: "Download App",
+      ctaUrl: "https://play.google.com/store/apps/dev?id=6954025191697949571&hl=en_US",
+      note: "✓ Now Available on Google Play Store",
+      noteColor: "text-cyan-400"
+    },
+    {
+      title: "Coindrop",
+      badge: "Flagship Product #2",
+      description: "Revolutionary cryptocurrency payment solution designed for creators and communities. Monetize content, manage digital assets, and build sustainable income streams with ease.",
+      cta: "Explore Coindrop",
+      ctaUrl: "https://coindrop.in/",
+      note: "✓ Trusted by creators worldwide",
+      noteColor: "text-emerald-400"
+    },
+    {
+      title: "Squad REN",
+      badge: "Flagship Product #3",
+      description: "Collaborative team platform built for the future of work. Connect squads, manage projects, and achieve goals together with AI-powered insights and real-time collaboration tools.",
+      cta: "Join Squad REN",
+      ctaUrl: "https://www.squad-ren.com/",
+      note: "✓ The future of team collaboration",
+      noteColor: "text-cyan-400"
+    }
+  ];
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-white">
+      {/* Hero Slider */}
+      <div className="relative w-full overflow-hidden rounded-2xl mx-4 mt-4 shadow-2xl">
+        <div className="flex transition-transform duration-700" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+          {slides.map((slide, idx) => (
+            <div key={idx} className="min-w-full bg-gradient-to-r from-slate-900 to-slate-800 text-white p-12 flex items-center justify-between">
+              <div className="flex-1">
+                <div className="inline-block px-4 py-1 rounded-full border border-cyan-400 text-cyan-400 text-sm font-semibold mb-4">
+                  {slide.badge}
+                </div>
+                <h2 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                  {slide.title}
+                </h2>
+                <p className="text-lg text-slate-300 mb-4 max-w-xl">{slide.description}</p>
+                <p className={`text-sm font-semibold mb-6 ${slide.noteColor}`}>{slide.note}</p>
+                <a
+                  href={slide.ctaUrl}
+                  target={slide.ctaUrl.startsWith("http") ? "_blank" : undefined}
+                  rel={slide.ctaUrl.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-bold rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
+                >
+                  {slide.cta}
+                </a>
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="text-6xl">🚀</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Slider Controls */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-cyan-500/30 hover:bg-cyan-500/50 text-white p-3 rounded-full transition-all"
+        >
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-cyan-500/30 hover:bg-cyan-500/50 text-white p-3 rounded-full transition-all"
+        >
+          ❯
+        </button>
+
+        {/* Slider Dots */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              className={`transition-all ${
+                idx === currentSlide
+                  ? "w-8 h-2 bg-emerald-400 rounded-full"
+                  : "w-2 h-2 bg-cyan-400/50 rounded-full hover:bg-cyan-400"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b border-cyan-200 bg-white/95 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b border-cyan-200 bg-white/95 backdrop-blur-xl mt-8">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -135,7 +230,76 @@ export default function Home() {
       {activeTab === "products" && (
         <section className="px-4 py-16">
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-12 text-center text-3xl font-bold text-slate-900">Our Products</h2>
+            <h2 className="mb-8 text-center text-3xl font-bold text-slate-900">Our Products</h2>
+
+            {/* Interactive Product Tree */}
+            <div className="mb-16 flex flex-wrap justify-center items-center gap-6">
+              <a href="https://www.iralacademy.com/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all">
+                  IRAL
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">IRAL Academy</p>
+              </a>
+
+              <a href="/products/discryptobank/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all overflow-hidden">
+                  <span className="text-lg">🏦</span>
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">DisCryptoBank</p>
+              </a>
+
+              <a href="https://coindrop.in/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all overflow-hidden">
+                  <span className="text-lg">💰</span>
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">Coindrop</p>
+              </a>
+
+              <a href="https://www.illyrushcasino.com/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all">
+                  IRC
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">IRC Gaming</p>
+              </a>
+
+              {/* Center - Main Logo */}
+              <div className="mx-4 mb-4">
+                <a href="#" className="group relative flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-bold text-2xl shadow-2xl group-hover:shadow-2xl group-hover:shadow-cyan-400/70 transition-all ring-4 ring-cyan-300">
+                    🤖
+                  </div>
+                  <p className="text-center text-sm font-bold text-slate-900 mt-3">ILLY ROBOTIC</p>
+                </a>
+              </div>
+
+              <a href="https://www.illysocial.io/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all overflow-hidden">
+                  <span className="text-lg">🌐</span>
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">IllySocial</p>
+              </a>
+
+              <a href="https://www.livepay.io/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all">
+                  LP
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">LIVEPAY</p>
+              </a>
+
+              <a href="https://www.squad-ren.com/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all">
+                  SR
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">Squad REN</p>
+              </a>
+
+              <a href="https://www.iris-ecosystem.com/" className="group relative">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-bold shadow-lg group-hover:shadow-xl group-hover:shadow-cyan-400/50 transition-all">
+                  I-RIS
+                </div>
+                <p className="text-center text-xs font-semibold text-slate-600 mt-2 group-hover:text-slate-900">I-RIS</p>
+              </a>
+            </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {products.map((product) => (
