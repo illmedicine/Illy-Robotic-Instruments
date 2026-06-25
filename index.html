@@ -993,38 +993,72 @@
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem;
-      align-items: center;
-      justify-items: center;
-    }
-    .client-logo {
+    /* Clients Carousel */
+    .clients-carousel-container {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      max-width: 220px;
+      height: 220px;
+      perspective: 1200px;
+      margin: 2rem 0;
+    }
+    .clients-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .client-carousel-item {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 220px;
       height: 110px;
       padding: 1rem 1.5rem;
       background: rgba(255, 255, 255, 0.96);
       border-radius: 12px;
       border: 1px solid rgba(100, 200, 255, 0.18);
-      transition: all 0.3s ease;
-      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center;
+      z-index: 1;
+      opacity: 0.4;
+      pointer-events: none;
     }
-    .client-logo:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
-      border-color: rgba(0, 255, 136, 0.45);
+    .client-carousel-item.center {
+      z-index: 10;
+      opacity: 1;
+      transform: scale(1.4) translateZ(0);
+      box-shadow: 0 20px 60px rgba(100, 200, 255, 0.35);
+      border-color: rgba(0, 255, 136, 0.6);
+      pointer-events: all;
     }
-    .client-logo img {
+    .client-carousel-item.left {
+      transform: translateX(-280px) scale(0.75) perspective(800px) rotateY(25deg);
+      opacity: 0.5;
+    }
+    .client-carousel-item.right {
+      transform: translateX(280px) scale(0.75) perspective(800px) rotateY(-25deg);
+      opacity: 0.5;
+    }
+    .client-carousel-item:not(.center) {
+      filter: grayscale(60%);
+    }
+    .client-carousel-item.center:hover {
+      box-shadow: 0 25px 70px rgba(0, 255, 136, 0.45);
+      transform: scale(1.45) translateZ(0);
+    }
+    .client-carousel-item img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
     }
-    .client-logo .client-fallback {
+    .client-carousel-item .client-fallback {
       position: absolute;
       inset: 0;
       display: none;
@@ -1037,7 +1071,7 @@
       padding: 0.5rem 1rem;
       letter-spacing: 0.3px;
     }
-    .client-logo img.broken + .client-fallback { display: flex; }
+    .client-carousel-item img.broken + .client-fallback { display: flex; }
 
     /* About / Contact / Web Designs sections */
     .info-section {
@@ -2167,28 +2201,30 @@
     <p>From Discord-native payroll to social-engagement microtasks to AI education — our products are different instruments in the same band. Together, they're rewriting how money, attention, and community connect.</p>
   </section>
 
-  <!-- Clients -->
+  <!-- Clients Carousel -->
   <section class="clients-section" id="clients">
     <span class="section-eyebrow">Trusted By</span>
     <h2>Clients We've Worked With</h2>
     <p class="section-sub">Brands and institutions that have partnered with Illy Robotic on automation, web, and creative engagements.</p>
-    <div class="clients-grid">
-      <a class="client-logo" href="https://www.delawarenorth.com" target="_blank" rel="noopener" aria-label="Delaware North">
-        <img src="assets/delaware-north.jpg" alt="Delaware North" onerror="this.classList.add('broken')" />
-        <span class="client-fallback">Delaware North</span>
-      </a>
-      <a class="client-logo" href="https://www.mhskids.org" target="_blank" rel="noopener" aria-label="Milton Hershey School">
-        <img src="assets/milton-hershey.jpg" alt="Milton Hershey School" onerror="this.classList.add('broken')" />
-        <span class="client-fallback">Milton Hershey School</span>
-      </a>
-      <a class="client-logo" href="https://www.rich.com" target="_blank" rel="noopener" aria-label="Rich's Products">
-        <img src="assets/rich-products.jpg" alt="Rich's Products" onerror="this.classList.add('broken')" />
-        <span class="client-fallback">Rich's Products</span>
-      </a>
-      <a class="client-logo" href="https://www.sherwoodelectromotion.com" target="_blank" rel="noopener" aria-label="Sherwood Electromotion">
-        <img src="assets/sherwood.jpg" alt="Sherwood Electromotion" onerror="this.classList.add('broken')" />
-        <span class="client-fallback">Sherwood Electromotion</span>
-      </a>
+    <div class="clients-carousel-container">
+      <div class="clients-carousel">
+        <a class="client-carousel-item" href="https://www.delawarenorth.com" target="_blank" rel="noopener" aria-label="Delaware North" data-index="0">
+          <img src="assets/delaware-north.jpg" alt="Delaware North" onerror="this.classList.add('broken')" />
+          <span class="client-fallback">Delaware North</span>
+        </a>
+        <a class="client-carousel-item" href="https://www.mhskids.org" target="_blank" rel="noopener" aria-label="Milton Hershey School" data-index="1">
+          <img src="assets/milton-hershey.jpg" alt="Milton Hershey School" onerror="this.classList.add('broken')" />
+          <span class="client-fallback">Milton Hershey School</span>
+        </a>
+        <a class="client-carousel-item" href="https://www.rich.com" target="_blank" rel="noopener" aria-label="Rich's Products" data-index="2">
+          <img src="assets/rich-products.jpg" alt="Rich's Products" onerror="this.classList.add('broken')" />
+          <span class="client-fallback">Rich's Products</span>
+        </a>
+        <a class="client-carousel-item" href="https://www.sherwoodelectromotion.com" target="_blank" rel="noopener" aria-label="Sherwood Electromotion" data-index="3">
+          <img src="assets/sherwood.jpg" alt="Sherwood Electromotion" onerror="this.classList.add('broken')" />
+          <span class="client-fallback">Sherwood Electromotion</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -2475,12 +2511,53 @@
       pAuto = setInterval(() => pSlide(1), 8000);
     }
 
+    /* Clients Carousel */
+    let carouselIndex = 0;
+    let carouselInterval;
+    function updateCarousel() {
+      const items = document.querySelectorAll('.client-carousel-item');
+      if (items.length === 0) return;
+      items.forEach((item, i) => {
+        item.classList.remove('left', 'center', 'right');
+        const pos = (i - carouselIndex + items.length) % items.length;
+        if (pos === 0) {
+          item.classList.add('center');
+        } else if (pos === items.length - 1) {
+          item.classList.add('left');
+        } else {
+          item.classList.add('right');
+        }
+      });
+    }
+    function rotateCarousel() {
+      const items = document.querySelectorAll('.client-carousel-item');
+      if (items.length > 0) {
+        carouselIndex = (carouselIndex + 1) % items.length;
+        updateCarousel();
+      }
+    }
+    function startCarousel() {
+      carouselInterval = setInterval(rotateCarousel, 1000);
+    }
+    function stopCarousel() {
+      clearInterval(carouselInterval);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const logoElements = document.querySelectorAll('.product-logo, .product-shield');
       logoElements.forEach(el => {
         el.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.1)'; });
         el.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
       });
+
+      /* Initialize Clients Carousel */
+      updateCarousel();
+      startCarousel();
+      const carousel = document.querySelector('.clients-carousel');
+      if (carousel) {
+        carousel.addEventListener('mouseenter', stopCarousel);
+        carousel.addEventListener('mouseleave', startCarousel);
+      }
 
       // Kick off the ambient lightning storm so visitors immediately see the effect
       startAmbientStorm();
