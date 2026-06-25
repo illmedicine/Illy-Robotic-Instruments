@@ -377,6 +377,12 @@
       --orbit-radius: 290px;
     }
 
+    .tree-product {
+      cursor: pointer;
+      transition: scale 0.35s ease, --orbit-radius 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Center orb (the "sun") — pinned at exact center of the tree */
     .tree-center {
       position: absolute;
       left: 50%;
@@ -384,9 +390,15 @@
       transform: translate(-50%, -50%);
       z-index: 10;
     }
+    .tree-center .tree-product-name { display: none; }
+    .tree-center .tree-product-logo {
+      width: 220px;
+      height: 220px;
+      border-width: 3px;
+      box-shadow: 0 0 40px rgba(0, 255, 136, 0.65), 0 0 80px rgba(100, 200, 255, 0.45);
+    }
 
-    /* Distribute 9 sub-products evenly around the sun (40deg apart) */
-    .product-tree .sub-product { --angle: 0deg; }
+    /* Each sub-product is placed by its --angle around the orbit */
     .product-tree .sub-product:nth-of-type(1) { --angle:   0deg; }
     .product-tree .sub-product:nth-of-type(2) { --angle:  40deg; }
     .product-tree .sub-product:nth-of-type(3) { --angle:  80deg; }
@@ -403,29 +415,23 @@
       top: 50%;
       transform:
         translate(-50%, -50%)
-        rotate(var(--angle))
+        rotate(var(--angle, 0deg))
         translateY(calc(var(--orbit-radius) * -1))
-        rotate(calc(var(--angle) * -1));
-    }
-    /* Hover scale moves to the logo so we don't fight the orbit transform */
-    .tree-product:hover { transform: inherit; filter: none; }
-    .tree-product:hover .tree-product-logo {
-      transform: scale(1.1);
-    }
-    .tree-center:hover .tree-product-logo {
-      transform: scale(1.05);
+        rotate(calc(var(--angle, 0deg) * -1));
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .tree-product {
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      cursor: pointer;
+    /* On hover, push the planet outward and pop a synopsis card */
+    .product-tree .sub-product:hover {
+      --orbit-radius: 365px;
+      z-index: 15;
     }
-
-    .tree-product:hover {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 25px rgba(0, 255, 136, 0.9)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.7));
+    .product-tree .sub-product:hover .tree-product-logo {
+      border-color: #00ff88;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.95), 0 0 70px rgba(100, 200, 255, 0.7);
+      scale: 1.08;
     }
+    .tree-center:hover .tree-product-logo { scale: 1.04; }
 
     .tree-product-logo {
       width: 130px;
@@ -437,14 +443,9 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: scale 0.35s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
       box-shadow: 0 0 18px rgba(100, 200, 255, 0.45);
-    }
-
-    .tree-product:hover .tree-product-logo {
-      border-color: #00ff88;
-      box-shadow: 0 0 32px rgba(0, 255, 136, 0.85), 0 0 60px rgba(100, 200, 255, 0.65);
     }
 
     .tree-product-logo img {
@@ -464,23 +465,52 @@
       color: #64c8ff;
       text-align: center;
       opacity: 0.85;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, color 0.3s ease;
     }
-
     .tree-product:hover .tree-product-name { opacity: 1; color: #00ff88; }
 
-    .tree-center .tree-product-logo {
-      width: 220px;
-      height: 220px;
-      border-width: 3px;
-      box-shadow: 0 0 40px rgba(0, 255, 136, 0.65), 0 0 80px rgba(100, 200, 255, 0.45);
+    /* Synopsis card — appears beside the hovered planet, content from data-synopsis */
+    .sub-product .synopsis-card {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 18px);
+      transform: translateY(-50%) scale(0.92);
+      width: 240px;
+      padding: 0.85rem 1rem;
+      background: rgba(10, 14, 39, 0.96);
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      border-radius: 14px;
+      color: #c0d0f0;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 255, 136, 0.18);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease 0.1s, transform 0.25s ease 0.1s;
+      z-index: 20;
     }
-
-    .tree-center .tree-product-name {
-      bottom: -42px;
-      font-size: 1.05rem;
+    .sub-product .synopsis-card .synopsis-title {
+      display: block;
+      color: #00ff88;
       font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .sub-product:hover .synopsis-card {
       opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    /* Mirror the card to the LEFT for planets on the left half of the orbit */
+    .product-tree .sub-product:nth-of-type(6) .synopsis-card,
+    .product-tree .sub-product:nth-of-type(7) .synopsis-card,
+    .product-tree .sub-product:nth-of-type(8) .synopsis-card,
+    .product-tree .sub-product:nth-of-type(9) .synopsis-card {
+      left: auto;
+      right: calc(100% + 18px);
     }
 
     /* Lightning Storm — Illy Robotic fires bolts to selected sub-products */
@@ -1646,26 +1676,32 @@
               <div class="tree-product-name">ILLY ROBOTIC</div>
             </div>
 
-            <!-- Sub-products: clicking/hovering fires lightning from leader -->
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
-              <div class="tree-product-logo">
-                <img src="assets/irai-academy.png" alt="IRAI Academy" />
-              </div>
-              <div class="tree-product-name">IRAI Academy</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="strike(this, '/products/discryptobank/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
-              <div class="tree-product-logo">
-                <img src="assets/discryptobank.png" alt="DisCryptoBank" />
-              </div>
-              <div class="tree-product-name">DisCryptoBank</div>
-            </div>
-
+            <!-- Sub-products in orbital order (1=top/12 o'clock, then clockwise) -->
+            <!-- 1) Coindrop — TOP -->
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://coindrop.in/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
               <div class="tree-product-logo">
                 <img src="assets/coindrop.png" alt="Coindrop" />
               </div>
               <div class="tree-product-name">Coindrop</div>
+              <div class="synopsis-card"><span class="synopsis-title">Coindrop</span>Watch · Engage · Earn. Complete short social tasks and earn Solana daily. 190+ countries, no minimum withdrawal.</div>
+            </div>
+
+            <!-- 2) DisCryptoBank — was at 40°; swap with IRAI puts it closer to top -->
+            <div class="tree-product sub-product" data-product onclick="strike(this, '/products/discryptobank/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/discryptobank.png" alt="DisCryptoBank" />
+              </div>
+              <div class="tree-product-name">DisCryptoBank</div>
+              <div class="synopsis-card"><span class="synopsis-title">DisCryptoBank</span>Discord-native crypto payroll engine. Generates microtasks across servers and pays workers in SOL automatically.</div>
+            </div>
+
+            <!-- 3) IRAI Academy — swapped position with DisCryptoBank -->
+            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+              <div class="tree-product-logo">
+                <img src="assets/irai-academy.png" alt="IRAI Academy" />
+              </div>
+              <div class="tree-product-name">IRAI Academy</div>
+              <div class="synopsis-card"><span class="synopsis-title">IRAI Academy</span>Hands-on AI &amp; automation training. Project-based curriculum that connects to real Illy Robotic products.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/IR-SAR-VUE/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1673,6 +1709,7 @@
                 <img src="assets/worldsar.png" alt="WorldSAR" />
               </div>
               <div class="tree-product-name">WorldSAR</div>
+              <div class="synopsis-card"><span class="synopsis-title">WorldSAR</span>Search &amp; Rescue Vue — real-time incident aggregation, volunteer coordination, and open response data.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/SocialPlug/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1680,6 +1717,7 @@
                 <img src="assets/socialplug.png" alt="SocialPlug" />
               </div>
               <div class="tree-product-name">SocialPlug</div>
+              <div class="synopsis-card"><span class="synopsis-title">SocialPlug</span>Growth-driven social marketing engine — content distribution, technical SEO, and creative growth on autopilot.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.illysocial.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1687,6 +1725,7 @@
                 <img src="assets/illysocial.png" alt="IllySocial" />
               </div>
               <div class="tree-product-name">IllySocial</div>
+              <div class="synopsis-card"><span class="synopsis-title">IllySocial</span>Community engagement scaler with built-in data sovereignty and wealth distribution.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.livepay.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1694,6 +1733,7 @@
                 <img src="assets/livepay.png" alt="LivePay" />
               </div>
               <div class="tree-product-name">LivePay</div>
+              <div class="synopsis-card"><span class="synopsis-title">LivePay</span>Real-time personal data monetization — own your data, earn your value, with instant 24/7 transfers.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.squad-ren.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1701,6 +1741,7 @@
                 <img src="assets/squad-ren-logo.png" alt="Squadron" />
               </div>
               <div class="tree-product-name">Squadron</div>
+              <div class="synopsis-card"><span class="synopsis-title">Squadron</span>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad.</div>
             </div>
 
             <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.iris-ecosystem.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
@@ -1708,6 +1749,7 @@
                 <img src="assets/i-ris.png" alt="I-RIS" />
               </div>
               <div class="tree-product-name">I-RIS</div>
+              <div class="synopsis-card"><span class="synopsis-title">I-RIS</span>Illy Robotic Studios — original IP, music, podcast, and video production powering the ecosystem.</div>
             </div>
           </div>
         </div>
@@ -2238,8 +2280,19 @@
       clearTimeout(strikeTimer);
       strikeTimer = setTimeout(() => {
         if (!targetEl.classList.contains('is-struck')) return;
+        // Recompute coords after CSS hover transition pushes the orb outward
+        const cRect  = container.getBoundingClientRect();
+        const lRect  = (leader.querySelector('.tree-product-logo') || leader).getBoundingClientRect();
+        const tRect  = (targetEl.querySelector('.tree-product-logo') || targetEl).getBoundingClientRect();
+        const nx1 = lRect.left - cRect.left + lRect.width / 2;
+        const ny1 = lRect.top  - cRect.top  + lRect.height / 2;
+        const nx2 = tRect.left - cRect.left + tRect.width / 2;
+        const ny2 = tRect.top  - cRect.top  + tRect.height / 2;
+        canvas.setAttribute('viewBox', `0 0 ${cRect.width} ${cRect.height}`);
+        canvas.setAttribute('width',  cRect.width);
+        canvas.setAttribute('height', cRect.height);
         canvas.querySelectorAll('.lightning-bolt').forEach(p => {
-          p.setAttribute('d', buildBoltPath(x1, y1, x2, y2));
+          p.setAttribute('d', buildBoltPath(nx1, ny1, nx2, ny2));
           p.style.animation = 'none';
           // force reflow then re-apply animation
           void p.getBoundingClientRect();
@@ -2249,7 +2302,7 @@
           p.style.strokeDashoffset = len;
           p.style.animation = 'bolt-strike 0.4s ease-out forwards';
         });
-      }, 300);
+      }, 480);
 
       if (url) {
         clearTimeout(strikeClearTimer);
