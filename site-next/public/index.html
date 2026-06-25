@@ -421,12 +421,15 @@
       transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* On hover, push the planet outward and pop a synopsis card */
-    .product-tree .sub-product:hover {
-      --orbit-radius: 365px;
+    /* On hover (via JS-applied .is-hovered class with grace period),
+       push the planet outward and pop a synopsis card. We use a class
+       instead of CSS :hover so the interaction stays sticky even when
+       the outward shift moves the orb out from under the cursor. */
+    .product-tree .sub-product.is-hovered {
+      --orbit-radius: 345px;
       z-index: 15;
     }
-    .product-tree .sub-product:hover .tree-product-logo {
+    .product-tree .sub-product.is-hovered .tree-product-logo {
       border-color: #00ff88;
       box-shadow: 0 0 35px rgba(0, 255, 136, 0.95), 0 0 70px rgba(100, 200, 255, 0.7);
       scale: 1.08;
@@ -500,7 +503,7 @@
       text-transform: uppercase;
       margin-bottom: 0.25rem;
     }
-    .sub-product:hover .synopsis-card {
+    .sub-product.is-hovered .synopsis-card {
       opacity: 1;
       transform: translateY(-50%) scale(1);
     }
@@ -1678,7 +1681,7 @@
 
             <!-- Sub-products in orbital order (1=top/12 o'clock, then clockwise) -->
             <!-- 1) Coindrop — TOP -->
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://coindrop.in/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://coindrop.in/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/coindrop.png" alt="Coindrop" />
               </div>
@@ -1687,7 +1690,7 @@
             </div>
 
             <!-- 2) DisCryptoBank — was at 40°; swap with IRAI puts it closer to top -->
-            <div class="tree-product sub-product" data-product onclick="strike(this, '/products/discryptobank/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, '/products/discryptobank/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/discryptobank.png" alt="DisCryptoBank" />
               </div>
@@ -1696,7 +1699,7 @@
             </div>
 
             <!-- 3) IRAI Academy — swapped position with DisCryptoBank -->
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/irai-academy.png" alt="IRAI Academy" />
               </div>
@@ -1704,7 +1707,7 @@
               <div class="synopsis-card"><span class="synopsis-title">IRAI Academy</span>Hands-on AI &amp; automation training. Project-based curriculum that connects to real Illy Robotic products.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/IR-SAR-VUE/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illmedicine.github.io/IR-SAR-VUE/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/worldsar.png" alt="WorldSAR" />
               </div>
@@ -1712,7 +1715,7 @@
               <div class="synopsis-card"><span class="synopsis-title">WorldSAR</span>Search &amp; Rescue Vue — real-time incident aggregation, volunteer coordination, and open response data.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://illmedicine.github.io/SocialPlug/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illmedicine.github.io/SocialPlug/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/socialplug.png" alt="SocialPlug" />
               </div>
@@ -1720,7 +1723,7 @@
               <div class="synopsis-card"><span class="synopsis-title">SocialPlug</span>Growth-driven social marketing engine — content distribution, technical SEO, and creative growth on autopilot.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.illysocial.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illysocial.io/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/illysocial.png" alt="IllySocial" />
               </div>
@@ -1728,7 +1731,7 @@
               <div class="synopsis-card"><span class="synopsis-title">IllySocial</span>Community engagement scaler with built-in data sovereignty and wealth distribution.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.livepay.io/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.livepay.io/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/livepay.png" alt="LivePay" />
               </div>
@@ -1736,7 +1739,7 @@
               <div class="synopsis-card"><span class="synopsis-title">LivePay</span>Real-time personal data monetization — own your data, earn your value, with instant 24/7 transfers.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.squad-ren.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.squad-ren.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/squad-ren-logo.png" alt="Squadron" />
               </div>
@@ -1744,7 +1747,7 @@
               <div class="synopsis-card"><span class="synopsis-title">Squadron</span>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="strike(this, 'https://www.iris-ecosystem.com/')" onmouseenter="strike(this)" onmouseleave="clearStrike()">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.iris-ecosystem.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/i-ris.png" alt="I-RIS" />
               </div>
@@ -2211,6 +2214,47 @@
     /* Lightning Storm — Illy Robotic fires bolts to selected sub-products */
     let strikeTimer = null;
     let strikeClearTimer = null;
+
+    /* Sticky hover handlers — keep the interaction alive while the orb shifts
+       outward so the user's cursor doesn't accidentally fall off and cause
+       intermittent strikes. */
+    let activePlanet = null;
+    let leaveTimer = null;
+    const HOVER_GRACE_MS = 320;
+
+    function planetEnter(el) {
+      if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+      // Already locked onto this planet — just keep it alive, don't restart the bolt
+      if (activePlanet === el) return;
+      if (activePlanet && activePlanet !== el) {
+        activePlanet.classList.remove('is-hovered');
+      }
+      activePlanet = el;
+      el.classList.add('is-hovered');
+      stopAmbientStorm();
+      strike(el);
+    }
+
+    function planetLeave(el) {
+      if (leaveTimer) clearTimeout(leaveTimer);
+      leaveTimer = setTimeout(() => {
+        if (activePlanet === el) {
+          el.classList.remove('is-hovered');
+          activePlanet = null;
+          clearStrike();
+          startAmbientStorm();
+        }
+        leaveTimer = null;
+      }, HOVER_GRACE_MS);
+    }
+
+    function planetClick(el, url) {
+      if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+      activePlanet = el;
+      el.classList.add('is-hovered');
+      stopAmbientStorm();
+      strike(el, url);
+    }
 
     function buildBoltPath(x1, y1, x2, y2) {
       const dx = x2 - x1, dy = y2 - y1;
