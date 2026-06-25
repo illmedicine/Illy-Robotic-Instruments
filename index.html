@@ -397,16 +397,18 @@
       box-shadow: 0 0 40px rgba(0, 255, 136, 0.65), 0 0 80px rgba(100, 200, 255, 0.45);
     }
 
-    /* Each sub-product is placed by its --angle around the orbit */
-    .product-tree .sub-product:nth-of-type(1) { --angle:   0deg; }
-    .product-tree .sub-product:nth-of-type(2) { --angle:  40deg; }
-    .product-tree .sub-product:nth-of-type(3) { --angle:  80deg; }
-    .product-tree .sub-product:nth-of-type(4) { --angle: 120deg; }
-    .product-tree .sub-product:nth-of-type(5) { --angle: 160deg; }
-    .product-tree .sub-product:nth-of-type(6) { --angle: 200deg; }
-    .product-tree .sub-product:nth-of-type(7) { --angle: 240deg; }
-    .product-tree .sub-product:nth-of-type(8) { --angle: 280deg; }
-    .product-tree .sub-product:nth-of-type(9) { --angle: 320deg; }
+    /* Each sub-product is placed by its --angle around the orbit
+       (10 planets evenly spaced, 36deg apart) */
+    .product-tree .sub-product:nth-of-type(1)  { --angle:   0deg; }
+    .product-tree .sub-product:nth-of-type(2)  { --angle:  36deg; }
+    .product-tree .sub-product:nth-of-type(3)  { --angle:  72deg; }
+    .product-tree .sub-product:nth-of-type(4)  { --angle: 108deg; }
+    .product-tree .sub-product:nth-of-type(5)  { --angle: 144deg; }
+    .product-tree .sub-product:nth-of-type(6)  { --angle: 180deg; }
+    .product-tree .sub-product:nth-of-type(7)  { --angle: 216deg; }
+    .product-tree .sub-product:nth-of-type(8)  { --angle: 252deg; }
+    .product-tree .sub-product:nth-of-type(9)  { --angle: 288deg; }
+    .product-tree .sub-product:nth-of-type(10) { --angle: 324deg; }
 
     .product-tree .sub-product {
       position: absolute;
@@ -506,11 +508,12 @@
       opacity: 1;
       transform: translateY(-50%) scale(1);
     }
-    /* Mirror the card to the LEFT for planets on the left half of the orbit */
-    .product-tree .sub-product:nth-of-type(6) .synopsis-card,
-    .product-tree .sub-product:nth-of-type(7) .synopsis-card,
-    .product-tree .sub-product:nth-of-type(8) .synopsis-card,
-    .product-tree .sub-product:nth-of-type(9) .synopsis-card {
+    /* Mirror the card to the LEFT for planets on the left half of the orbit
+       (with 10 planets at 36deg apart, positions 7-10 are at 216-324deg) */
+    .product-tree .sub-product:nth-of-type(7)  .synopsis-card,
+    .product-tree .sub-product:nth-of-type(8)  .synopsis-card,
+    .product-tree .sub-product:nth-of-type(9)  .synopsis-card,
+    .product-tree .sub-product:nth-of-type(10) .synopsis-card {
       left: auto;
       right: calc(100% + 18px);
     }
@@ -826,15 +829,19 @@
       gap: 1rem;
     }
     .product-slide-logo {
-      width: 52px; height: 52px;
-      border-radius: 12px;
-      background: rgba(100, 200, 255, 0.08);
-      border: 1px solid rgba(100, 200, 255, 0.25);
-      padding: 5px;
+      width: 96px; height: 96px;
+      border-radius: 18px;
+      background: rgba(100, 200, 255, 0.10);
+      border: 1px solid rgba(100, 200, 255, 0.35);
+      padding: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 0 22px rgba(100, 200, 255, 0.25);
+    }
+    @media (max-width: 820px) {
+      .product-slide-logo { width: 72px; height: 72px; border-radius: 14px; padding: 6px; }
     }
     .product-slide-logo img {
       max-width: 100%;
@@ -1694,7 +1701,7 @@
             </div>
 
             <!-- 2) DisCryptoBank — was at 40°; swap with IRAI puts it closer to top -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, '/products/discryptobank/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://dcb-gm.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/discryptobank.png" alt="DisCryptoBank" />
               </div>
@@ -1727,7 +1734,7 @@
               <div class="synopsis-card"><span class="synopsis-title">SocialPlug</span>Growth-driven social marketing engine — content distribution, technical SEO, and creative growth on autopilot.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illysocial.io/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illmedicine.github.io/illysocialV2/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/illysocial.png" alt="IllySocial" />
               </div>
@@ -1751,12 +1758,21 @@
               <div class="synopsis-card"><span class="synopsis-title">Squadron</span>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad.</div>
             </div>
 
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.iris-ecosystem.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'http://illy-ris.com/movie.html')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/i-ris.png" alt="I-RIS" />
               </div>
               <div class="tree-product-name">I-RIS</div>
               <div class="synopsis-card"><span class="synopsis-title">I-RIS</span>Illy Robotic Studios — original IP, music, podcast, and video production powering the ecosystem.</div>
+            </div>
+
+            <!-- 10) Web Designs — studio service product, completes the orbit -->
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, '#webdesigns')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+              <div class="tree-product-logo">
+                <img src="assets/webdesigns.png" alt="Web Designs" />
+              </div>
+              <div class="tree-product-name">Web Designs</div>
+              <div class="synopsis-card"><span class="synopsis-title">Web Designs</span>Custom, high-converting websites for brands and creators, built on our automation stack.</div>
             </div>
           </div>
         </div>
@@ -1933,7 +1949,7 @@
         <!-- Squadron -->
         <div class="product-slide" data-product="squadron">
           <div class="product-slide-media">
-            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80" alt="Squadron" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1200&q=80" alt="Squadron passenger van" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80'" />
           </div>
           <div class="product-slide-content">
             <div class="product-slide-header">
@@ -1972,7 +1988,7 @@
               <li>SOL payouts directly from server treasury</li>
               <li>Per-server treasury isolation for safety</li>
             </ul>
-            <a class="product-slide-cta" href="/products/discryptobank/">Learn More →</a>
+            <a class="product-slide-cta" href="https://dcb-gm.com/" target="_blank" rel="noopener">Learn More →</a>
           </div>
         </div>
 
@@ -2041,7 +2057,7 @@
               <li>Community wealth distribution</li>
               <li>Native integration with the ecosystem</li>
             </ul>
-            <a class="product-slide-cta" href="https://www.illysocial.io/" target="_blank" rel="noopener">Visit IllySocial →</a>
+            <a class="product-slide-cta" href="https://illmedicine.github.io/illysocialV2/" target="_blank" rel="noopener">Visit IllySocial →</a>
           </div>
         </div>
 
@@ -2064,7 +2080,7 @@
               <li>Visual storytelling for products</li>
               <li>Original IP &amp; ecosystem media</li>
             </ul>
-            <a class="product-slide-cta" href="https://www.iris-ecosystem.com/" target="_blank" rel="noopener">Enter the Studio →</a>
+            <a class="product-slide-cta" href="http://illy-ris.com/movie.html" target="_blank" rel="noopener">Enter the Studio →</a>
           </div>
         </div>
 
@@ -2111,6 +2127,29 @@
               <li>Plug &amp; play with the ecosystem</li>
             </ul>
             <a class="product-slide-cta" href="https://illmedicine.github.io/SocialPlug/" target="_blank" rel="noopener">Plug In →</a>
+          </div>
+        </div>
+
+        <!-- Web Designs -->
+        <div class="product-slide" data-product="webdesigns">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80" alt="Web Designs" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/webdesigns.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">Web Designs</div>
+                <div class="product-slide-tagline">Studio Service · Custom Sites</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">Modern, high-converting websites for brands and creators — fast, custom, and built on the same automation stack that powers our own ecosystem. From landing pages to full marketing sites.</p>
+            <ul class="product-slide-features">
+              <li>Conversion-focused landing pages</li>
+              <li>Full marketing sites &amp; storefronts</li>
+              <li>Built on our automation &amp; SEO stack</li>
+            </ul>
+            <a class="product-slide-cta" href="#webdesigns">Start a Project →</a>
           </div>
         </div>
       </div>
