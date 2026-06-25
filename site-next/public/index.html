@@ -367,24 +367,53 @@
       border-top: 1px solid rgba(100, 200, 255, 0.12);
     }
 
+    /* Solar-system layout: Illy Robotic is the sun, products orbit around it */
     .product-tree {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 2.25rem 2.75rem;
-      margin: 0.5rem auto 1rem;
-      max-width: 1100px;
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      aspect-ratio: 1 / 1;
+      margin: 1rem auto;
+      --orbit-radius: 290px;
     }
 
     .tree-center {
-      position: relative;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       z-index: 10;
-      flex-basis: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem 0 2.5rem;
+    }
+
+    /* Distribute 9 sub-products evenly around the sun (40deg apart) */
+    .product-tree .sub-product { --angle: 0deg; }
+    .product-tree .sub-product:nth-of-type(1) { --angle:   0deg; }
+    .product-tree .sub-product:nth-of-type(2) { --angle:  40deg; }
+    .product-tree .sub-product:nth-of-type(3) { --angle:  80deg; }
+    .product-tree .sub-product:nth-of-type(4) { --angle: 120deg; }
+    .product-tree .sub-product:nth-of-type(5) { --angle: 160deg; }
+    .product-tree .sub-product:nth-of-type(6) { --angle: 200deg; }
+    .product-tree .sub-product:nth-of-type(7) { --angle: 240deg; }
+    .product-tree .sub-product:nth-of-type(8) { --angle: 280deg; }
+    .product-tree .sub-product:nth-of-type(9) { --angle: 320deg; }
+
+    .product-tree .sub-product {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform:
+        translate(-50%, -50%)
+        rotate(var(--angle))
+        translateY(calc(var(--orbit-radius) * -1))
+        rotate(calc(var(--angle) * -1));
+    }
+    /* Hover scale moves to the logo so we don't fight the orbit transform */
+    .tree-product:hover { transform: inherit; filter: none; }
+    .tree-product:hover .tree-product-logo {
+      transform: scale(1.1);
+    }
+    .tree-center:hover .tree-product-logo {
+      transform: scale(1.05);
     }
 
     .tree-product {
@@ -439,11 +468,6 @@
     }
 
     .tree-product:hover .tree-product-name { opacity: 1; color: #00ff88; }
-
-    /* Subtle scatter so the row doesn't feel rigid */
-    .product-tree .sub-product:nth-child(3n)   { transform: translateY(14px); }
-    .product-tree .sub-product:nth-child(3n+1) { transform: translateY(-12px); }
-    .product-tree .sub-product:hover           { transform: translateY(0) scale(1.1); }
 
     .tree-center .tree-product-logo {
       width: 220px;
@@ -1184,9 +1208,10 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .product-tree {
-        gap: 1rem;
+        max-width: 560px;
+        --orbit-radius: 220px;
       }
 
       .tree-product-logo {
@@ -1210,9 +1235,24 @@
       }
     }
 
+    @media (max-width: 600px) {
+      .product-tree {
+        max-width: 420px;
+        --orbit-radius: 165px;
+      }
+      .tree-product-logo {
+        width: 78px;
+        height: 78px;
+      }
+      .tree-center .tree-product-logo {
+        width: 130px;
+        height: 130px;
+      }
+    }
+
     @media (max-width: 480px) {
       .hero {
-        padding: 2rem 1rem;
+        padding: 1.25rem 0.75rem 1.75rem;
       }
 
       .circuit-board {
@@ -1229,32 +1269,46 @@
         font-size: 1rem;
       }
 
+      /* On very small screens revert to grid so labels stay readable */
       .product-tree {
-        gap: 0.8rem;
+        position: static;
+        aspect-ratio: auto;
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem 0.8rem;
+        margin: 0.5rem auto 1.75rem;
       }
-
+      .tree-center {
+        position: static;
+        transform: none;
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+      .product-tree .sub-product {
+        position: static;
+        transform: none;
+        display: flex;
+        justify-content: center;
+      }
       .tree-product-logo {
         width: 80px;
         height: 80px;
       }
-
       .tree-center .tree-product-logo {
         width: 140px;
         height: 140px;
       }
-
       .tree-product-name {
         font-size: 0.72rem;
         bottom: -24px;
       }
-
       .tree-center .tree-product-name {
         bottom: -32px;
         font-size: 0.85rem;
       }
-      .product-tree .sub-product:nth-child(3n),
-      .product-tree .sub-product:nth-child(3n+1) { transform: none; }
-
       .product-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
