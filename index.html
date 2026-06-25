@@ -150,14 +150,13 @@
     .hero {
       position: relative;
       width: 100%;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
       overflow: hidden;
-      padding: 3rem 1rem;
+      padding: 1.5rem 1rem 2rem;
     }
 
     .hero::before {
@@ -192,7 +191,7 @@
       border: 3px solid;
       border-image: linear-gradient(135deg, #64c8ff, #00ff88) 1;
       border-radius: 20px;
-      padding: 4rem 3rem;
+      padding: 1.75rem 2rem 2rem;
       backdrop-filter: blur(10px);
       box-shadow: 0 0 40px rgba(100, 200, 255, 0.3), inset 0 0 40px rgba(100, 200, 255, 0.1);
     }
@@ -357,15 +356,15 @@
       padding: 2rem;
     }
 
-    .circuit-header--minimal { margin-bottom: 1rem; }
-    .circuit-header--minimal h1, .circuit-header--minimal h2 { display: none; }
     .hero-tagline {
       color: #a0b0d0;
       font-size: 1.05rem;
       line-height: 1.7;
       text-align: center;
       max-width: 720px;
-      margin: 0 auto;
+      margin: 1.75rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(100, 200, 255, 0.12);
     }
 
     .product-tree {
@@ -374,7 +373,7 @@
       justify-content: center;
       align-items: center;
       gap: 2.25rem 2.75rem;
-      margin: 2.5rem auto 4rem;
+      margin: 0.5rem auto 1rem;
       max-width: 1100px;
     }
 
@@ -526,7 +525,7 @@
       filter: blur(3px);
     }
     @keyframes bolt-strike {
-      0%   { stroke-dashoffset: 600; opacity: 0; }
+      0%   { stroke-dashoffset: var(--bolt-len, 600); opacity: 0; }
       30%  { opacity: 1; }
       100% { stroke-dashoffset: 0; opacity: 0.9; }
     }
@@ -1579,10 +1578,6 @@
   <div class="hero">
     <div class="circuit-board-container">
       <div class="circuit-board">
-        <div class="circuit-header circuit-header--minimal">
-          <p class="hero-tagline">Open-source, decentralized technology powering the next generation of fintech.<br>Data sovereignty. Community wealth. Intelligent automation.</p>
-        </div>
-
         <!-- Interactive Product Tree Menu with Lightning Storm Effect -->
         <div class="product-tree-container">
           <!-- Lightning canvas overlay (drawn behind product circles) -->
@@ -1662,6 +1657,9 @@
             </div>
           </div>
         </div>
+
+        <!-- Tagline now lives BELOW the lightning hero -->
+        <p class="hero-tagline">Open-source, decentralized technology powering the next generation of fintech.<br>Data sovereignty. Community wealth. Intelligent automation.</p>
 
         <!-- OLD SVG Circuit Removed -->
         <div class="svg-circuit" style="display: none;">
@@ -2169,10 +2167,13 @@
         const d = buildBoltPath(x1, y1, x2, y2);
         path.setAttribute('d', d);
         path.setAttribute('class', 'lightning-bolt ' + layer);
-        path.style.strokeDasharray = '600';
-        path.style.strokeDashoffset = '600';
-        path.style.animation = 'bolt-strike 0.55s ease-out forwards';
         canvas.appendChild(path);
+        // Use the path's actual length so the draw animation works at any distance
+        const totalLen = (path.getTotalLength && path.getTotalLength()) || 1000;
+        path.style.setProperty('--bolt-len', totalLen);
+        path.style.strokeDasharray = totalLen;
+        path.style.strokeDashoffset = totalLen;
+        path.style.animation = 'bolt-strike 0.55s ease-out forwards';
       }
 
       // Mark the target as struck (white flash → green pulse)
@@ -2188,6 +2189,10 @@
           p.style.animation = 'none';
           // force reflow then re-apply animation
           void p.getBoundingClientRect();
+          const len = (p.getTotalLength && p.getTotalLength()) || 1000;
+          p.style.setProperty('--bolt-len', len);
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
           p.style.animation = 'bolt-strike 0.4s ease-out forwards';
         });
       }, 300);
