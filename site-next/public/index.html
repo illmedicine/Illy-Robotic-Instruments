@@ -439,8 +439,13 @@
     .tree-center .tree-product-logo {
       width: 220px;
       height: 220px;
-      border-width: 3px;
-      box-shadow: 0 0 40px rgba(0, 255, 136, 0.65), 0 0 80px rgba(100, 200, 255, 0.45);
+      border-width: 2px;
+      /* the "sun": warm-cool corona radiating into the galaxy */
+      background: radial-gradient(circle at 50% 45%, rgba(120, 255, 200, 0.12) 0%, rgba(100, 200, 255, 0.05) 55%, rgba(120, 170, 230, 0.04) 100%);
+      box-shadow:
+        0 0 50px rgba(0, 255, 136, 0.55),
+        0 0 110px rgba(100, 200, 255, 0.4),
+        inset 0 0 40px rgba(120, 255, 200, 0.15);
     }
 
     /* Each sub-product is placed by its --angle around the orbit
@@ -1748,7 +1753,7 @@
         <a href="#about" onclick="closeMenu()">About Us</a>
         <a href="#clients" onclick="closeMenu()">Clients</a>
         <a href="#webdesigns" onclick="closeMenu()">Web Designs</a>
-        <a href="/IR-AIcademy/">IR-AICademy</a>
+        <a href="https://www.illyrobotic-ai.com/IR-AIcademy/">IR-AICademy</a>
         <a href="#contact" onclick="closeMenu()">Contact Us</a>
       </div>
     </div>
@@ -1801,7 +1806,7 @@
             </div>
 
             <!-- 3) IRAI Academy — swapped position with DisCryptoBank -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illyrobotics.github.io/IRAI-Academy/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illyrobotic-ai.com/IR-AIcademy/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/irai-academy.png" alt="IRAI Academy" />
               </div>
@@ -2102,7 +2107,7 @@
               <li>From beginner to production-ready</li>
               <li>Connect curriculum to real Illy Robotic products</li>
             </ul>
-            <a class="product-slide-cta" href="https://illyrobotics.github.io/IRAI-Academy/" target="_blank" rel="noopener">Enroll →</a>
+            <a class="product-slide-cta" href="https://www.illyrobotic-ai.com/IR-AIcademy/" target="_blank" rel="noopener">Enroll →</a>
           </div>
         </div>
 
