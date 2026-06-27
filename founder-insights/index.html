@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DG1SB2ZNCW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DG1SB2ZNCW');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Insights — Meet the Architect | Illy Robotic Instruments</title>
+  <meta name="description" content="Meet DeMarkus Darnell Wilson, Founder & Chief Visionary Architect of Illy Robotic Instruments — a Buffalo-born Full Stack AI Engineer and Cloud Solutions Architect building an open, community-first technology ecosystem.">
+  <link rel="icon" type="image/png" href="/assets/illy-robotic.png" />
+  <link rel="shortcut icon" type="image/png" href="/assets/illy-robotic.png" />
+  <link rel="apple-touch-icon" href="/assets/illy-robotic.png" />
+  <meta name="theme-color" content="#0a0e27" />
+  <meta property="og:title" content="Founder Insights — Meet the Architect" />
+  <meta property="og:description" content="DeMarkus Darnell Wilson — Founder & Chief Visionary Architect, Illy Robotic Instruments." />
+  <meta property="og:image" content="/assets/founder.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07091a;
+      --bg2: #0a0e27;
+      --ink: #eaf0ff;
+      --muted: #aab6d4;
+      --cyan: #64c8ff;
+      --green: #00ff88;
+      --line: rgba(120,170,255,0.16);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #11173a 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    /* ---- Top bar ---- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: rgba(7,9,26,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { position: relative; width: 116px; height: 44px; display: block; flex-shrink: 0; }
+    .brand img {
+      position: absolute; top: -8px; left: -10px;
+      width: 126px; height: 126px; object-fit: contain; z-index: 2000;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.65)) drop-shadow(0 0 18px rgba(100,200,255,0.4));
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .topbar a.back {
+      color: var(--muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      padding: 0.5rem 0.9rem; border-radius: 8px; transition: all .2s ease;
+    }
+    .topbar a.back:hover { color: var(--green); background: rgba(0,255,136,.08); }
+    .btn-linkedin {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.6rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 700;
+      font-size: 0.9rem; color: #04122a;
+      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .btn-linkedin:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,255,136,.35); }
+    .btn-linkedin svg { width: 18px; height: 18px; fill: #04122a; }
+
+    /* ---- Hero ---- */
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1.1rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(2.3rem, 5vw, 3.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.1rem;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #7ed3ff 0%, #2bffa3 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero .role {
+      font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--cyan);
+      margin-bottom: 1.5rem;
+    }
+    .hero .lede { color: var(--muted); font-size: 1.05rem; max-width: 48ch; }
+    .portrait {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 420px);
+      aspect-ratio: 1/1;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(120,170,255,0.25);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 6px rgba(10,14,39,.6), 0 0 60px rgba(0,255,136,.10);
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .portrait figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.4rem 1.1rem 0.9rem;
+      font-size: 0.8rem; letter-spacing: 0.3px; color: #dfe8ff;
+      background: linear-gradient(0deg, rgba(4,6,18,0.85), transparent);
+    }
+
+    /* ---- Article ---- */
+    .article {
+      max-width: 760px;
+      margin: 1.5rem auto 0;
+      padding: 2rem 1.5rem 1rem;
+    }
+    .rule {
+      width: 64px; height: 3px; border-radius: 3px; margin: 0 auto 2.5rem;
+      background: linear-gradient(90deg, var(--cyan), var(--green));
+    }
+    .article h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.2;
+      margin: 2.8rem 0 0.4rem;
+      color: #fff;
+    }
+    .article h2 .sub {
+      display: block; font-family: var(--sans); font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem;
+    }
+    .article p { color: #cdd7f0; font-size: 1.075rem; margin: 1.1rem 0; }
+    .article p a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+    /* drop cap on the first paragraph */
+    .article .intro::first-letter {
+      font-family: var(--serif); font-weight: 900; float: left;
+      font-size: 3.6rem; line-height: 0.8; padding: 0.3rem 0.7rem 0 0; color: var(--cyan);
+    }
+    .pullquote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.4rem, 3.2vw, 1.9rem); line-height: 1.35; color: #fff;
+      border-left: 3px solid var(--green);
+      padding: 0.4rem 0 0.4rem 1.4rem; margin: 2.4rem 0;
+    }
+
+    /* ---- Infographic figure ---- */
+    .figure {
+      max-width: 880px; margin: 3rem auto; padding: 0 1.5rem; text-align: center;
+    }
+    .figure a {
+      display: block; border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(120,170,255,0.22);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 60px rgba(100,200,255,.10);
+    }
+    .figure img { width: 100%; height: auto; display: block; }
+    .figure figcaption { color: var(--muted); font-size: 0.88rem; margin-top: 1rem; font-style: italic; }
+
+    /* ---- Closing CTA ---- */
+    .closing {
+      max-width: 760px; margin: 1rem auto 0; padding: 2rem 1.5rem 5rem; text-align: center;
+    }
+    .closing .welcome { font-family: var(--serif); font-size: 1.35rem; color: #fff; margin-bottom: 1.6rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .cta {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.9rem 1.7rem; border-radius: 999px; text-decoration: none; font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease;
+    }
+    .cta.primary { color: #04122a; background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%); }
+    .cta.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,255,136,.35); }
+    .cta.primary svg { width: 18px; height: 18px; fill: #04122a; }
+    .cta.secondary { color: var(--cyan); border: 1px solid rgba(120,170,255,0.4); }
+    .cta.secondary:hover { border-color: var(--green); color: var(--green); }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; padding-top: 3rem; gap: 2rem; text-align: center; }
+      .hero .lede { margin: 0 auto; }
+      .portrait { order: -1; }
+      .topbar a.back { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://www.illyrobotic-ai.com/" aria-label="Illy Robotic Instruments — Home">
+      <img src="/assets/illy-robotic.png" alt="Illy Robotic Instruments" />
+    </a>
+    <nav class="topbar-actions">
+      <a class="back" href="https://www.illyrobotic-ai.com/">← Back to Home</a>
+      <a class="btn-linkedin" href="https://www.linkedin.com/company/illy-robotic-instruments" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        Follow on LinkedIn
+      </a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Founder Insights</div>
+      <h1>Meet the <span class="grad">Architect</span></h1>
+      <div class="role">DeMarkus Darnell Wilson — Founder &amp; Chief Visionary Architect, Illy Robotic Instruments</div>
+      <p class="lede">A Buffalo-born Full Stack AI Engineer and Cloud Solutions Architect building an open, community-first technology ecosystem — where individuals are compensated for their digital footprint.</p>
+    </div>
+    <figure class="portrait">
+      <img src="/assets/founder.jpg" alt="DeMarkus Darnell Wilson, Founder of Illy Robotic Instruments" />
+      <figcaption>DeMarkus Darnell Wilson · Founder &amp; Chief Visionary Architect</figcaption>
+    </figure>
+  </section>
+
+  <!-- Article -->
+  <article class="article">
+    <div class="rule"></div>
+
+    <h2><span class="sub">The Spark of Innovation</span>Rooted in Buffalo</h2>
+    <p class="intro">I proudly hail from Buffalo, New York. I have always believed that the greatest scientific minds in the world come from this region — after all, we were the first city with electricity and cheap access to power thanks to the falls. Growing up in this environment gave me a deep, enduring affinity for Nikola Tesla and his ultimate dream: creating wireless, free energy for all. That same spirit of boundless, equitable innovation is the foundation of everything I build today.</p>
+
+    <h2><span class="sub">A Vision Forged in the Enterprise</span>Two Decades of Transformation</h2>
+    <p>For over two decades, I have dedicated my career to enterprise transformation and technical architecture. My journey through the ranks of corporate IT, working alongside several Fortune 50 companies, culminated in a pivotal moment during a C2C contract with Royal Caribbean. I was brought in as an independent contractor — operating under my newly formed entity, Illy Robotic Instruments — to lead the complex technical merger of the Celebrity and Royal Caribbean engineering teams.</p>
+    <p>In this role, I served as the chief architect of Azure Foundry and LaunchDarkly, establishing a cohesive release train strategy across all teams handling distinct areas of merged datasets and frontend booking systems. Seeing this massive investment in my expertise as an independent contractor sparked a profound foresight. I theorized that all companies would soon be actively investing in AI adoption and solutioning — a realization that came long before the title of “AI Transformation Professional” even existed.</p>
+
+    <h2><span class="sub">Bridging the Gap</span>From Code to Culture</h2>
+    <p>I am, at my core, a Full Stack AI Engineer and Cloud Solutions Architect. But technology without human alignment is just code. As a Senior Business Transformation Manager, an Organizational Change Lead, and a SAFe Scaled Agile SPC Practitioner, I have been able to fuse my deeply technical AI expertise with strong business acumen and servant leadership. This unique intersection allowed me to transform Illy Robotic Instruments from a visionary concept into a thriving small business, now boasting an active production ecosystem of products used by more than <strong>30,000 users worldwide</strong>.</p>
+
+    <h2><span class="sub">The Open Philosophy</span>Community Over Control</h2>
+    <p>I firmly believe in open-source empowerment over licensed, walled-garden models. I am fundamentally a Microsoft and Google-minded architect; I value the community guidelines, the creative collaboration, and the shared knowledge those ecosystems foster, standing in stark contrast to the closed-off approach of companies like Apple. My goal is to build technology that empowers the people, focusing on digital sovereignty and financial frameworks where individuals are compensated for their digital footprint.</p>
+    <p>I am not driven by the pursuit of status or celebrity like Elon Musk, Mark Zuckerberg, or Sam Altman. I am an eccentric inventor — a visionary who prefers to stay out of the spotlight and let the work speak for itself.</p>
+
+    <p class="pullquote">When you look at our infographic comparing closed models to the Open Mesh, you might assume I identify with the mastermind orchestrating the operation. But the truth is, I am not Gru.</p>
+  </article>
+
+  <!-- Infographic -->
+  <figure class="figure">
+    <a href="/assets/gru-open-mesh.png" target="_blank" rel="noopener">
+      <img src="/assets/gru-open-mesh.png" alt="Infographic: The Closed Model (Vector / Apple) versus the Open Mesh (Gru / Illy Robotics) — the choice between control and empowerment." />
+    </a>
+    <figcaption>The Closed Model vs. the Open Mesh — control versus empowerment.</figcaption>
+  </figure>
+
+  <article class="article" style="padding-top:0;">
+    <p>If you look closely, I am the little brown minion engineer hanging in the back. I am in the trenches, turning the wrenches, and building the solutions that make the ecosystem thrive.</p>
+  </article>
+
+  <!-- Closing -->
+  <section class="closing">
+    <p class="welcome">Welcome to Illy Robotic Instruments. Let’s build the future together.</p>
+    <div class="cta-row">
+      <a class="cta primary" href="https://www.linkedin.com/company/illy-robotic-instruments" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        Follow Illy Robotic Instruments
+      </a>
+      <a class="cta secondary" href="https://www.illyrobotic-ai.com/">Explore the Ecosystem</a>
+    </div>
+  </section>
+</body>
+</html>
