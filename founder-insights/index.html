@@ -63,7 +63,7 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       /* unify the three sketches toward a polished sepia-parchment tone */
-      filter: sepia(0.55) saturate(0.9) contrast(1.05) brightness(0.92);
+      filter: sepia(0.5) saturate(0.95) contrast(1.05) brightness(1.02);
     }
     .fi-band::after {
       content: '';
@@ -71,16 +71,29 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      /* dark wash + top/bottom feather so bands blend seamlessly */
+      /* Lighter overlay: reveal the sketches strongly toward the wide
+         left/right edges while keeping the centred reading column dark
+         enough for legible text. Plus a top/bottom feather to blend bands. */
       background:
-        linear-gradient(180deg, var(--bg) 0%, rgba(7,9,26,0.55) 12%, rgba(7,9,26,0.55) 88%, var(--bg) 100%),
-        linear-gradient(0deg, rgba(6,8,20,0.78), rgba(6,8,20,0.78));
+        linear-gradient(90deg, rgba(7,9,26,0.10) 0%, rgba(6,8,20,0.58) 24%, rgba(6,8,20,0.58) 76%, rgba(7,9,26,0.10) 100%),
+        linear-gradient(180deg, var(--bg) 0%, rgba(7,9,26,0.12) 12%, rgba(7,9,26,0.12) 88%, var(--bg) 100%);
     }
     .fi-band-1::before { background-image: url('/assets/sketch-anatomy.jpg'); }
     .fi-band-2::before { background-image: url('/assets/sketch-tesla.jpg'); }
     .fi-band-3::before { background-image: url('/assets/sketch-flying.jpg'); }
     @media (max-width: 820px) {
       .fi-band::before { background-attachment: scroll; }
+    }
+    /* keep editorial text crisp now that the sketches show through more */
+    .fi-band .hero h1,
+    .fi-band .hero .role,
+    .fi-band .hero .lede,
+    .fi-band .article h2,
+    .fi-band .article p,
+    .fi-band .pullquote,
+    .fi-band .figure figcaption,
+    .fi-band .closing .welcome {
+      text-shadow: 0 1px 12px rgba(4,6,16,0.92), 0 0 26px rgba(4,6,16,0.7);
     }
 
     /* ---- Top bar ---- */
