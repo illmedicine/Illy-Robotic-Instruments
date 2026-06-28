@@ -25,13 +25,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07091a;
-      --bg2: #0a0e27;
-      --ink: #eaf0ff;
-      --muted: #aab6d4;
-      --cyan: #64c8ff;
-      --green: #00ff88;
-      --line: rgba(120,170,255,0.16);
+      /* Navy · Orange · White theme */
+      --bg: #060a1c;
+      --bg2: #0a1230;
+      --ink: #f6f8ff;          /* near-white body */
+      --muted: #cdd6ec;        /* brighter muted for clarity */
+      --cyan: #ffb066;         /* light amber-orange accent */
+      --green: #ff7a1f;        /* deep orange accent */
+      --orange-grad: linear-gradient(135deg, #ffb066 0%, #ff7a1f 100%);
+      --line: rgba(255,170,90,0.20);
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
@@ -113,22 +115,22 @@
     .brand img {
       position: absolute; top: -8px; left: -10px;
       width: 126px; height: 126px; object-fit: contain; z-index: 2000;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.65)) drop-shadow(0 0 18px rgba(100,200,255,0.4));
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.65)) drop-shadow(0 0 18px rgba(255,170,90,0.5));
     }
     .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
     .topbar a.back {
       color: var(--muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;
       padding: 0.5rem 0.9rem; border-radius: 8px; transition: all .2s ease;
     }
-    .topbar a.back:hover { color: var(--green); background: rgba(0,255,136,.08); }
+    .topbar a.back:hover { color: var(--green); background: rgba(255,138,60,.10); }
     .btn-linkedin {
       display: inline-flex; align-items: center; gap: 0.55rem;
       padding: 0.6rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 700;
       font-size: 0.9rem; color: #04122a;
-      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+      background: linear-gradient(135deg, #ffb066 0%, #ff7a1f 100%);
       transition: transform .25s ease, box-shadow .25s ease;
     }
-    .btn-linkedin:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,255,136,.35); }
+    .btn-linkedin:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,138,60,.45); }
     .btn-linkedin svg { width: 18px; height: 18px; fill: #04122a; }
 
     /* ---- Hero ---- */
@@ -154,7 +156,7 @@
       margin-bottom: 1.1rem;
     }
     .hero h1 .grad {
-      background: linear-gradient(135deg, #7ed3ff 0%, #2bffa3 100%);
+      background: linear-gradient(135deg, #ffc187 0%, #ff7a1f 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .hero .role {
@@ -169,8 +171,8 @@
       aspect-ratio: 1/1;
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(120,170,255,0.25);
-      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 6px rgba(10,14,39,.6), 0 0 60px rgba(0,255,136,.10);
+      border: 1px solid rgba(255,170,90,0.32);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 6px rgba(10,14,39,.6), 0 0 60px rgba(255,138,60,.16);
     }
     .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .portrait figcaption {
@@ -202,7 +204,7 @@
       display: block; font-family: var(--sans); font-weight: 700; font-size: 0.72rem;
       letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem;
     }
-    .article p { color: #cdd7f0; font-size: 1.075rem; margin: 1.1rem 0; }
+    .article p { color: #eef2ff; font-size: 1.075rem; margin: 1.1rem 0; }
     .article p a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
     /* drop cap on the first paragraph */
     .article .intro::first-letter {
@@ -222,8 +224,8 @@
     }
     .figure a {
       display: block; border-radius: 18px; overflow: hidden;
-      border: 1px solid rgba(120,170,255,0.22);
-      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 60px rgba(100,200,255,.10);
+      border: 1px solid rgba(255,170,90,0.30);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 60px rgba(255,170,90,.16);
     }
     .figure img { width: 100%; height: auto; display: block; }
     .figure figcaption { color: var(--muted); font-size: 0.88rem; margin-top: 1rem; font-style: italic; }
@@ -239,10 +241,10 @@
       padding: 0.9rem 1.7rem; border-radius: 999px; text-decoration: none; font-weight: 700;
       transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease;
     }
-    .cta.primary { color: #04122a; background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%); }
-    .cta.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,255,136,.35); }
+    .cta.primary { color: #04122a; background: linear-gradient(135deg, #ffb066 0%, #ff7a1f 100%); }
+    .cta.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,138,60,.45); }
     .cta.primary svg { width: 18px; height: 18px; fill: #04122a; }
-    .cta.secondary { color: var(--cyan); border: 1px solid rgba(120,170,255,0.4); }
+    .cta.secondary { color: var(--cyan); border: 1px solid rgba(255,170,90,0.5); }
     .cta.secondary:hover { border-color: var(--green); color: var(--green); }
 
     @media (max-width: 820px) {
