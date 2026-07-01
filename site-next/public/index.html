@@ -205,7 +205,7 @@
       border: 1px solid rgba(100, 200, 255, 0.25);
       border-radius: 24px;
       padding: 1.25rem 2rem 1.25rem;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 0 60px rgba(100, 200, 255, 0.18), 0 0 120px rgba(0, 255, 136, 0.06);
     }
 
@@ -217,7 +217,7 @@
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
-      border-radius: inherit;
+      border-radius: 24px;
     }
     .galaxy-spin {
       position: absolute;
@@ -466,17 +466,18 @@
     }
 
     /* Each sub-product is placed by its --angle around the orbit
-       (10 planets evenly spaced, 36deg apart) */
+       (11 planets evenly spaced, ~32.7deg apart) */
     .product-tree .sub-product:nth-of-type(1)  { --angle:   0deg; }
-    .product-tree .sub-product:nth-of-type(2)  { --angle:  36deg; }
-    .product-tree .sub-product:nth-of-type(3)  { --angle:  72deg; }
-    .product-tree .sub-product:nth-of-type(4)  { --angle: 108deg; }
-    .product-tree .sub-product:nth-of-type(5)  { --angle: 144deg; }
-    .product-tree .sub-product:nth-of-type(6)  { --angle: 180deg; }
-    .product-tree .sub-product:nth-of-type(7)  { --angle: 216deg; }
-    .product-tree .sub-product:nth-of-type(8)  { --angle: 252deg; }
-    .product-tree .sub-product:nth-of-type(9)  { --angle: 288deg; }
-    .product-tree .sub-product:nth-of-type(10) { --angle: 324deg; }
+    .product-tree .sub-product:nth-of-type(2)  { --angle:  33deg; }
+    .product-tree .sub-product:nth-of-type(3)  { --angle:  65deg; }
+    .product-tree .sub-product:nth-of-type(4)  { --angle:  98deg; }
+    .product-tree .sub-product:nth-of-type(5)  { --angle: 131deg; }
+    .product-tree .sub-product:nth-of-type(6)  { --angle: 164deg; }
+    .product-tree .sub-product:nth-of-type(7)  { --angle: 196deg; }
+    .product-tree .sub-product:nth-of-type(8)  { --angle: 229deg; }
+    .product-tree .sub-product:nth-of-type(9)  { --angle: 262deg; }
+    .product-tree .sub-product:nth-of-type(10) { --angle: 295deg; }
+    .product-tree .sub-product:nth-of-type(11) { --angle: 327deg; }
 
     .product-tree .sub-product {
       position: absolute;
@@ -553,27 +554,27 @@
     .tree-product:hover .tree-product-name,
     .tree-product.is-hovered .tree-product-name { opacity: 1; color: #00ff88; }
 
-    /* Synopsis card — appears beside the hovered planet, content from data-synopsis */
+    /* Synopsis card — overlays the hovered planet, centered on top of the orb */
     .sub-product .synopsis-card {
       position: absolute;
       top: 50%;
-      left: calc(100% + 18px);
-      transform: translateY(-50%) scale(0.92);
-      width: 240px;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.88);
+      width: 210px;
       padding: 0.85rem 1rem;
-      background: rgba(10, 14, 39, 0.96);
-      border: 1px solid rgba(0, 255, 136, 0.45);
+      background: rgba(6, 9, 28, 0.97);
+      border: 1px solid rgba(0, 255, 136, 0.55);
       border-radius: 14px;
       color: #c0d0f0;
       font-size: 0.78rem;
       line-height: 1.5;
       letter-spacing: 0.2px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 255, 136, 0.18);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 255, 136, 0.22);
+      backdrop-filter: blur(12px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease 0.1s, transform 0.25s ease 0.1s;
-      z-index: 20;
+      transition: opacity 0.22s ease 0.08s, transform 0.22s ease 0.08s;
+      z-index: 100;
     }
     .sub-product .synopsis-card .synopsis-title {
       display: block;
@@ -586,16 +587,7 @@
     }
     .sub-product.is-hovered .synopsis-card {
       opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-    /* Mirror the card to the LEFT for planets on the left half of the orbit
-       (with 10 planets at 36deg apart, positions 7-10 are at 216-324deg) */
-    .product-tree .sub-product:nth-of-type(7)  .synopsis-card,
-    .product-tree .sub-product:nth-of-type(8)  .synopsis-card,
-    .product-tree .sub-product:nth-of-type(9)  .synopsis-card,
-    .product-tree .sub-product:nth-of-type(10) .synopsis-card {
-      left: auto;
-      right: calc(100% + 18px);
+      transform: translate(-50%, -50%) scale(1);
     }
 
     /* Lightning Storm — Illy Robotic fires bolts to selected sub-products */
@@ -1938,13 +1930,22 @@
               <div class="synopsis-card"><span class="synopsis-title">I-RIS</span>Illy Robotic Studios — original IP, music, podcast, and video production powering the ecosystem.</div>
             </div>
 
-            <!-- 10) Web Designs — studio service product, completes the orbit -->
+            <!-- 10) Web Designs — studio service product -->
             <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illyrobotic-ai.com/web-designs/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
               <div class="tree-product-logo">
                 <img src="assets/webdesigns.png" alt="Web Designs" />
               </div>
               <div class="tree-product-name">Web Designs</div>
               <div class="synopsis-card"><span class="synopsis-title">Web Designs</span>Custom, high-converting websites for brands and creators, built on our automation stack.</div>
+            </div>
+
+            <!-- 11) ResiGrid — Fair Data property management -->
+            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://resigrid.co/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
+              <div class="tree-product-logo">
+                <img src="assets/resigrid.png" alt="ResiGrid" />
+              </div>
+              <div class="tree-product-name">ResiGrid</div>
+              <div class="synopsis-card"><span class="synopsis-title">ResiGrid</span>The world's only property management platform built on Fair Data. On-time payments become a globally recognized RGE Score — no hidden fees.</div>
             </div>
           </div>
         </div>
@@ -2318,6 +2319,29 @@
               <li>Built on our automation &amp; SEO stack</li>
             </ul>
             <a class="product-slide-cta" href="https://www.illyrobotic-ai.com/web-designs/">Start a Project →</a>
+          </div>
+        </div>
+
+        <!-- ResiGrid -->
+        <div class="product-slide" data-product="resigrid">
+          <div class="product-slide-media">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="ResiGrid" loading="lazy" />
+          </div>
+          <div class="product-slide-content">
+            <div class="product-slide-header">
+              <div class="product-slide-logo"><img src="assets/resigrid.png" alt="" /></div>
+              <div>
+                <div class="product-slide-name">ResiGrid</div>
+                <div class="product-slide-tagline">Fair Data · RGE Score</div>
+              </div>
+            </div>
+            <p class="product-slide-desc">The world's only property management platform built on Fair Data. We transform on-time payments into a globally recognized RGE Score — empowering tenants with a portable reputation while giving landlords mathematically proven reliability, all without the hidden fees of legacy software.</p>
+            <ul class="product-slide-features">
+              <li>RGE Score — globally portable tenant reputation</li>
+              <li>Mathematically proven landlord reliability signals</li>
+              <li>Zero hidden fees vs. legacy property software</li>
+            </ul>
+            <a class="product-slide-cta" href="https://resigrid.co/" target="_blank" rel="noopener">Explore ResiGrid →</a>
           </div>
         </div>
       </div>
