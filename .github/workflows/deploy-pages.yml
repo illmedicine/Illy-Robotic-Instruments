@@ -146,49 +146,26 @@ jobs:
           </html>
           EOF
 
-      - name: Build IllySocial for /illysocial
+      - name: Build IllySocial for /isocial
         working-directory: _illysocial/Frontend
         run: |
           npm ci
-          npm run build
+          npx vite build --base=/isocial/
 
       - name: Copy IllySocial into Pages artifact
         run: |
-          rm -rf site-next/public/illysocial
-          mkdir -p site-next/public/illysocial
-          cp -a _illysocial/Frontend/dist/. site-next/public/illysocial/
+          rm -rf site-next/public/isocial
+          mkdir -p site-next/public/isocial
+          cp -a _illysocial/Frontend/dist/. site-next/public/isocial/
 
-      - name: Redirect /illysocial to IllySocial GitHub Pages
+      - name: Support IllySocial deep links on GitHub Pages
         run: |
-          cat > site-next/public/illysocial/index.html <<'EOF'
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="UTF-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-              <title>Redirecting…</title>
-              <meta http-equiv="refresh" content="0; url=https://illmedicine.github.io/illysocialV2/" />
-              <script>
-                (function () {
-                  var target = 'https://illmedicine.github.io/illysocialV2/';
-                  window.location.replace(target);
-                })();
-              </script>
-            </head>
-            <body>
-              <p>
-                Redirecting to
-                <a href="https://illmedicine.github.io/illysocialV2/">https://illmedicine.github.io/illysocialV2/</a>
-              </p>
-            </body>
-          </html>
-          EOF
-
-          # Support deep links like /illysocial/foo on GitHub Pages.
-          # GitHub Pages serves ONLY the site-root /404.html for unknown routes, so:
-          # 1) we generate a root 404.html that redirects /illysocial/* -> /illysocial/?p=<path>
-          # 2) we patch /illysocial/index.html to restore the original path.
-          perl -0777 -pe 's#</head>#<script>(function(){var p=new URLSearchParams(window.location.search);var r=p.get("p");if(r){if(r.startsWith("/")){r=r.slice(1);}window.history.replaceState(null,"",window.location.pathname.replace(/\/?$/,"/")+r+window.location.hash);p.delete("p");var q=p.toString();if(q){window.history.replaceState(null,"",window.location.pathname+"?"+q+window.location.hash);}else{window.history.replaceState(null,"",window.location.pathname+window.location.hash);}}})();</script></head>#s' -i site-next/public/illysocial/index.html
+          # IllySocial is a client-side-routed SPA (react-router) natively hosted at
+          # /isocial. GitHub Pages serves ONLY the site-root /404.html for unknown
+          # routes, so:
+          # 1) we generate a root 404.html that redirects /isocial/* -> /isocial/?p=<path> (same origin)
+          # 2) we patch /isocial/index.html to restore the original path from that query param.
+          perl -0777 -pe 's#</head>#<script>(function(){var p=new URLSearchParams(window.location.search);var r=p.get("p");if(r){if(r.startsWith("/")){r=r.slice(1);}window.history.replaceState(null,"",window.location.pathname.replace(/\/?$/,"/")+r+window.location.hash);p.delete("p");var q=p.toString();if(q){window.history.replaceState(null,"",window.location.pathname+"?"+q+window.location.hash);}else{window.history.replaceState(null,"",window.location.pathname+window.location.hash);}}})();</script></head>#s' -i site-next/public/isocial/index.html
 
           cat > site-next/public/404.html <<'EOF'
           <!doctype html>
@@ -200,16 +177,17 @@ jobs:
               <script>
                 (function () {
                   var path = window.location.pathname || '/';
-                  if (path.startsWith('/illysocial/')) {
-                    var rest = path.substring('/illysocial/'.length);
-                    var target = 'https://illmedicine.github.io/illysocialV2/' + rest + window.location.search + window.location.hash;
+                  var loc = window.location;
+                  if (path.startsWith('/isocial/')) {
+                    var rest = path.substring('/isocial/'.length);
+                    var target = loc.protocol + '//' + loc.host + '/isocial/?p=/' + rest + (loc.search ? '&' + loc.search.slice(1) : '') + loc.hash;
                     window.location.replace(target);
                     return;
                   }
                   if (path.startsWith('/livepay/')) {
-                    var rest = path.substring('/livepay/'.length);
-                    var target = 'https://illmedicine.github.io/LivePay/' + rest + window.location.search + window.location.hash;
-                    window.location.replace(target);
+                    var restLivepay = path.substring('/livepay/'.length);
+                    var targetLivepay = 'https://illmedicine.github.io/LivePay/' + restLivepay + window.location.search + window.location.hash;
+                    window.location.replace(targetLivepay);
                     return;
                   }
                 })();
