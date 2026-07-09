@@ -1,0 +1,21 @@
+{
+  "hosting": {
+    "public": "site-next/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": false,
+    "trailingSlash": false,
+    "rewrites": [
+      { "source": "/api/**", "function": "api" },
+      { "source": "/isocial/**", "destination": "/isocial/index.html" },
+      { "source": "/IR-AIcademy/**", "destination": "/IR-AIcademy/index.html" }
+    ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
+  }
+}
