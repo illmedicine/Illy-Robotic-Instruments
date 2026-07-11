@@ -7,7 +7,7 @@
       "**/node_modules/**"
     ],
     "cleanUrls": false,
-    "trailingSlash": false,
+    "trailingSlash": true,
     "redirects": [
       { "source": "/livepay", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 },
       { "source": "/livepay/**", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 }
