@@ -1814,94 +1814,95 @@
     /* ── R&D Lab Hero: Industrial Shelf + Rolling Fulcrum ─────────────────────── */
     .lab-hero {
       position: relative;
-      width: 100%;
-      height: 800px;
-      margin: 0 auto;
+      width: 100vw;
+      height: 100vh;
+      margin-left: calc(-50vw + 50%);
       overflow: hidden;
       background: #0a0e12;
+      z-index: 2;
     }
 
     .lab-bg {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(30,40,50,0.6) 0%, rgba(15,20,28,0.8) 100%),
-        repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(100,150,200,0.05) 60px, rgba(100,150,200,0.05) 61px),
-        repeating-linear-gradient(0deg, transparent 0, transparent 80px, rgba(100,150,200,0.04) 80px, rgba(100,150,200,0.04) 81px);
+        /* Factory floor fade */
+        linear-gradient(180deg, rgba(20,30,45,0.7) 0%, rgba(10,15,25,0.9) 100%),
+        /* Steel beams vertical */
+        repeating-linear-gradient(90deg,
+          transparent 0,
+          transparent calc(100vw / 8 - 60px),
+          rgba(60,80,120,0.15) calc(100vw / 8 - 60px),
+          rgba(60,80,120,0.15) calc(100vw / 8 - 40px)
+        ),
+        /* Depth grid horizontal */
+        repeating-linear-gradient(0deg,
+          transparent 0,
+          transparent 120px,
+          rgba(40,60,100,0.1) 120px,
+          rgba(40,60,100,0.1) 122px
+        ),
+        /* Receding perspective floor */
+        linear-gradient(to bottom,
+          rgba(15,25,40,0.5) 0%,
+          rgba(8,12,20,0.8) 100%
+        );
       z-index: 0;
     }
 
-    .lab-container {
+    .lab-shelves {
       position: relative;
       z-index: 1;
       width: 100%;
       height: 100%;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12%;
-      perspective: 1200px;
-      padding: 2rem 1rem;
-    }
-
-    /* Left & Right Shelves */
-    .lab-shelf {
-      flex: 0 0 28%;
-      height: 100%;
-      display: flex;
       flex-direction: column;
       justify-content: space-around;
-      gap: 0.5rem;
-      transform-style: preserve-3d;
-      transform: rotateX(8deg);
+      align-items: center;
+      padding: 120px 40px 200px 40px;
+      perspective: 1500px;
     }
 
-    .lab-shelf-left {
-      transform: perspective(1000px) rotateY(8deg) rotateX(6deg);
-    }
-
-    .lab-shelf-right {
-      transform: perspective(1000px) rotateY(-8deg) rotateX(6deg);
-    }
-
-    .shelf-tier {
+    /* Horizontal Shelf Rows */
+    .lab-shelf-row {
       position: relative;
-      height: 14%;
-      background: linear-gradient(180deg, rgba(80,90,110,0.3) 0%, rgba(40,50,70,0.5) 100%);
-      border-top: 2px solid rgba(0,255,136,0.3);
-      border-bottom: 1px solid rgba(50,60,80,0.6);
+      width: 100%;
+      max-width: 1400px;
+      height: 140px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 0 1rem;
-      box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 3px rgba(0,255,136,0.15);
+      justify-content: space-around;
+      background: linear-gradient(180deg, rgba(50,70,100,0.2) 0%, rgba(30,45,70,0.3) 100%);
+      border-top: 2px solid rgba(0,255,136,0.2);
+      border-bottom: 1px solid rgba(0,255,136,0.15);
+      box-shadow:
+        inset 0 2px 8px rgba(0,0,0,0.5),
+        0 2px 6px rgba(0,255,136,0.1);
+      gap: 60px;
+      padding: 0 40px;
+      transform: perspective(1200px) rotateX(4deg);
+      transition: all 0.5s ease;
     }
 
-    .shelf-tier.experimental {
-      background: linear-gradient(180deg, rgba(120,100,50,0.3) 0%, rgba(60,50,20,0.5) 100%);
-      border-top: 2px dashed rgba(255,200,0,0.6);
+    .lab-shelf-row.experimental {
+      background: linear-gradient(180deg, rgba(80,70,30,0.2) 0%, rgba(60,50,20,0.3) 100%);
+      border-top: 2px dashed rgba(255,200,0,0.4);
+      border-bottom: 1px dashed rgba(255,200,0,0.3);
     }
 
     .exp-label {
       position: absolute;
-      top: -18px;
-      left: 8px;
-      font-size: 10px;
+      top: -28px;
+      left: 40px;
+      font-size: 11px;
       font-weight: 900;
       letter-spacing: 2px;
       color: #ffc800;
-      background: rgba(0,0,0,0.8);
-      padding: 2px 6px;
-      border: 1px dashed rgba(255,200,0,0.8);
+      background: rgba(0,0,0,0.9);
+      padding: 4px 8px;
+      border: 1px dashed rgba(255,200,0,0.7);
       text-transform: uppercase;
-    }
-
-    .orb-pair {
-      display: flex;
-      gap: 2rem;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
+      z-index: 5;
     }
 
     .orb-slot {
@@ -1910,89 +1911,101 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
+      gap: 12px;
       flex-shrink: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .orb-slot img {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       border: 2px solid rgba(0,255,136,0.5);
-      box-shadow: 0 0 20px rgba(100,200,255,0.4), inset 0 0 15px rgba(0,255,136,0.2);
+      box-shadow: 0 0 25px rgba(100,200,255,0.3), inset 0 0 15px rgba(0,255,136,0.15);
       transition: all 0.3s ease;
       object-fit: cover;
     }
 
     .orb-slot:hover img {
-      box-shadow: 0 0 35px rgba(0,255,136,0.8), 0 0 50px rgba(100,200,255,0.6), inset 0 0 20px rgba(0,255,136,0.4);
-      transform: scale(1.08);
+      box-shadow: 0 0 40px rgba(0,255,136,0.7), 0 0 60px rgba(100,200,255,0.5), inset 0 0 20px rgba(0,255,136,0.3);
+      transform: scale(1.1);
     }
 
     .orb-slot span {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 1px;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.6);
       text-transform: uppercase;
       text-align: center;
-      max-width: 100px;
+      max-width: 110px;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .orb-slot.pulled {
+      transform: translateY(-80px);
+    }
+
+    .orb-slot.pulled span {
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* Fulcrum Rolling Base */
     .fulcrum-base {
       position: absolute;
-      bottom: 40px;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-      transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      gap: 8px;
+      transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  bottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .base-logo {
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle at 40% 35%, rgba(120,255,200,0.12) 0%, rgba(100,200,255,0.05) 55%, rgba(120,170,230,0.04) 100%);
-      border: 2px solid rgba(0,255,136,0.6);
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle at 40% 35%, rgba(120,255,200,0.15) 0%, rgba(100,200,255,0.08) 55%, rgba(120,170,230,0.05) 100%);
+      border: 2px solid rgba(0,255,136,0.5);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow:
-        0 0 40px rgba(0,255,136,0.55),
-        0 0 80px rgba(100,200,255,0.3),
-        inset 0 0 30px rgba(120,255,200,0.1);
+        0 0 50px rgba(0,255,136,0.4),
+        0 0 100px rgba(100,200,255,0.2),
+        inset 0 0 40px rgba(120,255,200,0.08);
     }
 
     .base-logo img {
-      width: 90%;
-      height: 90%;
+      width: 85%;
+      height: 85%;
       object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(0,255,136,0.5));
+      filter: drop-shadow(0 0 10px rgba(0,255,136,0.4));
     }
 
     .base-wheels {
-      width: 140px;
-      height: 12px;
+      width: 160px;
+      height: 14px;
       background:
-        radial-gradient(circle at 30px 6px, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.5) 100%),
-        radial-gradient(circle at 110px 6px, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.5) 100%);
+        radial-gradient(circle at 35px 7px, rgba(20,20,20,0.95) 0%, rgba(40,40,40,0.6) 100%),
+        radial-gradient(circle at 125px 7px, rgba(20,20,20,0.95) 0%, rgba(40,40,40,0.6) 100%);
       border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.9);
     }
 
     .arm-canvas {
       position: absolute;
-      top: -20px;
+      top: -30px;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;
-      height: 600px;
+      width: 900px;
+      height: 700px;
       pointer-events: none;
       z-index: 5;
     }
@@ -2045,39 +2058,49 @@
         <!-- R&D Lab Hero: Industrial Shelf + Rolling Fulcrum (Desktop) -->
         <div class="lab-hero" id="labHero">
           <div class="lab-bg"></div>
-          <div class="lab-container">
-            <!-- Left shelf (5 tiers) -->
-            <div class="lab-shelf lab-shelf-left">
-              <div class="shelf-tier" data-tier="0"><div class="orb-slot" data-orb="coindrop" data-product="https://coindrop.in/" data-name="Coindrop"><img src="assets/coindrop.png" alt="Coindrop" /><span>Coindrop</span></div></div>
-              <div class="shelf-tier" data-tier="1"><div class="orb-slot" data-orb="discryptobank" data-product="https://dcb-gm.com/" data-name="DisCryptoBank"><img src="assets/discryptobank.png" alt="DisCryptoBank" /><span>DisCryptoBank</span></div></div>
-              <div class="shelf-tier" data-tier="2"><div class="orb-slot" data-orb="irai" data-product="https://www.illyrobotic-ai.com/IR-AIcademy/" data-name="IRAI Academy"><img src="assets/irai-academy.png" alt="IRAI Academy" /><span>IRAI Academy</span></div></div>
-              <div class="shelf-tier" data-tier="3"><div class="orb-slot" data-orb="worldsar" data-product="https://illmedicine.github.io/IR-SAR-VUE/" data-name="WorldSAR"><img src="assets/worldsar.png" alt="WorldSAR" /><span>WorldSAR</span></div></div>
-              <div class="shelf-tier" data-tier="4"><div class="orb-slot" data-orb="socialplug" data-product="/socialplug/" data-name="SocialPlug"><img src="assets/socialplug.png" alt="SocialPlug" /><span>SocialPlug</span></div></div>
+
+          <!-- 5 Horizontal Shelves (Tier 0-4) spanning full width -->
+          <div class="lab-shelves">
+            <!-- Tier 0: Coindrop, IllySocial -->
+            <div class="lab-shelf-row tier-0">
+              <div class="orb-slot" data-orb="coindrop" data-product="https://coindrop.in/" data-name="Coindrop" data-tier="0"><img src="assets/coindrop.png" alt="Coindrop" /><span>Coindrop</span></div>
+              <div class="orb-slot" data-orb="illysocial" data-product="/isocial/" data-name="IllySocial" data-tier="0"><img src="assets/illysocial.png" alt="IllySocial" /><span>IllySocial</span></div>
             </div>
 
-            <!-- Fulcrum arm center (rolling base with integrated logo) -->
-            <div class="fulcrum-base" id="fulcrumBase">
-              <div class="base-logo">
-                <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
-              </div>
-              <div class="base-wheels"></div>
-              <canvas class="arm-canvas" id="armCanvas" aria-hidden="true"></canvas>
+            <!-- Tier 1: DisCryptoBank, I-RIS -->
+            <div class="lab-shelf-row tier-1">
+              <div class="orb-slot" data-orb="discryptobank" data-product="https://dcb-gm.com/" data-name="DisCryptoBank" data-tier="1"><img src="assets/discryptobank.png" alt="DisCryptoBank" /><span>DisCryptoBank</span></div>
+              <div class="orb-slot" data-orb="iris" data-product="http://illy-ris.com/movie.html" data-name="I-RIS" data-tier="1"><img src="assets/i-ris.png" alt="I-RIS" /><span>I-RIS</span></div>
             </div>
 
-            <!-- Right shelf (5 tiers: 4 single + 1 experimental with 2) -->
-            <div class="lab-shelf lab-shelf-right">
-              <div class="shelf-tier" data-tier="0"><div class="orb-slot" data-orb="illysocial" data-product="/isocial/" data-name="IllySocial"><img src="assets/illysocial.png" alt="IllySocial" /><span>IllySocial</span></div></div>
-              <div class="shelf-tier" data-tier="1"><div class="orb-slot" data-orb="iris" data-product="http://illy-ris.com/movie.html" data-name="I-RIS"><img src="assets/i-ris.png" alt="I-RIS" /><span>I-RIS</span></div></div>
-              <div class="shelf-tier" data-tier="2"><div class="orb-slot" data-orb="webdesigns" data-product="https://www.illyrobotic-ai.com/web-designs/" data-name="Web Designs"><img src="assets/webdesigns.png" alt="Web Designs" /><span>Web Designs</span></div></div>
-              <div class="shelf-tier" data-tier="3"><div class="orb-slot" data-orb="resigrid" data-product="https://resigrid.co/" data-name="ResiGrid"><img src="assets/resigrid.png" alt="ResiGrid" /><span>ResiGrid</span></div></div>
-              <div class="shelf-tier experimental" data-tier="4">
-                <span class="exp-label">EXPERIMENTAL</span>
-                <div class="orb-pair">
-                  <div class="orb-slot" data-orb="livepay" data-product="https://www.livepay.io/" data-name="LivePay"><img src="assets/livepay.png" alt="LivePay" /><span>LivePay</span></div>
-                  <div class="orb-slot" data-orb="squadren" data-product="https://www.squad-ren.com/" data-name="SquadREN"><img src="assets/squad-ren-logo.png" alt="SquadREN" /><span>SquadREN</span></div>
-                </div>
-              </div>
+            <!-- Tier 2: IRAI Academy, Web Designs -->
+            <div class="lab-shelf-row tier-2">
+              <div class="orb-slot" data-orb="irai" data-product="https://www.illyrobotic-ai.com/IR-AIcademy/" data-name="IRAI Academy" data-tier="2"><img src="assets/irai-academy.png" alt="IRAI Academy" /><span>IRAI Academy</span></div>
+              <div class="orb-slot" data-orb="webdesigns" data-product="https://www.illyrobotic-ai.com/web-designs/" data-name="Web Designs" data-tier="2"><img src="assets/webdesigns.png" alt="Web Designs" /><span>Web Designs</span></div>
             </div>
+
+            <!-- Tier 3: WorldSAR, ResiGrid -->
+            <div class="lab-shelf-row tier-3">
+              <div class="orb-slot" data-orb="worldsar" data-product="https://illmedicine.github.io/IR-SAR-VUE/" data-name="WorldSAR" data-tier="3"><img src="assets/worldsar.png" alt="WorldSAR" /><span>WorldSAR</span></div>
+              <div class="orb-slot" data-orb="resigrid" data-product="https://resigrid.co/" data-name="ResiGrid" data-tier="3"><img src="assets/resigrid.png" alt="ResiGrid" /><span>ResiGrid</span></div>
+            </div>
+
+            <!-- Tier 4 (Experimental): SocialPlug, LivePay + SquadREN -->
+            <div class="lab-shelf-row tier-4 experimental">
+              <span class="exp-label">EXPERIMENTAL</span>
+              <div class="orb-slot" data-orb="socialplug" data-product="/socialplug/" data-name="SocialPlug" data-tier="4"><img src="assets/socialplug.png" alt="SocialPlug" /><span>SocialPlug</span></div>
+              <div class="orb-slot" data-orb="livepay" data-product="https://www.livepay.io/" data-name="LivePay" data-tier="4"><img src="assets/livepay.png" alt="LivePay" /><span>LivePay</span></div>
+              <div class="orb-slot" data-orb="squadren" data-product="https://www.squad-ren.com/" data-name="SquadREN" data-tier="4"><img src="assets/squad-ren-logo.png" alt="SquadREN" /><span>SquadREN</span></div>
+            </div>
+          </div>
+
+          <!-- Fulcrum arm center (rolling base with integrated logo) -->
+          <div class="fulcrum-base" id="fulcrumBase">
+            <div class="base-logo">
+              <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
+            </div>
+            <div class="base-wheels"></div>
+            <canvas class="arm-canvas" id="armCanvas" aria-hidden="true"></canvas>
           </div>
         </div>
 
@@ -3173,21 +3196,29 @@
       const labHero = document.getElementById('labHero');
       const fulcrumBase = document.getElementById('fulcrumBase');
       const armCanvas = document.getElementById('armCanvas');
-      if (!labHero || !fulcrumBase) return;
+      if (!labHero || !fulcrumBase || !armCanvas) return;
 
       const ctx = armCanvas.getContext('2d');
       let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let selectedOrb = null, selectedData = null, pulledOut = false;
+      let selectedOrb = null;
       let basePos = { x: 0, y: 0 }, baseTarget = { x: 0, y: 0 };
       let armTarget = null, armEased = { x: 0, y: 0 };
+      let baseRotation = 0, baseRotationTarget = 0;
 
-      // Orb data: { tier, shelf: 'left'|'right', data: {...} }
+      // Build orb map from new structure
       const orbMap = {};
       document.querySelectorAll('.orb-slot').forEach(slot => {
         const orb = slot.dataset.orb;
-        const tier = parseInt(slot.closest('.shelf-tier').dataset.tier, 10);
-        const shelf = slot.closest('.lab-shelf-left') ? 'left' : 'right';
-        orbMap[orb] = { tier, shelf, data: { product: slot.dataset.product, name: slot.dataset.name }, el: slot };
+        const tier = parseInt(slot.dataset.tier, 10);
+        const row = slot.closest('.lab-shelf-row');
+        const rect = slot.getBoundingClientRect();
+        const rowRect = row.getBoundingClientRect();
+        orbMap[orb] = {
+          tier,
+          el: slot,
+          row,
+          data: { product: slot.dataset.product, name: slot.dataset.name }
+        };
       });
 
       function resize() {
@@ -3199,13 +3230,7 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // Shelf height: 5 tiers, spaced evenly in the hero height
-      function tierToY(tier) {
-        const tierHeight = (400 / 5);
-        return 200 + tier * tierHeight + tierHeight / 2;
-      }
-
-      // Select an orb
+      // Click handler
       document.addEventListener('click', (e) => {
         const slot = e.target.closest('.orb-slot');
         if (!slot) return;
@@ -3213,10 +3238,8 @@
         if (!orbMap[orb]) return;
 
         if (selectedOrb === orb) {
-          // Deselect: return orb
           selectOrb(null);
         } else {
-          // New selection
           selectOrb(orb);
         }
       });
@@ -3224,63 +3247,72 @@
       function selectOrb(orb) {
         if (orb === selectedOrb) return;
 
-        // Return previous orb
+        // Deselect previous
         if (selectedOrb && orbMap[selectedOrb]) {
           returnOrb(selectedOrb);
         }
 
         selectedOrb = orb;
-        selectedData = orb ? orbMap[orb] : null;
-        pulledOut = false;
 
         if (!orb) {
-          // Deselected: base returns to center
+          // Return to center
           baseTarget = { x: 0, y: 0 };
+          baseRotationTarget = 0;
           armTarget = null;
           return;
         }
 
-        // Position fulcrum base to reach this orb
+        // Get orb's position on shelf
         const info = orbMap[orb];
-        const shelfX = info.shelf === 'left' ? -220 : 220;
-        const shelfY = tierToY(info.tier) - 200;
+        const slot = info.el;
+        const row = info.row;
+        const slotRect = slot.getBoundingClientRect();
+        const rowRect = row.getBoundingClientRect();
+        const heroRect = labHero.getBoundingClientRect();
 
-        baseTarget = { x: shelfX, y: shelfY };
-        armTarget = { x: 0, y: tierToY(info.tier) };
+        // Calculate orb position relative to hero center
+        const orbCenterX = slotRect.left - heroRect.left + slotRect.width / 2;
+        const orbCenterY = slotRect.top - heroRect.top + slotRect.height / 2;
+        const heroCenterX = heroRect.width / 2;
+        const heroCenterY = heroRect.height / 2;
 
-        // Animate the reach
-        setTimeout(() => { if (selectedOrb === orb) pullOrb(orb); }, 600);
+        const offsetX = orbCenterX - heroCenterX;
+        const offsetY = orbCenterY - heroCenterY;
+
+        // Fulcrum target position (rolls to orb X, stays near its Y tier)
+        baseTarget = { x: offsetX * 0.6, y: 0 }; // Reduced horizontal swing for visibility
+        baseRotationTarget = Math.atan2(offsetY, offsetX) * (180 / Math.PI);
+        armTarget = { x: offsetX * 0.6, y: offsetY };
+
+        // Pull after arm reaches
+        setTimeout(() => { if (selectedOrb === orb) pullOrb(orb); }, 700);
       }
 
       function pullOrb(orb) {
-        if (selectedOrb !== orb) return;
-        pulledOut = true;
+        if (selectedOrb !== orb || !orbMap[orb]) return;
         const slot = orbMap[orb].el;
-        if (slot) {
-          slot.style.transform = 'translateX(60px) scale(0.95)';
-          slot.style.opacity = '0.6';
-        }
+        slot.classList.add('pulled');
       }
 
       function returnOrb(orb) {
+        if (!orbMap[orb]) return;
         const slot = orbMap[orb].el;
-        if (slot) {
-          slot.style.transform = 'none';
-          slot.style.opacity = '1';
-        }
+        slot.classList.remove('pulled');
       }
 
       function frame(now) {
-        const easeK = 0.14;
+        const easeK = 0.16;
         basePos.x += (baseTarget.x - basePos.x) * easeK;
         basePos.y += (baseTarget.y - basePos.y) * easeK;
+        baseRotation += (baseRotationTarget - baseRotation) * easeK * 0.5;
 
-        // Update fulcrum base position
-        const percent = (baseTarget.x + 250) / 500; // 0 to 1
-        const left = 50 + (percent - 0.5) * 30; // sweep ±15% from center
-        fulcrumBase.style.left = left + '%';
-        fulcrumBase.style.bottom = (40 + basePos.y) + 'px';
+        // Calculate left position for fulcrum (center is 50%)
+        const heroRect = labHero.getBoundingClientRect();
+        const heroCenterX = heroRect.width / 2;
+        const leftPercent = 50 + (basePos.x / heroCenterX) * 25; // ±25% sweep from center
+        fulcrumBase.style.left = Math.max(20, Math.min(80, leftPercent)) + '%';
 
+        // Arm easing
         if (armTarget) {
           armEased.x += (armTarget.x - armEased.x) * easeK;
           armEased.y += (armTarget.y - armEased.y) * easeK;
@@ -3291,46 +3323,58 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         if (armTarget && selectedOrb) {
-          const basePt = { x: 400, y: 200 };
-          const tipPt = { x: armEased.x + 400, y: armEased.y };
+          // Arm base at fulcrum center
+          const basePt = { x: W / (2 * dpr), y: H / (2 * dpr) - 60 };
+          const tipPt = {
+            x: W / (2 * dpr) + armEased.x / dpr,
+            y: H / (2 * dpr) - 60 + armEased.y / dpr
+          };
 
-          // IK reach (simplified)
-          const dx = tipPt.x - basePt.x, dy = tipPt.y - basePt.y;
-          const dist = Math.hypot(dx, dy);
-          const a1 = 120, a2 = 100; // segment lengths
-
-          // Draw arm segments
-          ctx.strokeStyle = 'rgba(200,220,240,0.8)';
-          ctx.lineWidth = 8;
+          // Metallic chrome arm segments
+          ctx.strokeStyle = '#c8dcf0';
+          ctx.lineWidth = 12;
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
+          ctx.filter = 'drop-shadow(0 0 8px rgba(0,255,136,0.5))';
 
-          // Simplify: straight reach toward target (full IK is complex)
+          const dx = tipPt.x - basePt.x;
+          const dy = tipPt.y - basePt.y;
+          const dist = Math.hypot(dx, dy);
+
           if (dist > 0) {
             const angle = Math.atan2(dy, dx);
-            const midX = basePt.x + Math.cos(angle) * a1;
-            const midY = basePt.y + Math.sin(angle) * a1;
+            const midX = basePt.x + Math.cos(angle) * 80;
+            const midY = basePt.y + Math.sin(angle) * 80;
 
+            // Upper segment
             ctx.beginPath();
             ctx.moveTo(basePt.x, basePt.y);
-            ctx.quadraticCurveTo(midX, midY, tipPt.x, tipPt.y);
+            ctx.lineTo(midX, midY);
             ctx.stroke();
 
-            // Gripper (two-finger claw)
-            ctx.strokeStyle = 'rgba(255,100,100,0.9)';
-            ctx.lineWidth = 4;
-            const gripAngle = angle + 0.3;
+            // Lower segment
             ctx.beginPath();
-            ctx.moveTo(tipPt.x, tipPt.y);
-            ctx.lineTo(tipPt.x + Math.cos(gripAngle) * 25, tipPt.y + Math.sin(gripAngle) * 25);
+            ctx.moveTo(midX, midY);
+            ctx.lineTo(tipPt.x, tipPt.y);
             ctx.stroke();
 
-            const gripAngle2 = angle - 0.3;
+            // Gripper (servo-style)
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 5;
+            const gripAngle = angle + 0.4;
             ctx.beginPath();
             ctx.moveTo(tipPt.x, tipPt.y);
-            ctx.lineTo(tipPt.x + Math.cos(gripAngle2) * 25, tipPt.y + Math.sin(gripAngle2) * 25);
+            ctx.lineTo(tipPt.x + Math.cos(gripAngle) * 30, tipPt.y + Math.sin(gripAngle) * 30);
+            ctx.stroke();
+
+            const gripAngle2 = angle - 0.4;
+            ctx.beginPath();
+            ctx.moveTo(tipPt.x, tipPt.y);
+            ctx.lineTo(tipPt.x + Math.cos(gripAngle2) * 30, tipPt.y + Math.sin(gripAngle2) * 30);
             ctx.stroke();
           }
+
+          ctx.filter = 'none';
         }
 
         requestAnimationFrame(frame);
