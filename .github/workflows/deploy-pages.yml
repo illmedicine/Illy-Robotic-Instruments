@@ -1,9 +1,8 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  # Hosting migrated to Firebase Hosting (see firebase-hosting.yml).
+  # GitHub Pages auto-deploy on push is disabled; run manually if ever needed.
   workflow_dispatch:
 
 permissions:

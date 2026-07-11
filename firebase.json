@@ -8,6 +8,10 @@
     ],
     "cleanUrls": false,
     "trailingSlash": false,
+    "redirects": [
+      { "source": "/livepay", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 },
+      { "source": "/livepay/**", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 }
+    ],
     "rewrites": [
       { "source": "/api/**", "function": "api" },
       { "source": "/isocial/**", "destination": "/isocial/index.html" },
