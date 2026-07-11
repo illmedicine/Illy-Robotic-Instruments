@@ -250,9 +250,26 @@
       pointer-events: none;
     }
     /* lift content above the galaxy layer */
-    .circuit-heading,
-    .product-tree-container,
-    .hero-tagline { position: relative; z-index: 3; }
+    .circuit-heading {
+      position: relative;
+      z-index: 3;
+      display: none;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .product-tree-container {
+      position: relative;
+      z-index: 3;
+      margin-top: calc(100vh - 64px);
+      padding-top: 4rem;
+    }
+
+    .hero-tagline {
+      position: relative;
+      z-index: 3;
+      margin-top: 4rem;
+    }
 
     .circuit-header {
       text-align: center;
