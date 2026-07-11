@@ -469,8 +469,79 @@
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
     }
-    .tree-center .tree-product-name { display: none; }
+    .tree-center .tree-product-name {
+      position: absolute;
+      top: 100%;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-top: 1rem;
+    }
+    .tree-center-summary {
+      position: absolute;
+      top: 100%;
+      margin-top: 6rem;
+      max-width: 500px;
+      font-size: 0.95rem;
+      color: #a0b0d0;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Scroll prompt at bottom of hero */
+    .scroll-prompt {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 20;
+    }
+    .scroll-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(100, 200, 255, 0.7);
+      text-transform: uppercase;
+      animation: fadeInOut 2s ease-in-out infinite;
+    }
+    .scroll-wheel {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(100, 200, 255, 0.5);
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 6px 0;
+      position: relative;
+    }
+    .scroll-wheel::before {
+      content: '';
+      width: 3px;
+      height: 8px;
+      background: rgba(100, 200, 255, 0.7);
+      border-radius: 2px;
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    @keyframes scrollDown {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(12px); opacity: 0; }
+    }
     .tree-center .tree-product-logo {
       width: 292px;
       height: 292px;
@@ -2029,6 +2100,13 @@
       z-index: 5;
     }
 
+    /* Desktop: Show product-tree orbital layout */
+    @media (min-width: 821px) {
+      .lab-hero { display: none !important; }
+      .circuit-heading { display: none; }
+      .product-tree-container { display: block !important; }
+    }
+
     /* Mobile Fallback */
     @media (max-width: 820px) {
       .lab-hero { display: none; }
@@ -2081,8 +2159,8 @@
           <p>Illy Robotic Instruments is a growth-driven studio building open-source, decentralized financial infrastructure. We design intelligent automation systems and creative growth engines that empower individuals and communities to own their data, capture their value, and scale without bloated ad spend.</p>
         </div>
 
-        <!-- R&D Lab Hero: Industrial Shelf + Rolling Fulcrum (Desktop) -->
-        <div class="lab-hero" id="labHero">
+        <!-- R&D Lab Hero: Industrial Shelf + Rolling Fulcrum (HIDDEN - Desktop uses product-tree) -->
+        <div class="lab-hero" id="labHero" style="display: none;">
           <div class="lab-bg"></div>
 
           <!-- 5 Horizontal Shelves (Tier 0-4) spanning full width -->
@@ -2130,8 +2208,8 @@
           </div>
         </div>
 
-        <!-- Mobile Fallback: Keep old lightning carousel (hidden on desktop) -->
-        <div class="product-tree-container" style="display: none;">
+        <!-- R&D Labs Circular Hero: Orbital product layout (visible on all sizes) -->
+        <div class="product-tree-container">
           <svg class="lightning-canvas" id="lightningCanvas" aria-hidden="true"></svg>
           <canvas class="arm-canvas-old" id="armCanvasOld" aria-hidden="true"></canvas>
 
@@ -2141,7 +2219,8 @@
               <div class="tree-product-logo">
                 <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
               </div>
-              <div class="tree-product-name">ILLY ROBOTIC</div>
+              <div class="tree-product-name">ILLY ROBOTIC<br><span style="font-size: 0.6em; font-weight: 400; color: #a0b0d0;">INSTRUMENTS</span></div>
+              <div class="tree-center-summary">Growth-driven studio building open-source, decentralized financial infrastructure. Intelligent automation systems powering the next generation of fintech.</div>
             </div>
 
             <!-- Sub-products in orbital order (1=top/12 o'clock, then clockwise) -->
@@ -2237,6 +2316,11 @@
               <div class="tree-product-name">ResiGrid</div>
               <div class="synopsis-card"><span class="synopsis-title">ResiGrid</span>The world's only property management platform built on Fair Data. On-time payments become a globally recognized RGE Score — no hidden fees.</div>
             </div>
+          </div>
+          <!-- Scroll prompt -->
+          <div class="scroll-prompt">
+            <div class="scroll-text">SCROLL TO EXPLORE</div>
+            <div class="scroll-wheel"></div>
           </div>
         </div>
 
