@@ -18,8 +18,14 @@
   <link rel="shortcut icon" type="image/png" href="assets/illy-robotic.png" />
   <link rel="apple-touch-icon" href="assets/illy-robotic.png" />
   <meta name="theme-color" content="#0a0e27" />
-  <!-- Three.js for 3D rendering -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js + postprocessing (bloom) for the R&D Labs corridor hero -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
   <style>
     * {
       margin: 0;
@@ -2120,24 +2126,198 @@
       z-index: 5;
     }
 
-    /* Desktop: Show product-tree orbital layout */
-    @media (min-width: 821px) {
-      .lab-hero { display: none !important; }
-      .circuit-heading { display: none; }
-      .product-tree-container { display: block !important; }
+    /* ══════ ILLY R&D LABS — immersive corridor hero (ported from isocial) ══════ */
+    .rnd-track {
+      position: relative;
+      width: 100%;
+      /* 13 pages: intro + 11 stations + arrival breathing room */
+      height: 1300vh;
+      background: #04050d;
+      margin-top: -64px; /* extend behind the fixed nav — borderless */
+    }
+    .rnd-sticky {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #rndCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .rnd-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(2, 3, 9, 0.85) 100%);
+    }
+    .rnd-scrollhint {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      z-index: 15;
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8b93c8;
+      animation: rndBob 1.8s ease-in-out infinite;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .rnd-scrollhint.hidden { opacity: 0; animation: none; }
+    @keyframes rndBob {
+      0%, 100% { transform: translate(-50%, 0); opacity: 0.55; }
+      50% { transform: translate(-50%, 8px); opacity: 1; }
     }
 
-    /* Mobile Fallback */
-    @media (max-width: 820px) {
-      .lab-hero { display: none; }
-      .circuit-heading { display: block; }
-      .product-tree-container { display: block !important; }
-      .product-tree-container {
-        position: relative;
-        z-index: 3;
-        margin-top: 0;
-        padding-top: 0;
-      }
+    /* DOM overlay — sections positioned down the scroll track */
+    .rnd-dom {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      color: #e7e9f5;
+      z-index: 10;
+    }
+    .rnd-dom section {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 8vw;
+      box-sizing: border-box;
+    }
+
+    /* Intro page */
+    .rnd-intro { align-items: center; text-align: center; }
+    .rnd-badge {
+      width: clamp(140px, 20vw, 220px);
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.45)) drop-shadow(0 12px 30px rgba(0, 0, 0, 0.6));
+      animation: rndBadgeFloat 5s ease-in-out infinite;
+    }
+    @keyframes rndBadgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .rnd-eyebrow {
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: #22d3ee;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .rnd-intro h1 {
+      font-size: clamp(40px, 8vw, 92px);
+      line-height: 0.98;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+    .rnd-intro h1 .grad {
+      background: linear-gradient(100deg, #8b7bff 10%, #22d3ee 55%, #00ff88 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .rnd-intro p {
+      margin: 22px auto 0;
+      max-width: 640px;
+      font-size: clamp(15px, 2vw, 19px);
+      line-height: 1.6;
+      color: #aab0d8;
+    }
+
+    /* Station caption cards */
+    .rnd-caption.left { align-items: flex-start; text-align: left; }
+    .rnd-caption.right { align-items: flex-end; text-align: right; }
+    .rnd-card {
+      pointer-events: auto;
+      max-width: 420px;
+      padding: 26px 28px;
+      border-radius: 18px;
+      background: rgba(10, 14, 31, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+    .rnd-node {
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: #7c85b8;
+      margin-bottom: 8px;
+    }
+    .rnd-card h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.05;
+      color: #fff;
+    }
+    .rnd-role {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .rnd-card p {
+      margin: 14px 0 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #b6bce0;
+    }
+    .rnd-visit {
+      display: inline-block;
+      margin-top: 18px;
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #04050d;
+      background: linear-gradient(90deg, #00ff88, #22d3ee);
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0, 255, 136, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .rnd-visit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0, 255, 136, 0.5);
+    }
+
+    /* No-WebGL fallback */
+    .rnd-fallback {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      padding: 100px 20px 60px;
+      background: radial-gradient(1200px 600px at 50% -10%, #1a1350 0%, #04050d 60%);
+    }
+    .rnd-fallback .row { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; max-width: 760px; }
+    .rnd-fallback .row a img { height: 72px; width: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5)); transition: transform 0.2s ease; }
+    .rnd-fallback .row a:hover img { transform: scale(1.1); }
+
+    @media (max-width: 640px) {
+      .rnd-card { max-width: 84vw; padding: 20px 22px; }
+      .rnd-dom section { padding: 0 6vw; }
     }
   </style>
 </head>
@@ -2166,314 +2346,32 @@
 
   <a id="top"></a>
 
-  <!-- ===== Background Band (Hero): galaxy box floats on a factory band ===== -->
-  <div class="bg-band bg-band-hero">
-  <div class="hero">
-    <div class="circuit-board-container">
-      <div class="circuit-board">
-        <!-- Animated galaxy backdrop -->
-        <div class="galaxy-bg" aria-hidden="true"><div class="galaxy-spin"></div></div>
+  <!-- ═══════ ILLY R&D LABS — immersive WebGL corridor hero ═══════
+       Ported from the IllySocial RndLab experience (LabScene.jsx).
+       The canvas is sticky inside a tall scroll track; the camera walks
+       down the corridor past all 11 product stations as the user scrolls,
+       then the page continues into the normal homepage sections. -->
+  <div class="rnd-track" id="rndTrack">
+    <div class="rnd-sticky">
+      <canvas id="rndCanvas"></canvas>
+      <div class="rnd-vignette" aria-hidden="true"></div>
+      <div class="rnd-scrollhint" id="rndScrollHint">scroll to explore &darr;</div>
+    </div>
 
-        <div class="circuit-heading" id="products">
-          <h2>Connected Financial Infrastructure</h2>
-          <p>Illy Robotic Instruments is a growth-driven studio building open-source, decentralized financial infrastructure. We design intelligent automation systems and creative growth engines that empower individuals and communities to own their data, capture their value, and scale without bloated ad spend.</p>
-        </div>
+    <!-- DOM overlay synced to the scroll -->
+    <div class="rnd-dom" id="products">
+      <!-- Page 0: Intro — the main Illy Robotic Instruments badge + summary -->
+      <section class="rnd-intro" style="top: 0;">
+        <img class="rnd-badge" src="assets/illy-robotic.png" alt="Illy Robotic Instruments" />
+        <div class="rnd-eyebrow">Illy Robotic Instruments</div>
+        <h1>ILLY <span class="grad">ROBOTIC</span></h1>
+        <p>A growth-driven studio building open-source, decentralized financial infrastructure. Scroll to walk deeper into the lab and explore all eleven instruments in the band — intelligent automation systems that empower creators to own their data, capture their value, and scale.</p>
+      </section>
 
-        <!-- R&D Lab Hero: Industrial Shelf + Rolling Fulcrum (HIDDEN - Desktop uses product-tree) -->
-        <div class="lab-hero" id="labHero" style="display: none;">
-          <div class="lab-bg"></div>
-
-          <!-- 5 Horizontal Shelves (Tier 0-4) spanning full width -->
-          <div class="lab-shelves">
-            <!-- Tier 0: Coindrop, IllySocial -->
-            <div class="lab-shelf-row tier-0">
-              <div class="orb-slot" data-orb="coindrop" data-product="https://coindrop.in/" data-name="Coindrop" data-tier="0"><img src="assets/coindrop.png" alt="Coindrop" /><span>Coindrop</span></div>
-              <div class="orb-slot" data-orb="illysocial" data-product="/isocial/" data-name="IllySocial" data-tier="0"><img src="assets/illysocial.png" alt="IllySocial" /><span>IllySocial</span></div>
-            </div>
-
-            <!-- Tier 1: DisCryptoBank, I-RIS -->
-            <div class="lab-shelf-row tier-1">
-              <div class="orb-slot" data-orb="discryptobank" data-product="https://dcb-gm.com/" data-name="DisCryptoBank" data-tier="1"><img src="assets/discryptobank.png" alt="DisCryptoBank" /><span>DisCryptoBank</span></div>
-              <div class="orb-slot" data-orb="iris" data-product="http://illy-ris.com/movie.html" data-name="I-RIS" data-tier="1"><img src="assets/i-ris.png" alt="I-RIS" /><span>I-RIS</span></div>
-            </div>
-
-            <!-- Tier 2: IRAI Academy, Web Designs -->
-            <div class="lab-shelf-row tier-2">
-              <div class="orb-slot" data-orb="irai" data-product="https://www.illyrobotic-ai.com/IR-AIcademy/" data-name="IRAI Academy" data-tier="2"><img src="assets/irai-academy.png" alt="IRAI Academy" /><span>IRAI Academy</span></div>
-              <div class="orb-slot" data-orb="webdesigns" data-product="https://www.illyrobotic-ai.com/web-designs/" data-name="Web Designs" data-tier="2"><img src="assets/webdesigns.png" alt="Web Designs" /><span>Web Designs</span></div>
-            </div>
-
-            <!-- Tier 3: WorldSAR, ResiGrid -->
-            <div class="lab-shelf-row tier-3">
-              <div class="orb-slot" data-orb="worldsar" data-product="https://illmedicine.github.io/IR-SAR-VUE/" data-name="WorldSAR" data-tier="3"><img src="assets/worldsar.png" alt="WorldSAR" /><span>WorldSAR</span></div>
-              <div class="orb-slot" data-orb="resigrid" data-product="https://resigrid.co/" data-name="ResiGrid" data-tier="3"><img src="assets/resigrid.png" alt="ResiGrid" /><span>ResiGrid</span></div>
-            </div>
-
-            <!-- Tier 4 (Experimental): SocialPlug, LivePay + SquadREN -->
-            <div class="lab-shelf-row tier-4 experimental">
-              <span class="exp-label">EXPERIMENTAL</span>
-              <div class="orb-slot" data-orb="socialplug" data-product="/socialplug/" data-name="SocialPlug" data-tier="4"><img src="assets/socialplug.png" alt="SocialPlug" /><span>SocialPlug</span></div>
-              <div class="orb-slot" data-orb="livepay" data-product="https://www.livepay.io/" data-name="LivePay" data-tier="4"><img src="assets/livepay.png" alt="LivePay" /><span>LivePay</span></div>
-              <div class="orb-slot" data-orb="squadren" data-product="https://www.squad-ren.com/" data-name="SquadREN" data-tier="4"><img src="assets/squad-ren-logo.png" alt="SquadREN" /><span>SquadREN</span></div>
-            </div>
-          </div>
-
-          <!-- Fulcrum arm center (rolling base with integrated logo) -->
-          <div class="fulcrum-base" id="fulcrumBase">
-            <div class="base-logo">
-              <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
-            </div>
-            <div class="base-wheels"></div>
-            <canvas class="arm-canvas" id="armCanvas" aria-hidden="true"></canvas>
-          </div>
-        </div>
-
-        <!-- R&D Labs 3D Interactive Hero: Canvas/WebGL orbital experience -->
-        <div class="product-tree-container" id="r3dLabsHero">
-          <canvas id="r3dCanvas" style="display: block; width: 100%; height: 100vh;"></canvas>
-
-          <div class="product-tree" id="productTree" style="display: none;">
-            <!-- Center: Illy Robotic at top, fires lightning to sub-products -->
-            <div class="tree-product tree-center" id="leaderNode" data-leader onclick="navigateTo('#products')">
-              <div class="tree-product-logo">
-                <img src="assets/illy-robotic.png" alt="ILLY ROBOTIC" />
-              </div>
-              <div class="tree-product-name">ILLY ROBOTIC<br><span style="font-size: 0.6em; font-weight: 400; color: #a0b0d0;">INSTRUMENTS</span></div>
-              <div class="tree-center-summary">Growth-driven studio building open-source, decentralized financial infrastructure. Intelligent automation systems powering the next generation of fintech.</div>
-            </div>
-
-            <!-- Sub-products in orbital order (1=top/12 o'clock, then clockwise) -->
-            <!-- 1) Coindrop — TOP -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://coindrop.in/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/coindrop.png" alt="Coindrop" />
-              </div>
-              <div class="tree-product-name">Coindrop</div>
-              <div class="synopsis-card"><span class="synopsis-title">Coindrop</span>Watch · Engage · Earn. Complete short social tasks and earn Solana daily. 190+ countries, no minimum withdrawal.</div>
-            </div>
-
-            <!-- 2) DisCryptoBank — was at 40°; swap with IRAI puts it closer to top -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://dcb-gm.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/discryptobank.png" alt="DisCryptoBank" />
-              </div>
-              <div class="tree-product-name">DisCryptoBank</div>
-              <div class="synopsis-card"><span class="synopsis-title">DisCryptoBank</span>Discord-native crypto payroll engine. Generates microtasks across servers and pays workers in SOL automatically.</div>
-            </div>
-
-            <!-- 3) IRAI Academy — swapped position with DisCryptoBank -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illyrobotic-ai.com/IR-AIcademy/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/irai-academy.png" alt="IRAI Academy" />
-              </div>
-              <div class="tree-product-name">IRAI Academy</div>
-              <div class="synopsis-card"><span class="synopsis-title">IRAI Academy</span>Hands-on AI &amp; automation training. Project-based curriculum that connects to real Illy Robotic products.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://illmedicine.github.io/IR-SAR-VUE/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/worldsar.png" alt="WorldSAR" />
-              </div>
-              <div class="tree-product-name">WorldSAR</div>
-              <div class="synopsis-card"><span class="synopsis-title">WorldSAR</span>Search &amp; Rescue Vue — real-time incident aggregation, volunteer coordination, and open response data.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, '/socialplug/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/socialplug.png" alt="SocialPlug" />
-              </div>
-              <div class="tree-product-name">SocialPlug</div>
-              <div class="synopsis-card"><span class="synopsis-title">SocialPlug</span>Growth-driven social marketing engine — content distribution, technical SEO, and creative growth on autopilot.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, '/isocial/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/illysocial.png" alt="IllySocial" />
-              </div>
-              <div class="tree-product-name">IllySocial</div>
-              <div class="synopsis-card"><span class="synopsis-title">IllySocial</span>Community engagement scaler with built-in data sovereignty and wealth distribution.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.livepay.io/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/livepay.png" alt="LivePay" />
-              </div>
-              <div class="tree-product-name">LivePay</div>
-              <div class="synopsis-card"><span class="synopsis-title">LivePay</span>Real-time personal data monetization — own your data, earn your value, with instant 24/7 transfers.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.squad-ren.com/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/squad-ren-logo.png" alt="SquadREN" />
-              </div>
-              <div class="tree-product-name">SquadREN</div>
-              <div class="synopsis-card"><span class="synopsis-title">SquadREN</span>Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad.</div>
-            </div>
-
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'http://illy-ris.com/movie.html')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/i-ris.png" alt="I-RIS" />
-              </div>
-              <div class="tree-product-name">I-RIS</div>
-              <div class="synopsis-card"><span class="synopsis-title">I-RIS</span>Illy Robotic Studios — original IP, music, podcast, and video production powering the ecosystem.</div>
-            </div>
-
-            <!-- 10) Web Designs — studio service product -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://www.illyrobotic-ai.com/web-designs/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/webdesigns.png" alt="Web Designs" />
-              </div>
-              <div class="tree-product-name">Web Designs</div>
-              <div class="synopsis-card"><span class="synopsis-title">Web Designs</span>Custom, high-converting websites for brands and creators, built on our automation stack.</div>
-            </div>
-
-            <!-- 11) ResiGrid — Fair Data property management -->
-            <div class="tree-product sub-product" data-product onclick="planetClick(this, 'https://resigrid.co/')" onmouseenter="planetEnter(this)" onmouseleave="planetLeave(this)">
-              <div class="tree-product-logo">
-                <img src="assets/resigrid.png" alt="ResiGrid" />
-              </div>
-              <div class="tree-product-name">ResiGrid</div>
-              <div class="synopsis-card"><span class="synopsis-title">ResiGrid</span>The world's only property management platform built on Fair Data. On-time payments become a globally recognized RGE Score — no hidden fees.</div>
-            </div>
-          </div>
-          <!-- Scroll prompt -->
-          <div class="scroll-prompt">
-            <div class="scroll-text">SCROLL TO EXPLORE</div>
-            <div class="scroll-wheel"></div>
-          </div>
-        </div>
-
-        <!-- Tagline now lives BELOW the lightning hero -->
-        <p class="hero-tagline">Open-source, decentralized technology powering the next generation of fintech.<br>Data sovereignty. Community wealth. Intelligent automation.</p>
-
-        <!-- OLD SVG Circuit Removed -->
-        <div class="svg-circuit" style="display: none;">
-          <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="display:none;">
-            <defs>
-              <linearGradient id="lightningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#64c8ff;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#00ff88;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#64c8ff;stop-opacity:1" />
-              </linearGradient>
-
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-
-              <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#1a3a52;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#0d1f2d;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-
-            <!-- Lightning paths connecting to central node -->
-            <!-- Top path -->
-            <path class="lightning-glow" d="M 700 150 Q 700 250, 700 350" />
-            <path class="lightning-path" d="M 700 150 Q 700 250, 700 350" />
-
-            <!-- Top-left path -->
-            <path class="lightning-glow" d="M 500 200 Q 550 300, 600 380" />
-            <path class="lightning-path" d="M 500 200 Q 550 300, 600 380" />
-
-            <!-- Top-right path -->
-            <path class="lightning-glow" d="M 900 200 Q 850 300, 800 380" />
-            <path class="lightning-path" d="M 900 200 Q 850 300, 800 380" />
-
-            <!-- Left path -->
-            <path class="lightning-glow" d="M 250 450 Q 450 450, 600 450" />
-            <path class="lightning-path" d="M 250 450 Q 450 450, 600 450" />
-
-            <!-- Right path -->
-            <path class="lightning-glow" d="M 1150 450 Q 950 450, 800 450" />
-            <path class="lightning-path" d="M 1150 450 Q 950 450, 800 450" />
-
-            <!-- Bottom-left path -->
-            <path class="lightning-glow" d="M 500 700 Q 550 600, 600 520" />
-            <path class="lightning-path" d="M 500 700 Q 550 600, 600 520" />
-
-            <!-- Bottom-right path -->
-            <path class="lightning-glow" d="M 900 700 Q 850 600, 800 520" />
-            <path class="lightning-path" d="M 900 700 Q 850 600, 800 520" />
-
-            <!-- Bottom path -->
-            <path class="lightning-glow" d="M 700 750 Q 700 650, 700 550" />
-            <path class="lightning-path" d="M 700 750 Q 700 650, 700 550" />
-
-            <!-- Connector dots along paths -->
-            <circle class="connector-dot" cx="700" cy="250" r="4" />
-            <circle class="connector-dot" cx="575" cy="290" r="4" />
-            <circle class="connector-dot" cx="825" cy="290" r="4" />
-            <circle class="connector-dot" cx="425" cy="450" r="4" />
-            <circle class="connector-dot" cx="1075" cy="450" r="4" />
-            <circle class="connector-dot" cx="575" cy="610" r="4" />
-            <circle class="connector-dot" cx="825" cy="610" r="4" />
-            <circle class="connector-dot" cx="700" cy="650" r="4" />
-
-            <!-- CENTER: ILLY ROBOTIC INSTRUMENTS -->
-            <g class="product-logo" onclick="navigateTo('#')">
-              <rect x="600" y="350" width="200" height="200" fill="none" />
-              <image href="assets/illy-robotic.png" x="600" y="350" width="200" height="200" preserveAspectRatio="xMidYMid meet" />
-            </g>
-
-            <!-- TOP: Coindrop -->
-            <g class="product-logo" onclick="navigateTo('https://coindrop.in/')">
-              <rect x="600" y="50" width="200" height="150" fill="none" />
-              <text x="700" y="130" text-anchor="middle" font-size="20" font-weight="700" fill="#64c8ff">Coindrop</text>
-            </g>
-
-            <!-- TOP-LEFT: DisCryptoBank -->
-            <g class="product-logo" onclick="navigateTo('/products/discryptobank/')">
-              <image href="assets/discryptobank.png" x="320" y="100" width="160" height="160" preserveAspectRatio="xMidYMid meet" />
-            </g>
-
-            <!-- TOP-RIGHT: I-RIS -->
-            <g class="product-logo" onclick="navigateTo('https://www.iris-ecosystem.com/')">
-              <image href="assets/i-ris.png" x="920" y="100" width="160" height="160" preserveAspectRatio="xMidYMid meet" />
-            </g>
-
-            <!-- LEFT: LIVEPAY -->
-            <g class="product-logo" onclick="navigateTo('https://www.livepay.io/')">
-              <rect x="80" y="350" width="170" height="200" fill="none" />
-              <text x="165" y="440" text-anchor="middle" font-size="18" font-weight="700" fill="#00ff88">LIVEPAY</text>
-              <text x="165" y="465" text-anchor="middle" font-size="12" fill="#a0b0d0">Digital Commerce</text>
-            </g>
-
-            <!-- RIGHT: ILLY BEAST GAMING -->
-            <g class="product-logo" onclick="navigateTo('https://www.illybeastgaming.com/')">
-              <rect x="1150" y="350" width="170" height="200" fill="none" />
-              <text x="1235" y="435" text-anchor="middle" font-size="16" font-weight="700" fill="#64c8ff">Illy Beast</text>
-              <text x="1235" y="460" text-anchor="middle" font-size="16" font-weight="700" fill="#64c8ff">Gaming</text>
-            </g>
-
-            <!-- BOTTOM-RIGHT: Squad REN -->
-            <g class="product-logo" onclick="navigateTo('https://www.squad-ren.com/')">
-              <rect x="850" y="700" width="200" height="150" fill="none" />
-              <text x="950" y="785" text-anchor="middle" font-size="20" font-weight="700" fill="#00ff88">Squad REN</text>
-              <text x="950" y="810" text-anchor="middle" font-size="12" fill="#a0b0d0">Team Platform</text>
-            </g>
-
-            <!-- BOTTOM: IllySocial -->
-            <g class="product-logo" onclick="navigateTo('https://www.illysocial.io/')">
-              <image href="assets/illysocial.png" x="600" y="700" width="200" height="150" preserveAspectRatio="xMidYMid meet" />
-            </g>
-
-            <!-- IRC Gaming -->
-            <g class="product-logo" onclick="navigateTo('https://www.illyrushcasino.com/')">
-              <rect x="1200" y="650" width="170" height="170" fill="none" />
-              <text x="1285" y="740" text-anchor="middle" font-size="18" font-weight="700" fill="#64c8ff">IRC</text>
-              <text x="1285" y="765" text-anchor="middle" font-size="11" fill="#a0b0d0">Gaming Network</text>
-            </g>
-          </svg>
-        </div>
-
-      </div>
+      <!-- Pages 1-11: one caption card per product station (injected by JS) -->
+      <div id="rndCaptions"></div>
     </div>
   </div>
-  </div><!-- /bg-band-hero -->
 
   <!-- ===== Background Band 1: Flagship Products ===== -->
   <div class="bg-band bg-band-1">
@@ -3283,14 +3181,6 @@
         carousel.addEventListener('mouseleave', startCarousel);
       }
 
-      // Kick off the ambient lightning storm so visitors immediately see the effect
-      startAmbientStorm();
-      const tree = document.querySelector('.product-tree-container');
-      if (tree) {
-        tree.addEventListener('mouseenter', stopAmbientStorm);
-        tree.addEventListener('mouseleave', startAmbientStorm);
-      }
-
       const track = document.getElementById('psliderTrack');
       if (track) {
         const slides = track.querySelectorAll('.product-slide');
@@ -3319,386 +3209,346 @@
     });
   </script>
 
-  <!-- Fulcrum Rolling Arm Controller -->
+  <!-- ═══════ ILLY R&D LABS corridor scene — vanilla Three.js port of isocial LabScene.jsx ═══════ -->
   <script>
-    (function() {
-      const labHero = document.getElementById('labHero');
-      const fulcrumBase = document.getElementById('fulcrumBase');
-      const armCanvas = document.getElementById('armCanvas');
-      if (!labHero || !fulcrumBase || !armCanvas) return;
+    (function () {
+      'use strict';
 
-      const ctx = armCanvas.getContext('2d');
-      let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let selectedOrb = null;
-      let basePos = { x: 0, y: 0 }, baseTarget = { x: 0, y: 0 };
-      let armTarget = null, armEased = { x: 0, y: 0 };
-      let baseRotation = 0, baseRotationTarget = 0;
-
-      // Build orb map from new structure
-      const orbMap = {};
-      document.querySelectorAll('.orb-slot').forEach(slot => {
-        const orb = slot.dataset.orb;
-        const tier = parseInt(slot.dataset.tier, 10);
-        const row = slot.closest('.lab-shelf-row');
-        const rect = slot.getBoundingClientRect();
-        const rowRect = row.getBoundingClientRect();
-        orbMap[orb] = {
-          tier,
-          el: slot,
-          row,
-          data: { product: slot.dataset.product, name: slot.dataset.name }
-        };
-      });
-
-      function resize() {
-        const r = labHero.getBoundingClientRect();
-        W = armCanvas.width = r.width * dpr;
-        H = armCanvas.height = r.height * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      // Click handler
-      document.addEventListener('click', (e) => {
-        const slot = e.target.closest('.orb-slot');
-        if (!slot) return;
-        const orb = slot.dataset.orb;
-        if (!orbMap[orb]) return;
-
-        if (selectedOrb === orb) {
-          selectOrb(null);
-        } else {
-          selectOrb(orb);
-        }
-      });
-
-      function selectOrb(orb) {
-        if (orb === selectedOrb) return;
-
-        // Deselect previous
-        if (selectedOrb && orbMap[selectedOrb]) {
-          returnOrb(selectedOrb);
-        }
-
-        selectedOrb = orb;
-
-        if (!orb) {
-          // Return to center
-          baseTarget = { x: 0, y: 0 };
-          baseRotationTarget = 0;
-          armTarget = null;
-          return;
-        }
-
-        // Get orb's position on shelf
-        const info = orbMap[orb];
-        const slot = info.el;
-        const row = info.row;
-        const slotRect = slot.getBoundingClientRect();
-        const rowRect = row.getBoundingClientRect();
-        const heroRect = labHero.getBoundingClientRect();
-
-        // Calculate orb position relative to hero center
-        const orbCenterX = slotRect.left - heroRect.left + slotRect.width / 2;
-        const orbCenterY = slotRect.top - heroRect.top + slotRect.height / 2;
-        const heroCenterX = heroRect.width / 2;
-        const heroCenterY = heroRect.height / 2;
-
-        const offsetX = orbCenterX - heroCenterX;
-        const offsetY = orbCenterY - heroCenterY;
-
-        // Fulcrum target position (rolls to orb X, stays near its Y tier)
-        baseTarget = { x: offsetX * 0.6, y: 0 }; // Reduced horizontal swing for visibility
-        baseRotationTarget = Math.atan2(offsetY, offsetX) * (180 / Math.PI);
-        armTarget = { x: offsetX * 0.6, y: offsetY };
-
-        // Pull after arm reaches
-        setTimeout(() => { if (selectedOrb === orb) pullOrb(orb); }, 700);
-      }
-
-      function pullOrb(orb) {
-        if (selectedOrb !== orb || !orbMap[orb]) return;
-        const slot = orbMap[orb].el;
-        slot.classList.add('pulled');
-      }
-
-      function returnOrb(orb) {
-        if (!orbMap[orb]) return;
-        const slot = orbMap[orb].el;
-        slot.classList.remove('pulled');
-      }
-
-      function frame(now) {
-        const easeK = 0.16;
-        basePos.x += (baseTarget.x - basePos.x) * easeK;
-        basePos.y += (baseTarget.y - basePos.y) * easeK;
-        baseRotation += (baseRotationTarget - baseRotation) * easeK * 0.5;
-
-        // Calculate left position for fulcrum (center is 50%)
-        const heroRect = labHero.getBoundingClientRect();
-        const heroCenterX = heroRect.width / 2;
-        const leftPercent = 50 + (basePos.x / heroCenterX) * 25; // ±25% sweep from center
-        fulcrumBase.style.left = Math.max(20, Math.min(80, leftPercent)) + '%';
-
-        // Arm easing
-        if (armTarget) {
-          armEased.x += (armTarget.x - armEased.x) * easeK;
-          armEased.y += (armTarget.y - armEased.y) * easeK;
-        }
-
-        // Draw arm
-        ctx.clearRect(0, 0, W, H);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        if (armTarget && selectedOrb) {
-          // Arm base at fulcrum center
-          const basePt = { x: W / (2 * dpr), y: H / (2 * dpr) - 60 };
-          const tipPt = {
-            x: W / (2 * dpr) + armEased.x / dpr,
-            y: H / (2 * dpr) - 60 + armEased.y / dpr
-          };
-
-          // Metallic chrome arm segments
-          ctx.strokeStyle = '#c8dcf0';
-          ctx.lineWidth = 12;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.filter = 'drop-shadow(0 0 8px rgba(0,255,136,0.5))';
-
-          const dx = tipPt.x - basePt.x;
-          const dy = tipPt.y - basePt.y;
-          const dist = Math.hypot(dx, dy);
-
-          if (dist > 0) {
-            const angle = Math.atan2(dy, dx);
-            const midX = basePt.x + Math.cos(angle) * 80;
-            const midY = basePt.y + Math.sin(angle) * 80;
-
-            // Upper segment
-            ctx.beginPath();
-            ctx.moveTo(basePt.x, basePt.y);
-            ctx.lineTo(midX, midY);
-            ctx.stroke();
-
-            // Lower segment
-            ctx.beginPath();
-            ctx.moveTo(midX, midY);
-            ctx.lineTo(tipPt.x, tipPt.y);
-            ctx.stroke();
-
-            // Gripper (servo-style)
-            ctx.strokeStyle = '#00ff88';
-            ctx.lineWidth = 5;
-            const gripAngle = angle + 0.4;
-            ctx.beginPath();
-            ctx.moveTo(tipPt.x, tipPt.y);
-            ctx.lineTo(tipPt.x + Math.cos(gripAngle) * 30, tipPt.y + Math.sin(gripAngle) * 30);
-            ctx.stroke();
-
-            const gripAngle2 = angle - 0.4;
-            ctx.beginPath();
-            ctx.moveTo(tipPt.x, tipPt.y);
-            ctx.lineTo(tipPt.x + Math.cos(gripAngle2) * 30, tipPt.y + Math.sin(gripAngle2) * 30);
-            ctx.stroke();
-          }
-
-          ctx.filter = 'none';
-        }
-
-        requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    })();
-
-    // ===== Three.js R&D 3D Interactive Hero =====
-    (function() {
-      if (typeof THREE === 'undefined') {
-        console.error('Three.js not loaded');
-        return;
-      }
-
-      const canvas = document.getElementById('r3dCanvas');
-      if (!canvas) {
-        console.error('Canvas element not found');
-        return;
-      }
-
-      try {
-        // Scene setup
-        const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x0a0e12);
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-      camera.position.z = 3;
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-
-      // Lighting
-      const light1 = new THREE.PointLight(0x00ffb8, 1.5, 1000);
-      light1.position.set(5, 5, 5);
-      scene.add(light1);
-      const light2 = new THREE.PointLight(0x64c8ff, 1, 1000);
-      light2.position.set(-5, -5, 5);
-      scene.add(light2);
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-      scene.add(ambientLight);
-
-      // Starfield background
-      const starsGeometry = new THREE.BufferGeometry();
-      const starPositions = new Float32Array(1000 * 3);
-      for (let i = 0; i < starPositions.length; i += 3) {
-        starPositions[i] = (Math.random() - 0.5) * 100;
-        starPositions[i + 1] = (Math.random() - 0.5) * 100;
-        starPositions[i + 2] = (Math.random() - 0.5) * 100;
-      }
-      starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-      const starsMaterial = new THREE.PointsMaterial({ color: 0x64c8ff, size: 0.1 });
-      const stars = new THREE.Points(starsGeometry, starsMaterial);
-      scene.add(stars);
-
-      // Concentric circles (wireframe torus rings)
-      const ringGeometry1 = new THREE.TorusGeometry(1.5, 0.02, 32, 100);
-      const ringGeometry2 = new THREE.TorusGeometry(2.2, 0.02, 32, 100);
-      const ringGeometry3 = new THREE.TorusGeometry(2.9, 0.02, 32, 100);
-      const ringMaterial = new THREE.MeshBasicMaterial({ color: 0x00ffb8, transparent: true, opacity: 0.6 });
-      const ring1 = new THREE.Mesh(ringGeometry1, ringMaterial);
-      const ring2 = new THREE.Mesh(ringGeometry2, ringMaterial);
-      const ring3 = new THREE.Mesh(ringGeometry3, ringMaterial);
-      scene.add(ring1, ring2, ring3);
-
-      // Center badge (sphere with glow)
-      const badgeGeometry = new THREE.SphereGeometry(0.5, 32, 32);
-      const badgeMaterial = new THREE.MeshStandardMaterial({
-        color: 0x00ffb8,
-        emissive: 0x00ffb8,
-        emissiveIntensity: 0.5,
-        metalness: 0.8,
-        roughness: 0.2
-      });
-      const badge = new THREE.Mesh(badgeGeometry, badgeMaterial);
-      scene.add(badge);
-
-      // 11 Products positioned in orbit
-      const products = [
-        { name: 'Coindrop', url: 'https://coindrop.in/', angle: 0 },
-        { name: 'DisCryptoBank', url: 'https://dcb-gm.com/', angle: Math.PI * 2 / 11 },
-        { name: 'IRAI Academy', url: 'https://www.illyrobotic-ai.com/IR-AIcademy/', angle: Math.PI * 4 / 11 },
-        { name: 'WorldSAR', url: 'https://illmedicine.github.io/IR-SAR-VUE/', angle: Math.PI * 6 / 11 },
-        { name: 'SocialPlug', url: '/socialplug/', angle: Math.PI * 8 / 11 },
-        { name: 'IllySocial', url: '/isocial/', angle: Math.PI * 10 / 11 },
-        { name: 'LivePay', url: 'https://www.livepay.io/', angle: Math.PI * 12 / 11 },
-        { name: 'SquadREN', url: 'https://www.squad-ren.com/', angle: Math.PI * 14 / 11 },
-        { name: 'I-RIS', url: 'http://illy-ris.com/movie.html', angle: Math.PI * 16 / 11 },
-        { name: 'Web Designs', url: 'https://www.illyrobotic-ai.com/web-designs/', angle: Math.PI * 18 / 11 },
-        { name: 'ResiGrid', url: 'https://resigrid.co/', angle: Math.PI * 20 / 11 }
+      // ── Ecosystem stations, in walk order ────────────────────────────────
+      var STATIONS = [
+        { key: 'illysocial',    name: 'Illy Social',    role: 'Community Engine',        tagline: 'Community engagement scaler with built-in data sovereignty and wealth distribution. Connect. Collaborate. Grow.',                       logo: 'assets/illysocial.png',      color: '#8b7bff', accent: '#c4b5fd', url: '/isocial/' },
+        { key: 'discryptobank', name: 'DisCryptoBank',  role: 'The Task Generators',     tagline: 'Discord-native crypto payroll engine. Budgets split into micro-bounties routed to a 100k+ member Discord network, paid in SOL.',           logo: 'assets/discryptobank.png',   color: '#22d3ee', accent: '#67e8f9', url: 'https://dcb-gm.com/' },
+        { key: 'coindrop',      name: 'CoinDrop',       role: 'Global Monetization',     tagline: 'Watch · Engage · Earn. Complete short social tasks and earn Solana daily — 190+ countries, instant payouts, no minimum withdrawal.',       logo: 'assets/coindrop.png',        color: '#f59e0b', accent: '#fcd34d', url: 'https://coindrop.in/' },
+        { key: 'iris',          name: 'I-RIS',          role: 'The Content Hub',         tagline: 'Illy Robotic Studios — original IP, music, podcast, and video production powering the ecosystem.',                                        logo: 'assets/i-ris.png',           color: '#a78bfa', accent: '#ddd6fe', url: 'http://illy-ris.com/movie.html' },
+        { key: 'socialplug',    name: 'Social Plug',    role: 'The Viral Multiplier',    tagline: 'Growth-driven social marketing engine — content distribution, technical SEO, and creative growth on autopilot.',                          logo: 'assets/socialplug.png',      color: '#34d399', accent: '#6ee7b7', url: '/socialplug/' },
+        { key: 'livepay',       name: 'LivePay',        role: 'Data Monetization',       tagline: 'Real-time personal data monetization — own your data, earn your value, with instant 24/7 transfers.',                                     logo: 'assets/livepay.png',         color: '#00ff88', accent: '#86efac', url: 'https://www.livepay.io/' },
+        { key: 'squadren',      name: 'SquadREN',       role: 'Group Transit',           tagline: 'Group transit, redefined. Book a seat on a shared route or charter a full van and ride with your squad.',                                  logo: 'assets/squad-ren-logo.png',  color: '#f472b6', accent: '#f9a8d4', url: 'https://www.squad-ren.com/' },
+        { key: 'irai',          name: 'IRAI Academy',   role: 'AI Training Ground',      tagline: 'Hands-on AI & automation training. Project-based curriculum that connects to real Illy Robotic products.',                                 logo: 'assets/irai-academy.png',    color: '#60a5fa', accent: '#93c5fd', url: 'https://www.illyrobotic-ai.com/IR-AIcademy/' },
+        { key: 'worldsar',      name: 'WorldSAR',       role: 'Search & Rescue',         tagline: 'Search & Rescue Vue — real-time incident aggregation, volunteer coordination, and open response data.',                                    logo: 'assets/worldsar.png',        color: '#2dd4bf', accent: '#5eead4', url: 'https://illmedicine.github.io/IR-SAR-VUE/' },
+        { key: 'webdesigns',    name: 'Web Designs',    role: 'Creative Engineering',    tagline: 'Custom, high-converting websites for brands and creators — AI-powered creation and full-stack engineering.',                               logo: 'assets/webdesigns.png',      color: '#c084fc', accent: '#e9d5ff', url: 'https://www.illyrobotic-ai.com/web-designs/' },
+        { key: 'resigrid',      name: 'ResiGrid',       role: 'Fair Data Property',      tagline: 'The world\'s only property management platform built on Fair Data. On-time payments become a globally recognized RGE Score.',              logo: 'assets/resigrid.png',        color: '#fb923c', accent: '#fdba74', url: 'https://resigrid.co/' }
       ];
 
-      const productSpheres = [];
-      products.forEach(product => {
-        const geometry = new THREE.SphereGeometry(0.3, 32, 32);
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x64c8ff,
-          emissive: 0x00ffb8,
-          emissiveIntensity: 0.3,
-          metalness: 0.6,
-          roughness: 0.4
-        });
-        const sphere = new THREE.Mesh(geometry, material);
-        sphere.position.x = Math.cos(product.angle) * 2.2;
-        sphere.position.y = Math.sin(product.angle) * 2.2;
-        sphere.userData = { url: product.url, name: product.name };
-        sphere.userData.originalPos = sphere.position.clone();
-        scene.add(sphere);
-        productSpheres.push(sphere);
+      var STATION_Z0 = -18;   // z of the first station
+      var STATION_GAP = -17;  // spacing between stations
+      var PAGES = STATIONS.length + 2;
+      var LAST_Z = STATION_Z0 + (STATIONS.length - 1) * STATION_GAP;
+      var CAM_START = 12;
+      var CAM_END = LAST_Z - 32;
+
+      var track = document.getElementById('rndTrack');
+      var canvas = document.getElementById('rndCanvas');
+      var captionsHost = document.getElementById('rndCaptions');
+      var hint = document.getElementById('rndScrollHint');
+      if (!track || !canvas) return;
+
+      // ── WebGL detection with graceful fallback ───────────────────────────
+      var hasWebGL = (function () {
+        try {
+          var c = document.createElement('canvas');
+          return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+        } catch (e) { return false; }
+      })();
+
+      // ── Inject DOM caption cards (pages 1..11) ───────────────────────────
+      STATIONS.forEach(function (s, i) {
+        var sec = document.createElement('section');
+        sec.className = 'rnd-caption ' + (i % 2 ? 'right' : 'left');
+        sec.style.top = ((i + 1) * 100) + 'vh';
+        sec.innerHTML =
+          '<div class="rnd-card">' +
+            '<div class="rnd-node">NODE ' + String(i + 1).padStart(2, '0') + ' / ' + STATIONS.length + '</div>' +
+            '<h2>' + s.name + '</h2>' +
+            '<div class="rnd-role" style="color:' + s.accent + '">' + s.role + '</div>' +
+            '<p>' + s.tagline + '</p>' +
+            '<a class="rnd-visit" href="' + s.url + '">Visit ' + s.name + ' &rarr;</a>' +
+          '</div>';
+        captionsHost.appendChild(sec);
       });
 
-      // Raycaster for mouse picking
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2();
-
-      // Mouse move for glow effect
-      document.addEventListener('mousemove', (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(productSpheres);
-        productSpheres.forEach(sphere => {
-          if (intersects.length > 0 && intersects[0].object === sphere) {
-            sphere.scale.set(1.2, 1.2, 1.2);
-            sphere.material.emissiveIntensity = 0.8;
-            document.body.style.cursor = 'pointer';
-          } else {
-            sphere.scale.set(1, 1, 1);
-            sphere.material.emissiveIntensity = 0.3;
-            document.body.style.cursor = 'default';
-          }
+      if (!hasWebGL || typeof THREE === 'undefined') {
+        // Static fallback: badge + clickable logo row, no scroll corridor.
+        track.style.height = 'auto';
+        var sticky = track.querySelector('.rnd-sticky');
+        if (sticky) sticky.style.display = 'none';
+        var dom = track.querySelector('.rnd-dom');
+        if (dom) { dom.style.position = 'relative'; dom.style.pointerEvents = 'auto'; }
+        var intro = track.querySelector('.rnd-intro');
+        if (intro) { intro.style.position = 'relative'; intro.classList.add('rnd-fallback'); }
+        var row = document.createElement('div');
+        row.className = 'row';
+        STATIONS.forEach(function (s) {
+          row.innerHTML += '<a href="' + s.url + '" title="' + s.name + '"><img src="' + s.logo + '" alt="' + s.name + '" loading="lazy"></a>';
         });
-      });
+        if (intro) intro.appendChild(row);
+        captionsHost.querySelectorAll('section').forEach(function (sec) {
+          sec.style.position = 'relative'; sec.style.top = 'auto'; sec.style.height = 'auto'; sec.style.padding = '30px 8vw';
+        });
+        return;
+      }
 
-      // Click handler for products
-      document.addEventListener('click', (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(productSpheres);
-        if (intersects.length > 0) {
-          const url = intersects[0].object.userData.url;
-          window.location.href = url;
+      // ── Renderer / scene / camera ────────────────────────────────────────
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      var scene = new THREE.Scene();
+      scene.background = new THREE.Color('#04050d');
+      scene.fog = new THREE.Fog('#04050d', 14, 82);
+
+      var camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 400);
+      camera.position.set(0, 0.5, CAM_START);
+
+      // ── Starfield ────────────────────────────────────────────────────────
+      (function makeStars() {
+        var n = 2600, pos = new Float32Array(n * 3);
+        for (var i = 0; i < n; i++) {
+          // shell distribution like drei <Stars radius=150 depth=70>
+          var r = 150 + Math.random() * 70;
+          var theta = Math.random() * Math.PI * 2;
+          var phi = Math.acos(2 * Math.random() - 1);
+          pos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+          pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
+          pos[i * 3 + 2] = r * Math.cos(phi) - 60;
         }
+        var g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        var m = new THREE.PointsMaterial({ color: '#ffffff', size: 0.9, sizeAttenuation: true, transparent: true, opacity: 0.85, fog: false });
+        scene.add(new THREE.Points(g, m));
+      })();
+
+      // ── Sparkles drifting down the corridor ──────────────────────────────
+      var sparkles;
+      (function makeSparkles() {
+        var n = 220, pos = new Float32Array(n * 3);
+        for (var i = 0; i < n; i++) {
+          pos[i * 3]     = (Math.random() - 0.5) * 26;
+          pos[i * 3 + 1] = (Math.random() - 0.5) * 10 + 0.5;
+          pos[i * 3 + 2] = -Math.random() * 250 + 15;
+        }
+        var g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        var m = new THREE.PointsMaterial({ color: '#8b7bff', size: 0.14, sizeAttenuation: true, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false });
+        sparkles = new THREE.Points(g, m);
+        scene.add(sparkles);
+      })();
+
+      // ── Neon floor grid (cell + section layers, fog does the fading) ────
+      (function makeGrid() {
+        var cell = new THREE.GridHelper(300, 250, '#1b2450', '#1b2450');
+        cell.position.set(0, -3.7, -80);
+        cell.material.transparent = true; cell.material.opacity = 0.55;
+        scene.add(cell);
+        var section = new THREE.GridHelper(300, 50, '#4c3aa8', '#4c3aa8');
+        section.position.set(0, -3.69, -80);
+        section.material.transparent = true; section.material.opacity = 0.8;
+        scene.add(section);
+      })();
+
+      // ── Corridor gate rings, receding into the dark ──────────────────────
+      (function makeGates() {
+        var gateGeo = new THREE.TorusGeometry(7.6, 0.05, 12, 72);
+        for (var i = 0; i < 22; i++) {
+          var m = new THREE.MeshBasicMaterial({ color: i % 2 ? '#22d3ee' : '#7c5cff', transparent: true, opacity: 0.5 });
+          var gate = new THREE.Mesh(gateGeo, m);
+          gate.position.set(0, 0.5, 7 - i * 11);
+          scene.add(gate);
+        }
+      })();
+
+      // ── Rounded-rect geometry helper (stand-in for drei RoundedBox) ─────
+      function roundedRectGeo(w, h, r) {
+        var s = new THREE.Shape();
+        var x = -w / 2, y = -h / 2;
+        s.moveTo(x + r, y);
+        s.lineTo(x + w - r, y);  s.quadraticCurveTo(x + w, y, x + w, y + r);
+        s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        s.lineTo(x + r, y + h);  s.quadraticCurveTo(x, y + h, x, y + h - r);
+        s.lineTo(x, y + r);      s.quadraticCurveTo(x, y, x + r, y);
+        return new THREE.ShapeGeometry(s, 8);
+      }
+
+      // ── Product stations: halo ring + glass card + logo + floor pool ────
+      var texLoader = new THREE.TextureLoader();
+      var stationGroups = [];
+      var clickables = [];
+
+      STATIONS.forEach(function (s, i) {
+        var side = i % 2 ? 1 : -1;
+        var z = STATION_Z0 + i * STATION_GAP;
+        var group = new THREE.Group();
+        group.position.set(side * 3.1, 0.6, z);
+        group.rotation.y = -side * 0.3;
+
+        var floatGroup = new THREE.Group();
+        group.add(floatGroup);
+
+        // halo ring
+        var halo = new THREE.Mesh(
+          new THREE.TorusGeometry(3.05, 0.045, 16, 90),
+          new THREE.MeshBasicMaterial({ color: s.accent })
+        );
+        floatGroup.add(halo);
+
+        // rim glow behind the card
+        var rim = new THREE.Mesh(
+          roundedRectGeo(5.35, 5.35, 0.26),
+          new THREE.MeshBasicMaterial({ color: s.color, transparent: true, opacity: 0.2 })
+        );
+        rim.position.z = -0.14;
+        floatGroup.add(rim);
+
+        // glass card
+        var card = new THREE.Mesh(
+          roundedRectGeo(5, 5, 0.22),
+          new THREE.MeshBasicMaterial({ color: '#0a0e1f', transparent: true, opacity: 0.66 })
+        );
+        floatGroup.add(card);
+
+        // logo
+        var tex = texLoader.load(s.logo);
+        tex.encoding = THREE.sRGBEncoding;
+        var logo = new THREE.Mesh(
+          new THREE.PlaneGeometry(3.7, 3.7),
+          new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+        );
+        logo.position.z = 0.22;
+        logo.userData.url = s.url;
+        logo.userData.name = s.name;
+        floatGroup.add(logo);
+        clickables.push(logo);
+
+        // floor light pool
+        var pool = new THREE.Mesh(
+          new THREE.CircleGeometry(3.4, 48),
+          new THREE.MeshBasicMaterial({ color: s.color, transparent: true, opacity: 0.12 })
+        );
+        pool.rotation.x = -Math.PI / 2;
+        pool.position.set(0, -3.7, 0);
+        group.add(pool);
+
+        scene.add(group);
+        stationGroups.push({ float: floatGroup, phase: i * 1.7, logo: logo });
       });
 
-      // Scroll handler
-      let scrollY = 0;
-      window.addEventListener('scroll', () => {
-        scrollY = window.scrollY;
+      // ── Arrival portal at the end of the walk ────────────────────────────
+      var portalGroup = new THREE.Group();
+      var portalRing = new THREE.Mesh(
+        new THREE.TorusGeometry(5.6, 0.16, 24, 90),
+        new THREE.MeshBasicMaterial({ color: '#8b7bff' })
+      );
+      portalRing.position.set(0, 0.5, LAST_Z - 12);
+      var portalDisc = new THREE.Mesh(
+        new THREE.CircleGeometry(5.5, 64),
+        new THREE.MeshBasicMaterial({ color: '#0a0e1f', transparent: true, opacity: 0.7 })
+      );
+      portalDisc.position.set(0, 0.5, LAST_Z - 12.4);
+      portalGroup.add(portalRing, portalDisc);
+      scene.add(portalGroup);
+
+      // ── Bloom postprocessing ─────────────────────────────────────────────
+      var composer = null;
+      try {
+        if (THREE.EffectComposer && THREE.RenderPass && THREE.UnrealBloomPass) {
+          composer = new THREE.EffectComposer(renderer);
+          composer.addPass(new THREE.RenderPass(scene, camera));
+          var bloom = new THREE.UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight), 0.9, 0.55, 0.25
+          );
+          composer.addPass(bloom);
+        }
+      } catch (e) { composer = null; }
+
+      // ── Scroll rig (damped, like drei ScrollControls damping) ───────────
+      var offset = 0;      // eased 0..1
+      var offsetGoal = 0;  // raw 0..1
+
+      function readScroll() {
+        var rect = track.getBoundingClientRect();
+        var total = track.offsetHeight - window.innerHeight;
+        offsetGoal = Math.min(1, Math.max(0, -rect.top / Math.max(1, total)));
+        if (hint) hint.classList.toggle('hidden', offsetGoal > 0.02);
+      }
+      window.addEventListener('scroll', readScroll, { passive: true });
+      readScroll();
+
+      // ── Raycast hover / click on station logos ───────────────────────────
+      var raycaster = new THREE.Raycaster();
+      var pointer = new THREE.Vector2(-2, -2);
+      var hovered = null;
+
+      canvas.addEventListener('pointermove', function (e) {
+        var r = canvas.getBoundingClientRect();
+        pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+        pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+      });
+      canvas.addEventListener('click', function (e) {
+        var r = canvas.getBoundingClientRect();
+        pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+        pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+        raycaster.setFromCamera(pointer, camera);
+        var hits = raycaster.intersectObjects(clickables);
+        if (hits.length) window.location.href = hits[0].object.userData.url;
       });
 
-      // Resize handler
-      window.addEventListener('resize', () => {
+      // ── Resize ───────────────────────────────────────────────────────────
+      window.addEventListener('resize', function () {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        if (composer) composer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      // Animation loop
+      // ── Animation loop ───────────────────────────────────────────────────
+      var clock = new THREE.Clock();
+
       function animate() {
         requestAnimationFrame(animate);
+        var t = clock.getElapsedTime();
 
-        // Rotate rings
-        ring1.rotation.z += 0.001;
-        ring2.rotation.z -= 0.0015;
-        ring3.rotation.z += 0.0008;
+        // damped scroll
+        offset += (offsetGoal - offset) * 0.07;
+        var o = offset;
 
-        // Rotate badge
-        badge.rotation.x += 0.003;
-        badge.rotation.y += 0.005;
+        // camera walk with sway + bob (port of Rig())
+        var z = CAM_START + o * (CAM_END - CAM_START);
+        camera.position.x = Math.sin(o * Math.PI * 2) * 0.7;
+        camera.position.y = 0.5 + Math.sin(o * 9) * 0.12;
+        camera.position.z = z;
+        camera.lookAt(Math.sin((o + 0.03) * Math.PI * 2) * 0.5, 0.35, z - 12);
 
-        // Orbit products
-        productSpheres.forEach((sphere, index) => {
-          const angle = (Date.now() * 0.0001 + products[index].angle) % (Math.PI * 2);
-          sphere.position.x = Math.cos(angle) * 2.2;
-          sphere.position.y = Math.sin(angle) * 2.2;
-          sphere.rotation.x += 0.002;
-          sphere.rotation.y += 0.003;
-        });
+        // station float (port of drei <Float>)
+        for (var i = 0; i < stationGroups.length; i++) {
+          var sg = stationGroups[i];
+          sg.float.position.y = Math.sin(t * 1.1 + sg.phase) * 0.24;
+          sg.float.rotation.z = Math.sin(t * 0.55 + sg.phase) * 0.035;
+          sg.float.rotation.x = Math.sin(t * 0.4 + sg.phase * 2) * 0.02;
+        }
 
-        // Rotate starfield
-        stars.rotation.x += 0.00001;
-        stars.rotation.y += 0.00002;
+        // portal slow float
+        portalGroup.position.y = Math.sin(t * 0.7) * 0.12;
 
-        // Scroll effect - zoom camera based on scroll
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = scrollY / maxScroll;
-        camera.position.z = 3 + scrollPercent * 2;
+        // sparkle drift
+        if (sparkles) sparkles.position.y = Math.sin(t * 0.28) * 0.4;
 
-        renderer.render(scene, camera);
+        // hover raycast (cheap: only when pointer is on canvas)
+        raycaster.setFromCamera(pointer, camera);
+        var hits = raycaster.intersectObjects(clickables);
+        var hit = hits.length ? hits[0].object : null;
+        if (hit !== hovered) {
+          if (hovered) hovered.scale.set(1, 1, 1);
+          hovered = hit;
+          if (hovered) hovered.scale.set(1.08, 1.08, 1.08);
+          canvas.style.cursor = hovered ? 'pointer' : 'default';
+        }
+
+        if (composer) composer.render();
+        else renderer.render(scene, camera);
       }
       animate();
-      } catch (error) {
-        console.error('Three.js hero initialization error:', error);
-      }
     })();
   </script>
+
 </body>
 </html>
