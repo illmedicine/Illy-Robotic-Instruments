@@ -3513,11 +3513,20 @@
 
     // ===== Three.js R&D 3D Interactive Hero =====
     (function() {
-      const canvas = document.getElementById('r3dCanvas');
-      if (!canvas) return;
+      if (typeof THREE === 'undefined') {
+        console.error('Three.js not loaded');
+        return;
+      }
 
-      // Scene setup
-      const scene = new THREE.Scene();
+      const canvas = document.getElementById('r3dCanvas');
+      if (!canvas) {
+        console.error('Canvas element not found');
+        return;
+      }
+
+      try {
+        // Scene setup
+        const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0a0e12);
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
       camera.position.z = 3;
@@ -3686,6 +3695,9 @@
         renderer.render(scene, camera);
       }
       animate();
+      } catch (error) {
+        console.error('Three.js hero initialization error:', error);
+      }
     })();
   </script>
 </body>
