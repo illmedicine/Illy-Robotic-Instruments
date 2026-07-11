@@ -2654,7 +2654,9 @@
         const el = (leader && leader.querySelector('.tree-product-logo')) || leader;
         if (!el) return { x: W / 2, y: H / 2 };
         const r = el.getBoundingClientRect();
-        return { x: r.left - cRect.left + r.width / 2, y: r.top - cRect.top + r.height / 2 };
+        const cx = r.left - cRect.left + r.width / 2, cy = r.top - cRect.top + r.height / 2;
+        // Mount at the right edge of the shield, so the arm extends outward as an appendage
+        return { x: cx + r.width * 0.32, y: cy - r.height * 0.06 };
       }
 
       function resize() {
@@ -2719,9 +2721,10 @@
         last = now;
 
         let goal = target;
-        if (goal) { const b = basePt(); goal = { x: b.x + (goal.x - b.x) * 0.86, y: b.y + (goal.y - b.y) * 0.86 }; }
-        else { if (!home) setHome(); const t = now * 0.0005; goal = { x: home.x + Math.cos(t) * 42, y: home.y + Math.sin(t * 1.2) * 26 }; }
-        const k = reduce ? 1 : 0.14;
+        if (goal) { const b = basePt(); goal = { x: b.x + (goal.x - b.x) * 0.88, y: b.y + (goal.y - b.y) * 0.88 }; }
+        else { if (!home) setHome(); const t = now * 0.0003; goal = { x: home.x + Math.cos(t) * 32, y: home.y + Math.sin(t * 1.1) * 20 }; }
+        // Fast, snappy servo motion — aggressive easing so the arm snaps to target
+        const k = reduce ? 1 : 0.32;
         eased.x += (goal.x - eased.x) * k; eased.y += (goal.y - eased.y) * k;
         fabrik(eased.x, eased.y);
 
@@ -2730,30 +2733,70 @@
         const clawA = { x: tip.x + Math.cos(ang + 0.5) * cl, y: tip.y + Math.sin(ang + 0.5) * cl };
         const clawB = { x: tip.x + Math.cos(ang - 0.5) * cl, y: tip.y + Math.sin(ang - 0.5) * cl };
 
-        buf.fill(0);
-        for (let i = 0; i < N; i++) {
-          const a = pts[i], b = pts[i + 1], segLen = dist(a, b), steps = Math.max(2, Math.ceil(segLen / (cellW * 0.6)));
-          const thick = 15 + (N - i) * 2.4; // thicker toward the mounted base
-          for (let s = 0; s <= steps; s++) { const t = s / steps; stamp(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, thick, 1.1); }
-        }
-        for (let j = 0; j <= N; j++) stamp(pts[j].x, pts[j].y, 20, 1.25); // beefier joints
-        [[tip, clawA], [tip, clawB]].forEach(seg => {
-          const a = seg[0], b = seg[1], L = dist(a, b), st = Math.max(2, Math.ceil(L / (cellW * 0.6)));
-          for (let s = 0; s <= st; s++) { const t = s / st; stamp(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, 10, 1.1); }
-        });
-
         ctx.clearRect(0, 0, W, H);
-        for (let gy = 0; gy < rows; gy++) {
-          for (let gx = 0; gx < cols; gx++) {
-            const v = buf[gy * cols + gx];
-            if (v <= 0.05) continue;
-            const g = Math.min(1, v);
-            const idx = Math.max(1, Math.min(ramp.length - 1, Math.round(g * (ramp.length - 1))));
-            const rr = Math.round(30 + 60 * g), gg = Math.round(180 + 75 * g), bb = Math.round(130 + 90 * g);
-            ctx.fillStyle = 'rgba(' + rr + ',' + gg + ',' + bb + ',' + Math.min(1, 0.55 + v).toFixed(2) + ')';
-            ctx.fillText(ramp[idx], gx * cellW, gy * cellH);
-          }
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        // A tapered, cylinder-shaded metallic beam from a->b (half-widths w1,w2)
+        function beam(a, b, w1, w2) {
+          const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1e-4;
+          const px = -dy / L, py = dx / L; // unit perpendicular
+          const mw = Math.max(w1, w2);
+          const g = ctx.createLinearGradient(a.x - px * mw, a.y - py * mw, a.x + px * mw, a.y + py * mw);
+          g.addColorStop(0.00, '#0e1216');
+          g.addColorStop(0.20, '#3d4650');
+          g.addColorStop(0.46, '#cfd9e2');
+          g.addColorStop(0.58, '#f6fafd');
+          g.addColorStop(0.78, '#565e68');
+          g.addColorStop(1.00, '#0b0e12');
+          ctx.beginPath();
+          ctx.moveTo(a.x + px * w1, a.y + py * w1);
+          ctx.lineTo(b.x + px * w2, b.y + py * w2);
+          ctx.lineTo(b.x - px * w2, b.y - py * w2);
+          ctx.lineTo(a.x - px * w1, a.y - py * w1);
+          ctx.closePath();
+          ctx.fillStyle = g;
+          ctx.fill();
+          // specular highlight rail near the top edge
+          ctx.beginPath();
+          ctx.moveTo(a.x + px * w1 * 0.45, a.y + py * w1 * 0.45);
+          ctx.lineTo(b.x + px * w2 * 0.45, b.y + py * w2 * 0.45);
+          ctx.lineWidth = Math.max(1, mw * 0.14);
+          ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+          ctx.stroke();
         }
+
+        // A servo joint hub with a brand-green accent ring
+        function joint(p, r) {
+          const rg = ctx.createRadialGradient(p.x - r * 0.32, p.y - r * 0.32, r * 0.1, p.x, p.y, r);
+          rg.addColorStop(0, '#f6fafd');
+          rg.addColorStop(0.45, '#8d97a2');
+          rg.addColorStop(0.82, '#2a3037');
+          rg.addColorStop(1, '#0a0d11');
+          ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = rg; ctx.fill();
+          ctx.beginPath(); ctx.arc(p.x, p.y, r * 0.7, 0, Math.PI * 2);
+          ctx.lineWidth = Math.max(1.5, r * 0.16);
+          ctx.strokeStyle = 'rgba(0,255,136,0.95)';
+          ctx.shadowColor = 'rgba(0,255,136,0.85)';
+          ctx.shadowBlur = r * 1.1;
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+          ctx.beginPath(); ctx.arc(p.x, p.y, r * 0.26, 0, Math.PI * 2);
+          ctx.fillStyle = '#0a0d11'; ctx.fill();
+        }
+
+        // Industrial factory arm: thick base taper to rigid tip
+        const wBase = 38, wTip = 14;
+        const wAt = (i) => wBase + (wTip - wBase) * (i / N);
+
+        for (let i = 0; i < N; i++) beam(pts[i], pts[i + 1], wAt(i), wAt(i + 1));
+        // gripper fingers — chunky industrial claw
+        beam(tip, clawA, 9, 5);
+        beam(tip, clawB, 9, 5);
+        // servo joints: visible industrial-grade hubs with heavy glow rings
+        for (let j = N; j >= 1; j--) joint(pts[j], wAt(j) * 0.9 + 5);
+        joint(pts[0], wBase * 1.35); // base mount: big servo housing
         requestAnimationFrame(frame);
       }
 
