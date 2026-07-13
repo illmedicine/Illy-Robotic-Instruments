@@ -43,22 +43,79 @@
     }
     html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
-    /* Sticky Top Nav */
+    /* ===== Initialization / boot loading screen ===== */
+    .init-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 50% 40%, #0a1130 0%, #04060f 68%, #000000 100%);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .init-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .init-inner { text-align: center; width: min(90vw, 460px); padding: 1rem; }
+    .init-logo-wrap {
+      position: relative;
+      width: 150px; height: 150px;
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .init-logo {
+      width: 130px; height: 130px; object-fit: contain;
+      animation: initPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes initPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 22px rgba(0,255,136,0.45)); }
+      50% { transform: scale(1.06); filter: drop-shadow(0 0 46px rgba(0,255,136,0.9)) drop-shadow(0 0 80px rgba(100,200,255,0.6)); }
+    }
+    .init-ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: #00ff88;
+      border-right-color: #64c8ff;
+      animation: initSpin 1.1s linear infinite;
+    }
+    @keyframes initSpin { to { transform: rotate(360deg); } }
+    .init-title {
+      margin-top: 1.6rem; font-weight: 800; letter-spacing: 3px; font-size: 1.05rem; color: #fff;
+    }
+    .init-sub {
+      margin-top: 0.45rem; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      background: linear-gradient(135deg, #64c8ff, #00ff88);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .init-bar {
+      margin: 1.6rem auto 0; width: 100%; height: 4px; border-radius: 4px;
+      background: rgba(100, 200, 255, 0.15); overflow: hidden;
+    }
+    .init-bar-fill {
+      width: 0%; height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, #64c8ff, #00ff88);
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.8);
+      transition: width 0.25s ease;
+    }
+    .init-log {
+      margin-top: 1rem; min-height: 1.2em;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.75rem; color: #8fb4e0; letter-spacing: 0.3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .init-logo, .init-ring { animation: none; }
+    }
+
+    /* Sticky Top Nav — borderless, transparent; only the floating badge shows */
     .topnav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(10, 14, 39, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(100, 200, 255, 0.18);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      background: transparent;
+      transition: background 0.3s ease;
       overflow: visible;
     }
-    .topnav.scrolled {
-      background: rgba(10, 14, 39, 0.92);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 30px rgba(0, 255, 136, 0.08);
-    }
+    .topnav.scrolled { background: transparent; }
     .topnav-inner {
       position: relative;
       max-width: 1300px;
@@ -2322,25 +2379,61 @@
   </style>
 </head>
 <body>
+  <!-- Initialization / boot loading screen (first landing) -->
+  <div id="initLoader" class="init-loader">
+    <div class="init-inner">
+      <div class="init-logo-wrap">
+        <img class="init-logo" src="assets/illy-robotic.png" alt="Illy Robotic Instruments" />
+        <div class="init-ring"></div>
+      </div>
+      <div class="init-title">ILLY ROBOTIC INSTRUMENTS</div>
+      <div class="init-sub">Initializing AI Mesh Architecture</div>
+      <div class="init-bar"><div class="init-bar-fill" id="initBarFill"></div></div>
+      <div class="init-log" id="initLog">Booting core…</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var loader = document.getElementById('initLoader');
+      if (!loader) return;
+      // only on first landing this session
+      try { if (sessionStorage.getItem('iri_init_done')) { loader.parentNode.removeChild(loader); return; } } catch (e) {}
+      document.documentElement.style.overflow = 'hidden';
+      var fill = document.getElementById('initBarFill');
+      var log = document.getElementById('initLog');
+      var lines = [
+        'Booting AI mesh core…',
+        'Loading product ecosystem…',
+        'Syncing decentralized nodes…',
+        'Calibrating lightning array…',
+        'Establishing secure connection…',
+        'System ready.'
+      ];
+      var p = 0;
+      var iv = setInterval(function () {
+        p = Math.min(100, p + Math.random() * 16 + 7);
+        if (fill) fill.style.width = p + '%';
+        var idx = Math.min(lines.length - 1, Math.floor(p / (100 / lines.length)));
+        if (log) log.textContent = lines[idx];
+        if (p >= 100) {
+          clearInterval(iv);
+          setTimeout(function () {
+            loader.classList.add('done');
+            document.documentElement.style.overflow = '';
+            try { sessionStorage.setItem('iri_init_done', '1'); } catch (e) {}
+            setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 700);
+          }, 450);
+        }
+      }, 270);
+    })();
+  </script>
+
   <!-- Sticky Top Nav -->
   <nav class="topnav" id="topnav">
     <div class="topnav-inner">
-      <a class="topnav-brand" href="#top" onclick="closeMenu()">
-        <img src="assets/illy-robotic.png" alt="Illy Robotic" />
-        <span class="brand-text"><span class="brand-line1">Illy Robotic</span><span class="brand-line2">Instruments</span></span>
+      <a class="topnav-brand" href="#top" aria-label="Illy Robotic Instruments — Home">
+        <img src="assets/illy-robotic.png" alt="Illy Robotic Instruments" />
       </a>
-      <button class="topnav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="topnav-menu" id="navMenu">
-        <a href="#products" onclick="closeMenu()">Products</a>
-        <a href="#about" onclick="closeMenu()">About Us</a>
-        <a href="#clients" onclick="closeMenu()">Clients</a>
-        <a href="#webdesigns" onclick="closeMenu()">Web Designs</a>
-        <a href="https://www.illyrobotic-ai.com/IR-AIcademy/">IR-AICademy</a>
-        <a href="https://www.illyrobotic-ai.com/founder-insights/">Founder Insights</a>
-        <a href="#contact" onclick="closeMenu()">Contact Us</a>
-      </div>
     </div>
   </nav>
 
@@ -2697,10 +2790,10 @@
   <section class="info-section" id="contact">
     <span class="section-eyebrow">Get in Touch</span>
     <h2>Contact Us</h2>
-    <p>Have a project, partnership, or just want to say hi? We'd love to hear from you. Drop a line and a real human on our team will get back within one business day.</p>
+    <p>Have a project, partnership, or just want to say hi? Book a time that works for you and let's talk — a real human on our team will meet you there.</p>
     <div class="info-cta-row">
-      <a class="info-cta" href="mailto:dwilson@illyrobotic-ai.com">Email Us</a>
-      <a class="info-cta secondary" href="https://github.com/illmedicine" target="_blank" rel="noopener">Follow on GitHub</a>
+      <a class="info-cta" href="https://calendar.app.google/KbygymCietHJbKBb8" target="_blank" rel="noopener">Book an Appointment</a>
+      <a class="info-cta secondary" href="https://www.illyrobotic-ai.com/founder-insights/">Meet the Founder</a>
     </div>
   </section>
 
