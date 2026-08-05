@@ -11,102 +11,450 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Work | Illy Robotic Instruments</title>
-  <meta name="description" content="Recent web design and brand-marketing projects completed by Illy Robotic Instruments for clients.">
+  <title>Our Work — Featured Side Projects &amp; Visionary Prototypes | Illy Robotic Instruments</title>
+  <meta name="description" content="Featured side projects and visionary prototypes by Illy Robotic Instruments — including TidyLocal, a modern local cleaning platform, with full product overviews and investor projections.">
   <link rel="icon" type="image/png" href="/assets/illy-robotic.png" />
   <link rel="shortcut icon" type="image/png" href="/assets/illy-robotic.png" />
   <meta name="theme-color" content="#0a0e27" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
-      color: #e0e6ff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    :root {
+      --bg: #070b1c;
+      --bg2: #0a0e27;
+      --ink: #eef2ff;
+      --muted: #a6b3d4;
+      --line: rgba(120,170,255,0.16);
+      /* per-project accent (overridden when a project is active) */
+      --accent: #64c8ff;
+      --accent2: #00ff88;
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #12183c 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    /* ---- Nav ---- */
     .nav {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid rgba(100, 200, 255, 0.18);
-      background: rgba(10, 14, 39, 0.75);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,11,28,0.78);
       backdrop-filter: blur(14px);
     }
-    .nav img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.55)); }
-    .nav-brand { display: flex; flex-direction: column; line-height: 1.1; text-decoration: none; }
-    .nav-brand .b1 { font-weight: 800; font-size: 1rem; color: #fff; letter-spacing: 0.5px; }
-    .nav-brand .b2 {
-      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
-      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .nav-brand { position: relative; width: 116px; height: 42px; display: block; flex-shrink: 0; }
+    .nav-brand img {
+      position: absolute; top: -8px; left: -8px;
+      width: 118px; height: 118px; object-fit: contain; z-index: 200;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)) drop-shadow(0 0 16px rgba(100,200,255,0.4));
     }
     .nav .back {
-      margin-left: auto; color: #c0d0f0; text-decoration: none; font-weight: 600;
+      margin-left: auto; color: var(--muted); text-decoration: none; font-weight: 600;
       font-size: 0.9rem; padding: 0.45rem 0.9rem; border-radius: 8px; transition: all 0.2s ease;
     }
-    .nav .back:hover { color: #00ff88; background: rgba(0, 255, 136, 0.08); }
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 1.5rem;
-    }
+    .nav .back:hover { color: var(--accent2); background: rgba(0,255,136,0.08); }
+
+    /* ---- Header ---- */
+    .head { text-align: center; padding: 3rem 1.5rem 1rem; max-width: 900px; margin: 0 auto; }
     .eyebrow {
-      font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; color: #00ff88;
-      text-transform: uppercase; margin-bottom: 1rem;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; color: var(--accent2);
+      text-transform: uppercase; margin-bottom: 0.9rem;
     }
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%);
+    .head h1 {
+      font-size: clamp(1.9rem, 4.5vw, 3.1rem); font-weight: 900; letter-spacing: -0.5px; line-height: 1.08;
+      background: linear-gradient(135deg, #7ed3ff 0%, #2bffa3 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 1.25rem; line-height: 1.1;
+      margin-bottom: 0.9rem;
     }
-    .lede { color: #a0b0d0; max-width: 620px; font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
-    .badge {
-      display: inline-block; padding: 0.6rem 1.5rem; border-radius: 999px;
-      background: rgba(0, 255, 136, 0.12); border: 1px solid rgba(0, 255, 136, 0.4);
-      color: #00ff88; font-weight: 700; letter-spacing: 1px; margin-bottom: 2.5rem;
+    .head p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 680px; margin: 0 auto; }
+
+    /* ---- Project selector ---- */
+    .selector {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      max-width: 1100px; margin: 2rem auto 0; padding: 0 1.5rem;
     }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-    .cta {
-      display: inline-block; padding: 0.85rem 1.75rem; border-radius: 999px;
-      font-weight: 700; text-decoration: none; transition: all 0.3s ease;
-      background: linear-gradient(135deg, #64c8ff 0%, #00ff88 100%); color: #0a0e27;
+    .proj-tile {
+      position: relative;
+      width: 210px; min-height: 118px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 1.1rem 1rem; border-radius: 16px; cursor: pointer;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+      text-align: center;
     }
-    .cta.secondary { background: transparent; border: 1px solid rgba(100, 200, 255, 0.4); color: #64c8ff; }
-    .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3); }
-    .cta.secondary:hover { border-color: #00ff88; color: #00ff88; }
+    .proj-tile:hover { transform: translateY(-3px); border-color: rgba(120,170,255,0.4); }
+    .proj-tile.active {
+      border-color: var(--tile-accent, #64c8ff);
+      background: color-mix(in srgb, var(--tile-accent, #64c8ff) 12%, transparent);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.4), 0 0 0 1px var(--tile-accent, #64c8ff) inset;
+    }
+    .proj-tile .tile-logo {
+      width: 54px; height: 54px; border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; font-weight: 900;
+      background: var(--tile-grad, linear-gradient(135deg,#64c8ff,#00ff88));
+      color: #04122a; box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+    .proj-tile .tile-name { font-weight: 800; font-size: 0.98rem; letter-spacing: 0.2px; }
+    .proj-tile .tile-tag { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.3px; }
+    .proj-tile.locked { cursor: default; opacity: 0.6; }
+    .proj-tile.locked:hover { transform: none; border-color: var(--line); }
+    .proj-tile.locked .tile-logo { background: rgba(150,170,210,0.18); color: #9fb0d4; font-size: 1.3rem; }
+
+    /* ---- Panels ---- */
+    .panels { max-width: 1080px; margin: 2.5rem auto 0; padding: 0 1.25rem 5rem; }
+    .proj-panel { display: none; animation: fade .4s ease; }
+    .proj-panel.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    /* project hero */
+    .p-hero {
+      position: relative; overflow: hidden;
+      border-radius: 22px; border: 1px solid var(--line);
+      background:
+        radial-gradient(700px 300px at 15% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+        linear-gradient(180deg, rgba(12,17,40,0.85), rgba(8,11,26,0.85));
+      padding: 2.4rem 2rem;
+    }
+    .p-hero .p-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1.1rem;
+    }
+    .p-hero h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.5px; line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+    .p-hero h2 .b { color: var(--accent); }
+    .p-hero .p-tag { font-size: 1.05rem; color: var(--accent2); font-weight: 600; margin-bottom: 1rem; }
+    .p-hero .p-intro { color: #ccd6ef; font-size: 1.02rem; line-height: 1.7; max-width: 62ch; }
+    .p-cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+    .p-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 0.92rem;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s, color .25s;
+    }
+    .p-cta.primary { color: #04122a; background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+    .p-cta.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px color-mix(in srgb, var(--accent2) 35%, transparent); }
+    .p-cta.ghost { color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+    .p-cta.ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* section blocks */
+    .p-section { margin-top: 2.6rem; }
+    .p-kicker { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem; }
+    .p-section > h3 {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.3px; margin-bottom: 0.4rem; color: #fff;
+    }
+    .p-section > .p-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 70ch; margin-bottom: 1.4rem; }
+
+    .figure { margin: 1.4rem 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+    .figure a { display: block; }
+    .figure img { width: 100%; height: auto; display: block; }
+    .figure-cap { text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; margin-top: 0.7rem; }
+
+    /* how-it-works cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .card {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem 1.4rem;
+      transition: border-color .25s ease, transform .25s ease;
+    }
+    .card:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); transform: translateY(-2px); }
+    .card .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 10px; font-weight: 800; margin-bottom: 0.8rem;
+      background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+    .card h4 { font-size: 1.08rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; }
+    .card p { color: #c2cde8; font-size: 0.92rem; line-height: 1.6; }
+
+    /* investment / pricing */
+    .callout {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent),
+        rgba(255,255,255,0.02);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      border-radius: 18px; padding: 1.6rem 1.6rem;
+    }
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+    .stat {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem;
+      text-align: center;
+    }
+    .stat .big { font-size: 1.7rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .stat .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.3px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.2rem; }
+    .split .box { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; }
+    .split .box h5 { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .split .box p { color: #c2cde8; font-size: 0.9rem; line-height: 1.6; }
+    .split .box .accent { color: var(--accent2); font-weight: 700; }
+
+    /* tier cards */
+    .tiers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.2rem; }
+    .tier {
+      position: relative; border-radius: 16px; padding: 1.3rem 1.4rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+    }
+    .tier .t-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.9rem; }
+    .tier .t-name { font-weight: 800; color: #fff; font-size: 1.05rem; }
+    .tier .t-vol { font-size: 0.78rem; color: var(--muted); }
+    .tier .t-rows { display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.9rem; }
+    .tier .t-rows .r { display: flex; justify-content: space-between; gap: 1rem; color: #c2cde8; }
+    .tier .t-rows .r .v { font-weight: 700; color: #eaf0ff; }
+    .tier .t-gross { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; }
+    .tier .t-gross .v { font-weight: 900; color: var(--accent); }
+    .tier .payback {
+      margin-top: 0.9rem; text-align: center; font-weight: 800; letter-spacing: 0.3px;
+      padding: 0.55rem; border-radius: 10px;
+      background: color-mix(in srgb, var(--accent2) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+      color: var(--accent2);
+    }
+    .takeaway {
+      margin-top: 1.4rem; border-radius: 16px; padding: 1.4rem 1.5rem;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), color-mix(in srgb, var(--accent2) 10%, transparent));
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+    .takeaway h5 { font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem; }
+    .takeaway p { color: #e6ecff; font-size: 0.98rem; line-height: 1.7; }
+    .takeaway strong { color: #fff; }
+
+    .p-foot { margin-top: 2.6rem; text-align: center; }
+    .p-foot .seed {
+      display: inline-block; margin-bottom: 1.2rem; padding: 0.6rem 1.4rem; border-radius: 999px;
+      font-weight: 800; letter-spacing: 0.5px; color: #04122a;
+      background: linear-gradient(135deg, #ffcf5e, #ff9d2f);
+      box-shadow: 0 10px 26px rgba(255,160,50,0.3);
+    }
+
+    .placeholder-note { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 3rem; }
+
+    @media (max-width: 760px) {
+      .cards, .price-grid, .split, .tiers { grid-template-columns: 1fr; }
+      .proj-tile { width: 100%; max-width: 320px; }
+      .p-hero { padding: 1.8rem 1.3rem; }
+    }
   </style>
 </head>
 <body>
   <nav class="nav">
-    <a class="nav-brand" href="https://www.illyrobotic-ai.com/">
-      <span style="display:flex;align-items:center;gap:0.7rem;">
-        <img src="/assets/illy-robotic.png" alt="Illy Robotic" />
-        <span style="display:flex;flex-direction:column;">
-          <span class="b1">Illy Robotic</span>
-          <span class="b2">Instruments</span>
-        </span>
-      </span>
+    <a class="nav-brand" href="https://www.illyrobotic-ai.com/" aria-label="Illy Robotic Instruments — Home">
+      <img src="/assets/illy-robotic.png" alt="Illy Robotic Instruments" />
     </a>
     <a class="back" href="https://www.illyrobotic-ai.com/">← Back to Home</a>
   </nav>
 
-  <main>
-    <div class="eyebrow">Portfolio</div>
-    <h1>Our Work</h1>
-    <div class="badge">🚧 Coming Soon</div>
-    <p class="lede">A showcase of recent web design and brand-marketing projects we've completed for our clients. We're curating the case studies now — check back shortly to see the work.</p>
-    <div class="cta-row">
-      <a class="cta" href="https://www.illyrobotic-ai.com/web-designs/">Start a Project</a>
-      <a class="cta secondary" href="mailto:dwilson@illyrobotic-ai.com?subject=Portfolio%20Inquiry">Get in Touch</a>
-    </div>
-  </main>
+  <header class="head">
+    <div class="eyebrow">Our Work · Portfolio</div>
+    <h1>Featured Side Projects &amp; Visionary Prototypes</h1>
+    <p>Select a project below to open a dedicated deep-dive — product vision, how it works, and the full investor thesis with financial projections, all on one page.</p>
+  </header>
+
+  <!-- ===== Project logo selector ===== -->
+  <div class="selector" id="selector" role="tablist" aria-label="Select a project">
+    <button class="proj-tile active" data-project="tidylocal" role="tab" aria-selected="true"
+            style="--tile-accent:#14c8b0; --tile-grad:linear-gradient(135deg,#22d3a0,#2aa3d6);"
+            onclick="selectProject('tidylocal')">
+      <span class="tile-logo">🚂</span>
+      <span class="tile-name">TidyLocal</span>
+      <span class="tile-tag">Local Cleaning Platform</span>
+    </button>
+
+    <button class="proj-tile locked" data-project="soon2" role="tab" aria-selected="false" tabindex="-1" disabled>
+      <span class="tile-logo">＋</span>
+      <span class="tile-name">Coming Soon</span>
+      <span class="tile-tag">Prototype #2</span>
+    </button>
+
+    <button class="proj-tile locked" data-project="soon3" role="tab" aria-selected="false" tabindex="-1" disabled>
+      <span class="tile-logo">＋</span>
+      <span class="tile-name">Coming Soon</span>
+      <span class="tile-tag">Prototype #3</span>
+    </button>
+  </div>
+
+  <div class="panels">
+    <!-- ================= TidyLocal ================= -->
+    <section class="proj-panel active" data-panel="tidylocal" style="--accent:#22d3a0; --accent2:#2aa3d6;">
+      <div class="p-hero">
+        <span class="p-badge">Visionary Prototype · NYC Pilot</span>
+        <h2><span class="b">TidyLocal</span> — Your Modern Local Cleaning Platform</h2>
+        <div class="p-tag">Book it. Track it. Trust it. Total control over scope and cost.</div>
+        <p class="p-intro">TidyLocal is a modern, local cleaning platform that brings full transparency to hiring a cleaner. An app-based, granular booking flow lets clients define exactly what they want cleaned — room by room — with real-time, upfront pricing. Qualified local cleaners (TLCs) are matched instantly, funds are held in escrow, and payment only releases when the job is rated complete.</p>
+        <div class="p-cta-row">
+          <a class="p-cta primary" href="https://illmedicine.github.io/TidyLocal/" target="_blank" rel="noopener">View Live Demo →</a>
+          <a class="p-cta ghost" href="#tidylocal-invest">Investor One-Pager ↓</a>
+        </div>
+      </div>
+
+      <div class="figure">
+        <a href="/assets/tidylocal-infographic.jpg" target="_blank" rel="noopener">
+          <img src="/assets/tidylocal-infographic.jpg" alt="TidyLocal user journey infographic: user booking & app UI, job routing & cleaner alert, acceptance & communication, completion & review." loading="lazy" />
+        </a>
+        <div class="figure-cap">The TidyLocal journey — from a detailed, transparent booking to escrow-secured completion.</div>
+      </div>
+
+      <!-- How it works -->
+      <div class="p-section">
+        <div class="p-kicker">How It Works</div>
+        <h3>Four steps down the line</h3>
+        <div class="cards">
+          <div class="card">
+            <span class="num">1</span>
+            <h4>Detailed &amp; Upfront Booking</h4>
+            <p>Users go beyond a generic "clean." A "dirtiness" slider, room count and size selectors, and a per-room checkbox list (sweep, mop, deep-clean the fridge or oven…) determine the price in real time — fully transparent. Booking time also affects cost (immediate service vs. scheduled ahead).</p>
+          </div>
+          <div class="card">
+            <span class="num">2</span>
+            <h4>Rapid, Qualified Cleaner Matching</h4>
+            <p>The request is instantly routed to the TidyLocal Job Board. Qualified local cleaners (TLCs) get alerted, each with a full profile — rating score, jobs completed, availability, transportation verification, and client reviews — so clients match with trusted individuals.</p>
+          </div>
+          <div class="card">
+            <span class="num">3</span>
+            <h4>Secure Escrow Payment</h4>
+            <p>When a cleaner accepts, an in-app instant messenger coordinates the details. The client pre-pays at booking and funds are held securely in escrow — no money changes hands at the door, keeping the exchange fair and safe for both sides.</p>
+          </div>
+          <div class="card">
+            <span class="num">4</span>
+            <h4>Quality &amp; Accountability</h4>
+            <p>On completion, the client marks the job done and leaves a rating, instantly releasing the escrowed funds. The visible rating system rewards thorough, timely work and builds a trusted community; consistent poor reviews (or a "don't send again") carry real consequences.</p>
+          </div>
+        </div>
+        <p class="p-sub" style="margin-top:1.4rem;">In essence, TidyLocal gives clients total control over the scope and cost of their cleaning while giving qualified cleaners a steady stream of jobs and a secure, guaranteed payment process.</p>
+      </div>
+
+      <!-- ================= Investment ================= -->
+      <div class="p-section" id="tidylocal-invest">
+        <div class="p-kicker">Investment Approach &amp; Strategy</div>
+        <h3>The NYC Pilot — a path to guaranteed payback</h3>
+        <p class="p-sub">Launch strategy is contingent upon securing a <strong style="color:#fff;">$100,000 seed loan</strong> for the New York City pilot. To show investors exactly when the loan is repaid, we calculate the maximum capacity of a 5-person W2 team.</p>
+
+        <div class="callout">
+          <h4 style="color:#fff; font-size:1.05rem; margin-bottom:0.4rem;">NYC Competitive Pricing Strategy</h4>
+          <p style="color:#c2cde8; font-size:0.95rem; line-height:1.7;">A standard professional home cleaning in NYC typically runs <strong style="color:#fff;">$168–$298</strong> (up to ~$80/hr; a 1,600&nbsp;sq&nbsp;ft home costs ~$160–$320). To aggressively capture share while keeping gig-worker pay attractive, TidyLocal institutes a <strong style="color:var(--accent2);">$160 flat rate</strong> for a standard residential cleaning (~3 hours of labor).</p>
+          <div class="price-grid">
+            <div class="stat"><div class="big">$160</div><div class="lbl">Flat rate · standard clean</div></div>
+            <div class="stat"><div class="big">$144</div><div class="lbl">1099 payout · ≈ $48/hr</div></div>
+            <div class="stat"><div class="big">10%</div><div class="lbl">Platform fee on 1099 jobs ($16)</div></div>
+          </div>
+          <div class="split">
+            <div class="box">
+              <h5>W2 TLC Agents</h5>
+              <p>First-month salaries are pre-funded by seed capital, so TidyLocal retains <span class="accent">100% ($160)</span> of the revenue from their bookings — the financial engine of early profitability.</p>
+            </div>
+            <div class="box">
+              <h5>1099 Contractors</h5>
+              <p>TidyLocal takes a competitive <span class="accent">10% ($16)</span> platform fee, leaving the contractor <span class="accent">$144</span> — about <span class="accent">$48/hour</span>, exceptionally high for gig work, attracting reliable talent fast.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-section">
+        <div class="p-kicker">90-Day Revenue &amp; Seed Payback Projection</div>
+        <h3>The W2 team is the revenue engine</h3>
+        <p class="p-sub"><strong style="color:#fff;">W2 fixed output:</strong> 5 TLC W2 agents × 5 days/week = 65 working days over the 90-day pilot. At 2 standard cleanings/day, the team has a fixed maximum capacity of <strong style="color:#fff;">650 bookings</strong> — and because W2 agents yield 100% revenue capture, they drive early profitability. The four tiers below assume W2 agents are fully booked before jobs spill over to the 1099 network.</p>
+
+        <div class="tiers">
+          <div class="tier">
+            <div class="t-head"><span class="t-name">Tier 1 · Low Volume</span><span class="t-vol">~15 bookings / day</span></div>
+            <div class="t-rows">
+              <div class="r"><span>Total 90-day bookings</span><span class="v">1,350</span></div>
+              <div class="r"><span>W2 (650 @ $160)</span><span class="v">$104,000</span></div>
+              <div class="r"><span>1099 (700 @ $16)</span><span class="v">$11,200</span></div>
+            </div>
+            <div class="t-gross"><span>90-day gross revenue</span><span class="v">$115,200</span></div>
+            <div class="payback">$100K seed payback · Day 78</div>
+          </div>
+
+          <div class="tier">
+            <div class="t-head"><span class="t-name">Tier 2 · Steady Growth</span><span class="t-vol">~30 bookings / day</span></div>
+            <div class="t-rows">
+              <div class="r"><span>Total 90-day bookings</span><span class="v">2,700</span></div>
+              <div class="r"><span>W2 (650 @ $160)</span><span class="v">$104,000</span></div>
+              <div class="r"><span>1099 (2,050 @ $16)</span><span class="v">$32,800</span></div>
+            </div>
+            <div class="t-gross"><span>90-day gross revenue</span><span class="v">$136,800</span></div>
+            <div class="payback">$100K seed payback · Day 66</div>
+          </div>
+
+          <div class="tier">
+            <div class="t-head"><span class="t-name">Tier 3 · High Demand</span><span class="t-vol">~50 bookings / day</span></div>
+            <div class="t-rows">
+              <div class="r"><span>Total 90-day bookings</span><span class="v">4,500</span></div>
+              <div class="r"><span>W2 (650 @ $160)</span><span class="v">$104,000</span></div>
+              <div class="r"><span>1099 (3,850 @ $16)</span><span class="v">$61,600</span></div>
+            </div>
+            <div class="t-gross"><span>90-day gross revenue</span><span class="v">$165,600</span></div>
+            <div class="payback">$100K seed payback · Day 55</div>
+          </div>
+
+          <div class="tier">
+            <div class="t-head"><span class="t-name">Tier 4 · Max Saturation</span><span class="t-vol">~100 bookings / day</span></div>
+            <div class="t-rows">
+              <div class="r"><span>Total 90-day bookings</span><span class="v">9,000</span></div>
+              <div class="r"><span>W2 (650 @ $160)</span><span class="v">$104,000</span></div>
+              <div class="r"><span>1099 (8,350 @ $16)</span><span class="v">$133,600</span></div>
+            </div>
+            <div class="t-gross"><span>90-day gross revenue</span><span class="v">$237,600</span></div>
+            <div class="payback">$100K seed payback · Day 38</div>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <h5>Investor Takeaway</h5>
+          <p>The W2 strategy isn't just about quality control — it's a massive revenue accelerator. Because TidyLocal captures <strong>100% of the W2 booking fees</strong>, the initial 5 direct hires generate <strong>$104,000 on their own</strong> in the first 90 days. Even in the worst-case "Low Volume" scenario (Tier 1), the W2 employees effectively <strong>pay back the entire $100,000 loan principal independently.</strong></p>
+        </div>
+
+        <div class="figure" style="margin-top:1.6rem;">
+          <a href="/assets/tidylocal-roi.jpg" target="_blank" rel="noopener">
+            <img src="/assets/tidylocal-roi.jpg" alt="TidyLocal 90-Day Revenue & Seed Payback Projection — investor overview infographic showing conservative worst-case tiers and payback days." loading="lazy" />
+          </a>
+          <div class="figure-cap">Investor overview — a conservative worst-case view of the path to $100K seed payback.</div>
+        </div>
+      </div>
+
+      <div class="p-foot">
+        <div class="seed">💵 Seeking a $100K seed loan · NYC pilot</div>
+        <div class="cta-row" style="display:flex;flex-wrap:wrap;gap:0.8rem;justify-content:center;">
+          <a class="p-cta primary" href="https://calendar.app.google/KbygymCietHJbKBb8" target="_blank" rel="noopener">Book an Investor Call →</a>
+          <a class="p-cta ghost" href="https://illmedicine.github.io/TidyLocal/" target="_blank" rel="noopener">Explore the Live Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future projects render here as they are added -->
+    <p class="placeholder-note">More visionary prototypes are on the way — each with its own live demo and full investor thesis. Check back soon.</p>
+  </div>
+
+  <script>
+    function selectProject(id) {
+      document.querySelectorAll('.proj-tile').forEach(function (t) {
+        var on = t.dataset.project === id;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.proj-panel').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.panel === id);
+      });
+      var sel = document.getElementById('selector');
+      if (sel) window.scrollTo({ top: Math.max(0, sel.offsetTop - 16), behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
