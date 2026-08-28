@@ -1,0 +1,464 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MIAMI VIBES × NYC STREET ART — IRIS Global Theme
+   90s Miami Vice · Comic Book Energy · Neon Everything
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap');
+
+/* ── Miami Vice Color Tokens ────────────────────────────────────────────── */
+:root {
+  --mv-pink:     #FF006E;
+  --mv-cyan:     #00F5FF;
+  --mv-orange:   #FF6B00;
+  --mv-purple:   #7B2FFF;
+  --mv-yellow:   #FFE600;
+  --mv-green:    #00FF88;
+  --mv-magenta:  #FF00FF;
+  --mv-bg:       #05000A;
+  --mv-bg2:      #0D0015;
+  --mv-surf:     rgba(255,0,110,0.06);
+  --mv-line:     rgba(255,0,110,0.22);
+  --mv-grad:     linear-gradient(135deg, #FF006E 0%, #FF6B00 50%, #7B2FFF 100%);
+  --mv-sunset:   linear-gradient(180deg, #FF6B00 0%, #FF006E 40%, #7B2FFF 75%, #05000A 100%);
+  --mv-cyan-grad:linear-gradient(135deg, #00F5FF 0%, #7B2FFF 100%);
+  --mv-font-hd:  'Bebas Neue', 'Barlow Condensed', Impact, 'Arial Black', sans-serif;
+  --mv-font-bd:  'Barlow Condensed', 'Bebas Neue', Impact, sans-serif;
+}
+
+/* Override existing CSS variable tokens */
+:root {
+  --bg:        var(--mv-bg)  !important;
+  --bg2:       var(--mv-bg2) !important;
+  --accent:    var(--mv-pink)   !important;
+  --accent2:   var(--mv-cyan)   !important;
+  --green:     var(--mv-green)  !important;
+  --bigo:      var(--mv-pink)   !important;
+  --bigo2:     var(--mv-orange) !important;
+  --iris-grad: var(--mv-grad)   !important;
+  --line:      var(--mv-line)   !important;
+}
+
+/* ── Global body: deep Miami black ────────────────────────────────────── */
+html { background: var(--mv-bg) !important; }
+html body {
+  background: var(--mv-bg) !important;
+  color: #f0eaff !important;
+  font-family: var(--mv-font-bd), 'Segoe UI', sans-serif;
+}
+
+/* ── Animated retrowave grid (fixed, behind everything) ─────────────── */
+html body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 79px,
+      rgba(255,0,110,0.09) 79px, rgba(255,0,110,0.09) 80px),
+    repeating-linear-gradient(0deg,
+      transparent 0px, transparent 79px,
+      rgba(0,245,255,0.05) 79px, rgba(0,245,255,0.05) 80px),
+    linear-gradient(180deg, #05000A 0%, #0D0015 60%, #05000A 100%);
+  animation: mvGridScroll 10s linear infinite;
+  background-attachment: fixed;
+}
+@keyframes mvGridScroll {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to   { background-position: 0 80px, 0 80px, 0 0; }
+}
+
+/* Bottom horizon glow */
+html body::after {
+  content: '';
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 35vh;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(255,0,110,0.07) 0%, transparent 100%);
+}
+
+/* ── Nav bar ──────────────────────────────────────────────────────────── */
+.nav-bar, .topnav, .nav, nav {
+  background: rgba(5,0,10,0.94) !important;
+  border-bottom: 1px solid rgba(255,0,110,0.28) !important;
+  box-shadow: 0 2px 28px rgba(255,0,110,0.10) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Nav links */
+.topnav-menu a         { color: #ccc0e8 !important; }
+.topnav-menu a:hover   { color: #FF006E !important; background: rgba(255,0,110,0.08) !important; }
+.nav-back              { color: #a090cc !important; }
+.nav-back:hover        { color: #00F5FF !important; }
+.nav a:hover           { color: #FF006E !important; }
+.nav .back:hover       { color: #00F5FF !important; background: rgba(0,245,255,0.07) !important; }
+
+/* Hamburger burger lines */
+.topnav-burger         { border-color: rgba(255,0,110,0.35) !important; }
+.topnav-burger span    { background: #FF006E !important; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   IRIS LOGO — animated letter-by-letter color shift
+   (old-school analog digital clock effect)
+   Usage: <span class="iris-anim-logo"><span class="il">I</span>
+          <span class="il">-</span><span class="il">R</span>
+          <span class="il">I</span><span class="il">S</span></span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes irisLetterColor {
+  0%   { color: #FF006E; text-shadow: 0 0 8px #FF006E, 0 0 18px rgba(255,0,110,0.45); }
+  16%  { color: #FF6B00; text-shadow: 0 0 8px #FF6B00, 0 0 18px rgba(255,107,0,0.45); }
+  33%  { color: #FFE600; text-shadow: 0 0 8px #FFE600, 0 0 18px rgba(255,230,0,0.45); }
+  50%  { color: #00FF88; text-shadow: 0 0 8px #00FF88, 0 0 18px rgba(0,255,136,0.45); }
+  66%  { color: #00F5FF; text-shadow: 0 0 8px #00F5FF, 0 0 18px rgba(0,245,255,0.45); }
+  83%  { color: #7B2FFF; text-shadow: 0 0 8px #7B2FFF, 0 0 18px rgba(123,47,255,0.45); }
+  100% { color: #FF006E; text-shadow: 0 0 8px #FF006E, 0 0 18px rgba(255,0,110,0.45); }
+}
+
+.iris-anim-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+}
+.iris-anim-logo .il {
+  display: inline-block;
+  font-family: var(--mv-font-hd) !important;
+  font-size: inherit;
+  font-weight: 900 !important;
+  letter-spacing: 3px !important;
+  animation: irisLetterColor 6s ease-in-out infinite;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+/* Stagger each letter for the "clock digit" effect */
+.iris-anim-logo .il:nth-child(1) { animation-delay:  0.0s; }
+.iris-anim-logo .il:nth-child(2) { animation-delay: -1.2s; }
+.iris-anim-logo .il:nth-child(3) { animation-delay: -2.4s; }
+.iris-anim-logo .il:nth-child(4) { animation-delay: -3.6s; }
+.iris-anim-logo .il:nth-child(5) { animation-delay: -4.8s; }
+
+/* Also animate the existing .nav-logo-text if not yet split */
+.nav-logo-text {
+  font-family: var(--mv-font-hd) !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #FF006E !important;
+  animation: irisLetterColor 5s ease-in-out infinite !important;
+  font-size: 1.5rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 4px !important;
+}
+
+/* Image logo: neon color-shift glow */
+@keyframes logoNeonPulse {
+  0%,100% { filter: drop-shadow(0 0 14px rgba(255,0,110,0.8)) drop-shadow(0 8px 16px rgba(0,0,0,0.65)); }
+  25%     { filter: drop-shadow(0 0 14px rgba(255,107,0,0.8)) drop-shadow(0 8px 16px rgba(0,0,0,0.65)); }
+  50%     { filter: drop-shadow(0 0 14px rgba(0,245,255,0.8)) drop-shadow(0 8px 16px rgba(0,0,0,0.65)); }
+  75%     { filter: drop-shadow(0 0 14px rgba(123,47,255,0.8)) drop-shadow(0 8px 16px rgba(0,0,0,0.65)); }
+}
+.topnav-brand img {
+  animation: logoNeonPulse 4s ease-in-out infinite !important;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+@keyframes mvBtnGlow {
+  0%,100% { box-shadow: 0 4px 18px rgba(255,0,110,0.45), 0 0 35px rgba(255,0,110,0.15); }
+  50%     { box-shadow: 0 4px 28px rgba(255,107,0,0.55), 0 0 45px rgba(255,107,0,0.20); }
+}
+@keyframes mvBtnShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Primary / Bigo buttons */
+.btn-bigo, .p-cta.primary, button.btn-bigo {
+  background: linear-gradient(135deg, #FF006E 0%, #FF6B00 60%, #FFE600 100%) !important;
+  background-size: 200% auto !important;
+  color: #05000A !important;
+  border: none !important;
+  font-family: var(--mv-font-hd) !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.5px !important;
+  animation: mvBtnShimmer 3s linear infinite, mvBtnGlow 3s ease-in-out infinite !important;
+  box-shadow: 0 4px 18px rgba(255,0,110,0.45) !important;
+}
+.btn-bigo:hover, .p-cta.primary:hover {
+  transform: scale(1.06) !important;
+  box-shadow: 0 8px 36px rgba(255,0,110,0.7) !important;
+}
+
+/* Outline / ghost buttons */
+.btn-outline, .p-cta.ghost {
+  background: transparent !important;
+  border: 1px solid rgba(255,0,110,0.45) !important;
+  color: #FF006E !important;
+  transition: all .25s ease !important;
+}
+.btn-outline:hover, .p-cta.ghost:hover {
+  border-color: #00F5FF !important;
+  color: #00F5FF !important;
+  box-shadow: 0 0 18px rgba(0,245,255,0.35), inset 0 0 12px rgba(0,245,255,0.06) !important;
+}
+
+/* ── Tiles / Cards ────────────────────────────────────────────────────── */
+.proj-tile, .creator-card, .about-card, .stat-card, .insight-card,
+.comment-form, .comment-item {
+  background: rgba(5,0,15,0.88) !important;
+  border-color: rgba(255,0,110,0.14) !important;
+}
+.proj-tile:hover, .creator-card:hover {
+  border-color: rgba(255,0,110,0.42) !important;
+  box-shadow: 0 8px 32px rgba(255,0,110,0.14), 0 0 0 1px rgba(255,0,110,0.18) !important;
+}
+.proj-tile.active {
+  border-color: #FF006E !important;
+  box-shadow: 0 0 0 1px #FF006E, 0 12px 36px rgba(255,0,110,0.28) !important;
+}
+
+/* ── Live badges ──────────────────────────────────────────────────────── */
+.badge-live, .live-pill, .live-indicator {
+  background: rgba(255,0,110,0.14) !important;
+  border-color: rgba(255,0,110,0.42) !important;
+  color: #FF006E !important;
+}
+.live-dot, .dot { background: #FF006E !important; }
+
+/* ── Stat numbers → Miami gradient ───────────────────────────────────── */
+.sn, .ic-num {
+  background: var(--mv-grad) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ── Section headings / accent colors ────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--mv-font-bd) !important;
+}
+.accent, .eyebrow, [class*="kicker"], [class*="eyebrow"] {
+  color: #FF006E !important;
+}
+.accent2 { color: #00F5FF !important; }
+
+/* ── Gradient text headings → Miami sunset ───────────────────────────── */
+.head h1, .hero-title, [class*="hero"] h1 {
+  background: var(--mv-sunset) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ── Page hero sections: graffiti watermark overlay ──────────────────── */
+.corner-hero, .page-hero, .fi-hero, .hero-section, #hero {
+  position: relative;
+}
+.corner-hero::before, .page-hero::before {
+  content: 'I-RIS';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mv-font-hd);
+  font-size: clamp(4rem, 14vw, 12rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,0,110,0.10);
+  letter-spacing: 0.3em;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+}
+
+/* ── Animated neon border on hero bottom edge ─────────────────────────── */
+@keyframes mvNeonScan {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 300% 0%; }
+}
+.corner-hero::after, .identity-bar::after, .stream-player::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%, #FF006E 20%, #FF6B00 40%, #FFE600 60%, #00F5FF 80%, transparent 100%);
+  background-size: 300% 100%;
+  animation: mvNeonScan 3s linear infinite;
+  z-index: 10;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.footer-logo, .corner-footer .footer-logo {
+  font-family: var(--mv-font-hd) !important;
+  background: var(--mv-grad) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+.corner-footer {
+  border-color: rgba(255,0,110,0.2) !important;
+}
+
+/* ── Share / comment buttons ─────────────────────────────────────────── */
+.share-btn.share-copy {
+  background: rgba(0,245,255,0.10) !important;
+  color: #00F5FF !important;
+  border: 1px solid rgba(0,245,255,0.25) !important;
+}
+.share-btn.share-copy:hover {
+  background: rgba(0,245,255,0.22) !important;
+}
+.cf-input, .cf-textarea {
+  background: rgba(5,0,15,0.95) !important;
+  border-color: rgba(255,0,110,0.20) !important;
+  color: #f0eaff !important;
+}
+.cf-input:focus, .cf-textarea:focus {
+  border-color: rgba(255,0,110,0.55) !important;
+  box-shadow: 0 0 0 2px rgba(255,0,110,0.12) !important;
+}
+
+/* ── Quick links ──────────────────────────────────────────────────────── */
+.quick-link {
+  background: rgba(5,0,15,0.9) !important;
+  border-color: rgba(255,0,110,0.12) !important;
+}
+.quick-link:hover {
+  border-color: rgba(255,0,110,0.4) !important;
+  color: #FF006E !important;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #05000A; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF006E, #7B2FFF);
+  border-radius: 3px;
+}
+
+/* ── Text selection ───────────────────────────────────────────────────── */
+::selection { background: rgba(255,0,110,0.30); color: #fff; }
+
+/* ── Slider dots → Miami pink ─────────────────────────────────────────── */
+.slider-dot        { background: rgba(255,0,110,0.40) !important; border-color: transparent !important; }
+.slider-dot.active { background: #FF006E !important; box-shadow: 0 0 14px rgba(255,0,110,0.8) !important; }
+
+/* ── Admin panel ──────────────────────────────────────────────────────── */
+.admin-bar { border-color: rgba(255,0,110,0.25) !important; }
+.admin-btn.approve {
+  background: linear-gradient(135deg,#FF006E,#FF6B00) !important;
+  color: #fff !important;
+}
+.admin-btn.reject {
+  background: rgba(255,0,110,0.14) !important;
+  color: #FF006E !important;
+  border-color: rgba(255,0,110,0.35) !important;
+}
+
+/* ── Insights bar top stripe ──────────────────────────────────────────── */
+.insight-card::before {
+  background: var(--mv-grad) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONTRAST GUARANTEES — every text element stays legible on dark Miami bg
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Universal text baseline — everything inherits light color unless overridden */
+html body, html body * {
+  color: inherit;
+}
+html body {
+  color: #f0eaff !important;
+}
+
+/* Explicit white on any element whose text might go invisible */
+p, span, div, li, td, th, label, input, textarea, select,
+a, h1, h2, h3, h4, h5, h6,
+.card, [class*="card"], [class*="tile"], [class*="item"],
+[class*="row"], [class*="section"], [class*="panel"],
+[class*="stat"], [class*="info"], [class*="meta"],
+[class*="name"], [class*="title"], [class*="label"],
+[class*="text"], [class*="desc"], [class*="body"],
+[class*="content"], [class*="detail"] {
+  color: #f0eaff;
+}
+
+/* Muted / secondary text */
+[class*="muted"], [class*="dim"], [class*="sub"], [class*="secondary"],
+[class*="hint"], [class*="caption"], small {
+  color: #b8a8d8 !important;
+}
+
+/* Link defaults */
+a { color: #f0eaff; }
+a:hover { color: #FF006E; }
+
+/* Headings — bright white */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+  font-family: 'Barlow Condensed', 'Bebas Neue', Impact, sans-serif !important;
+}
+
+/* Nav links always light */
+.topnav-menu a, .nav a, nav a, .nav-inner a {
+  color: #e0d4ff !important;
+}
+
+/* Card/surface text always white */
+.about-card *, .stat-card *, .insight-card *,
+.comment-form *, .comment-item *,
+.proj-tile *, .creator-card *,
+.stream-section *, .sidebar *,
+.identity-bar *, .identity-inner * {
+  color: #f0eaff;
+}
+
+/* Override any dark-text utility classes */
+.text-dark, .text-black { color: #f0eaff !important; }
+
+/* Inputs need white text on dark bg */
+input, textarea, select {
+  color: #f0eaff !important;
+  background: rgba(5,0,15,0.95) !important;
+  border-color: rgba(255,0,110,0.25) !important;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(176,160,216,0.65) !important;
+}
+
+/* Bigo Hub specific — creator rows / show rows */
+.show-row, .creator-row, .trending-row,
+.show-card, .creator-card-inner, .stream-item,
+.shows-list *, .creators-list * {
+  color: #f0eaff !important;
+}
+
+/* Section/tab content */
+.tab-content, .panel-content, .section-body,
+.featured-section *, .trending-section * {
+  color: #f0eaff !important;
+}
+
+/* Make card borders pop so cards are visible as distinct regions */
+.about-card, .stat-card, .insight-card, .comment-form, .comment-item,
+.proj-tile, [class*="card"], [class*="tile"], [class*="panel"],
+[class*="row"]:not(.cf-row):not(.hero-stats-row):not(.admin-row) {
+  border: 1px solid rgba(255,0,110,0.22) !important;
+  background: rgba(13,0,21,0.92) !important;
+}
+
+/* ── Responsive helpers ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  html body::before {
+    background-size: 60px 60px, 60px 60px, 100% 100%;
+  }
+}
