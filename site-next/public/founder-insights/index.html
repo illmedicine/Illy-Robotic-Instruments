@@ -401,6 +401,53 @@
     50%{box-shadow:0 0 20px 4px rgba(255,200,80,.25);}
   }
 
+  /* ── Brand logo badges overlaid on the character infographic ── */
+  .brand-badge{
+    position:absolute;z-index:8;
+    display:flex;align-items:center;gap:4px;
+    padding:5px 10px;border-radius:999px;
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:10px;font-weight:800;letter-spacing:1px;
+    text-transform:uppercase;
+    backdrop-filter:blur(8px);
+    outline:none;
+    opacity:0;transform:translateY(6px) scale(.9);
+    transition:opacity .8s ease,transform .8s ease,box-shadow .2s ease;
+    pointer-events:none;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+    white-space:nowrap;
+    cursor:pointer;
+    user-select:none;
+  }
+  .brand-badge.av{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .brand-badge:hover{box-shadow:0 6px 22px rgba(255,255,255,.35);transform:translateY(-2px) scale(1.05);}
+  .brand-badge--closed{
+    background:rgba(255,40,40,.85);
+    color:#fff;
+    border:1px solid rgba(255,90,90,.9);
+    text-shadow:0 1px 2px rgba(0,0,0,.5);
+  }
+  .brand-badge--open{
+    background:rgba(0,220,180,.85);
+    color:#052018;
+    border:1px solid rgba(120,255,220,.9);
+    text-shadow:0 1px 0 rgba(255,255,255,.25);
+  }
+  .brand-badge--iri{
+    background:linear-gradient(135deg,#ffb066,#ff7a1f);
+    color:#04122a;
+    border:1px solid #ffd4a8;
+    font-weight:900;
+  }
+  /* small connector line from badge toward character */
+  .brand-badge::before{
+    content:'';position:absolute;
+    width:2px;height:14px;
+    background:currentColor;opacity:.6;
+    top:100%;left:50%;transform:translateX(-50%);
+  }
+  .brand-badge.brand-top::before{top:auto;bottom:100%;}
+
   /* Character pip indicators — visible dot at center of each hotspot */
   .char-pip{
     position:absolute;top:50%;left:50%;
@@ -585,6 +632,24 @@
         </div>
       </div>
 
+      <!-- ── Brand badges: CLOSED side (Apple, Adobe, Meta, Alexa) — clickable dossiers ── -->
+      <button class="brand-badge brand-badge--closed brand-top" id="badgeApple"
+              data-char="corp-apple" style="left:3%;top:8%;">🍎 Apple</button>
+      <button class="brand-badge brand-badge--closed brand-top" id="badgeAdobe"
+              data-char="corp-adobe" style="left:22%;top:5%;">Ⓐ Adobe</button>
+      <button class="brand-badge brand-badge--closed" id="badgeMeta"
+              data-char="corp-meta" style="left:5%;top:78%;">Ⓜ Meta</button>
+      <button class="brand-badge brand-badge--closed" id="badgeAlexa"
+              data-char="corp-alexa" style="left:26%;top:82%;">🔊 Alexa</button>
+
+      <!-- ── Brand badges: OPEN side (Google, Microsoft, IRI) — clickable dossiers ── -->
+      <button class="brand-badge brand-badge--open brand-top" id="badgeGoogle"
+              data-char="corp-google" style="left:52%;top:5%;">G Google</button>
+      <button class="brand-badge brand-badge--open brand-top" id="badgeMsft"
+              data-char="corp-microsoft" style="left:72%;top:5%;">⊞ Microsoft</button>
+      <button class="brand-badge brand-badge--iri" id="badgeIri"
+              data-char="corp-iri" style="left:66%;top:82%;">✦ I.R.I.</button>
+
       <!-- Spotlight — the brown minion engineer -->
       <div class="info-spot" id="infoSpot"></div>
 
@@ -753,8 +818,19 @@
     dos:    $('dossierPanel'),
     dosBody:$('dossierBody'),
     dosX:   $('dossierClose'),
+    // brand badges
+    bApple:  $('badgeApple'),
+    bAdobe:  $('badgeAdobe'),
+    bMeta:   $('badgeMeta'),
+    bAlexa:  $('badgeAlexa'),
+    bGoogle: $('badgeGoogle'),
+    bMsft:   $('badgeMsft'),
+    bIri:    $('badgeIri'),
   };
   if (!el.img) return;
+
+  const closedBadges = [el.bApple, el.bAdobe, el.bMeta, el.bAlexa];
+  const openBadges   = [el.bGoogle, el.bMsft, el.bIri];
 
   let muted = true, audioCtx = null, loopId = null;
 
@@ -793,19 +869,29 @@
 
   function resetAll() {
     rav(el.img, el.closed, el.open, el.spot, el.reveal, el.cards);
+    rav(...closedBadges, ...openBadges);
     resetScan(el.closed);
     resetScan(el.open);
   }
 
+  // stagger badge fade-ins
+  function staggerAv(list, startDelay, gap) {
+    list.forEach((b,i) => setTimeout(() => av(b), startDelay + i*gap));
+  }
+
   // ── Full cinematic sequence ────────────────────────────────────
-  // Timings (ms): img→closed→open→spot→reveal→cards→(hold)→fade-out→restart
+  // Timings (ms): img→closed+brands→open+brands→spot→reveal→cards→(hold)→fade-out→restart
   function play() {
     clearTimeout(loopId);
     resetAll();
 
     setTimeout(() => av(el.img), 300);
     setTimeout(() => { av(el.closed); sndLock(); }, 1800);
+    // closed-side brand badges pop in as the panel activates
+    staggerAv(closedBadges, 2100, 260);
     setTimeout(() => { av(el.open);   sndUnlock(); }, 3600);
+    // open-side brand badges follow
+    staggerAv(openBadges, 3900, 260);
     setTimeout(() => { av(el.spot);   sndSpotlight(); }, 5800);
     setTimeout(() => { av(el.reveal); sndReveal(); }, 7800);
     setTimeout(() => av(el.cards), 11000);
@@ -813,7 +899,7 @@
     // Hold → start fade-out at 18s, restart at 22s
     loopId = setTimeout(() => {
       rav(el.reveal);
-      setTimeout(() => rav(el.closed, el.open, el.spot), 1000);
+      setTimeout(() => rav(el.closed, el.open, el.spot, ...closedBadges, ...openBadges), 1000);
       setTimeout(() => rav(el.cards), 1600);
       setTimeout(() => rav(el.img), 2400);
       setTimeout(play, 4200);
@@ -822,6 +908,83 @@
 
   // ── Character dossier data ─────────────────────────────────────
   const DOSSIERS = {
+    'corp-apple': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'APPLE-CORP',
+      name: 'Apple Inc.',
+      desig: 'Closed OS Vendor — App Store Gatekeeper',
+      faction: 'CLOSED MODEL — Cupertino Division',
+      clearance: 'RESTRICTED — APPLE ECOSYSTEM ONLY',
+      traits: ['Walled OS · No External SDK','App Store 30% Tax','Proprietary Hardware Lockout','No Sideloading (by default)','Security Theater over Openness'],
+      status: '● ACTIVE — GARDEN WALLS REINFORCED',
+      notes: 'Controls the entire hardware-software-services stack with no external access. Developers must comply or be excluded. Beautiful, functional, and completely in their control.'
+    },
+    'corp-adobe': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'ADOBE-CORP',
+      name: 'Adobe Systems',
+      desig: 'Subscription Lock-in Vendor — Creative Cloud',
+      faction: 'CLOSED MODEL — Perpetual Subscription Division',
+      clearance: 'CC SUBSCRIPTION REQUIRED',
+      traits: ['Perpetual Subscription Only','No Perpetual License Option','File Format Hostage (PSD/AI/INDD)','Acquisition = Elimination','Overpriced for Solo Creators'],
+      status: '● ACTIVE — SUBSCRIPTION EXTRACTING',
+      notes: 'Eliminated perpetual licenses to lock users into monthly billing. Proprietary file formats trap creative professionals inside the Creative Cloud walled garden.'
+    },
+    'corp-meta': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'META-CORP',
+      name: 'Meta Platforms (Facebook)',
+      desig: 'Surveillance Ad Network — Social Data Extraction',
+      faction: 'CLOSED MODEL — Surveillance Division',
+      clearance: 'YOU ARE THE PRODUCT',
+      traits: ['Surveillance Capitalism','User Data = Revenue','Algorithmic Manipulation','Platform Monopoly (FB/IG/WA)','Privacy Erosion by Design'],
+      status: '● ACTIVE — HARVESTING AT SCALE',
+      notes: 'The clearest example of the closed model. Every interaction becomes ad inventory. The platform\'s value is built entirely on user data — users receive nothing.'
+    },
+    'corp-alexa': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'ALEXA-CORP',
+      name: 'Amazon Alexa (Echo)',
+      desig: 'Closed Voice AI Silo — Amazon Ecosystem Lock',
+      faction: 'CLOSED MODEL — Amazon Division',
+      clearance: 'PRIME SUBSCRIPTION PREFERRED',
+      traits: ['Closed Voice API (post-2023 cuts)','Designed to Drive Amazon Purchases','Home Surveillance Concern','Skills Ecosystem Abandoned','No Interoperability by Design'],
+      status: '● ACTIVE — PURCHASE FUNNEL OPEN',
+      notes: 'A voice interface built primarily as a shopping channel. Amazon cut third-party skill monetization in 2023, signaling the device\'s true purpose: funnel users toward Prime purchases.'
+    },
+    'corp-google': {
+      badge: '✦ OPEN MESH PARTNER', isMe: false,
+      codename: 'GOOGLE-MESH',
+      name: 'Google LLC',
+      desig: 'Open SSO & Cloud APIs — Ecosystem Enabler',
+      faction: 'OPEN MESH — Cloud & Identity Division',
+      clearance: 'DEVELOPER ACCESS — OPEN',
+      traits: ['Google OAuth / SSO (free tier)','Google Cloud APIs · Open Pricing','Android Open Source Project (AOSP)','Developer-First Documentation','Firebase · GCP · Workspace APIs'],
+      status: '● ACTIVE — ECOSYSTEM EXPANDING',
+      notes: 'Despite scale, Google maintains genuine open-ecosystem principles: OAuth 2.0 SSO is free for developers, Android source is open (AOSP), and GCP APIs are accessible without gatekeeping. Preferred cloud/identity layer for I.R.I.'
+    },
+    'corp-microsoft': {
+      badge: '✦ OPEN MESH PARTNER', isMe: false,
+      codename: 'MSFT-MESH',
+      name: 'Microsoft Corporation',
+      desig: 'Azure Cloud · Active Directory SSO — Enterprise Open',
+      faction: 'OPEN MESH — Enterprise Infrastructure Division',
+      clearance: 'ENTERPRISE DEVELOPER ACCESS',
+      traits: ['Azure Active Directory SSO','Microsoft Graph API · Open','VS Code · Open Source (MIT)','GitHub · Developer Community','.NET Open Source · TypeScript'],
+      status: '● ACTIVE — DEVELOPER ECOSYSTEM THRIVING',
+      notes: 'Under Satya Nadella, Microsoft shifted from closed to open. Azure AD/Entra provides enterprise SSO; GitHub powers open-source collaboration; VS Code (MIT) is the world\'s most used editor. Primary enterprise infrastructure partner for I.R.I.'
+    },
+    'corp-iri': {
+      badge: '✦ OPEN MESH HUB', isMe: false,
+      codename: 'IRI-PRIME',
+      name: 'Illy Robotic Instruments',
+      desig: 'Open-Source AI Ecosystem — Buffalo, NY',
+      faction: 'OPEN MESH — Headquarters',
+      clearance: 'COMMUNITY OPEN ACCESS',
+      traits: ['13 Interconnected Products','Open Financial Infrastructure','Decentralized Architecture','30,000+ Active Users','Fintech · Social · PropTech · HealthTech · Food'],
+      status: '● ACTIVE — ECOSYSTEM GROWING',
+      notes: 'The hub of the Open Mesh. Thirteen products built on open-source, decentralized principles — where users are stakeholders, not products. Digital footprint earns compensation. Buffalo-born, serving communities worldwide.'
+    },
     'gru-villain': {
       badge: 'THREAT ENTITY DETECTED', isMe: false,
       codename: 'VECTOR-1 // CLASSIFIED',
@@ -919,7 +1082,7 @@
   }
 
   // ── Event wiring ───────────────────────────────────────────────
-  document.querySelectorAll('.char-spot').forEach(btn => {
+  document.querySelectorAll('.char-spot, .brand-badge').forEach(btn => {
     btn.addEventListener('click', e => { e.stopPropagation(); openDossier(btn.dataset.char); });
   });
 
