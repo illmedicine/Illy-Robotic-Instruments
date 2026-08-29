@@ -289,91 +289,15 @@
     box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 80px rgba(255,107,0,.1);
   }
 
-  /* Base image */
-  .info-img{width:100%;height:auto;display:block;opacity:0;transition:opacity 1.8s ease;}
-  .info-img.av{opacity:1;}
-
-  /* Panel overlays */
-  .info-panel{
-    position:absolute;top:0;bottom:0;width:50%;
-    opacity:0;transition:opacity .9s ease;pointer-events:none;
-  }
-  .info-closed{left:0;background:rgba(220,40,40,.1);border-right:2px solid rgba(220,40,40,.55);}
-  .info-open{right:0;background:rgba(0,200,220,.08);border-left:2px solid rgba(0,200,220,.55);}
-  .info-panel.av{opacity:1;}
-
-  /* Scan line */
-  .info-scan{
-    position:absolute;left:0;right:0;height:2px;opacity:0;
-    animation:infoScan 1.8s ease-in-out forwards;
-  }
-  .info-scan-red{background:linear-gradient(90deg,transparent,rgba(220,40,40,.85),transparent);animation-delay:.15s;}
-  .info-scan-cyan{background:linear-gradient(90deg,transparent,rgba(0,220,240,.85),transparent);animation-delay:.15s;}
-  @keyframes infoScan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
-
-  /* Panel labels */
-  .info-lbl{
-    position:absolute;top:8%;display:flex;flex-direction:column;
-    align-items:flex-start;gap:.25rem;
-    padding:.55rem .75rem;background:rgba(0,0,0,.78);
-    border-radius:8px;backdrop-filter:blur(8px);
-    opacity:0;transform:translateY(-10px);
-    transition:opacity .6s ease .5s,transform .6s ease .5s;max-width:42%;
-  }
-  .info-lbl-l{left:3%;border-left:3px solid rgba(220,40,40,.85);}
-  .info-lbl-r{right:3%;border-left:3px solid rgba(0,220,240,.85);}
-  .info-panel.av .info-lbl{opacity:1;transform:translateY(0);}
-  .info-lbl span{font-size:1.2rem;}
-  .info-lbl strong{color:#fff;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;}
-  .info-lbl em{color:#aaa;font-size:.68rem;font-style:normal;}
-
-  /* Spotlight — brown minion */
-  .info-spot{
-    position:absolute;left:73%;top:55%;
-    width:110px;height:110px;border-radius:50%;
-    transform:translate(-50%,-50%) scale(.4);
-    background:radial-gradient(circle,rgba(255,220,100,.5) 0%,rgba(255,200,80,.15) 50%,transparent 70%);
-    border:2px solid rgba(255,200,80,.7);
-    box-shadow:0 0 0 6px rgba(255,200,80,.2),0 0 50px rgba(255,200,80,.4);
-    opacity:0;pointer-events:none;
-    transition:opacity .9s ease,transform .9s ease;
-    animation:infoSpotPulse 2.2s ease-in-out infinite;
-  }
-  .info-spot.av{opacity:1;transform:translate(-50%,-50%) scale(1);}
-  @keyframes infoSpotPulse{
-    0%,100%{box-shadow:0 0 0 6px rgba(255,200,80,.2),0 0 50px rgba(255,200,80,.4);}
-    50%{box-shadow:0 0 0 14px rgba(255,200,80,.35),0 0 80px rgba(255,200,80,.65);}
-  }
-
-  /* Identity reveal */
-  .info-reveal{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
-    background:rgba(4,8,22,.72);backdrop-filter:blur(3px);
-    opacity:0;pointer-events:none;
-    transition:opacity .9s ease;gap:1rem;padding:2rem;
-  }
-  .info-reveal.av{opacity:1;}
-  .info-r1{
-    font-family:var(--serif);font-size:clamp(2rem,5.5vw,4.5rem);font-weight:900;
-    color:#fff;letter-spacing:-.02em;text-align:center;
-    opacity:0;transform:scale(.85);transition:opacity .7s ease,transform .7s ease;
-    text-shadow:0 4px 40px rgba(255,100,0,.7),0 0 80px rgba(255,100,0,.3);
-  }
-  .info-r2{
-    font-family:var(--serif);font-size:clamp(1rem,2.8vw,1.8rem);
-    font-weight:500;font-style:italic;color:#ffb066;text-align:center;
-    opacity:0;transform:translateY(18px);
-    transition:opacity .6s ease .35s,transform .6s ease .35s;
-  }
-  .info-r3{
-    font-size:clamp(.85rem,1.8vw,1.1rem);color:rgba(255,255,255,.7);
-    text-align:center;line-height:1.65;opacity:0;transform:translateY(18px);
-    transition:opacity .6s ease .7s,transform .6s ease .7s;
-  }
-  .info-reveal.av .info-r1{opacity:1;transform:scale(1);}
-  .info-reveal.av .info-r2{opacity:1;transform:translateY(0);}
-  .info-reveal.av .info-r3{opacity:1;transform:translateY(0);}
+  /* ── Architecture Diagram SVG ── */
+  .arch-svg{width:100%;height:100%;display:block;}
+  #svgLeft,#svgRight{transition:opacity .9s ease,filter .9s ease;}
+  #svgLeft.emph { filter:drop-shadow(0 0 10px rgba(180,80,230,.7)) brightness(1.3); }
+  #svgRight.emph{ filter:drop-shadow(0 0 10px rgba(255,140,66,.7)) brightness(1.3); }
+  #svgLeft.dim  { opacity:.32; }
+  #svgRight.dim { opacity:.32; }
+  #svgYouNode   { transition:filter .9s ease; }
+  #svgYouNode.emph{ filter:drop-shadow(0 0 16px rgba(255,200,80,.85)) brightness(1.4); }
 
   /* ── Character hotspot buttons ── */
   .char-spot{
@@ -560,82 +484,169 @@
 
     <div class="infostage" id="infoStage">
 
-      <!-- Base infographic image -->
-      <img class="info-img" id="infoImg"
-           src="/assets/gru-open-mesh.png"
-           alt="Infographic: The Closed Model (Vector / Apple) vs The Open Mesh (Illy Robotics)" />
+      <!-- ══ Architecture Diagram: Walled Garden vs Open Mesh ══
+           ViewBox 600×600. Hotspot left% = (cx-r)/600, top% = (cy-r)/600.
+           Every pip is pixel-perfect over its node circle. -->
+      <svg class="arch-svg" id="archSvg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-label="Architecture diagram: The Walled Garden vs The Open Mesh">
+        <defs>
+          <linearGradient id="bgL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#120622"/><stop offset="100%" stop-color="#1c0835"/></linearGradient>
+          <linearGradient id="bgR" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f0900"/><stop offset="100%" stop-color="#1c1000"/></linearGradient>
+          <marker id="arrowIn" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L6,3.5 L0,6.5 Z" fill="rgba(170,80,230,.75)"/></marker>
+          <marker id="arrowBi" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L6,3.5 L0,6.5 Z" fill="rgba(255,140,66,.75)"/></marker>
+          <marker id="arrowBiRev" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse"><path d="M0,0.5 L6,3.5 L0,6.5 Z" fill="rgba(255,140,66,.75)"/></marker>
+          <clipPath id="clipL"><rect x="0" y="0" width="291" height="600"/></clipPath>
+          <clipPath id="clipR"><rect x="309" y="0" width="291" height="600"/></clipPath>
+        </defs>
 
-      <!-- Left panel: Closed Model -->
-      <div class="info-panel info-closed" id="infoClosed">
-        <div class="info-scan info-scan-red"></div>
-        <div class="info-lbl info-lbl-l">
-          <span>🔒</span>
-          <strong>The Closed Model</strong>
-          <em>Control · Lock-in · User as Product</em>
-        </div>
-      </div>
+        <!-- ── LEFT: The Walled Garden (cx of panel = 145) ── -->
+        <g id="svgLeft" clip-path="url(#clipL)">
+          <rect x="0" y="0" width="291" height="600" fill="url(#bgL)"/>
+          <!-- grid -->
+          <g opacity="0.05" stroke="#9944dd" stroke-width="0.5">
+            <line x1="0" y1="75" x2="291" y2="75"/><line x1="0" y1="150" x2="291" y2="150"/><line x1="0" y1="225" x2="291" y2="225"/><line x1="0" y1="300" x2="291" y2="300"/><line x1="0" y1="375" x2="291" y2="375"/><line x1="0" y1="450" x2="291" y2="450"/><line x1="0" y1="525" x2="291" y2="525"/>
+            <line x1="75" y1="0" x2="75" y2="600"/><line x1="150" y1="0" x2="150" y2="600"/><line x1="225" y1="0" x2="225" y2="600"/>
+          </g>
+          <!-- wall border -->
+          <rect x="3" y="3" width="285" height="594" fill="none" stroke="rgba(160,60,220,.35)" stroke-width="2.5"/>
+          <rect x="0" y="0" width="22" height="22" fill="rgba(160,60,220,.2)"/><rect x="269" y="0" width="22" height="22" fill="rgba(160,60,220,.2)"/>
+          <rect x="0" y="578" width="22" height="22" fill="rgba(160,60,220,.2)"/><rect x="269" y="578" width="22" height="22" fill="rgba(160,60,220,.2)"/>
+          <!-- title + lock icon -->
+          <text x="145" y="26" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="800" letter-spacing="3" fill="rgba(180,110,240,.65)">THE WALLED GARDEN</text>
+          <g transform="translate(127,32)"><rect x="2" y="9" width="20" height="14" rx="2" fill="rgba(160,60,220,.2)" stroke="rgba(160,60,220,.55)" stroke-width="1.5"/><path d="M6,9 L6,5 Q6,1 12,1 Q18,1 18,5 L18,9" fill="none" stroke="rgba(160,60,220,.55)" stroke-width="1.5"/><circle cx="12" cy="15" r="2" fill="rgba(160,60,220,.75)"/></g>
+          <!-- CORP HUB — cx=145, cy=280 -->
+          <g id="corpHub">
+            <rect x="82" y="257" width="126" height="46" rx="5" fill="rgba(120,40,180,.22)" stroke="rgba(160,80,220,.65)" stroke-width="1.5"/>
+            <text x="145" y="273" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-weight="900" letter-spacing="1.5" fill="rgba(210,160,255,.9)">CORP DATA HUB</text>
+            <text x="145" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="rgba(160,100,220,.5)">extracts · profits · repeats</text>
+            <rect x="76" y="251" width="138" height="58" rx="8" fill="none" stroke="rgba(160,60,220,.2)" stroke-width="1"><animate attributeName="opacity" values="0.2;0.5;0.2" dur="2.5s" repeatCount="indefinite"/></rect>
+          </g>
+          <!-- APPLE — cx=72 cy=152 r=34 → hotspot left=6.3% top=19.7% -->
+          <g id="nodeApple"><circle cx="72" cy="152" r="34" fill="rgba(80,20,130,.4)" stroke="rgba(150,70,210,.5)" stroke-width="1.5"/><text x="72" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="800" fill="rgba(220,170,255,.95)">APPLE</text><text x="72" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(180,120,240,.5)">Walled OS · No SDK</text></g>
+          <!-- ADOBE — cx=218 cy=152 r=34 → hotspot left=30.7% top=19.7% -->
+          <g id="nodeAdobe"><circle cx="218" cy="152" r="34" fill="rgba(80,20,130,.4)" stroke="rgba(150,70,210,.5)" stroke-width="1.5"/><text x="218" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="800" fill="rgba(220,170,255,.95)">ADOBE</text><text x="218" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(180,120,240,.5)">Sub Lock-in Only</text></g>
+          <!-- META — cx=72 cy=432 r=34 → hotspot left=6.3% top=66.3% -->
+          <g id="nodeMeta"><circle cx="72" cy="432" r="34" fill="rgba(80,20,130,.4)" stroke="rgba(150,70,210,.5)" stroke-width="1.5"/><text x="72" y="429" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="800" fill="rgba(220,170,255,.95)">META</text><text x="72" y="442" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(180,120,240,.5)">You = Ad Product</text></g>
+          <!-- ALEXA — cx=218 cy=432 r=34 → hotspot left=30.7% top=66.3% -->
+          <g id="nodeAlexa"><circle cx="218" cy="432" r="34" fill="rgba(80,20,130,.4)" stroke="rgba(150,70,210,.5)" stroke-width="1.5"/><text x="218" y="429" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="800" fill="rgba(220,170,255,.95)">ALEXA</text><text x="218" y="442" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(180,120,240,.5)">Amazon Closed Silo</text></g>
+          <!-- extraction arrows → hub -->
+          <line x1="94" y1="179" x2="104" y2="257" stroke="rgba(160,70,220,.5)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowIn)"><animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.1s" repeatCount="indefinite"/></line>
+          <line x1="197" y1="179" x2="186" y2="257" stroke="rgba(160,70,220,.5)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowIn)"><animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.1s" begin="0.28s" repeatCount="indefinite"/></line>
+          <line x1="94" y1="404" x2="104" y2="303" stroke="rgba(160,70,220,.5)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowIn)"><animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.1s" begin="0.55s" repeatCount="indefinite"/></line>
+          <line x1="197" y1="404" x2="186" y2="303" stroke="rgba(160,70,220,.5)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowIn)"><animate attributeName="stroke-dashoffset" from="7" to="0" dur="1.1s" begin="0.83s" repeatCount="indefinite"/></line>
+          <!-- bottom label -->
+          <text x="145" y="524" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="rgba(180,100,220,.55)">You are the product.</text>
+          <text x="145" y="537" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="rgba(160,90,210,.35)">Data extracted. Value kept by corp.</text>
+          <!-- Corporate figure — cx=145 cy=565: head r=13 body rect 122-168 550-596 -->
+          <g id="corpChar"><rect x="122" y="550" width="46" height="46" rx="4" fill="rgba(80,20,130,.45)" stroke="rgba(150,60,210,.3)" stroke-width="1"/><polygon points="145,552 141,567 145,572 149,567" fill="rgba(180,70,230,.55)"/><circle cx="145" cy="541" r="13" fill="rgba(80,20,130,.45)" stroke="rgba(150,60,210,.3)" stroke-width="1"/><rect x="169" y="563" width="16" height="13" rx="2" fill="rgba(80,20,130,.4)" stroke="rgba(150,60,210,.38)" stroke-width="1"/><rect x="173" y="561" width="8" height="3" rx="1" fill="none" stroke="rgba(150,60,210,.38)" stroke-width="1"/><circle cx="177" cy="569" r="2.5" fill="rgba(160,60,220,.6)"/></g>
+        </g>
 
-      <!-- Right panel: Open Mesh -->
-      <div class="info-panel info-open" id="infoOpen">
-        <div class="info-scan info-scan-cyan"></div>
-        <div class="info-lbl info-lbl-r">
-          <span>🔓</span>
-          <strong>The Open Mesh</strong>
-          <em>Open Source · Community · User as Owner</em>
-        </div>
-      </div>
+        <!-- ── CENTER DIVIDER ── -->
+        <line x1="300" y1="16" x2="300" y2="584" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="20" fill="#0c0d16" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+        <text x="300" y="305" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="900" fill="rgba(255,255,255,.42)">VS</text>
 
-      <!-- Spotlight — the brown minion engineer -->
-      <div class="info-spot" id="infoSpot"></div>
+        <!-- ── RIGHT: The Open Mesh (cx of panel = 454) ── -->
+        <g id="svgRight" clip-path="url(#clipR)">
+          <rect x="309" y="0" width="291" height="600" fill="url(#bgR)"/>
+          <!-- grid -->
+          <g opacity="0.05" stroke="#ff8c42" stroke-width="0.5">
+            <line x1="309" y1="75" x2="600" y2="75"/><line x1="309" y1="150" x2="600" y2="150"/><line x1="309" y1="225" x2="600" y2="225"/><line x1="309" y1="300" x2="600" y2="300"/><line x1="309" y1="375" x2="600" y2="375"/><line x1="309" y1="450" x2="600" y2="450"/><line x1="309" y1="525" x2="600" y2="525"/>
+            <line x1="384" y1="0" x2="384" y2="600"/><line x1="459" y1="0" x2="459" y2="600"/><line x1="534" y1="0" x2="534" y2="600"/>
+          </g>
+          <!-- mesh border -->
+          <rect x="312" y="3" width="285" height="594" fill="none" stroke="rgba(255,140,66,.28)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <!-- title + key icon -->
+          <text x="454" y="26" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="800" letter-spacing="3" fill="rgba(255,168,85,.75)">THE OPEN MESH</text>
+          <g transform="translate(436,31)"><circle cx="9" cy="8" r="7" fill="rgba(255,140,66,.15)" stroke="rgba(255,140,66,.55)" stroke-width="1.5"/><circle cx="9" cy="7" r="2" fill="rgba(255,140,66,.7)"/><line x1="14" y1="12" x2="28" y2="22" stroke="rgba(255,140,66,.55)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="17" x2="20" y2="21" stroke="rgba(255,140,66,.55)" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="20" x2="23" y2="24" stroke="rgba(255,140,66,.55)" stroke-width="1.5" stroke-linecap="round"/></g>
+          <!-- YOU hub — cx=454 cy=280 r=32 → hotspot left=70.3% top=41.3% -->
+          <g id="svgYouNode">
+            <circle cx="454" cy="280" r="48" fill="none" stroke="rgba(255,140,66,.08)" stroke-width="1"><animate attributeName="r" values="48;58;48" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.08;0.03;0.08" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="454" cy="280" r="32" fill="rgba(255,140,66,.12)" stroke="rgba(255,140,66,.65)" stroke-width="2"/>
+            <text x="454" y="276" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="900" fill="rgba(255,220,160,.95)">YOU</text>
+            <text x="454" y="291" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="rgba(255,168,85,.6)">stakeholder · owner</text>
+          </g>
+          <!-- GOOGLE — cx=378 cy=152 r=34 → hotspot left=57.3% top=19.7% -->
+          <g id="nodeGoogle"><circle cx="378" cy="152" r="34" fill="rgba(60,30,0,.5)" stroke="rgba(255,140,66,.42)" stroke-width="1.5"/><text x="378" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" font-weight="800" fill="rgba(255,220,160,.95)">GOOGLE</text><text x="378" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(255,168,85,.5)">Open SSO · Cloud APIs</text></g>
+          <!-- MICROSOFT — cx=530 cy=152 r=34 → hotspot left=82.7% top=19.7% -->
+          <g id="nodeMsft"><circle cx="530" cy="152" r="34" fill="rgba(60,30,0,.5)" stroke="rgba(255,140,66,.42)" stroke-width="1.5"/><text x="530" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="800" fill="rgba(255,220,160,.95)">MICRO-</text><text x="530" y="157" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="800" fill="rgba(255,220,160,.95)">SOFT</text><text x="530" y="169" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(255,168,85,.5)">Azure · AD SSO</text></g>
+          <!-- IRI — cx=454 cy=432 r=34 → hotspot left=70% top=66.3% -->
+          <g id="nodeIri"><circle cx="454" cy="432" r="34" fill="rgba(60,30,0,.5)" stroke="rgba(255,168,85,.55)" stroke-width="2"/><text x="454" y="429" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="900" fill="rgba(255,220,160,.95)">I.R.I.</text><text x="454" y="442" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="rgba(255,168,85,.6)">Open Mesh · Buffalo NY</text></g>
+          <!-- bidirectional arrows YOU ↔ ecosystem -->
+          <line x1="404" y1="176" x2="434" y2="255" stroke="rgba(255,140,66,.45)" stroke-width="1.5" stroke-dasharray="4,3" marker-start="url(#arrowBiRev)" marker-end="url(#arrowBi)"><animate attributeName="stroke-dashoffset" from="0" to="7" dur="1.4s" repeatCount="indefinite"/></line>
+          <line x1="504" y1="176" x2="474" y2="255" stroke="rgba(255,140,66,.45)" stroke-width="1.5" stroke-dasharray="4,3" marker-start="url(#arrowBiRev)" marker-end="url(#arrowBi)"><animate attributeName="stroke-dashoffset" from="0" to="7" dur="1.4s" begin="0.47s" repeatCount="indefinite"/></line>
+          <line x1="454" y1="398" x2="454" y2="314" stroke="rgba(255,168,85,.55)" stroke-width="2" stroke-dasharray="4,3" marker-start="url(#arrowBiRev)" marker-end="url(#arrowBi)"><animate attributeName="stroke-dashoffset" from="0" to="7" dur="1.4s" begin="0.23s" repeatCount="indefinite"/></line>
+          <!-- mesh cross-links (subtle) -->
+          <line x1="412" y1="152" x2="496" y2="152" stroke="rgba(255,140,66,.12)" stroke-width="0.75" stroke-dasharray="3,6"><animate attributeName="stroke-dashoffset" from="0" to="9" dur="2.5s" repeatCount="indefinite"/></line>
+          <line x1="396" y1="182" x2="436" y2="398" stroke="rgba(255,140,66,.08)" stroke-width="0.75" stroke-dasharray="3,8"><animate attributeName="stroke-dashoffset" from="0" to="11" dur="3.5s" repeatCount="indefinite"/></line>
+          <line x1="512" y1="182" x2="472" y2="398" stroke="rgba(255,140,66,.08)" stroke-width="0.75" stroke-dasharray="3,8"><animate attributeName="stroke-dashoffset" from="0" to="11" dur="3.5s" begin="1.2s" repeatCount="indefinite"/></line>
+          <!-- bottom label -->
+          <text x="454" y="524" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="rgba(255,168,85,.6)">You are a stakeholder.</text>
+          <text x="454" y="537" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="rgba(255,168,85,.35)">Data earns. Value flows back to you.</text>
+          <!-- Architect figure — cx=454 cy=565: head r=13 body 432-476 550-596 -->
+          <g id="archChar"><rect x="432" y="550" width="44" height="46" rx="4" fill="rgba(100,45,0,.5)" stroke="rgba(255,140,66,.3)" stroke-width="1"/><g transform="translate(475,549)"><rect x="0" y="0" width="4" height="18" rx="2" fill="rgba(255,140,66,.5)" transform="rotate(-25,2,9)"/><circle cx="2" cy="1" r="4.5" fill="rgba(255,140,66,.38)" stroke="rgba(255,140,66,.6)" stroke-width="1"/></g><circle cx="454" cy="541" r="13" fill="rgba(100,45,0,.5)" stroke="rgba(255,140,66,.3)" stroke-width="1"/><circle cx="454" cy="526" r="7" fill="none" stroke="rgba(255,200,80,.6)" stroke-width="1.5"><animate attributeName="r" values="7;10;7" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.18;0.6" dur="2.2s" repeatCount="indefinite"/></circle><text x="454" y="582" text-anchor="middle" font-family="system-ui,sans-serif" font-size="5.5" letter-spacing="1" fill="rgba(255,200,80,.48)">ARCHITECT</text></g>
+        </g>
 
-      <!-- Identity reveal overlay -->
-      <div class="info-reveal" id="infoReveal">
-        <p class="info-r1">I AM NOT GRU.</p>
-        <p class="info-r2">I am the brown minion engineer in the back.</p>
-        <p class="info-r3">In the trenches. Turning the wrenches.<br>Building the solutions that make the ecosystem thrive.</p>
-      </div>
+        <!-- outer frame -->
+        <rect x="1" y="1" width="598" height="598" fill="none" stroke="rgba(255,140,66,.06)" stroke-width="2"/>
+      </svg>
 
-      <!-- ── Character hotspot click zones + pip indicators ── -->
-      <!-- Each hotspot has a visible pip (glowing dot) centred within it -->
+      <!-- ══ Hotspot buttons — left%=(cx-r)/600, top%=(cy-r)/600 — pixel-perfect over every node circle ══ -->
 
-      <!-- Gru — Villain / Closed Model -->
-      <button class="char-spot" data-char="gru-villain"
-              style="left:4%;top:33%;width:90px;height:150px;"
-              aria-label="Inspect character" title="Tap to inspect">
+      <!-- LEFT PANEL nodes (r=34 each) -->
+      <!-- APPLE cx=72 cy=152: left=(72-34)/600=6.3% top=(152-34)/600=19.7% -->
+      <button class="char-spot" data-char="corp-apple"
+              style="left:6.3%;top:19.7%;width:68px;height:68px;"
+              aria-label="Inspect: Apple" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
+      <!-- ADOBE cx=218 cy=152: left=(218-34)/600=30.7% top=19.7% -->
+      <button class="char-spot" data-char="corp-adobe"
+              style="left:30.7%;top:19.7%;width:68px;height:68px;"
+              aria-label="Inspect: Adobe" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
+      <!-- META cx=72 cy=432: left=6.3% top=(432-34)/600=66.3% -->
+      <button class="char-spot" data-char="corp-meta"
+              style="left:6.3%;top:66.3%;width:68px;height:68px;"
+              aria-label="Inspect: Meta" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
+      <!-- ALEXA cx=218 cy=432: left=30.7% top=66.3% -->
+      <button class="char-spot" data-char="corp-alexa"
+              style="left:30.7%;top:66.3%;width:68px;height:68px;"
+              aria-label="Inspect: Alexa" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
+      <!-- Corp figure cx=145 cy=565: left=(145-26)/600=19.8% top=(541-13)/600=88% -->
+      <button class="char-spot" data-char="corporate-exec"
+              style="left:19.8%;top:88%;width:58px;height:56px;"
+              aria-label="Inspect: Corporate Enforcer" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Minion Alpha — upper left of mesh device -->
-      <button class="char-spot" data-char="minion-alpha"
-              style="left:55%;top:4%;width:68px;height:78px;"
-              aria-label="Inspect character" title="Tap to inspect">
+      <!-- RIGHT PANEL nodes (r=34 each) -->
+      <!-- GOOGLE cx=378 cy=152: left=(378-34)/600=57.3% top=19.7% -->
+      <button class="char-spot" data-char="corp-google"
+              style="left:57.3%;top:19.7%;width:68px;height:68px;"
+              aria-label="Inspect: Google" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
-
-      <!-- Minion Beta — upper right cluster -->
-      <button class="char-spot" data-char="minion-beta"
-              style="left:72%;top:2%;width:68px;height:78px;"
-              aria-label="Inspect character" title="Tap to inspect">
+      <!-- MICROSOFT cx=530 cy=152: left=(530-34)/600=82.7% top=19.7% -->
+      <button class="char-spot" data-char="corp-microsoft"
+              style="left:82.7%;top:19.7%;width:68px;height:68px;"
+              aria-label="Inspect: Microsoft" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
-
-      <!-- Minion Gamma — right side of device, above the brown minion -->
-      <button class="char-spot" data-char="minion-gamma"
-              style="left:80%;top:18%;width:58px;height:62px;"
-              aria-label="Inspect character" title="Tap to inspect">
+      <!-- IRI cx=454 cy=432: left=(454-34)/600=70% top=66.3% -->
+      <button class="char-spot" data-char="corp-iri"
+              style="left:70%;top:66.3%;width:68px;height:68px;"
+              aria-label="Inspect: Illy Robotic Instruments" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
-
-      <!-- Gru (Open Mesh) — presenter / bottom right -->
-      <button class="char-spot" data-char="gru-open"
-              style="left:83%;top:54%;width:86px;height:120px;"
-              aria-label="Inspect character" title="Tap to inspect">
-        <span class="char-pip"></span>
-      </button>
-
-      <!-- Brown Minion — THE ARCHITECT (golden pip) — last in DOM = highest click priority -->
+      <!-- Architect figure cx=454 cy=565: last in DOM = highest click priority
+           left=(454-26)/600=71.3% top=(541-13)/600=88% -->
       <button class="char-spot char-spot--me" data-char="brown-minion"
-              style="left:84%;top:30%;width:80px;height:95px;"
+              style="left:71.3%;top:88%;width:58px;height:56px;"
               aria-label="Tap to inspect: The Architect — DeMarkus Darnell Wilson" title="Tap to inspect">
         <span class="char-pip char-pip--me"></span>
       </button>
@@ -676,7 +687,7 @@
       </div>
     </div>
 
-    <p class="infohero-caption">The Closed Model vs. the Open Mesh — control versus empowerment. Click any character to open their dossier.</p>
+    <p class="infohero-caption">The Walled Garden vs. the Open Mesh — click any node to open its dossier.</p>
   </section>
 
   <!-- Band 1: da Vinci anatomy -->
@@ -737,24 +748,21 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// INFOGRAPHIC HERO — Auto-loop · Character Dossiers
+// ARCH DIAGRAM — Phase loop · Company & Founder Dossiers
 // ═══════════════════════════════════════════════════════════════════
 (function() {
   const $ = id => document.getElementById(id);
 
   const el = {
-    img:    $('infoImg'),
-    closed: $('infoClosed'),
-    open:   $('infoOpen'),
-    spot:   $('infoSpot'),
-    reveal: $('infoReveal'),
+    svgL:   $('svgLeft'),
+    svgR:   $('svgRight'),
+    svgYou: $('svgYouNode'),
     cards:  $('infoCards'),
     snd:    $('infoSnd'),
     dos:    $('dossierPanel'),
     dosBody:$('dossierBody'),
     dosX:   $('dossierClose'),
   };
-  if (!el.img) return;
 
   let muted = true, audioCtx = null, loopId = null;
 
@@ -775,63 +783,142 @@
     osc.start(c.currentTime + delay);
     osc.stop(c.currentTime + delay + dur + 0.1);
   }
-  function sndLock()      { tone(260,'sine',0,.18,.025); tone(200,'sine',.12,.2,.018); }
-  function sndUnlock()    { tone(330,'sine',0,.9,.022); tone(440,'sine',.12,.9,.018); tone(550,'sine',.24,1,.014); }
-  function sndSpotlight() { tone(523,'sine',0,1.2,.028); tone(659,'sine',.2,1.2,.022); tone(784,'sine',.4,1.8,.018); }
-  function sndReveal()    { tone(110,'sine',0,3.5,.015); tone(165,'sine',.15,3.5,.01); }
+  function sndClosed() { tone(220,'sine',0,.3,.018); tone(165,'sine',.18,.3,.012); }
+  function sndOpen()   { tone(392,'sine',0,.5,.016); tone(523,'sine',.18,.5,.012); tone(659,'sine',.36,.7,.010); }
+  function sndYou()    { tone(523,'sine',0,1.0,.018); tone(659,'sine',.25,1.0,.014); tone(784,'sine',.5,1.4,.010); }
 
-  // ── Animation helpers ──────────────────────────────────────────
-  function av(...els)  { els.forEach(e => e && e.classList.add('av')); }
-  function rav(...els) { els.forEach(e => e && e.classList.remove('av')); }
-
-  function resetScan(panel) {
-    const s = panel.querySelector('.info-scan');
-    if (!s) return;
-    const c = s.cloneNode(true);
-    s.parentNode.replaceChild(c, s);
+  // ── Phase classes ──────────────────────────────────────────────
+  function clearPhase() {
+    [el.svgL, el.svgR, el.svgYou].forEach(e => e && e.classList.remove('emph','dim'));
+    el.cards && el.cards.classList.remove('av');
   }
 
-  function resetAll() {
-    rav(el.img, el.closed, el.open, el.spot, el.reveal, el.cards);
-    resetScan(el.closed);
-    resetScan(el.open);
+  // phase 1: walled garden spotlight
+  function phase1() {
+    clearPhase();
+    el.svgL.classList.add('emph');
+    el.svgR.classList.add('dim');
+    sndClosed();
+  }
+  // phase 2: open mesh spotlight
+  function phase2() {
+    clearPhase();
+    el.svgR.classList.add('emph');
+    el.svgL.classList.add('dim');
+    sndOpen();
+  }
+  // phase 3: YOU node — both panels, founder centered
+  function phase3() {
+    clearPhase();
+    el.svgYou.classList.add('emph');
+    el.cards && el.cards.classList.add('av');
+    sndYou();
   }
 
-  // ── Full cinematic sequence ────────────────────────────────────
-  // Timings (ms): img→closed→open→spot→reveal→cards→(hold)→fade-out→restart
   function play() {
     clearTimeout(loopId);
-    resetAll();
-
-    setTimeout(() => av(el.img), 300);
-    setTimeout(() => { av(el.closed); sndLock(); }, 1800);
-    setTimeout(() => { av(el.open);   sndUnlock(); }, 3600);
-    setTimeout(() => { av(el.spot);   sndSpotlight(); }, 5800);
-    setTimeout(() => { av(el.reveal); sndReveal(); }, 7800);
-    setTimeout(() => av(el.cards), 11000);
-
-    // Hold → start fade-out at 18s, restart at 22s
+    phase1();
     loopId = setTimeout(() => {
-      rav(el.reveal);
-      setTimeout(() => rav(el.closed, el.open, el.spot), 1000);
-      setTimeout(() => rav(el.cards), 1600);
-      setTimeout(() => rav(el.img), 2400);
-      setTimeout(play, 4200);
-    }, 18000);
+      phase2();
+      loopId = setTimeout(() => {
+        phase3();
+        loopId = setTimeout(() => {
+          clearPhase();
+          loopId = setTimeout(play, 1800);
+        }, 6000);
+      }, 5500);
+    }, 5000);
   }
 
-  // ── Character dossier data ─────────────────────────────────────
+  // ── Dossier entries ────────────────────────────────────────────
   const DOSSIERS = {
-    'gru-villain': {
-      badge: 'THREAT ENTITY DETECTED', isMe: false,
-      codename: 'VECTOR-1 // CLASSIFIED',
-      name: 'The Closed Architect',
-      desig: 'Chief Proprietary Officer, PROPERRATY TECHNOLOGY',
-      faction: 'CLOSED MODEL — Restricted Division',
-      clearance: 'RESTRICTED — NO OUTSIDE ACCESS',
-      traits: ['Proprietary Data Hoarding','User Lock-in Design','Black Box Systems','Subscription Extraction','Walled Garden Infrastructure'],
+    'corporate-exec': {
+      badge: '⚠ CLOSED MODEL ENFORCER', isMe: false,
+      codename: 'EXECUTOR-PRIME',
+      name: 'The Corporate Gatekeeper',
+      desig: 'Chief Proprietary Officer — Walled Garden Division',
+      faction: 'CLOSED MODEL — Restricted Access',
+      clearance: 'CORPORATE ONLY — NO OUTSIDE ACCESS',
+      traits: ['Proprietary Lock-in Design','User Data Extraction','Black Box Systems','Subscription Ratchet','Monopoly Maintenance'],
       status: '● ACTIVE — THREAT LEVEL: HIGH',
-      notes: 'Operates under the belief that users are products, not people. Commands full data-extraction pipeline. Resistant to open-source principles. Do not trust.'
+      notes: 'Enforces the walled garden at all costs. Data flows in — profit flows out. Users are products, never stakeholders. Operates under the principle: if you can\'t lock them in, price them out.'
+    },
+    'corp-apple': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'APPLE-CORP',
+      name: 'Apple Inc.',
+      desig: 'Closed OS Vendor — App Store Gatekeeper',
+      faction: 'CLOSED MODEL — Cupertino Division',
+      clearance: 'RESTRICTED — APPLE ECOSYSTEM ONLY',
+      traits: ['Walled OS — No External SDK','App Store 30% Tax','Proprietary Hardware Lockout','No Sideloading (by default)','Security Theater over Openness'],
+      status: '● ACTIVE — GARDEN WALLS REINFORCED',
+      notes: 'Controls the entire hardware-software-services stack with no external access. Developers must comply with App Store rules or be excluded. The definition of a closed model — beautiful, functional, and completely in their control.'
+    },
+    'corp-adobe': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'ADOBE-CORP',
+      name: 'Adobe Systems',
+      desig: 'Subscription Lock-in Vendor — Creative Cloud',
+      faction: 'CLOSED MODEL — Perpetual Subscription Division',
+      clearance: 'CC SUBSCRIPTION REQUIRED',
+      traits: ['Perpetual Subscription Only','No Perpetual License Option','File Format Hostage (PSD/AI/INDD)','Acquisition = Market Elimination','Overpriced for Solo Creators'],
+      status: '● ACTIVE — SUBSCRIPTION EXTRACTING',
+      notes: 'Eliminated perpetual licenses to lock users into monthly billing. Proprietary file formats create switching costs that trap creative professionals. Acquired Figma (then dropped under regulatory pressure) to eliminate open competition.'
+    },
+    'corp-meta': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'META-CORP',
+      name: 'Meta Platforms (Facebook)',
+      desig: 'Surveillance Ad Network — Social Data Extraction',
+      faction: 'CLOSED MODEL — Surveillance Division',
+      clearance: 'YOU ARE THE PRODUCT',
+      traits: ['Surveillance Capitalism','User Data = Revenue','Algorithmic Manipulation','Platform Monopoly (FB/IG/WA)','Privacy Erosion by Design'],
+      status: '● ACTIVE — HARVESTING AT SCALE',
+      notes: 'The clearest example of the closed model\'s user-as-product philosophy. Every interaction is monetized as ad inventory. The platform\'s value is built entirely on user data — users receive no compensation or ownership stake.'
+    },
+    'corp-alexa': {
+      badge: '🔒 WALLED GARDEN NODE', isMe: false,
+      codename: 'ALEXA-CORP',
+      name: 'Amazon Alexa (Echo)',
+      desig: 'Closed Voice AI Silo — Amazon Ecosystem Lock',
+      faction: 'CLOSED MODEL — Amazon Division',
+      clearance: 'PRIME SUBSCRIPTION PREFERRED',
+      traits: ['Closed Voice API (post-2023 cuts)','Designed to Drive Amazon Purchases','Home Surveillance Concern','Skills Ecosystem Abandoned','No Interoperability by Design'],
+      status: '● ACTIVE — PURCHASE FUNNEL OPEN',
+      notes: 'A voice interface built primarily as a shopping channel. Amazon cut third-party Alexa skill monetization in 2023, signaling the device\'s true purpose: funnel users toward Amazon Prime and purchases. No openness — just conversion.'
+    },
+    'corp-google': {
+      badge: '✦ OPEN MESH PARTNER', isMe: false,
+      codename: 'GOOGLE-MESH',
+      name: 'Google LLC',
+      desig: 'Open SSO & Cloud APIs — Ecosystem Enabler',
+      faction: 'OPEN MESH — Cloud & Identity Division',
+      clearance: 'DEVELOPER ACCESS — OPEN',
+      traits: ['Google OAuth / SSO (free tier)','Google Cloud APIs — Open Pricing','Android Open Source Project (AOSP)','Developer-First Documentation','Firebase · GCP · Workspace APIs'],
+      status: '● ACTIVE — ECOSYSTEM EXPANDING',
+      notes: 'Despite scale, Google maintains genuine open-ecosystem principles: OAuth 2.0 SSO is free for developers, Android source is open (AOSP), and GCP APIs are accessible without gatekeeping. The preferred cloud and identity layer for the Illy Robotic Instruments Open Mesh.'
+    },
+    'corp-microsoft': {
+      badge: '✦ OPEN MESH PARTNER', isMe: false,
+      codename: 'MSFT-MESH',
+      name: 'Microsoft Corporation',
+      desig: 'Azure Cloud · Active Directory SSO — Enterprise Open',
+      faction: 'OPEN MESH — Enterprise Infrastructure Division',
+      clearance: 'ENTERPRISE DEVELOPER ACCESS',
+      traits: ['Azure Active Directory SSO','Microsoft Graph API — Open','VS Code — Open Source (MIT)','GitHub — Developer Community','.NET Open Source · TypeScript'],
+      status: '● ACTIVE — DEVELOPER ECOSYSTEM THRIVING',
+      notes: 'Under Satya Nadella\'s leadership, Microsoft fundamentally shifted from closed to open. Azure AD/Entra provides enterprise SSO; GitHub powers open-source collaboration; VS Code (MIT licensed) is the world\'s most used editor. Primary enterprise infrastructure partner for the Illy Robotic Instruments ecosystem.'
+    },
+    'corp-iri': {
+      badge: '✦ OPEN MESH HUB', isMe: false,
+      codename: 'IRI-PRIME',
+      name: 'Illy Robotic Instruments',
+      desig: 'Open-Source AI Ecosystem — Buffalo, NY',
+      faction: 'OPEN MESH — Headquarters',
+      clearance: 'COMMUNITY OPEN ACCESS',
+      traits: ['13 Interconnected Products','Open Financial Infrastructure','Decentralized Architecture','30,000+ Active Users','Fintech · Social Commerce · PropTech · HealthTech · Local Food'],
+      status: '● ACTIVE — ECOSYSTEM GROWING',
+      notes: 'The hub of the Open Mesh. Thirteen products built on open-source, decentralized principles — where users are stakeholders, not products. Digital footprint earns compensation. Built by one architect from Buffalo, NY, now serving communities worldwide.'
     },
     'brown-minion': {
       badge: '✦ IDENTITY CONFIRMED — PRINCIPAL ARCHITECT', isMe: true,
@@ -841,52 +928,8 @@
       faction: 'OPEN MESH — Illy Robotic Instruments · Buffalo, NY',
       clearance: 'ARCHITECT-1 — UNRESTRICTED',
       traits: ['Full Stack AI Engineering','Cloud Solutions Architecture','Azure · Google Cloud','SAFe Scaled Agile SPC','20+ Yrs Enterprise Transformation','Open Source Advocacy'],
-      status: '● ACTIVE — FIELD POSITION: THE TRENCHES',
-      notes: '"I am not Gru. I am the brown minion engineer in the back — in the trenches, turning the wrenches." Founder of a community-first AI ecosystem now serving 30,000+ users worldwide.'
-    },
-    'minion-alpha': {
-      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
-      codename: 'UNIT-7 "SPARKY"',
-      name: 'NPC Engineer #7',
-      desig: 'Circuit Integration Specialist, Hardware Division',
-      faction: 'OPEN MESH — Hardware Division',
-      clearance: 'LEVEL-2',
-      traits: ['Open Hardware Design','High-Voltage Enthusiasm','Banana-Fueled Sprints','Accidentally Productive'],
-      status: '● ACTIVE — CURRENTLY SPARKING THINGS',
-      notes: 'Enthusiastic about anything that emits light. Accidentally overclocked the mesh node to 400% capacity during "routine calibration." Results: mostly positive. Repeat occurrence pending review.'
-    },
-    'minion-beta': {
-      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
-      codename: 'UNIT-12 "BLOOP"',
-      name: 'NPC Engineer #12',
-      desig: 'Network Stack Architect, Protocol Division',
-      faction: 'OPEN MESH — Protocol Division',
-      clearance: 'LEVEL-2',
-      traits: ['Distributed Systems','WebSocket Whispering','USB-C Both Sides (Claims)','Sub-10ms Latency Goals'],
-      status: '● ACTIVE — PACKET INSPECTION IN PROGRESS',
-      notes: 'Responsible for the Open Mesh interconnect protocol. Claims to insert USB-C correctly on the first attempt, every time. Unit-7 contests this vigorously. Investigation ongoing.'
-    },
-    'minion-gamma': {
-      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
-      codename: 'UNIT-3 "ZIGZAG"',
-      name: 'NPC Engineer #3',
-      desig: 'Mesh Security Specialist, Security Division',
-      faction: 'OPEN MESH — Security Division',
-      clearance: 'LEVEL-3',
-      traits: ['Zero-Trust Architecture','Cryptographic Protocols','Open-Source Auditing','Screwdriver Proficiency: Advanced'],
-      status: '● ACTIVE — PERIMETER AUDIT ONGOING',
-      notes: 'Guards the open lock with extreme dedication. Philosophically committed to radical transparency — paradoxically secretive about the location of the communal banana reserve.'
-    },
-    'gru-open': {
-      badge: 'NPC DETECTED // REFORMED', isMe: false,
-      codename: 'VECTOR-REFORMED',
-      name: 'The Converted Architect',
-      desig: 'Community Relations Lead, Outreach & Evangelism',
-      faction: 'OPEN MESH — Outreach Division',
-      clearance: 'LEVEL-4',
-      traits: ['Former Closed-Source Villain','Open Source Evangelist','Community-First Mindset','Monthly "User as Owner" Host'],
-      status: '● ACTIVE — CONVERTING OTHERS',
-      notes: 'A reformed proprietary architect who reviewed the Open Mesh documentation and immediately switched sides. Now hosts monthly community calls with suspicious enthusiasm. Welcomed but watched.'
+      status: '● ACTIVE — IN THE TRENCHES',
+      notes: 'Founder of a community-first AI ecosystem now serving 30,000+ users worldwide. Buffalo-born. Tesla-inspired. Building open, decentralized infrastructure where individuals are compensated for their digital footprint — one product at a time.'
     }
   };
 
@@ -900,18 +943,9 @@
       <div class="dos-codename">${d.codename}</div>
       <div class="dos-name">${d.name}</div>
       <div class="dos-desig">${d.desig}</div>
-      <div class="dos-row">
-        <span class="dos-row-lbl">Faction</span>
-        <span class="dos-row-val">${d.faction}</span>
-      </div>
-      <div class="dos-row">
-        <span class="dos-row-lbl">Clearance</span>
-        <span class="dos-row-val">${d.clearance}</span>
-      </div>
-      <div class="dos-row">
-        <span class="dos-row-lbl">Capabilities</span>
-        <div class="dos-traits">${d.traits.map(t => `<span class="dos-trait">${t}</span>`).join('')}</div>
-      </div>
+      <div class="dos-row"><span class="dos-row-lbl">Faction</span><span class="dos-row-val">${d.faction}</span></div>
+      <div class="dos-row"><span class="dos-row-lbl">Clearance</span><span class="dos-row-val">${d.clearance}</span></div>
+      <div class="dos-row"><span class="dos-row-lbl">Capabilities</span><div class="dos-traits">${d.traits.map(t=>`<span class="dos-trait">${t}</span>`).join('')}</div></div>
       <div class="dos-status ${me ? 'dos-status--me' : 'dos-status--npc'}">${d.status}</div>
       <div class="dos-notes">${d.notes}</div>
     `;
@@ -930,8 +964,8 @@
     el.snd.textContent = muted ? '🔇 Sound' : '🔊 Sound';
   });
 
-  // ── Auto-start on page load (hero is always first visible element) ──
-  setTimeout(play, 700);
+  // ── Auto-start ──────────────────────────────────────────────────
+  setTimeout(play, 800);
 })();
 </script>
 </body>
