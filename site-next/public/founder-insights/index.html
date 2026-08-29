@@ -401,52 +401,49 @@
     50%{box-shadow:0 0 20px 4px rgba(255,200,80,.25);}
   }
 
-  /* ── Brand logo badges overlaid on the character infographic ── */
+  /* ── Real brand logo badges overlaid on the infographic ── */
   .brand-badge{
     position:absolute;z-index:8;
-    display:flex;align-items:center;gap:4px;
-    padding:5px 10px;border-radius:999px;
-    font-family:'Inter',system-ui,sans-serif;
-    font-size:10px;font-weight:800;letter-spacing:1px;
-    text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:5px 10px 5px 6px;border-radius:999px;
+    background:rgba(6,10,28,.88);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 6px 20px rgba(0,0,0,.55);
     backdrop-filter:blur(8px);
-    outline:none;
-    opacity:0;transform:translateY(6px) scale(.9);
-    transition:opacity .8s ease,transform .8s ease,box-shadow .2s ease;
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:10.5px;font-weight:700;letter-spacing:.4px;
+    color:#f6f8ff;
+    cursor:pointer;user-select:none;outline:none;
+    opacity:0;transform:translateY(6px) scale(.92);
+    transition:opacity .8s ease,transform .8s ease,box-shadow .2s ease,background .2s ease;
     pointer-events:none;
-    box-shadow:0 4px 14px rgba(0,0,0,.4);
     white-space:nowrap;
-    cursor:pointer;
-    user-select:none;
   }
   .brand-badge.av{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
-  .brand-badge:hover{box-shadow:0 6px 22px rgba(255,255,255,.35);transform:translateY(-2px) scale(1.05);}
-  .brand-badge--closed{
-    background:rgba(255,40,40,.85);
-    color:#fff;
-    border:1px solid rgba(255,90,90,.9);
-    text-shadow:0 1px 2px rgba(0,0,0,.5);
+  .brand-badge:hover{
+    background:rgba(10,18,48,.98);
+    box-shadow:0 8px 26px rgba(255,170,90,.35);
+    transform:translateY(-2px) scale(1.06);
   }
-  .brand-badge--open{
-    background:rgba(0,220,180,.85);
-    color:#052018;
-    border:1px solid rgba(120,255,220,.9);
-    text-shadow:0 1px 0 rgba(255,255,255,.25);
+  .brand-badge svg{
+    width:18px;height:18px;display:block;flex-shrink:0;
+    background:#fff;border-radius:50%;padding:2px;
+  }
+  .brand-badge--closed{border-color:rgba(255,80,80,.35);}
+  .brand-badge--closed::after{
+    content:'✕';margin-left:2px;color:#ff5c5c;font-size:11px;font-weight:900;
+  }
+  .brand-badge--open{border-color:rgba(90,230,180,.4);}
+  .brand-badge--open::after{
+    content:'✓';margin-left:2px;color:#5aeeb4;font-size:11px;font-weight:900;
   }
   .brand-badge--iri{
-    background:linear-gradient(135deg,#ffb066,#ff7a1f);
+    border-color:rgba(255,170,90,.55);
+    background:linear-gradient(135deg,rgba(255,176,102,.95),rgba(255,122,31,.95));
     color:#04122a;
-    border:1px solid #ffd4a8;
-    font-weight:900;
   }
-  /* small connector line from badge toward character */
-  .brand-badge::before{
-    content:'';position:absolute;
-    width:2px;height:14px;
-    background:currentColor;opacity:.6;
-    top:100%;left:50%;transform:translateX(-50%);
-  }
-  .brand-badge.brand-top::before{top:auto;bottom:100%;}
+  .brand-badge--iri svg{background:transparent;padding:0;}
+  .brand-badge--iri::after{content:'HUB';margin-left:2px;color:#04122a;font-size:9px;font-weight:900;}
 
   /* Character pip indicators — visible dot at center of each hotspot */
   .char-pip{
@@ -632,23 +629,44 @@
         </div>
       </div>
 
-      <!-- ── Brand badges: CLOSED side (Apple, Adobe, Meta, Alexa) — clickable dossiers ── -->
-      <button class="brand-badge brand-badge--closed brand-top" id="badgeApple"
-              data-char="corp-apple" style="left:3%;top:8%;">🍎 Apple</button>
-      <button class="brand-badge brand-badge--closed brand-top" id="badgeAdobe"
-              data-char="corp-adobe" style="left:22%;top:5%;">Ⓐ Adobe</button>
+      <!-- ── Real brand logos: CLOSED side ── -->
+      <button class="brand-badge brand-badge--closed" id="badgeApple"
+              data-char="corp-apple" style="left:3%;top:4%;">
+        <svg viewBox="0 0 24 24" fill="#000"><path d="M17.6 12.5c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.8 0-1.8-.8-3-.7-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9.2.8 1.1 1.7 2.3 2.9 2.3s1.6-.7 3-.7 1.8.7 3 .7 2-1.1 2.8-2.3c.9-1.3 1.2-2.6 1.2-2.7 0 0-2.6-1-2.6-3.9zM15.6 5.7c.6-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.8 1.1 0 2.2-.6 2.9-1.3z"/></svg>
+        Apple
+      </button>
+      <button class="brand-badge brand-badge--closed" id="badgeAdobe"
+              data-char="corp-adobe" style="left:16%;top:4%;">
+        <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FA0F00"/><path d="M6.8 18.5L11.5 5h1L17 18.5h-2.3l-.9-2.6H9.9L9 18.5H6.8zm3.6-4.4h3.2L12 9.7l-1.6 4.4z" fill="#fff"/></svg>
+        Adobe
+      </button>
       <button class="brand-badge brand-badge--closed" id="badgeMeta"
-              data-char="corp-meta" style="left:5%;top:78%;">Ⓜ Meta</button>
+              data-char="corp-meta" style="left:29%;top:4%;">
+        <svg viewBox="0 0 36 36"><defs><linearGradient id="mg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0064E1"/><stop offset="50%" stop-color="#0082FB"/><stop offset="100%" stop-color="#0064E1"/></linearGradient></defs><path d="M18 8c-3.3 0-5.6 2.5-7.4 5.6C9.1 16 8 18.4 8 21c0 2.7 1.4 4.5 3.7 4.5 1.9 0 3.4-1.5 5-4.3-.9-1.5-1.5-2.6-2.4-2.6-.7 0-1.4.6-1.9 1.9-.3.7-.6 1-.9 1-.4 0-.7-.4-.7-1.1 0-1.4.6-3.1 1.5-4.6 1.1-1.8 2.4-3 3.9-3 1.5 0 2.4 1.1 3.3 2.6-1.7 2.9-3.5 6-5.5 6-1.5 0-2.5-1.2-2.5-2.9-1.3.9-2 2.6-2 3.6 0 2.4 1.7 3.9 4 3.9 2.8 0 4.9-2.6 6.7-5.7 1.6 2.9 3.1 5.7 5.5 5.7 2.5 0 4-1.8 4-4.9 0-3.1-1.9-7-4.1-9.6C22.9 9.4 20.6 8 18 8z" fill="url(#mg1)"/></svg>
+        Meta
+      </button>
       <button class="brand-badge brand-badge--closed" id="badgeAlexa"
-              data-char="corp-alexa" style="left:26%;top:82%;">🔊 Alexa</button>
+              data-char="corp-alexa" style="left:42%;top:4%;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#00CAFF"/><circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M12 5 A7 7 0 0 1 19 12" fill="none" stroke="#fff" stroke-width="1.8"/></svg>
+        Alexa
+      </button>
 
-      <!-- ── Brand badges: OPEN side (Google, Microsoft, IRI) — clickable dossiers ── -->
-      <button class="brand-badge brand-badge--open brand-top" id="badgeGoogle"
-              data-char="corp-google" style="left:52%;top:5%;">G Google</button>
-      <button class="brand-badge brand-badge--open brand-top" id="badgeMsft"
-              data-char="corp-microsoft" style="left:72%;top:5%;">⊞ Microsoft</button>
+      <!-- ── Real brand logos: OPEN side ── -->
+      <button class="brand-badge brand-badge--open" id="badgeGoogle"
+              data-char="corp-google" style="left:55%;top:4%;">
+        <svg viewBox="0 0 24 24"><path d="M22.5 12.3c0-.9-.1-1.7-.2-2.5H12v4.7h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.2-4.8 3.2-8.2z" fill="#4285F4"/><path d="M12 23c2.9 0 5.4-1 7.2-2.6l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.8 0-5.2-1.9-6.1-4.5H2.1v2.8C3.9 20.7 7.7 23 12 23z" fill="#34A853"/><path d="M5.9 14.3c-.2-.7-.3-1.4-.3-2.1s.1-1.5.3-2.1V7.3H2.1C1.4 8.7 1 10.3 1 12s.4 3.3 1.1 4.7l3.8-2.4z" fill="#FBBC05"/><path d="M12 4.9c1.6 0 3 .5 4.2 1.6l3.1-3.1C17.4 1.6 14.9 1 12 1 7.7 1 3.9 3.3 2.1 6.7l3.8 2.9c.9-2.6 3.3-4.7 6.1-4.7z" fill="#EA4335"/></svg>
+        Google
+      </button>
+      <button class="brand-badge brand-badge--open" id="badgeMsft"
+              data-char="corp-microsoft" style="left:68%;top:4%;">
+        <svg viewBox="0 0 24 24" style="background:#fff;padding:1px;"><rect x="1" y="1" width="10" height="10" fill="#F25022"/><rect x="13" y="1" width="10" height="10" fill="#7FBA00"/><rect x="1" y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+        Microsoft
+      </button>
       <button class="brand-badge brand-badge--iri" id="badgeIri"
-              data-char="corp-iri" style="left:66%;top:82%;">✦ I.R.I.</button>
+              data-char="corp-iri" style="left:85%;top:4%;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#04122a"/><text x="12" y="16" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="900" fill="#ff8c42">IRI</text></svg>
+        I.R.I.
+      </button>
 
       <!-- Spotlight — the brown minion engineer -->
       <div class="info-spot" id="infoSpot"></div>
@@ -663,44 +681,45 @@
       <!-- ── Character hotspot click zones + pip indicators ── -->
       <!-- Each hotspot has a visible pip (glowing dot) centred within it -->
 
-      <!-- Gru — Villain / Closed Model -->
+      <!-- Vector — Villain / Closed Model (left panel figure) -->
       <button class="char-spot" data-char="gru-villain"
-              style="left:4%;top:33%;width:90px;height:150px;"
-              aria-label="Inspect character" title="Tap to inspect">
+              style="left:7%;top:42%;width:80px;height:130px;"
+              aria-label="Inspect: Vector (closed model)" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Minion Alpha — upper left of mesh device -->
+      <!-- Minion Alpha — top of the mesh cluster (upper left of the device) -->
       <button class="char-spot" data-char="minion-alpha"
-              style="left:55%;top:4%;width:68px;height:78px;"
-              aria-label="Inspect character" title="Tap to inspect">
+              style="left:56%;top:30%;width:58px;height:66px;"
+              aria-label="Inspect: minion engineer" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Minion Beta — upper right cluster -->
+      <!-- Minion Beta — top-right of the mesh cluster -->
       <button class="char-spot" data-char="minion-beta"
-              style="left:72%;top:2%;width:68px;height:78px;"
-              aria-label="Inspect character" title="Tap to inspect">
+              style="left:65%;top:32%;width:58px;height:66px;"
+              aria-label="Inspect: minion engineer" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Minion Gamma — right side of device, above the brown minion -->
+      <!-- Minion Gamma — bottom of the mesh cluster (yellow minion at foot) -->
       <button class="char-spot" data-char="minion-gamma"
-              style="left:80%;top:18%;width:58px;height:62px;"
-              aria-label="Inspect character" title="Tap to inspect">
+              style="left:58%;top:52%;width:58px;height:66px;"
+              aria-label="Inspect: minion engineer" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Gru (Open Mesh) — presenter / bottom right -->
+      <!-- Gru (Open Mesh) — presenter standing at the right side -->
       <button class="char-spot" data-char="gru-open"
-              style="left:83%;top:54%;width:86px;height:120px;"
-              aria-label="Inspect character" title="Tap to inspect">
+              style="left:82%;top:52%;width:80px;height:115px;"
+              aria-label="Inspect: Gru (open mesh)" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
 
-      <!-- Brown Minion — THE ARCHITECT (golden pip) — last in DOM = highest click priority -->
+      <!-- Brown Minion — THE ARCHITECT (golden pip) — the brown minion at the right side of the cluster.
+           Last in DOM = highest click priority above overlapping spots. -->
       <button class="char-spot char-spot--me" data-char="brown-minion"
-              style="left:84%;top:30%;width:80px;height:95px;"
+              style="left:71%;top:45%;width:64px;height:78px;"
               aria-label="Tap to inspect: The Architect — DeMarkus Darnell Wilson" title="Tap to inspect">
         <span class="char-pip char-pip--me"></span>
       </button>
@@ -818,7 +837,6 @@
     dos:    $('dossierPanel'),
     dosBody:$('dossierBody'),
     dosX:   $('dossierClose'),
-    // brand badges
     bApple:  $('badgeApple'),
     bAdobe:  $('badgeAdobe'),
     bMeta:   $('badgeMeta'),
@@ -828,7 +846,6 @@
     bIri:    $('badgeIri'),
   };
   if (!el.img) return;
-
   const closedBadges = [el.bApple, el.bAdobe, el.bMeta, el.bAlexa];
   const openBadges   = [el.bGoogle, el.bMsft, el.bIri];
 
@@ -874,29 +891,25 @@
     resetScan(el.open);
   }
 
-  // stagger badge fade-ins
   function staggerAv(list, startDelay, gap) {
     list.forEach((b,i) => setTimeout(() => av(b), startDelay + i*gap));
   }
 
   // ── Full cinematic sequence ────────────────────────────────────
-  // Timings (ms): img→closed+brands→open+brands→spot→reveal→cards→(hold)→fade-out→restart
   function play() {
     clearTimeout(loopId);
     resetAll();
 
     setTimeout(() => av(el.img), 300);
     setTimeout(() => { av(el.closed); sndLock(); }, 1800);
-    // closed-side brand badges pop in as the panel activates
-    staggerAv(closedBadges, 2100, 260);
+    staggerAv(closedBadges, 2100, 220);
     setTimeout(() => { av(el.open);   sndUnlock(); }, 3600);
-    // open-side brand badges follow
-    staggerAv(openBadges, 3900, 260);
+    staggerAv(openBadges, 3900, 220);
     setTimeout(() => { av(el.spot);   sndSpotlight(); }, 5800);
     setTimeout(() => { av(el.reveal); sndReveal(); }, 7800);
     setTimeout(() => av(el.cards), 11000);
 
-    // Hold → start fade-out at 18s, restart at 22s
+    // Hold → fade-out → restart
     loopId = setTimeout(() => {
       rav(el.reveal);
       setTimeout(() => rav(el.closed, el.open, el.spot, ...closedBadges, ...openBadges), 1000);
