@@ -605,13 +605,6 @@
         <span class="char-pip"></span>
       </button>
 
-      <!-- Brown Minion — THE ARCHITECT (golden pip) -->
-      <button class="char-spot char-spot--me" data-char="brown-minion"
-              style="left:68%;top:40%;width:85px;height:105px;"
-              aria-label="Tap to inspect: The Architect" title="Tap to inspect">
-        <span class="char-pip char-pip--me"></span>
-      </button>
-
       <!-- Minion Alpha — upper left of mesh device -->
       <button class="char-spot" data-char="minion-alpha"
               style="left:55%;top:4%;width:68px;height:78px;"
@@ -626,9 +619,9 @@
         <span class="char-pip"></span>
       </button>
 
-      <!-- Minion Gamma — right side of device -->
+      <!-- Minion Gamma — right side of device, above the brown minion -->
       <button class="char-spot" data-char="minion-gamma"
-              style="left:80%;top:24%;width:62px;height:72px;"
+              style="left:80%;top:18%;width:58px;height:62px;"
               aria-label="Inspect character" title="Tap to inspect">
         <span class="char-pip"></span>
       </button>
@@ -638,6 +631,13 @@
               style="left:83%;top:54%;width:86px;height:120px;"
               aria-label="Inspect character" title="Tap to inspect">
         <span class="char-pip"></span>
+      </button>
+
+      <!-- Brown Minion — THE ARCHITECT (golden pip) — last in DOM = highest click priority -->
+      <button class="char-spot char-spot--me" data-char="brown-minion"
+              style="left:84%;top:30%;width:80px;height:95px;"
+              aria-label="Tap to inspect: The Architect — DeMarkus Darnell Wilson" title="Tap to inspect">
+        <span class="char-pip char-pip--me"></span>
       </button>
 
       <!-- ── Dossier panel (populated by JS) ── -->
