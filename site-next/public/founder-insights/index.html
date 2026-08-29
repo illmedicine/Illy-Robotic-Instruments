@@ -258,82 +258,78 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
   /* ═══════════════════════════════════════════════════════════
-     ANIMATED INFOGRAPHIC HERO — The Architect's Philosophy
+     INFOGRAPHIC HERO — Auto-looping, Interactive Character Dossiers
      ═══════════════════════════════════════════════════════════ */
-  .arch-wrap{position:relative;max-width:960px;margin:3rem auto;padding:0 1.5rem;}
-  .arch-snd{
-    position:absolute;top:.8rem;right:2rem;z-index:20;
-    background:rgba(6,10,28,.8);border:1px solid rgba(255,170,90,.4);
-    color:#ffb066;padding:.4rem .9rem;border-radius:999px;cursor:pointer;
-    font-size:.78rem;font-family:var(--sans);letter-spacing:.5px;
-    backdrop-filter:blur(8px);transition:all .2s;
-  }
-  .arch-snd:hover{background:rgba(255,107,0,.25);border-color:rgba(255,170,90,.7);}
 
-  .arch-stage{
-    position:relative;width:100%;background:#000;
+  /* Wrapper */
+  .infohero{position:relative;width:100%;max-width:1280px;margin:0 auto;padding:2.5rem 1.5rem 2rem;}
+
+  /* Header text */
+  .infohero-head{text-align:center;margin-bottom:1.5rem;}
+  .infohero-eyebrow{
+    display:block;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+    color:#ffb066;margin-bottom:.55rem;
+  }
+  .infohero-title{
+    font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.6rem);
+    font-weight:700;color:#fff;letter-spacing:-.02em;
+  }
+  .infohero-title em{font-style:italic;color:#ffb066;}
+
+  /* Stage — square image (1024×1024) capped so it fits within the viewport */
+  .infostage{
+    position:relative;
+    /* width = min(container, available viewport height) so square image never overflows */
+    width: min(100%, calc(100vh - 195px));
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    background:#000;
     border-radius:18px;overflow:hidden;
     border:1px solid rgba(255,170,90,.25);
     box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 80px rgba(255,107,0,.1);
-    cursor:pointer;
   }
-  .arch-stage-hint{
-    position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);
-    color:rgba(255,255,255,.35);font-size:.72rem;letter-spacing:1.5px;
-    text-transform:uppercase;pointer-events:none;
-    animation:archHintFade 2.5s ease-in-out infinite;
-  }
-  @keyframes archHintFade{0%,100%{opacity:.35}50%{opacity:.85}}
 
   /* Base image */
-  .arch-img{width:100%;height:auto;display:block;opacity:0;transition:opacity 1.8s ease;}
-  .arch-img.av{opacity:1;}
+  .info-img{width:100%;height:auto;display:block;opacity:0;transition:opacity 1.8s ease;}
+  .info-img.av{opacity:1;}
 
-  /* Side overlays */
-  .arch-side{
-    position:absolute;top:0;bottom:0;width:50%;opacity:0;
-    transition:opacity .9s ease;pointer-events:none;
+  /* Panel overlays */
+  .info-panel{
+    position:absolute;top:0;bottom:0;width:50%;
+    opacity:0;transition:opacity .9s ease;pointer-events:none;
   }
-  .arch-closed{
-    left:0;background:rgba(220,40,40,.1);
-    border-right:2px solid rgba(220,40,40,.55);
-  }
-  .arch-open{
-    right:0;background:rgba(0,200,220,.08);
-    border-left:2px solid rgba(0,200,220,.55);
-  }
-  .arch-side.av{opacity:1;}
+  .info-closed{left:0;background:rgba(220,40,40,.1);border-right:2px solid rgba(220,40,40,.55);}
+  .info-open{right:0;background:rgba(0,200,220,.08);border-left:2px solid rgba(0,200,220,.55);}
+  .info-panel.av{opacity:1;}
 
-  /* Animated scan line */
-  .arch-scan{
+  /* Scan line */
+  .info-scan{
     position:absolute;left:0;right:0;height:2px;opacity:0;
-    animation:archScan 1.8s ease-in-out forwards;
+    animation:infoScan 1.8s ease-in-out forwards;
   }
-  .arch-scan-red{background:linear-gradient(90deg,transparent,rgba(220,40,40,.85),transparent);animation-delay:.15s;}
-  .arch-scan-cyan{background:linear-gradient(90deg,transparent,rgba(0,220,240,.85),transparent);animation-delay:.15s;}
-  @keyframes archScan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
+  .info-scan-red{background:linear-gradient(90deg,transparent,rgba(220,40,40,.85),transparent);animation-delay:.15s;}
+  .info-scan-cyan{background:linear-gradient(90deg,transparent,rgba(0,220,240,.85),transparent);animation-delay:.15s;}
+  @keyframes infoScan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
 
   /* Panel labels */
-  .arch-label{
-    position:absolute;top:8%;
-    display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;
+  .info-lbl{
+    position:absolute;top:8%;display:flex;flex-direction:column;
+    align-items:flex-start;gap:.25rem;
     padding:.55rem .75rem;background:rgba(0,0,0,.78);
     border-radius:8px;backdrop-filter:blur(8px);
     opacity:0;transform:translateY(-10px);
     transition:opacity .6s ease .5s,transform .6s ease .5s;max-width:42%;
   }
-  .arch-label-closed{left:3%;border-left:3px solid rgba(220,40,40,.85);}
-  .arch-label-open{right:3%;border-left:3px solid rgba(0,220,240,.85);}
-  .arch-side.av .arch-label{opacity:1;transform:translateY(0);}
-  .arch-label .al-icon{font-size:1.2rem;}
-  .arch-label strong{color:#fff;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;}
-  .arch-label em{color:#aaa;font-size:.68rem;font-style:normal;}
+  .info-lbl-l{left:3%;border-left:3px solid rgba(220,40,40,.85);}
+  .info-lbl-r{right:3%;border-left:3px solid rgba(0,220,240,.85);}
+  .info-panel.av .info-lbl{opacity:1;transform:translateY(0);}
+  .info-lbl span{font-size:1.2rem;}
+  .info-lbl strong{color:#fff;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;}
+  .info-lbl em{color:#aaa;font-size:.68rem;font-style:normal;}
 
-  /* Pulsing spotlight — targets brown minion (right panel, lower center) */
-  .arch-spot{
-    position:absolute;
-    /* tuned for the right-panel minion group in gru-open-mesh.png */
-    left:73%;top:55%;
+  /* Spotlight — brown minion */
+  .info-spot{
+    position:absolute;left:73%;top:55%;
     width:110px;height:110px;border-radius:50%;
     transform:translate(-50%,-50%) scale(.4);
     background:radial-gradient(circle,rgba(255,220,100,.5) 0%,rgba(255,200,80,.15) 50%,transparent 70%);
@@ -341,85 +337,178 @@
     box-shadow:0 0 0 6px rgba(255,200,80,.2),0 0 50px rgba(255,200,80,.4);
     opacity:0;pointer-events:none;
     transition:opacity .9s ease,transform .9s ease;
-    animation:archSpotPulse 2.2s ease-in-out infinite;
+    animation:infoSpotPulse 2.2s ease-in-out infinite;
   }
-  .arch-spot.av{opacity:1;transform:translate(-50%,-50%) scale(1);}
-  @keyframes archSpotPulse{
+  .info-spot.av{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  @keyframes infoSpotPulse{
     0%,100%{box-shadow:0 0 0 6px rgba(255,200,80,.2),0 0 50px rgba(255,200,80,.4);}
-    50%{box-shadow:0 0 0 12px rgba(255,200,80,.35),0 0 80px rgba(255,200,80,.6);}
+    50%{box-shadow:0 0 0 14px rgba(255,200,80,.35),0 0 80px rgba(255,200,80,.65);}
   }
 
-  /* Identity reveal overlay */
-  .arch-reveal{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  /* Identity reveal */
+  .info-reveal{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
     background:rgba(4,8,22,.72);backdrop-filter:blur(3px);
     opacity:0;pointer-events:none;
     transition:opacity .9s ease;gap:1rem;padding:2rem;
   }
-  .arch-reveal.av{opacity:1;}
-  .arch-r1{
+  .info-reveal.av{opacity:1;}
+  .info-r1{
     font-family:var(--serif);font-size:clamp(2rem,5.5vw,4.5rem);font-weight:900;
     color:#fff;letter-spacing:-.02em;text-align:center;
-    opacity:0;transform:scale(.85);
-    transition:opacity .7s ease,transform .7s ease;
+    opacity:0;transform:scale(.85);transition:opacity .7s ease,transform .7s ease;
     text-shadow:0 4px 40px rgba(255,100,0,.7),0 0 80px rgba(255,100,0,.3);
   }
-  .arch-r2{
+  .info-r2{
     font-family:var(--serif);font-size:clamp(1rem,2.8vw,1.8rem);
     font-weight:500;font-style:italic;color:#ffb066;text-align:center;
     opacity:0;transform:translateY(18px);
     transition:opacity .6s ease .35s,transform .6s ease .35s;
   }
-  .arch-r3{
+  .info-r3{
     font-size:clamp(.85rem,1.8vw,1.1rem);color:rgba(255,255,255,.7);
-    text-align:center;line-height:1.65;
-    opacity:0;transform:translateY(18px);
+    text-align:center;line-height:1.65;opacity:0;transform:translateY(18px);
     transition:opacity .6s ease .7s,transform .6s ease .7s;
   }
-  .arch-reveal.av .arch-r1{opacity:1;transform:scale(1);}
-  .arch-reveal.av .arch-r2{opacity:1;transform:translateY(0);}
-  .arch-reveal.av .arch-r3{opacity:1;transform:translateY(0);}
+  .info-reveal.av .info-r1{opacity:1;transform:scale(1);}
+  .info-reveal.av .info-r2{opacity:1;transform:translateY(0);}
+  .info-reveal.av .info-r3{opacity:1;transform:translateY(0);}
 
-  /* Dismiss / explore button inside reveal */
-  .arch-dismiss{
-    margin-top:.5rem;padding:.45rem 1.1rem;
-    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
-    color:#fff;border-radius:999px;cursor:pointer;font-size:.78rem;
-    letter-spacing:.8px;transition:background .2s;pointer-events:auto;
+  /* ── Character hotspot buttons ── */
+  .char-spot{
+    position:absolute;background:transparent;
+    border:2px solid transparent;border-radius:10px;
+    cursor:crosshair;z-index:10;
+    transition:border-color .25s,background .25s,box-shadow .25s;
+    padding:0;
   }
-  .arch-dismiss:hover{background:rgba(255,170,90,.2);border-color:#ffb066;}
+  .char-spot:hover{
+    border-color:rgba(255,170,90,.7);
+    background:rgba(255,170,90,.1);
+    box-shadow:0 0 24px rgba(255,170,90,.3);
+  }
+  .char-spot--me:hover{
+    border-color:rgba(255,200,80,1);
+    background:rgba(255,200,80,.15);
+    box-shadow:0 0 40px rgba(255,200,80,.5);
+    cursor:pointer;
+  }
+  /* Subtle "tap me" pulse on the brown minion hotspot */
+  .char-spot--me{animation:meGlow 3s ease-in-out infinite;}
+  @keyframes meGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,200,80,0);}
+    50%{box-shadow:0 0 20px 4px rgba(255,200,80,.25);}
+  }
 
-  /* Principle cards below image */
-  .arch-cards{
+  /* ── Dossier slide-in panel ── */
+  .dossier{
+    position:absolute;top:0;right:0;
+    width:min(360px,88%);height:100%;
+    background:rgba(4,8,22,.93);backdrop-filter:blur(18px);
+    border-left:1px solid rgba(255,170,90,.3);
+    z-index:20;
+    transform:translateX(102%);
+    transition:transform .42s cubic-bezier(.22,.61,.36,1);
+    display:flex;flex-direction:column;overflow-y:auto;
+  }
+  .dossier.open{transform:translateX(0);}
+  .dossier-top{
+    position:sticky;top:0;z-index:1;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.75rem 1rem .6rem;
+    background:rgba(4,8,22,.9);border-bottom:1px solid rgba(255,170,90,.15);
+  }
+  .dossier-sys{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+  .dossier-close{
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
+    color:rgba(255,255,255,.7);width:26px;height:26px;border-radius:50%;
+    cursor:pointer;font-size:.82rem;display:flex;align-items:center;justify-content:center;
+    transition:background .2s;flex-shrink:0;
+  }
+  .dossier-close:hover{background:rgba(255,107,0,.4);border-color:#ff7a1f;}
+  .dossier-body{padding:.8rem 1.1rem 1.5rem;flex:1;}
+
+  /* Dossier content */
+  .dos-badge{
+    display:inline-block;font-size:.6rem;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;
+    padding:.28rem .65rem;border-radius:4px;margin-bottom:.9rem;
+  }
+  .dos-badge--me{background:rgba(255,200,80,.18);color:#ffd060;border:1px solid rgba(255,200,80,.4);}
+  .dos-badge--npc{background:rgba(0,180,200,.1);color:#00c8dc;border:1px solid rgba(0,200,220,.25);}
+
+  .dos-codename{font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.15rem;}
+  .dos-name{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.2rem;}
+  .dos-desig{font-size:.8rem;color:#ffb066;margin-bottom:1rem;line-height:1.4;}
+
+  .dos-row{display:flex;flex-direction:column;gap:.08rem;margin-bottom:.7rem;}
+  .dos-row-lbl{font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+  .dos-row-val{font-size:.8rem;color:rgba(255,255,255,.75);line-height:1.45;}
+
+  .dos-traits{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.15rem;}
+  .dos-trait{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
+    border-radius:999px;padding:.18rem .55rem;font-size:.68rem;color:rgba(255,255,255,.65);
+  }
+
+  .dos-status{
+    margin-top:.9rem;padding:.45rem .7rem;border-radius:6px;
+    font-size:.7rem;letter-spacing:.4px;font-weight:600;
+  }
+  .dos-status--me{background:rgba(255,200,80,.1);color:#ffd060;border:1px solid rgba(255,200,80,.22);}
+  .dos-status--npc{background:rgba(0,180,200,.07);color:#00c8dc;border:1px solid rgba(0,200,220,.18);}
+
+  .dos-notes{
+    margin-top:.9rem;padding:.7rem .85rem;
+    background:rgba(255,255,255,.03);
+    border-left:2px solid rgba(255,170,90,.45);
+    border-radius:0 6px 6px 0;
+    font-size:.77rem;color:rgba(255,255,255,.55);line-height:1.6;font-style:italic;
+  }
+
+  /* Controls bar */
+  .infohero-controls{
+    display:flex;align-items:center;gap:.85rem;
+    margin-top:.85rem;flex-wrap:wrap;
+  }
+  .info-snd{
+    background:rgba(6,10,28,.8);border:1px solid rgba(255,170,90,.4);
+    color:#ffb066;padding:.38rem .85rem;border-radius:999px;cursor:pointer;
+    font-size:.76rem;font-family:var(--sans);letter-spacing:.5px;
+    backdrop-filter:blur(8px);transition:all .2s;
+  }
+  .info-snd:hover{background:rgba(255,107,0,.25);border-color:rgba(255,170,90,.7);}
+  .loop-badge{
+    font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:#00c8dc;
+    animation:loopBlink 2.4s ease-in-out infinite;
+  }
+  @keyframes loopBlink{0%,100%{opacity:.5}50%{opacity:1}}
+  .infohero-hint{
+    font-size:.72rem;color:rgba(255,255,255,.35);font-style:italic;margin-left:auto;
+  }
+
+  /* Principle cards */
+  .info-cards{
     display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:1rem;margin-top:2rem;
+    gap:1rem;margin-top:1.5rem;
     opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;
   }
-  .arch-cards.av{opacity:1;transform:translateY(0);}
-  .arch-card{
+  .info-cards.av{opacity:1;transform:translateY(0);}
+  .info-card{
     background:rgba(255,255,255,.04);border:1px solid rgba(255,170,90,.18);
     border-radius:12px;padding:1.2rem;
     display:flex;flex-direction:column;gap:.45rem;
     transition:border-color .2s,transform .2s,box-shadow .2s;
   }
-  .arch-card:hover{
+  .info-card:hover{
     border-color:rgba(255,170,90,.55);transform:translateY(-3px);
     box-shadow:0 12px 30px rgba(0,0,0,.4),0 0 20px rgba(255,170,90,.1);
   }
-  .arch-card>span{font-size:1.7rem;}
-  .arch-card strong{color:#ffb066;font-size:.9rem;}
-  .arch-card p{color:#cdd6ec;font-size:.82rem;line-height:1.55;margin:0;}
-  .arch-caption{color:rgba(255,255,255,.45);font-size:.83rem;font-style:italic;text-align:center;margin-top:1rem;}
-
-  /* Replay button */
-  .arch-replay{
-    display:block;margin:1.2rem auto 0;padding:.5rem 1.4rem;
-    background:transparent;border:1px solid rgba(255,170,90,.35);
-    color:#ffb066;border-radius:999px;cursor:pointer;font-size:.8rem;
-    letter-spacing:.8px;transition:all .2s;font-family:var(--sans);
-  }
-  .arch-replay:hover{background:rgba(255,107,0,.2);border-color:#ffb066;}
+  .info-card>span{font-size:1.7rem;}
+  .info-card strong{color:#ffb066;font-size:.9rem;}
+  .info-card p{color:#cdd6ec;font-size:.82rem;line-height:1.55;margin:0;}
+  .infohero-caption{color:rgba(255,255,255,.38);font-size:.8rem;font-style:italic;text-align:center;margin-top:1rem;}
   </style>
 </head>
 <body>
@@ -435,6 +524,124 @@
       </a>
     </nav>
   </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INFOGRAPHIC HERO — Auto-looping · Interactive Dossiers
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="infohero" id="infoHero">
+    <div class="infohero-head">
+      <span class="infohero-eyebrow">The Architect's Philosophy</span>
+      <h2 class="infohero-title">The Closed Model <em>vs.</em> The Open Mesh</h2>
+    </div>
+
+    <div class="infostage" id="infoStage">
+
+      <!-- Base infographic image -->
+      <img class="info-img" id="infoImg"
+           src="/assets/gru-open-mesh.png"
+           alt="Infographic: The Closed Model (Vector / Apple) vs The Open Mesh (Illy Robotics)" />
+
+      <!-- Left panel: Closed Model -->
+      <div class="info-panel info-closed" id="infoClosed">
+        <div class="info-scan info-scan-red"></div>
+        <div class="info-lbl info-lbl-l">
+          <span>🔒</span>
+          <strong>The Closed Model</strong>
+          <em>Control · Lock-in · User as Product</em>
+        </div>
+      </div>
+
+      <!-- Right panel: Open Mesh -->
+      <div class="info-panel info-open" id="infoOpen">
+        <div class="info-scan info-scan-cyan"></div>
+        <div class="info-lbl info-lbl-r">
+          <span>🔓</span>
+          <strong>The Open Mesh</strong>
+          <em>Open Source · Community · User as Owner</em>
+        </div>
+      </div>
+
+      <!-- Spotlight — the brown minion engineer -->
+      <div class="info-spot" id="infoSpot"></div>
+
+      <!-- Identity reveal overlay -->
+      <div class="info-reveal" id="infoReveal">
+        <p class="info-r1">I AM NOT GRU.</p>
+        <p class="info-r2">I am the brown minion engineer in the back.</p>
+        <p class="info-r3">In the trenches. Turning the wrenches.<br>Building the solutions that make the ecosystem thrive.</p>
+      </div>
+
+      <!-- ── Character hotspot click zones ── -->
+      <!-- Gru — Villain / Closed Model (left panel, left edge) -->
+      <button class="char-spot" data-char="gru-villain"
+              style="left:4%;top:33%;width:88px;height:148px;"
+              aria-label="Inspect character: Closed Model Architect" title="Inspect character"></button>
+
+      <!-- Brown Minion — THE ARCHITECT (right panel, center-back) -->
+      <button class="char-spot char-spot--me" data-char="brown-minion"
+              style="left:64%;top:36%;width:80px;height:100px;"
+              aria-label="Inspect character: The Brown Minion Engineer" title="Inspect character"></button>
+
+      <!-- Minion Alpha — upper left of mesh device -->
+      <button class="char-spot" data-char="minion-alpha"
+              style="left:55%;top:4%;width:66px;height:76px;"
+              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+
+      <!-- Minion Beta — upper right cluster -->
+      <button class="char-spot" data-char="minion-beta"
+              style="left:72%;top:2%;width:68px;height:76px;"
+              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+
+      <!-- Minion Gamma — right side of device -->
+      <button class="char-spot" data-char="minion-gamma"
+              style="left:80%;top:24%;width:60px;height:70px;"
+              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+
+      <!-- Gru (Open Mesh) — presenter / bottom right -->
+      <button class="char-spot" data-char="gru-open"
+              style="left:83%;top:54%;width:84px;height:118px;"
+              aria-label="Inspect character: Open Mesh Presenter" title="Inspect character"></button>
+
+      <!-- ── Dossier panel (populated by JS) ── -->
+      <div class="dossier" id="dossierPanel">
+        <div class="dossier-top">
+          <span class="dossier-sys">IRI · FIELD DOSSIER v2.1</span>
+          <button class="dossier-close" id="dossierClose" aria-label="Close dossier">✕</button>
+        </div>
+        <div class="dossier-body" id="dossierBody"></div>
+      </div>
+
+    </div><!-- /infostage -->
+
+    <!-- Controls row -->
+    <div class="infohero-controls">
+      <button class="info-snd" id="infoSnd" aria-label="Toggle audio">🔇 Sound</button>
+      <span class="loop-badge">● Looping</span>
+      <span class="infohero-hint">Click any character to open their dossier</span>
+    </div>
+
+    <!-- Principle cards -->
+    <div class="info-cards" id="infoCards">
+      <div class="info-card">
+        <span>🏗️</span><strong>Builder First</strong>
+        <p>Engineering from the ground up — not directing from a stage. The work speaks for itself.</p>
+      </div>
+      <div class="info-card">
+        <span>🌐</span><strong>Open Always</strong>
+        <p>Open source architecture. Transparent value chains. No black boxes. No lock-in.</p>
+      </div>
+      <div class="info-card">
+        <span>🤝</span><strong>Community Owned</strong>
+        <p>Users are owners — not products. Your digital footprint earns compensation.</p>
+      </div>
+      <div class="info-card">
+        <span>⚡</span><strong>Equity Driven</strong>
+        <p>Tesla's dream made real — boundless, equitable technology for every individual.</p>
+      </div>
+    </div>
+
+    <p class="infohero-caption">The Closed Model vs. the Open Mesh — control versus empowerment.</p>
+  </section>
 
   <!-- Band 1: da Vinci anatomy -->
   <div class="fi-band fi-band-1">
@@ -480,74 +687,6 @@
   <!-- Band 3: da Vinci flying machine -->
   <div class="fi-band fi-band-3">
 
-  <!-- ═══ ANIMATED INFOGRAPHIC HERO ═══ -->
-  <div class="arch-wrap" id="archWrap">
-    <button class="arch-snd" id="archSnd" aria-label="Toggle audio">🔇 Sound</button>
-
-    <!-- Main stage (click to interact) -->
-    <div class="arch-stage" id="archStage" role="button" tabindex="0" aria-label="Interactive infographic — click to reveal">
-
-      <!-- Base infographic image -->
-      <img class="arch-img" id="archImg" src="/assets/gru-open-mesh.png"
-           alt="Infographic: The Closed Model (Vector / Apple) versus the Open Mesh (Gru / Illy Robotics)" />
-
-      <!-- Left panel: Closed Model -->
-      <div class="arch-side arch-closed" id="archClosed">
-        <div class="arch-scan arch-scan-red"></div>
-        <div class="arch-label arch-label-closed">
-          <span class="al-icon">🔒</span>
-          <strong>The Closed Model</strong>
-          <em>Control · Lock-in · User as Product</em>
-        </div>
-      </div>
-
-      <!-- Right panel: Open Mesh -->
-      <div class="arch-side arch-open" id="archOpen">
-        <div class="arch-scan arch-scan-cyan"></div>
-        <div class="arch-label arch-label-open">
-          <span class="al-icon">🔓</span>
-          <strong>The Open Mesh</strong>
-          <em>Open Source · Community · User as Owner</em>
-        </div>
-      </div>
-
-      <!-- Spotlight — the brown minion engineer -->
-      <div class="arch-spot" id="archSpot"></div>
-
-      <!-- Identity reveal overlay -->
-      <div class="arch-reveal" id="archReveal">
-        <p class="arch-r1">I AM NOT GRU.</p>
-        <p class="arch-r2">I am the brown minion engineer hanging in the back.</p>
-        <p class="arch-r3">In the trenches. Turning the wrenches.<br>Building the solutions that make the ecosystem thrive.</p>
-        <button class="arch-dismiss" id="archDismiss">Explore the Diagram ↗</button>
-      </div>
-
-      <span class="arch-stage-hint" id="archHint">Click to reveal</span>
-    </div><!-- /arch-stage -->
-
-    <!-- Four principle cards -->
-    <div class="arch-cards" id="archCards">
-      <div class="arch-card">
-        <span>🏗️</span><strong>Builder First</strong>
-        <p>Engineering from the ground up — not directing from a stage. The work speaks for itself.</p>
-      </div>
-      <div class="arch-card">
-        <span>🌐</span><strong>Open Always</strong>
-        <p>Open source architecture. Transparent value chains. No black boxes. No lock-in.</p>
-      </div>
-      <div class="arch-card">
-        <span>🤝</span><strong>Community Owned</strong>
-        <p>Users are owners — not products. Your digital footprint earns compensation.</p>
-      </div>
-      <div class="arch-card">
-        <span>⚡</span><strong>Equity Driven</strong>
-        <p>Tesla's dream made real — boundless, equitable technology for every individual.</p>
-      </div>
-    </div>
-
-    <figcaption class="arch-caption">The Closed Model vs. the Open Mesh — control versus empowerment.</figcaption>
-    <button class="arch-replay" id="archReplay">↺ Replay</button>
-  </div><!-- /arch-wrap -->
 
   <article class="article" style="padding-top:0;">
     <p>If you look closely, I am the little brown minion engineer hanging in the back. I am in the trenches, turning the wrenches, and building the solutions that make the ecosystem thrive.</p>
@@ -568,149 +707,201 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// ANIMATED INFOGRAPHIC — The Architect's Philosophy
+// INFOGRAPHIC HERO — Auto-loop · Character Dossiers
 // ═══════════════════════════════════════════════════════════════════
 (function() {
   const $ = id => document.getElementById(id);
+
   const el = {
-    wrap:    $('archWrap'),    img:     $('archImg'),
-    closed:  $('archClosed'), open:    $('archOpen'),
-    spot:    $('archSpot'),   reveal:  $('archReveal'),
-    cards:   $('archCards'),  snd:     $('archSnd'),
-    hint:    $('archHint'),   dismiss: $('archDismiss'),
-    replay:  $('archReplay'), stage:   $('archStage'),
+    img:    $('infoImg'),
+    closed: $('infoClosed'),
+    open:   $('infoOpen'),
+    spot:   $('infoSpot'),
+    reveal: $('infoReveal'),
+    cards:  $('infoCards'),
+    snd:    $('infoSnd'),
+    dos:    $('dossierPanel'),
+    dosBody:$('dossierBody'),
+    dosX:   $('dossierClose'),
   };
-  if (!el.wrap) return;
+  if (!el.img) return;
 
-  let played = false, muted = true;
-  let audioCtx = null;
+  let muted = true, audioCtx = null, loopId = null;
 
-  // ── Web Audio helpers ──────────────────────────────────────────
-  function ctx() {
+  // ── Audio ──────────────────────────────────────────────────────
+  function actx() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     return audioCtx;
   }
-
-  function tone(freq, type, startDelay, duration, gain) {
+  function tone(freq, type, delay, dur, gain) {
     if (muted) return;
-    const c = ctx();
-    const osc = c.createOscillator(), g = c.createGain();
+    const c = actx(), osc = c.createOscillator(), g = c.createGain();
     osc.connect(g); g.connect(c.destination);
     osc.type = type;
-    osc.frequency.setValueAtTime(freq, c.currentTime + startDelay);
-    g.gain.setValueAtTime(0, c.currentTime + startDelay);
-    g.gain.linearRampToValueAtTime(gain, c.currentTime + startDelay + 0.04);
-    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + startDelay + duration);
-    osc.start(c.currentTime + startDelay);
-    osc.stop(c.currentTime + startDelay + duration + 0.1);
+    osc.frequency.setValueAtTime(freq, c.currentTime + delay);
+    g.gain.setValueAtTime(0, c.currentTime + delay);
+    g.gain.linearRampToValueAtTime(gain, c.currentTime + delay + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + dur);
+    osc.start(c.currentTime + delay);
+    osc.stop(c.currentTime + delay + dur + 0.1);
+  }
+  function sndLock()      { tone(300,'sawtooth',0,.12,.09); tone(220,'sawtooth',.1,.15,.07); tone(160,'sawtooth',.22,.2,.05); }
+  function sndUnlock()    { tone(330,'sine',0,.7,.10); tone(440,'sine',.08,.7,.08); tone(550,'sine',.16,.9,.06); tone(660,'sine',.25,1,.05); }
+  function sndSpotlight() { tone(523,'triangle',0,1,.12); tone(659,'triangle',.18,1,.10); tone(784,'triangle',.36,1.5,.09); tone(1047,'triangle',.54,2,.07); }
+  function sndReveal()    { tone(110,'sine',0,3,.06); tone(165,'sine',.1,3,.04); }
+
+  // ── Animation helpers ──────────────────────────────────────────
+  function av(...els)  { els.forEach(e => e && e.classList.add('av')); }
+  function rav(...els) { els.forEach(e => e && e.classList.remove('av')); }
+
+  function resetScan(panel) {
+    const s = panel.querySelector('.info-scan');
+    if (!s) return;
+    const c = s.cloneNode(true);
+    s.parentNode.replaceChild(c, s);
   }
 
-  // Closed Model "locked" sound — descending metallic
-  function sndLock() {
-    tone(300, 'sawtooth', 0,    0.12, 0.09);
-    tone(220, 'sawtooth', 0.1,  0.15, 0.07);
-    tone(160, 'sawtooth', 0.22, 0.2,  0.05);
+  function resetAll() {
+    rav(el.img, el.closed, el.open, el.spot, el.reveal, el.cards);
+    resetScan(el.closed);
+    resetScan(el.open);
   }
 
-  // Open Mesh "unlock" sound — ascending warm chord
-  function sndUnlock() {
-    tone(330, 'sine', 0,    0.7, 0.10);
-    tone(440, 'sine', 0.08, 0.7, 0.08);
-    tone(550, 'sine', 0.16, 0.9, 0.06);
-    tone(660, 'sine', 0.25, 1.0, 0.05);
+  // ── Full cinematic sequence ────────────────────────────────────
+  // Timings (ms): img→closed→open→spot→reveal→cards→(hold)→fade-out→restart
+  function play() {
+    clearTimeout(loopId);
+    resetAll();
+
+    setTimeout(() => av(el.img), 300);
+    setTimeout(() => { av(el.closed); sndLock(); }, 1800);
+    setTimeout(() => { av(el.open);   sndUnlock(); }, 3600);
+    setTimeout(() => { av(el.spot);   sndSpotlight(); }, 5800);
+    setTimeout(() => { av(el.reveal); sndReveal(); }, 7800);
+    setTimeout(() => av(el.cards), 11000);
+
+    // Hold → start fade-out at 18s, restart at 22s
+    loopId = setTimeout(() => {
+      rav(el.reveal);
+      setTimeout(() => rav(el.closed, el.open, el.spot), 1000);
+      setTimeout(() => rav(el.cards), 1600);
+      setTimeout(() => rav(el.img), 2400);
+      setTimeout(play, 4200);
+    }, 18000);
   }
 
-  // Spotlight "found you" — rising triumphant 3-note
-  function sndSpotlight() {
-    tone(523, 'triangle', 0,    1.0, 0.12);
-    tone(659, 'triangle', 0.18, 1.0, 0.10);
-    tone(784, 'triangle', 0.36, 1.5, 0.09);
-    tone(1047,'triangle', 0.54, 2.0, 0.07);
-  }
+  // ── Character dossier data ─────────────────────────────────────
+  const DOSSIERS = {
+    'gru-villain': {
+      badge: 'THREAT ENTITY DETECTED', isMe: false,
+      codename: 'VECTOR-1 // CLASSIFIED',
+      name: 'The Closed Architect',
+      desig: 'Chief Proprietary Officer, PROPERRATY TECHNOLOGY',
+      faction: 'CLOSED MODEL — Restricted Division',
+      clearance: 'RESTRICTED — NO OUTSIDE ACCESS',
+      traits: ['Proprietary Data Hoarding','User Lock-in Design','Black Box Systems','Subscription Extraction','Walled Garden Infrastructure'],
+      status: '● ACTIVE — THREAT LEVEL: HIGH',
+      notes: 'Operates under the belief that users are products, not people. Commands full data-extraction pipeline. Resistant to open-source principles. Do not trust.'
+    },
+    'brown-minion': {
+      badge: '✦ IDENTITY CONFIRMED — PRINCIPAL ARCHITECT', isMe: true,
+      codename: 'ARCHITECT-PRIME',
+      name: 'DeMarkus Darnell Wilson',
+      desig: 'Founder & Chief Visionary Architect — Illy Robotic Instruments',
+      faction: 'OPEN MESH — Illy Robotic Instruments · Buffalo, NY',
+      clearance: 'ARCHITECT-1 — UNRESTRICTED',
+      traits: ['Full Stack AI Engineering','Cloud Solutions Architecture','Azure · Google Cloud','SAFe Scaled Agile SPC','20+ Yrs Enterprise Transformation','Open Source Advocacy'],
+      status: '● ACTIVE — FIELD POSITION: THE TRENCHES',
+      notes: '"I am not Gru. I am the brown minion engineer in the back — in the trenches, turning the wrenches." Founder of a community-first AI ecosystem now serving 30,000+ users worldwide.'
+    },
+    'minion-alpha': {
+      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
+      codename: 'UNIT-7 "SPARKY"',
+      name: 'NPC Engineer #7',
+      desig: 'Circuit Integration Specialist, Hardware Division',
+      faction: 'OPEN MESH — Hardware Division',
+      clearance: 'LEVEL-2',
+      traits: ['Open Hardware Design','High-Voltage Enthusiasm','Banana-Fueled Sprints','Accidentally Productive'],
+      status: '● ACTIVE — CURRENTLY SPARKING THINGS',
+      notes: 'Enthusiastic about anything that emits light. Accidentally overclocked the mesh node to 400% capacity during "routine calibration." Results: mostly positive. Repeat occurrence pending review.'
+    },
+    'minion-beta': {
+      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
+      codename: 'UNIT-12 "BLOOP"',
+      name: 'NPC Engineer #12',
+      desig: 'Network Stack Architect, Protocol Division',
+      faction: 'OPEN MESH — Protocol Division',
+      clearance: 'LEVEL-2',
+      traits: ['Distributed Systems','WebSocket Whispering','USB-C Both Sides (Claims)','Sub-10ms Latency Goals'],
+      status: '● ACTIVE — PACKET INSPECTION IN PROGRESS',
+      notes: 'Responsible for the Open Mesh interconnect protocol. Claims to insert USB-C correctly on the first attempt, every time. Unit-7 contests this vigorously. Investigation ongoing.'
+    },
+    'minion-gamma': {
+      badge: 'NPC DETECTED // OPEN MESH', isMe: false,
+      codename: 'UNIT-3 "ZIGZAG"',
+      name: 'NPC Engineer #3',
+      desig: 'Mesh Security Specialist, Security Division',
+      faction: 'OPEN MESH — Security Division',
+      clearance: 'LEVEL-3',
+      traits: ['Zero-Trust Architecture','Cryptographic Protocols','Open-Source Auditing','Screwdriver Proficiency: Advanced'],
+      status: '● ACTIVE — PERIMETER AUDIT ONGOING',
+      notes: 'Guards the open lock with extreme dedication. Philosophically committed to radical transparency — paradoxically secretive about the location of the communal banana reserve.'
+    },
+    'gru-open': {
+      badge: 'NPC DETECTED // REFORMED', isMe: false,
+      codename: 'VECTOR-REFORMED',
+      name: 'The Converted Architect',
+      desig: 'Community Relations Lead, Outreach & Evangelism',
+      faction: 'OPEN MESH — Outreach Division',
+      clearance: 'LEVEL-4',
+      traits: ['Former Closed-Source Villain','Open Source Evangelist','Community-First Mindset','Monthly "User as Owner" Host'],
+      status: '● ACTIVE — CONVERTING OTHERS',
+      notes: 'A reformed proprietary architect who reviewed the Open Mesh documentation and immediately switched sides. Now hosts monthly community calls with suspicious enthusiasm. Welcomed but watched.'
+    }
+  };
 
-  // Ambient drone during reveal
-  function sndReveal() {
-    tone(110, 'sine', 0,   3.0, 0.06);
-    tone(165, 'sine', 0.1, 3.0, 0.04);
-  }
-
-  // ── Animation sequence ─────────────────────────────────────────
-  function sequence() {
-    if (played) return;
-    played = true;
-    el.hint.style.display = 'none';
-
-    // Stage 0 — Image fades in (0.3s)
-    setTimeout(() => { el.img.classList.add('av'); }, 300);
-
-    // Stage 1 — Closed Model revealed + lock sound (1.8s)
-    setTimeout(() => {
-      el.closed.classList.add('av');
-      sndLock();
-    }, 1800);
-
-    // Stage 2 — Open Mesh revealed + unlock sound (3.6s)
-    setTimeout(() => {
-      el.open.classList.add('av');
-      sndUnlock();
-    }, 3600);
-
-    // Stage 3 — Spotlight finds the brown minion (5.8s)
-    setTimeout(() => {
-      el.spot.classList.add('av');
-      sndSpotlight();
-    }, 5800);
-
-    // Stage 4 — Identity reveal (7.8s)
-    setTimeout(() => {
-      el.reveal.classList.add('av');
-      sndReveal();
-    }, 7800);
-
-    // Stage 5 — Principle cards slide up (11s)
-    setTimeout(() => {
-      el.cards.classList.add('av');
-    }, 11000);
-  }
-
-  // ── Reset / replay ─────────────────────────────────────────────
-  function reset() {
-    played = false;
-    ['av'].forEach(c => {
-      [el.img, el.closed, el.open, el.spot, el.reveal, el.cards]
-        .forEach(e => e.classList.remove(c));
-    });
-    el.hint.style.display = '';
+  // ── Dossier renderer ───────────────────────────────────────────
+  function openDossier(key) {
+    const d = DOSSIERS[key];
+    if (!d) return;
+    const me = d.isMe;
+    el.dosBody.innerHTML = `
+      <div class="dos-badge ${me ? 'dos-badge--me' : 'dos-badge--npc'}">${d.badge}</div>
+      <div class="dos-codename">${d.codename}</div>
+      <div class="dos-name">${d.name}</div>
+      <div class="dos-desig">${d.desig}</div>
+      <div class="dos-row">
+        <span class="dos-row-lbl">Faction</span>
+        <span class="dos-row-val">${d.faction}</span>
+      </div>
+      <div class="dos-row">
+        <span class="dos-row-lbl">Clearance</span>
+        <span class="dos-row-val">${d.clearance}</span>
+      </div>
+      <div class="dos-row">
+        <span class="dos-row-lbl">Capabilities</span>
+        <div class="dos-traits">${d.traits.map(t => `<span class="dos-trait">${t}</span>`).join('')}</div>
+      </div>
+      <div class="dos-status ${me ? 'dos-status--me' : 'dos-status--npc'}">${d.status}</div>
+      <div class="dos-notes">${d.notes}</div>
+    `;
+    el.dos.classList.add('open');
   }
 
   // ── Event wiring ───────────────────────────────────────────────
-  el.stage.addEventListener('click', () => { if (!played) sequence(); });
-  el.stage.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!played) sequence(); }});
-
-  el.dismiss.addEventListener('click', e => {
-    e.stopPropagation();
-    el.reveal.classList.remove('av');
+  document.querySelectorAll('.char-spot').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); openDossier(btn.dataset.char); });
   });
 
-  el.replay.addEventListener('click', () => {
-    reset();
-    setTimeout(sequence, 400);
-  });
+  el.dosX.addEventListener('click', () => el.dos.classList.remove('open'));
 
-  // Sound toggle
   el.snd.addEventListener('click', () => {
     muted = !muted;
     el.snd.textContent = muted ? '🔇 Sound' : '🔊 Sound';
   });
 
-  // ── Auto-play when section scrolls into view ───────────────────
-  const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !played) {
-      setTimeout(sequence, 600);
-      obs.disconnect();
-    }
-  }, { threshold: 0.25 });
-  obs.observe(el.wrap);
+  // ── Auto-start on page load (hero is always first visible element) ──
+  setTimeout(play, 700);
 })();
 </script>
 </body>
