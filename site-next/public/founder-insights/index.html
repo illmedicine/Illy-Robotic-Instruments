@@ -401,6 +401,30 @@
     50%{box-shadow:0 0 20px 4px rgba(255,200,80,.25);}
   }
 
+  /* Character pip indicators — visible dot at center of each hotspot */
+  .char-pip{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(0,200,220,.75);
+    box-shadow:0 0 0 3px rgba(0,200,220,.25),0 0 12px rgba(0,200,220,.5);
+    pointer-events:none;
+    animation:pipPulse 2s ease-in-out infinite;
+  }
+  .char-pip::after{
+    content:'';position:absolute;inset:-4px;border-radius:50%;
+    border:1px solid rgba(0,200,220,.4);
+    animation:pipRing 2s ease-in-out infinite;
+  }
+  .char-pip--me{
+    background:rgba(255,200,80,.9);
+    box-shadow:0 0 0 4px rgba(255,200,80,.3),0 0 18px rgba(255,200,80,.6);
+    width:13px;height:13px;
+  }
+  .char-pip--me::after{border-color:rgba(255,200,80,.5);}
+  @keyframes pipPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2);}}
+  @keyframes pipRing{0%{transform:scale(1);opacity:.6;}100%{transform:scale(2.2);opacity:0;}}
+
   /* ── Dossier slide-in panel ── */
   .dossier{
     position:absolute;top:0;right:0;
@@ -571,36 +595,50 @@
         <p class="info-r3">In the trenches. Turning the wrenches.<br>Building the solutions that make the ecosystem thrive.</p>
       </div>
 
-      <!-- ── Character hotspot click zones ── -->
-      <!-- Gru — Villain / Closed Model (left panel, left edge) -->
-      <button class="char-spot" data-char="gru-villain"
-              style="left:4%;top:33%;width:88px;height:148px;"
-              aria-label="Inspect character: Closed Model Architect" title="Inspect character"></button>
+      <!-- ── Character hotspot click zones + pip indicators ── -->
+      <!-- Each hotspot has a visible pip (glowing dot) centred within it -->
 
-      <!-- Brown Minion — THE ARCHITECT (right panel, center-back) -->
+      <!-- Gru — Villain / Closed Model -->
+      <button class="char-spot" data-char="gru-villain"
+              style="left:4%;top:33%;width:90px;height:150px;"
+              aria-label="Inspect character" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
+
+      <!-- Brown Minion — THE ARCHITECT (golden pip) -->
       <button class="char-spot char-spot--me" data-char="brown-minion"
-              style="left:64%;top:36%;width:80px;height:100px;"
-              aria-label="Inspect character: The Brown Minion Engineer" title="Inspect character"></button>
+              style="left:68%;top:40%;width:85px;height:105px;"
+              aria-label="Tap to inspect: The Architect" title="Tap to inspect">
+        <span class="char-pip char-pip--me"></span>
+      </button>
 
       <!-- Minion Alpha — upper left of mesh device -->
       <button class="char-spot" data-char="minion-alpha"
-              style="left:55%;top:4%;width:66px;height:76px;"
-              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+              style="left:55%;top:4%;width:68px;height:78px;"
+              aria-label="Inspect character" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
 
       <!-- Minion Beta — upper right cluster -->
       <button class="char-spot" data-char="minion-beta"
-              style="left:72%;top:2%;width:68px;height:76px;"
-              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+              style="left:72%;top:2%;width:68px;height:78px;"
+              aria-label="Inspect character" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
 
       <!-- Minion Gamma — right side of device -->
       <button class="char-spot" data-char="minion-gamma"
-              style="left:80%;top:24%;width:60px;height:70px;"
-              aria-label="Inspect character: NPC Engineer" title="Inspect character"></button>
+              style="left:80%;top:24%;width:62px;height:72px;"
+              aria-label="Inspect character" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
 
       <!-- Gru (Open Mesh) — presenter / bottom right -->
       <button class="char-spot" data-char="gru-open"
-              style="left:83%;top:54%;width:84px;height:118px;"
-              aria-label="Inspect character: Open Mesh Presenter" title="Inspect character"></button>
+              style="left:83%;top:54%;width:86px;height:120px;"
+              aria-label="Inspect character" title="Tap to inspect">
+        <span class="char-pip"></span>
+      </button>
 
       <!-- ── Dossier panel (populated by JS) ── -->
       <div class="dossier" id="dossierPanel">
@@ -616,8 +654,6 @@
     <!-- Controls row -->
     <div class="infohero-controls">
       <button class="info-snd" id="infoSnd" aria-label="Toggle audio">🔇 Sound</button>
-      <span class="loop-badge">● Looping</span>
-      <span class="infohero-hint">Click any character to open their dossier</span>
     </div>
 
     <!-- Principle cards -->
@@ -745,10 +781,10 @@
     osc.start(c.currentTime + delay);
     osc.stop(c.currentTime + delay + dur + 0.1);
   }
-  function sndLock()      { tone(300,'sawtooth',0,.12,.09); tone(220,'sawtooth',.1,.15,.07); tone(160,'sawtooth',.22,.2,.05); }
-  function sndUnlock()    { tone(330,'sine',0,.7,.10); tone(440,'sine',.08,.7,.08); tone(550,'sine',.16,.9,.06); tone(660,'sine',.25,1,.05); }
-  function sndSpotlight() { tone(523,'triangle',0,1,.12); tone(659,'triangle',.18,1,.10); tone(784,'triangle',.36,1.5,.09); tone(1047,'triangle',.54,2,.07); }
-  function sndReveal()    { tone(110,'sine',0,3,.06); tone(165,'sine',.1,3,.04); }
+  function sndLock()      { tone(260,'sine',0,.18,.025); tone(200,'sine',.12,.2,.018); }
+  function sndUnlock()    { tone(330,'sine',0,.9,.022); tone(440,'sine',.12,.9,.018); tone(550,'sine',.24,1,.014); }
+  function sndSpotlight() { tone(523,'sine',0,1.2,.028); tone(659,'sine',.2,1.2,.022); tone(784,'sine',.4,1.8,.018); }
+  function sndReveal()    { tone(110,'sine',0,3.5,.015); tone(165,'sine',.15,3.5,.01); }
 
   // ── Animation helpers ──────────────────────────────────────────
   function av(...els)  { els.forEach(e => e && e.classList.add('av')); }
