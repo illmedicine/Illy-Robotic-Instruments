@@ -380,9 +380,11 @@
     position:absolute;background:transparent;
     border:2px solid transparent;border-radius:10px;
     cursor:crosshair;z-index:10;
-    transition:border-color .25s,background .25s,box-shadow .25s;
+    opacity:0;transition:opacity .8s ease,border-color .25s,background .25s,box-shadow .25s;
     padding:0;
   }
+  /* Pips only appear once the base infographic has faded in */
+  .info-img.av ~ .char-spot{opacity:1;}
   .char-spot:hover{
     border-color:rgba(255,170,90,.7);
     background:rgba(255,170,90,.1);
@@ -535,18 +537,6 @@
     font-size:.77rem;color:rgba(255,255,255,.55);line-height:1.6;font-style:italic;
   }
 
-  /* Controls bar */
-  .infohero-controls{
-    display:flex;align-items:center;gap:.85rem;
-    margin-top:.85rem;flex-wrap:wrap;
-  }
-  .info-snd{
-    background:rgba(6,10,28,.8);border:1px solid rgba(255,170,90,.4);
-    color:#ffb066;padding:.38rem .85rem;border-radius:999px;cursor:pointer;
-    font-size:.76rem;font-family:var(--sans);letter-spacing:.5px;
-    backdrop-filter:blur(8px);transition:all .2s;
-  }
-  .info-snd:hover{background:rgba(255,107,0,.25);border-color:rgba(255,170,90,.7);}
   .loop-badge{
     font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:#00c8dc;
     animation:loopBlink 2.4s ease-in-out infinite;
@@ -738,11 +728,6 @@
 
     </div><!-- /infostage -->
 
-    <!-- Controls row -->
-    <div class="infohero-controls">
-      <button class="info-snd" id="infoSnd" aria-label="Toggle audio">🔇 Sound</button>
-    </div>
-
     <!-- Principle cards -->
     <div class="info-cards" id="infoCards">
       <div class="info-card">
@@ -836,7 +821,6 @@
     spot:   $('infoSpot'),
     reveal: $('infoReveal'),
     cards:  $('infoCards'),
-    snd:    $('infoSnd'),
     dos:    $('dossierPanel'),
     dosBody:$('dossierBody'),
     dosX:   $('dossierClose'),
@@ -852,29 +836,7 @@
   const closedBadges = [el.bApple, el.bAdobe, el.bMeta, el.bAlexa];
   const openBadges   = [el.bGoogle, el.bMsft, el.bIri];
 
-  let muted = true, audioCtx = null, loopId = null;
-
-  // ── Audio ──────────────────────────────────────────────────────
-  function actx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-  function tone(freq, type, delay, dur, gain) {
-    if (muted) return;
-    const c = actx(), osc = c.createOscillator(), g = c.createGain();
-    osc.connect(g); g.connect(c.destination);
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, c.currentTime + delay);
-    g.gain.setValueAtTime(0, c.currentTime + delay);
-    g.gain.linearRampToValueAtTime(gain, c.currentTime + delay + 0.04);
-    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + dur);
-    osc.start(c.currentTime + delay);
-    osc.stop(c.currentTime + delay + dur + 0.1);
-  }
-  function sndLock()      { tone(260,'sine',0,.18,.025); tone(200,'sine',.12,.2,.018); }
-  function sndUnlock()    { tone(330,'sine',0,.9,.022); tone(440,'sine',.12,.9,.018); tone(550,'sine',.24,1,.014); }
-  function sndSpotlight() { tone(523,'sine',0,1.2,.028); tone(659,'sine',.2,1.2,.022); tone(784,'sine',.4,1.8,.018); }
-  function sndReveal()    { tone(110,'sine',0,3.5,.015); tone(165,'sine',.15,3.5,.01); }
+  let loopId = null;
 
   // ── Animation helpers ──────────────────────────────────────────
   function av(...els)  { els.forEach(e => e && e.classList.add('av')); }
@@ -887,8 +849,10 @@
     s.parentNode.replaceChild(c, s);
   }
 
+  // Only reset overlays — the base image stays visible across loops so
+  // we never dead-face to a black stage with just pips floating on it.
   function resetAll() {
-    rav(el.img, el.closed, el.open, el.spot, el.reveal, el.cards);
+    rav(el.closed, el.open, el.spot, el.reveal, el.cards);
     rav(...closedBadges, ...openBadges);
     resetScan(el.closed);
     resetScan(el.open);
@@ -904,24 +868,22 @@
     resetAll();
 
     setTimeout(() => av(el.img), 300);
-    setTimeout(() => { av(el.closed); sndLock(); }, 1800);
+    setTimeout(() => av(el.closed), 1800);
     staggerAv(closedBadges, 2100, 220);
-    setTimeout(() => { av(el.open);   sndUnlock(); }, 3600);
+    setTimeout(() => av(el.open), 3600);
     staggerAv(openBadges, 3900, 220);
-    setTimeout(() => { av(el.spot);   sndSpotlight(); }, 5800);
+    setTimeout(() => av(el.spot), 5800);
     setTimeout(() => {
-      av(el.reveal); sndReveal();
+      av(el.reveal);
       rav(...closedBadges, ...openBadges); // clear badge chrome so text reads cleanly
     }, 7800);
     setTimeout(() => av(el.cards), 11000);
 
-    // Hold → fade-out → restart
+    // Hold → quick fade → restart (image stays visible; only overlays cycle)
     loopId = setTimeout(() => {
       rav(el.reveal);
-      setTimeout(() => rav(el.closed, el.open, el.spot, ...closedBadges, ...openBadges), 1000);
-      setTimeout(() => rav(el.cards), 1600);
-      setTimeout(() => rav(el.img), 2400);
-      setTimeout(play, 4200);
+      setTimeout(() => rav(el.closed, el.open, el.spot, el.cards, ...closedBadges, ...openBadges), 700);
+      setTimeout(play, 1800);
     }, 18000);
   }
 
@@ -1106,11 +1068,6 @@
   });
 
   el.dosX.addEventListener('click', () => el.dos.classList.remove('open'));
-
-  el.snd.addEventListener('click', () => {
-    muted = !muted;
-    el.snd.textContent = muted ? '🔇 Sound' : '🔊 Sound';
-  });
 
   // ── Auto-start on page load (hero is always first visible element) ──
   setTimeout(play, 700);
