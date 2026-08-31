@@ -327,6 +327,22 @@
   .info-lbl strong{color:#fff;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;}
   .info-lbl em{color:#aaa;font-size:.68rem;font-style:normal;}
 
+  /* Illy Robotic brand-mark — masks the AI watermark baked into the base image */
+  .info-brand-mark{
+    position:absolute;right:1.5%;bottom:1.5%;
+    width:8%;aspect-ratio:1;z-index:6;
+    display:flex;align-items:center;justify-content:center;
+    background:#04070f;
+    border:1px solid rgba(255,170,90,.35);
+    border-radius:8px;
+    box-shadow:0 4px 14px rgba(0,0,0,.6),0 0 12px rgba(255,140,66,.15);
+    padding:6px;
+    opacity:0;transition:opacity 1.4s ease .4s;
+    pointer-events:none;
+  }
+  .info-brand-mark img{width:100%;height:100%;object-fit:contain;display:block;}
+  .info-img.av ~ .info-brand-mark{opacity:1;}
+
   /* Spotlight — brown minion (top-right of the mesh device cluster) */
   .info-spot{
     position:absolute;left:89.5%;top:29.5%;
@@ -657,6 +673,11 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#04122a"/><text x="12" y="16" text-anchor="middle" font-family="system-ui" font-size="9" font-weight="900" fill="#ff8c42">IRI</text></svg>
         I.R.I.
       </button>
+
+      <!-- Illy Robotic logo overlay — covers the bottom-right watermark on the base image -->
+      <div class="info-brand-mark" aria-hidden="true">
+        <img src="/assets/illy-robotic.png" alt="" />
+      </div>
 
       <!-- Spotlight — the brown minion engineer -->
       <div class="info-spot" id="infoSpot"></div>
