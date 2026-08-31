@@ -447,9 +447,23 @@
     width:18px;height:18px;display:block;flex-shrink:0;
     background:#fff;border-radius:50%;padding:2px;
   }
-  .brand-badge--closed{border-color:rgba(255,80,80,.35);}
+  .brand-badge--closed{border-color:rgba(255,80,80,.35);overflow:visible;}
+  /* Small in-pill ✕ marker (kept so the pill still reads as "closed" before the stamp lands) */
   .brand-badge--closed::after{
     content:'✕';margin-left:2px;color:#ff5c5c;font-size:11px;font-weight:900;
+  }
+  /* Big animated red "no" stamp — slams onto every walled-garden chip once the pill is visible */
+  .brand-badge--closed::before{
+    content:'';position:absolute;inset:-14px;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='none' stroke='%23ff2323' stroke-width='9'/><line x1='22' y1='22' x2='78' y2='78' stroke='%23ff2323' stroke-width='9' stroke-linecap='round'/></svg>") center/contain no-repeat;
+    filter:drop-shadow(0 0 6px rgba(255,50,50,.7));
+    opacity:0;transform:scale(2.4) rotate(-25deg);
+    transition:opacity .28s ease,transform .5s cubic-bezier(.34,1.56,.64,1);
+    transition-delay:.9s;
+    pointer-events:none;z-index:3;
+  }
+  .brand-badge--closed.av::before{
+    opacity:.95;transform:scale(1) rotate(-6deg);
   }
   .brand-badge--open{border-color:rgba(90,230,180,.4);}
   .brand-badge--open::after{
@@ -635,24 +649,24 @@
         </div>
       </div>
 
-      <!-- ── Real brand logos: CLOSED side — single row at top edge (clear of labels + text) ── -->
+      <!-- ── Real brand logos: CLOSED side — Apple pinned top-left, walled-garden products lined up along the bottom ── -->
       <button class="brand-badge brand-badge--closed" id="badgeApple"
               data-char="corp-apple" style="left:2%;top:2%;">
         <svg viewBox="0 0 24 24" fill="#000"><path d="M17.6 12.5c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.8 0-1.8-.8-3-.7-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9.2.8 1.1 1.7 2.3 2.9 2.3s1.6-.7 3-.7 1.8.7 3 .7 2-1.1 2.8-2.3c.9-1.3 1.2-2.6 1.2-2.7 0 0-2.6-1-2.6-3.9zM15.6 5.7c.6-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.8 1.1 0 2.2-.6 2.9-1.3z"/></svg>
         Apple
       </button>
       <button class="brand-badge brand-badge--closed" id="badgeAdobe"
-              data-char="corp-adobe" style="left:14%;top:2%;">
+              data-char="corp-adobe" style="left:2%;bottom:2%;">
         <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FA0F00"/><path d="M6.8 18.5L11.5 5h1L17 18.5h-2.3l-.9-2.6H9.9L9 18.5H6.8zm3.6-4.4h3.2L12 9.7l-1.6 4.4z" fill="#fff"/></svg>
         Adobe
       </button>
       <button class="brand-badge brand-badge--closed" id="badgeMeta"
-              data-char="corp-meta" style="left:26%;top:2%;">
+              data-char="corp-meta" style="left:17%;bottom:2%;">
         <svg viewBox="0 0 36 36"><defs><linearGradient id="mg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0064E1"/><stop offset="50%" stop-color="#0082FB"/><stop offset="100%" stop-color="#0064E1"/></linearGradient></defs><path d="M18 8c-3.3 0-5.6 2.5-7.4 5.6C9.1 16 8 18.4 8 21c0 2.7 1.4 4.5 3.7 4.5 1.9 0 3.4-1.5 5-4.3-.9-1.5-1.5-2.6-2.4-2.6-.7 0-1.4.6-1.9 1.9-.3.7-.6 1-.9 1-.4 0-.7-.4-.7-1.1 0-1.4.6-3.1 1.5-4.6 1.1-1.8 2.4-3 3.9-3 1.5 0 2.4 1.1 3.3 2.6-1.7 2.9-3.5 6-5.5 6-1.5 0-2.5-1.2-2.5-2.9-1.3.9-2 2.6-2 3.6 0 2.4 1.7 3.9 4 3.9 2.8 0 4.9-2.6 6.7-5.7 1.6 2.9 3.1 5.7 5.5 5.7 2.5 0 4-1.8 4-4.9 0-3.1-1.9-7-4.1-9.6C22.9 9.4 20.6 8 18 8z" fill="url(#mg1)"/></svg>
         Meta
       </button>
       <button class="brand-badge brand-badge--closed" id="badgeAlexa"
-              data-char="corp-alexa" style="left:38%;top:2%;">
+              data-char="corp-alexa" style="left:32%;bottom:2%;">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#00CAFF"/><circle cx="12" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M12 5 A7 7 0 0 1 19 12" fill="none" stroke="#fff" stroke-width="1.8"/></svg>
         Alexa
       </button>
