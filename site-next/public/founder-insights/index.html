@@ -880,11 +880,12 @@
     setTimeout(() => av(el.cards), 11000);
 
     // Hold → quick fade → restart (image stays visible; only overlays cycle)
+    // 13s total = ~5s of readable reveal after it fades in at 7.8s.
     loopId = setTimeout(() => {
       rav(el.reveal);
       setTimeout(() => rav(el.closed, el.open, el.spot, el.cards, ...closedBadges, ...openBadges), 700);
       setTimeout(play, 1800);
-    }, 18000);
+    }, 13000);
   }
 
   // ── Character dossier data ─────────────────────────────────────
