@@ -264,14 +264,24 @@
     /* ── Products ── */
     .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .product {
+      position: relative; isolation: isolate; overflow: hidden;
       display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
-      background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px 20px;
-      text-decoration: none; color: var(--ink); transition: border-color 0.2s, transform 0.2s;
+      background: #0c1a2e; border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px 20px;
+      text-decoration: none; color: #fff; transition: border-color 0.2s, transform 0.2s;
     }
-    .product:hover { border-color: #b8c9e2; transform: translateY(-2px); }
+    .product::before {
+      content: ""; position: absolute; inset: 0; z-index: -2;
+      background: var(--bg) center / cover no-repeat; transition: transform 0.6s ease;
+    }
+    .product::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(12,26,46,0.62) 0%, rgba(12,26,46,0.84) 55%, rgba(12,26,46,0.95) 100%);
+    }
+    .product:hover { border-color: #3b6fb0; transform: translateY(-2px); }
+    .product:hover::before { transform: scale(1.06); }
     .product-logo {
       width: 104px; height: 104px; object-fit: contain; flex: 0 0 auto;
-      filter: drop-shadow(0 10px 14px rgba(12,26,46,0.22));
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55));
       animation: product-float 6s ease-in-out infinite;
     }
     .product:nth-child(2n) .product-logo { animation-delay: -2s; }
@@ -279,9 +289,9 @@
     .product:hover .product-logo { animation-play-state: paused; filter: drop-shadow(0 16px 22px rgba(15,95,184,0.35)); }
     @keyframes product-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
     .product-body { display: flex; flex-direction: column; gap: 2px; }
-    .product-name { font-weight: 650; font-size: 1rem; }
-    .product-cat { font-size: 0.86rem; color: var(--muted); }
-    .product-link { font-size: 0.86rem; color: var(--blue); font-weight: 600; }
+    .product-name { font-weight: 650; font-size: 1rem; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+    .product-cat { font-size: 0.86rem; color: rgba(255,255,255,0.88); }
+    .product-link { font-size: 0.86rem; color: #9cc7ff; font-weight: 600; }
 
     /* ── Contact ── */
     .contact { background: var(--ink); color: #fff; padding: 88px 0; }
@@ -702,62 +712,62 @@
         <p class="lead">Thirteen products built across fintech, social commerce, proptech, health, food, transit, education and emergency response.</p>
       </div>
         <div class="product-grid">
-          <a class="product" href="/isocial/">
+          <a class="product" style="--bg: url(assets/products/bg/illysocial.jpg)" href="/isocial/">
             <img class="product-logo" src="assets/products/illysocial.png" alt="IllySocial logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">IllySocial</div><div class="product-cat">Creator ecosystem hub</div></div>
             <span class="product-link">Visit →</span>
           </a>
-          <a class="product" href="https://dcb-gm.com/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/discryptobank.jpg)" href="https://dcb-gm.com/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/discryptobank.png" alt="DisCryptoBank logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">DisCryptoBank</div><div class="product-cat">Payroll</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://coindrop.in/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/coindrop.jpg)" href="https://coindrop.in/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/coindrop.png" alt="Coindrop logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">Coindrop</div><div class="product-cat">Earn</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="/socialplug/">
+          <a class="product" style="--bg: url(assets/products/bg/socialplug.jpg)" href="/socialplug/">
             <img class="product-logo" src="assets/products/socialplug.png" alt="SocialPlug logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">SocialPlug</div><div class="product-cat">Distribution</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://www.livepay.io/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/livepay.jpg)" href="https://www.livepay.io/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/livepay.png" alt="LivePay logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">LivePay</div><div class="product-cat">Payments</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://resigrid.co/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/resigrid.jpg)" href="https://resigrid.co/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/resigrid.png" alt="ResiGrid logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">ResiGrid</div><div class="product-cat">PropTech · fair data</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://buffaloeats.food" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/buffaloeats.jpg)" href="https://buffaloeats.food" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/buffaloeats.png" alt="Buffalo Eats logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">Buffalo Eats</div><div class="product-cat">Ghost kitchen · POS</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://www.squad-ren.com/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/squad-ren.jpg)" href="https://www.squad-ren.com/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/squad-ren.png" alt="SquadREN logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">SquadREN</div><div class="product-cat">Transit · mobility</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://www.illyrobotic-ai.com/IR-AIcademy/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/irai-academy.jpg)" href="https://www.illyrobotic-ai.com/IR-AIcademy/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/irai-academy.png" alt="IRAI Academy logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">IRAI Academy</div><div class="product-cat">EdTech · AI training</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://illy-ris.com" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/i-ris.jpg)" href="https://illy-ris.com" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/i-ris.png" alt="I-RIS logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">I-RIS</div><div class="product-cat">Creative studio</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="https://illmedicine.github.io/IR-SAR-VUE/" target="_blank" rel="noopener">
+          <a class="product" style="--bg: url(assets/products/bg/worldsar.jpg)" href="https://illmedicine.github.io/IR-SAR-VUE/" target="_blank" rel="noopener">
             <img class="product-logo" src="assets/products/worldsar.png" alt="WorldSAR logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">WorldSAR</div><div class="product-cat">Emergency tech · open data</div></div>
             <span class="product-link">Explore →</span>
           </a>
-          <a class="product" href="/web-designs/">
+          <a class="product" style="--bg: url(assets/products/bg/webdesigns.jpg)" href="/web-designs/">
             <img class="product-logo" src="assets/products/webdesigns.png" alt="Web Designs logo" width="104" height="104" loading="lazy">
             <div class="product-body"><div class="product-name">Web Designs</div><div class="product-cat">Studio service</div></div>
             <span class="product-link">Explore →</span>
