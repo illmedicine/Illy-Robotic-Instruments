@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "isocial-e5297",
     "public": "site-next/public",
     "ignore": [
       "firebase.json",
