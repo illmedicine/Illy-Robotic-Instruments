@@ -5,7 +5,7 @@ import { usd, vendorMark } from "./foundrykit.js";
 import { story } from "./foundrystory.js";
 import { pathCards } from "./foundryspend.js";
 import { kpi } from "./foundry.js";
-import { currentRoute, replaceRoute, urlFor } from "../route.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 // Azure AI Foundry > AI topology. Two animated infographics under one switch:
 //   Today:  the scattered landscape of Copilot on the web, the builder Copilots inside each app, the pilots and the E7 proposal. Platform Manager is not in it.
@@ -41,17 +41,17 @@ function todaySpec(land) {
     ...spread(L[0], people(), 70),
     ...spread(L[1], [
       { id: "d-copilot", title: "Microsoft 365 Copilot", mark: "copilot", tone: "warn", badge: seats ? { text: `${mo(seats)}, ${sp.people.copilotLicensed} seats${pp ? `, ${pp.seatsBelowBreakEven} below break-even` : ""}`, tone: "warn" } : { text: "licence data not read yet", tone: "bad" },
-        detail: { lines: ["Paid per seat. It works on what a person can already open in Microsoft 365, so it knows nothing of our contract terms or catalogue unless they sit in a file that person can open.", pp && pp.allSeats != null ? `A seat costs $${pp.allSeats.toFixed(2)} per prompt on average, and ${pp.seatsIdle} seats show no prompts in the audit period.` : "Prompt counts have not been read yet."], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+        detail: { lines: ["Paid per seat. It works on what a person can already open in Microsoft 365, so it knows nothing of our contract terms or catalogue unless they sit in a file that person can open.", pp && pp.allSeats != null ? `A seat costs $${pp.allSeats.toFixed(2)} per prompt on average, and ${pp.seatsIdle} seats show no prompts in the audit period.` : "Prompt counts have not been read yet."], link: { href: "#foundryspend", text: "AI spend" } } },
       { id: "d-web", title: "Copilot Chat on the web", sub: "Free with the work sign-in", mark: "copilotchat", tone: "warn", badge: bs ? { text: `${bs.people} people use it with no seat`, tone: "warn" } : { text: "free, no add-on cost", tone: "warn" },
         detail: { lines: ["The free chat on the web and in Edge. Good for general drafting; it has no private knowledge of our contracts, sites or reports, and nothing keeps what one person works out.", bs ? `${bs.wouldJustifyASeat} of these people use Copilot enough that a seat would pay for itself.` : ""] } },
       { id: "d-builders", title: "Builder Copilots in each app", sub: "Power Automate, Power Apps, SharePoint, Power BI", mark: "microsoft", tone: "bad", badge: { text: "Minimal: suggests steps, rarely finishes an automation", tone: "bad" },
         detail: { lines: ["Each app has its own assistant with its own limits. They describe what to click but do not build, test and deploy an automation end to end, so most people stop using them and ask someone else."] } },
       { id: "d-studio", title: "Copilot Studio agents", mark: "studio", tone: "n", badge: studio && studio.monthly != null ? { text: `${mo(studio)} pay-as-you-go`, tone: "warn" } : { text: "no pay-as-you-go billed", tone: "warn" }, detail: { lines: ["Agents built by makers, billed in Copilot Credits when pay-as-you-go. Each is owned and tuned by whoever built it."] } },
       { id: "d-cowork", title: "Copilot Cowork (pilot)", mark: "cowork", tone: "warn", badge: cowork && cowork.monthly != null ? { text: `${mo(cowork)}: $${pilot} a prompt`, tone: "bad" } : { text: `$${pilot} a prompt; use not seen`, tone: "bad" },
-        detail: { lines: [`A pilot, charged at $${pilot} a prompt, so ${Math.ceil((sp.seat ? sp.seat.price : 30) / pilot)} prompts a month cost as much as a Copilot seat.`], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+        detail: { lines: [`A pilot, charged at $${pilot} a prompt, so ${Math.ceil((sp.seat ? sp.seat.price : 30) / pilot)} prompts a month cost as much as a Copilot seat.`], link: { href: "#foundryspend", text: "AI spend" } } },
       { id: "d-claude", title: "Claude (pilot)", mark: "claude", tone: "warn", badge: { text: `$${pilot} a prompt; use not measured`, tone: "bad" }, detail: { lines: [`A pilot, priced here like Cowork at about $${pilot} a prompt. Platform Manager has no usage source for it, so its cost is not counted anywhere.`] } },
       { id: "d-e7", title: "Microsoft 365 E7 (an option)", sub: "Copilot, Agent 365 and Entra Suite in one licence", mark: "m365", tone: "warn", badge: e7 ? { text: `+${mo(e7)} if all ${sp.people.e5} E5 users move`, tone: "bad" } : { text: "needs the directory", tone: "warn" },
-        detail: { lines: ["The proposal is to move every E5 user to E7. That buys Copilot for everyone whether or not they use it."], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+        detail: { lines: ["The proposal is to move every E5 user to E7. That buys Copilot for everyone whether or not they use it."], link: { href: "#foundryspend", text: "AI spend" } } },
     ], 78),
     ...spread(L[2], [
       { id: "b-graph", title: "Microsoft Graph and semantic index", sub: "What a person can open in Microsoft 365", mark: "graph", tone: "n", detail: { lines: ["Copilot finds grounding here. Only content stored in Microsoft 365 and open to the person is visible to it."] } },
@@ -71,7 +71,7 @@ function todaySpec(land) {
       { id: "c-entra", title: "Entra groups and RBAC", sub: "Departments and AD groups, decided product by product", mark: "entra", tone: "warn", detail: { lines: ["The same person can be allowed into one AI door and not another, because each product reads groups separately."] } },
       { id: "c-fabric", title: "Fabric governance", sub: "Domains and workspace roles govern data, not the AI that reads it", mark: "powerbi", tone: "warn", detail: { lines: ["Fabric domains, workspace roles and lineage apply to people and items, not to the assistants that read them."] } },
       { id: "g-learning", title: "Nothing learned is kept", sub: "Each person starts from a blank chat.", mark: "shadow", tone: "bad", detail: { lines: ["No shared memory: the next person asks the same question again."] } },
-      { id: "g-cost", title: "No view of use or cost per task", sub: "Seats, per-prompt pilots and vendor invoices sit in different places.", mark: "cost", tone: "bad", detail: { lines: ["Seats, per-prompt pilots and an E7 uplift are priced in three different ways."], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+      { id: "g-cost", title: "No view of use or cost per task", sub: "Seats, per-prompt pilots and vendor invoices sit in different places.", mark: "cost", tone: "bad", detail: { lines: ["Seats, per-prompt pilots and an E7 uplift are priced in three different ways."], link: { href: "#foundryspend", text: "AI spend" } } },
       { id: "g-gov", title: "No single owner of AI settings", sub: "Model, knowledge, who may use it and how much: decided in every product.", mark: "shadow", tone: "bad", detail: { lines: ["No registry of agents, limits or approvals."] } },
     ], 96),
   ];
@@ -122,21 +122,21 @@ function targetSpec(land) {
   const L = [lane(16, 16, 190, 700, "Who asks"), lane(222, 16, 230, 700, "One governed front door"), lane(468, 16, 410, 700, "Foundry agents: tuned, taught and counted"), lane(894, 16, 200, 700, "Models for the job"),
     lane(1110, 16, 190, 700, "Knowledge and data"), lane(1316, 16, 190, 700, "What it changes"), lane(222, 732, 1284, 138, "Governance on every call")];
   const agentNode = (g, x, i) => ({ id: "a-" + g.id, x, y: 130 + i * 74, w: 190, h: 66, title: g.name, agent: g, learning: g.learning, tone: "good", badge: { text: `${g.usage.people} people, ${g.usage.requests} asks`, tone: "" },
-    detail: { lines: [`${g.kind} agent for ${g.product}. Knowledge held: ${g.learning.percent}% (${g.learning.level}).`], link: { href: urlFor("foundryagents/" + g.id), text: "Administer this agent" } } });
+    detail: { lines: [`${g.kind} agent for ${g.product}. Knowledge held: ${g.learning.percent}% (${g.learning.level}).`], link: { href: "#foundryagents/" + g.id, text: "Administer this agent" } } });
   const a = land.agents, left = a.slice(0, 7), right = a.slice(7);
   const door = (id, y, hh, title, sub, mk, badge, lines, link) => ({ id, x: 234, y, w: 206, h: hh, title, sub, mark: mk, tone: "good", badge, detail: { lines, link } });
   const nodes = [
     ...spread(L[0], people({ text: "Entra department and AD group", tone: "" }), 70),
-    door("t-door", 62, 130, "Platform Manager", "One sign-in, and an agent for every product in one place", "ppm", live, ["Everyone reaches the agents through one door. Every request is counted and every setting change is in the audit trail."], { href: urlFor("foundryoverview"), text: "Agent overview" }),
+    door("t-door", 62, 130, "Platform Manager", "One sign-in, and an agent for every product in one place", "ppm", live, ["Everyone reaches the agents through one door. Every request is counted and every setting change is in the audit trail."], { href: "#foundryoverview", text: "Agent overview" }),
     door("t-g-entra", 206, 96, "Departments and AD security groups", "RBAC path: who may call which agent", "entra", { text: "Roles live; group mapping planned", tone: "warn" },
       ["A person's Entra department and AD security groups decide which agents they may call, which knowledge pools those agents may read and which model tier they run on. Admin, Contracts and User roles gate the agents today; mapping departments and groups needs the Foundry connection."]),
     door("t-g-purview", 316, 96, "Sensitivity labels and DLP", "Purview: the label travels with the data", "purview", needs,
       ["Retrieval returns only passages whose label the person's group may read, DLP checks the draft before it is shown, and Purview records the interaction. An agent never quotes a document the person could not open."]),
     door("t-copilot", 426, 96, "Microsoft 365 Copilot", "Premium seats only where use pays for one", "copilot", P && P.seatsKept != null ? { text: `${P.seatsKept} seats kept`, tone: "good" } : undefined,
-      ["Copilot stays where it is strongest: inside Word, Outlook and Teams. Seats are limited to the people whose use pays for one, and everyone stays on E5."], { href: urlFor("foundryspend"), text: "AI spend" }),
+      ["Copilot stays where it is strongest: inside Word, Outlook and Teams. Seats are limited to the people whose use pays for one, and everyone stays on E5."], { href: "#foundryspend", text: "AI spend" }),
     door("t-chat", 536, 80, "Copilot Chat (free)", "General questions", "copilotchat", undefined, ["Still available for general questions. Work that needs our own knowledge goes to an agent."]),
     { id: "t-router", x: 480, y: 56, w: 386, h: 58, title: "Agent router and registry", sub: "Foundry Agent Service: who may call which agent, on which model", mark: "foundry", tone: "good", badge: { text: "Registry live; routing in Platform Manager today", tone: "good" },
-      detail: { lines: ["Every agent has an owner, a model, knowledge, live data sources and a daily limit, set on the Agent administration page. Foundry Agent Service takes over hosting once the connection is made."], link: { href: urlFor("foundryagents"), text: "Agent administration" } } },
+      detail: { lines: ["Every agent has an owner, a model, knowledge, live data sources and a daily limit, set on the Agent administration page. Foundry Agent Service takes over hosting once the connection is made."], link: { href: "#foundryagents", text: "Agent administration" } } },
     ...left.map((g, i) => agentNode(g, 480, i)), ...right.map((g, i) => agentNode(g, 680, i)),
     ...spread(L[3], [
       { id: "t-qwen", title: "Qwen 2.5 7B (local)", sub: "Free, runs on this server", mark: "local", tone: "good", badge: ready("qwen2.5:7b-instruct") ? { text: "Ready", tone: "good" } : { text: "Ollama not answering", tone: "warn" }, detail: { lines: ["Routine drafting and anything that must not leave the server."] } },
@@ -145,7 +145,7 @@ function targetSpec(land) {
       { id: "t-claude", title: "Claude in Foundry", sub: "Planned model choice", mark: "claude", tone: "n", badge: { text: "Planned", tone: "warn" }, detail: { lines: ["Claude is offered in the Foundry model catalogue, so the pilot can move behind the same groups, labels, limits and logging as every other model, paid by the token instead of per prompt."] } },
     ], 72),
     ...spread(L[4], [
-      { id: "t-kb", title: "Per-agent knowledge pools", sub: "Word, PDF, Excel, CSV, PowerPoint, images", mark: "search", tone: "good", badge: live, detail: { lines: ["Each agent has its own pool. What people rate useful is added to it, so the agent improves with use."], link: { href: urlFor("foundryagents"), text: "Build knowledge" } } },
+      { id: "t-kb", title: "Per-agent knowledge pools", sub: "Word, PDF, Excel, CSV, PowerPoint, images", mark: "search", tone: "good", badge: live, detail: { lines: ["Each agent has its own pool. What people rate useful is added to it, so the agent improves with use."], link: { href: "#foundryagents", text: "Build knowledge" } } },
       { id: "t-dv", title: "Dataverse", sub: "Power Platform inventory", mark: "dataverse", tone: "n", badge: live, detail: { lines: ["Agents read counts and types from the inventory Platform Manager already collects."] } },
       { id: "t-graph", title: "Microsoft Graph and Entra", sub: "Licences, directory, sign-ins", mark: "graph", tone: "n", badge: live, detail: { lines: ["Counts only, never names, unless an administrator allows personal data."] } },
       { id: "t-fabric", title: "Fabric and OneLake", sub: "Domains, workspace roles, lineage", mark: "powerbi", tone: "n", badge: needs, detail: { lines: ["Agents that read Fabric and Power BI data use the same domains and workspace roles as people, and the sensitivity labels on items come with the data."] } },
@@ -154,9 +154,9 @@ function targetSpec(land) {
       { id: "o-saved1", title: "Contract work in house", sub: "Briefs and checklists from the Contract Renewal Agent", mark: "saving", tone: "good", badge: { text: "outside spend not collected here", tone: "warn" }, detail: { lines: ["The agent works from the agreements and decisions uploaded to it, so renewals stop starting from a blank page."] } },
       { id: "o-saved2", title: "Flows, reports and sites in house", sub: "Drafts for an owner to review", mark: "saving", tone: "good", badge: { text: "outside spend not collected here", tone: "warn" }, detail: { lines: ["Departments without the skill get a tested draft instead of an outside statement of work."] } },
       { id: "o-saved3", title: "Copilot seats follow use", sub: "Premium only where it pays for itself", mark: "saving", tone: "good", badge: P && P.seatsKept != null ? { text: `${P.seatsReclaimed} reclaimed, ${P.seatsAdded} added`, tone: "good" } : { text: "needs audit data", tone: "warn" },
-        detail: { lines: ["Seats are reclaimed from people whose use does not pay for one and given to people on free Copilot Chat whose use does."], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+        detail: { lines: ["Seats are reclaimed from people whose use does not pay for one and given to people on free Copilot Chat whose use does."], link: { href: "#foundryspend", text: "AI spend" } } },
       { id: "o-saved4", title: "Everyone stays on E5", sub: "No E7 uplift", mark: "saving", tone: "good", badge: P ? { text: `${usd(P.savingVsE7)} a month against E7 (estimate)`, tone: P.savingVsE7 >= 0 ? "good" : "warn" } : { text: "needs the directory", tone: "warn" },
-        detail: { lines: ["Pilots and every other agent run through Foundry, paid by the token."], link: { href: urlFor("foundryspend"), text: "AI spend" } } },
+        detail: { lines: ["Pilots and every other agent run through Foundry, paid by the token."], link: { href: "#foundryspend", text: "AI spend" } } },
     ], 96),
     ...["t-g-safety|Content safety and prompt shields|Checked on every call|safety", "t-g-gw|AI gateway: token quotas|Budget per agent; cheapest model that fits|gateway", "t-g-trace|Tracing and evaluations|Score answers against test cases|trace",
       "t-g-dspm|Purview DSPM for AI and audit|Every AI interaction discoverable|purview", "t-g-audit|Audit and cost view|Requests counted by agent and person|cost"].map((s, i) => {
@@ -240,7 +240,7 @@ function todaySummary(land) {
     kpi("People on free Copilot Chat", bs ? String(bs.people) : "-", bs ? `${bs.wouldJustifyASeat} use it enough to justify a seat` : "needs audit data"),
     kpi("E7 for every E5 user, a month", usd(sp.paths.e7.lines[0].monthly), "on top of what E5 costs now"),
     kpi("Pilots, per prompt", `$${sp.stated.pilotPerPrompt}`, "Cowork and Claude pilots")),
-  h("div", { class: "toolbar" }, h("a", { class: "btn primary", href: urlFor("foundryspend") }, "See the spend landscapes")));
+  h("div", { class: "toolbar" }, h("a", { class: "btn primary", href: "#foundryspend" }, "See the spend landscapes")));
 }
 
 export async function render() {

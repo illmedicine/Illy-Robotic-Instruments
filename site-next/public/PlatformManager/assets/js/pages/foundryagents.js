@@ -2,7 +2,7 @@ import { h, icon, pill, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
 import { patch, meter } from "./foundrykit.js";
-import { currentRoute, replaceRoute, urlFor } from "../route.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 // Azure AI Foundry > Agent administration: choose each agent's model, tune its parameters, give it instructions, teach it with files and live data, and see what it has learned.
 
@@ -159,7 +159,7 @@ export async function render() {
     const a = d, panes = { model: paintModel, instructions: paintInstructions, knowledge: paintKnowledge, sources: paintSources, learning: paintLearning };
     main.replaceChildren(
       h("div", { class: "card fa-head" }, patch(a, 76), h("div", { class: "fa-head-t" }, h("h2", { text: a.name }), h("div", { class: "muted", text: `${a.product}, ${a.kind} agent` }), h("p", { text: a.blurb }),
-        h("div", { class: "toolbar" }, h("a", { class: "btn sm", href: urlFor(a.page) }, icon("external"), "Open the agent"), a.enabled ? pill("On", "ok") : pill("Off", "risk"), pill(a.model.label, a.model.free ? "ok" : "warn"))), h("div", { class: "fa-head-m" }, h("small", { text: "What it knows" }), meter(a.learning, { big: true }))),
+        h("div", { class: "toolbar" }, h("a", { class: "btn sm", href: "#" + a.page }, icon("external"), "Open the agent"), a.enabled ? pill("On", "ok") : pill("Off", "risk"), pill(a.model.label, a.model.free ? "ok" : "warn"))), h("div", { class: "fa-head-m" }, h("small", { text: "What it knows" }), meter(a.learning, { big: true }))),
       h("div", { class: "seg fa-tabs", role: "tablist" }, TABS.map(([k, label]) => h("button", { type: "button", role: "tab", "aria-pressed": String(k === tab), onclick: () => { tab = k; paint(); } }, label))),
       panes[tab]());
   }

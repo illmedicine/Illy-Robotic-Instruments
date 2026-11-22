@@ -1,4 +1,3 @@
-import { urlFor } from "../route.js";
 import { h, icon, pill, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
@@ -24,7 +23,7 @@ function agentCard(a) {
       h("div", {}, h("b", { text: fmt.n(u.requests) }), h("small", { text: `requests, ${fmt.n(u.last30)} in 30 days` })),
       h("div", {}, h("b", { text: fmt.n(k.files + k.automatic) }), h("small", { text: `files held, ${k.sources} live source${k.sources === 1 ? "" : "s"}` }))),
     a.model.note ? h("div", { class: "muted fagent-note", text: a.model.note }) : null,
-    h("div", { class: "toolbar" }, h("a", { class: "btn sm", href: urlFor(a.page) }, icon("external"), "Open"), h("a", { class: "btn sm primary", href: urlFor("foundryagents/" + a.id) }, "Administer")));
+    h("div", { class: "toolbar" }, h("a", { class: "btn sm", href: "#" + a.page }, icon("external"), "Open"), h("a", { class: "btn sm primary", href: "#foundryagents/" + a.id }, "Administer")));
 }
 
 export async function overview() {
