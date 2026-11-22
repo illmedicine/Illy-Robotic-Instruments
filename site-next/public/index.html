@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -264,11 +264,21 @@
     /* ── Products ── */
     .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .product {
-      display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
-      background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px 20px;
       text-decoration: none; color: var(--ink); transition: border-color 0.2s, transform 0.2s;
     }
     .product:hover { border-color: #b8c9e2; transform: translateY(-2px); }
+    .product-logo {
+      width: 104px; height: 104px; object-fit: contain; flex: 0 0 auto;
+      filter: drop-shadow(0 10px 14px rgba(12,26,46,0.22));
+      animation: product-float 6s ease-in-out infinite;
+    }
+    .product:nth-child(2n) .product-logo { animation-delay: -2s; }
+    .product:nth-child(3n) .product-logo { animation-delay: -4s; }
+    .product:hover .product-logo { animation-play-state: paused; filter: drop-shadow(0 16px 22px rgba(15,95,184,0.35)); }
+    @keyframes product-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    .product-body { display: flex; flex-direction: column; gap: 2px; }
     .product-name { font-weight: 650; font-size: 1rem; }
     .product-cat { font-size: 0.86rem; color: var(--muted); }
     .product-link { font-size: 0.86rem; color: var(--blue); font-weight: 600; }
@@ -323,6 +333,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .slider-track, .btn, .service, .product { transition: none; }
+      .product-logo { animation: none; }
     }
   </style>
 </head>
@@ -690,21 +701,68 @@
         <h2>More from Illy Robotic Instruments.</h2>
         <p class="lead">Thirteen products built across fintech, social commerce, proptech, health, food, transit, education and emergency response.</p>
       </div>
-      <div class="product-grid">
-        <a class="product" href="/isocial/"><div><div class="product-name">IllySocial</div><div class="product-cat">Creator ecosystem hub</div></div><span class="product-link">Visit →</span></a>
-        <a class="product" href="https://dcb-gm.com/" target="_blank" rel="noopener"><div><div class="product-name">DisCryptoBank</div><div class="product-cat">Payroll</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://coindrop.in/" target="_blank" rel="noopener"><div><div class="product-name">Coindrop</div><div class="product-cat">Earn</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="/socialplug/"><div><div class="product-name">SocialPlug</div><div class="product-cat">Distribution</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://www.livepay.io/" target="_blank" rel="noopener"><div><div class="product-name">LivePay</div><div class="product-cat">Payments</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://resigrid.co/" target="_blank" rel="noopener"><div><div class="product-name">ResiGrid</div><div class="product-cat">PropTech · fair data</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://mycana.info" target="_blank" rel="noopener"><div><div class="product-name">Mycana</div><div class="product-cat">Health tech · personalization</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://buffaloeats.food" target="_blank" rel="noopener"><div><div class="product-name">Buffalo Eats</div><div class="product-cat">Ghost kitchen · POS</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://www.squad-ren.com/" target="_blank" rel="noopener"><div><div class="product-name">SquadREN</div><div class="product-cat">Transit · mobility</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://www.illyrobotic-ai.com/IR-AIcademy/" target="_blank" rel="noopener"><div><div class="product-name">IRAI Academy</div><div class="product-cat">EdTech · AI training</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://illy-ris.com" target="_blank" rel="noopener"><div><div class="product-name">I-RIS</div><div class="product-cat">Creative studio</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="https://illmedicine.github.io/IR-SAR-VUE/" target="_blank" rel="noopener"><div><div class="product-name">WorldSAR</div><div class="product-cat">Emergency tech · open data</div></div><span class="product-link">Explore →</span></a>
-        <a class="product" href="/web-designs/"><div><div class="product-name">Web Designs</div><div class="product-cat">Studio service</div></div><span class="product-link">Explore →</span></a>
-      </div>
+        <div class="product-grid">
+          <a class="product" href="/isocial/">
+            <img class="product-logo" src="assets/products/illysocial.png" alt="IllySocial logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">IllySocial</div><div class="product-cat">Creator ecosystem hub</div></div>
+            <span class="product-link">Visit →</span>
+          </a>
+          <a class="product" href="https://dcb-gm.com/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/discryptobank.png" alt="DisCryptoBank logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">DisCryptoBank</div><div class="product-cat">Payroll</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://coindrop.in/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/coindrop.png" alt="Coindrop logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">Coindrop</div><div class="product-cat">Earn</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="/socialplug/">
+            <img class="product-logo" src="assets/products/socialplug.png" alt="SocialPlug logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">SocialPlug</div><div class="product-cat">Distribution</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://www.livepay.io/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/livepay.png" alt="LivePay logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">LivePay</div><div class="product-cat">Payments</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://resigrid.co/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/resigrid.png" alt="ResiGrid logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">ResiGrid</div><div class="product-cat">PropTech · fair data</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://buffaloeats.food" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/buffaloeats.png" alt="Buffalo Eats logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">Buffalo Eats</div><div class="product-cat">Ghost kitchen · POS</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://www.squad-ren.com/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/squad-ren.png" alt="SquadREN logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">SquadREN</div><div class="product-cat">Transit · mobility</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://www.illyrobotic-ai.com/IR-AIcademy/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/irai-academy.png" alt="IRAI Academy logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">IRAI Academy</div><div class="product-cat">EdTech · AI training</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://illy-ris.com" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/i-ris.png" alt="I-RIS logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">I-RIS</div><div class="product-cat">Creative studio</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="https://illmedicine.github.io/IR-SAR-VUE/" target="_blank" rel="noopener">
+            <img class="product-logo" src="assets/products/worldsar.png" alt="WorldSAR logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">WorldSAR</div><div class="product-cat">Emergency tech · open data</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+          <a class="product" href="/web-designs/">
+            <img class="product-logo" src="assets/products/webdesigns.png" alt="Web Designs logo" width="104" height="104" loading="lazy">
+            <div class="product-body"><div class="product-name">Web Designs</div><div class="product-cat">Studio service</div></div>
+            <span class="product-link">Explore →</span>
+          </a>
+        </div>
     </div>
   </section>
 
