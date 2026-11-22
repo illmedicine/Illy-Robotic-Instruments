@@ -63,7 +63,8 @@
     .section-head .lead { margin-top: 0.4rem; }
     .echo-title { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
     .echo-title h2 { flex: 1 1 420px; margin-bottom: 0; }
-    .echo-logo { width: 150px; height: 150px; flex: 0 0 auto; }
+    .echo-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; flex: 0 0 auto; }
+    .echo-logo { width: 150px; height: 150px; }
 
     /* ── Top nav ── */
     .topnav {
@@ -498,7 +499,11 @@
         <span class="eyebrow">Echo Vue</span>
         <div class="echo-title">
           <h2>Room intelligence from the WiFi you already have.</h2>
-          <img class="echo-logo" src="assets/echo-vue/favicon.svg" alt="Echo Vue logo">
+          <div class="echo-badge">
+            <img class="echo-logo" src="assets/echo-vue/favicon.svg" alt="Echo Vue logo">
+            <span class="hero-badge-title">Echo Vue</span>
+            <span class="hero-badge-sub">Coming soon to Microsoft Store</span>
+          </div>
         </div>
         <p class="lead">Echo Vue is IoT intelligence and automation for commercial spaces and homes. A small bridge on the wall turns existing WiFi signals into anonymised occupancy counts, with no camera, no microphone and no speaker.</p>
       </div>
