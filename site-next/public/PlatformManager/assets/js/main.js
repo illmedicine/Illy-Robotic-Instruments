@@ -323,9 +323,15 @@ async function show() {
 }
 
 // The last thing on every screen: where people read how sign-in works and what is recorded.
+const ILLY_HOME = "https://www.illyrobotic-ai.com/";
 function siteFoot() {
-  // Shown at the foot of every page for every role: a single centred link, not a menu item.
-  return h("footer", { class: "sitefoot" }, h("a", { href: urlFor("privacy"), text: "Privacy & security" }));
+  // Shown at the foot of every page for every role: the privacy link, then the maker's credit. The credit goes to the Illy homepage.
+  return h("footer", { class: "sitefoot" },
+    h("a", { href: urlFor("privacy"), text: "Privacy & security" }),
+    h("span", { class: "sep", "aria-hidden": "true", text: "·" }),
+    h("a", { class: "illy-powered", href: ILLY_HOME, title: "Illy Robotic Instruments" },
+      h("img", { src: "/PlatformManager/assets/img/illy-shield.png", alt: "", width: 18, height: 18 }),
+      h("span", { text: "Powered by Illy Robotic Instruments" })));
 }
 
 function demoBanner() {
