@@ -1,3 +1,4 @@
+import { urlFor } from "../route.js";
 import { h, icon, pill } from "../dom.js";
 import { pageHead } from "./common.js";
 import { kpi, money, note, pct, select } from "./widgets.js";
@@ -7,7 +8,7 @@ import { parseLocalDate } from "../analyze/core.js";
 
 const EVIDENCE = { measured: ["measured", "ok"], profile: ["from profile", "info"], benchmark: ["benchmark", "warn"] };
 const evidence = (e) => pill(...(EVIDENCE[e] || [e, ""]));
-const link = (hash, label) => h("a", { href: "#" + hash, text: label });
+const link = (hash, label) => h("a", { href: urlFor(hash), text: label });
 
 function evidenceRow(ok, label, hash, hint) {
   return h("div", { style: { display: "flex", gap: "8px", alignItems: "center", padding: "6px 0", borderBottom: "1px solid var(--line)" } },

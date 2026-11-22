@@ -1,3 +1,4 @@
+import { urlFor } from "../route.js";
 import { h, pill } from "../dom.js";
 import { pageHead } from "./common.js";
 import { dataTable, openDrawer } from "../ui.js";
@@ -70,7 +71,7 @@ export async function transitions() {
         h("h3", {}, t.title, pill(label, tone), h("span", { class: "sub", text: t.kind })),
         h("p", { text: t.summary }), h("p", {}, h("b", { text: "Timing: " }), t.timing),
         t.whyItMatters ? h("p", {}, h("b", { text: "Why it matters: " }), t.whyItMatters) : null,
-        t.planner === "fabric" ? h("p", {}, h("a", { href: "#fabric", text: "Open the Fabric planner" })) : null,
+        t.planner === "fabric" ? h("p", {}, h("a", { href: urlFor("fabric"), text: "Open the Fabric planner" })) : null,
         h("details", {}, h("summary", { text: "Actions, asks, pitfalls and facts" }),
           bulletList("What to do", t.actions), bulletList("Ask Microsoft", t.askMicrosoft), bulletList("Pitfalls", t.pitfalls),
           bulletList("Facts", t.facts), bulletList("For your organization", t.org), t.source ? h("p", { class: "muted" }, "Source: ", src(t.source)) : null));

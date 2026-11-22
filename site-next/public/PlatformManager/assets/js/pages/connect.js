@@ -1,3 +1,4 @@
+import { urlFor } from "../route.js";
 import { h, icon, pill, copyText, download, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
@@ -135,7 +136,7 @@ export async function render(ctx) {
       h("li", { text: "Each source below turns to Working. A red source shows the exact reason: usually a permission that still needs consent." })),
     h("div", { class: "cs-grid" }, rows.map((s) => { const st = s.status ? (STATE[s.status.state] || [s.status.state, ""]) : ["Off", ""]; return h("div", { class: "cs-chip" }, h("b", { text: s.name }), pill(s.status && !s.status.enabled ? "Switched off" : st[0], s.status && !s.status.enabled ? "" : st[1])); })),
     permCheck(g.demo),
-    h("div", { class: "toolbar" }, h("a", { class: "btn", href: "#sources" }, icon("database"), "Open Data sources")))));
+    h("div", { class: "toolbar" }, h("a", { class: "btn", href: urlFor("sources") }, icon("database"), "Open Data sources")))));
   return root;
 }
 

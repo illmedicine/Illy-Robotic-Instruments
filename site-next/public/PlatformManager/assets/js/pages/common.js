@@ -1,3 +1,4 @@
+import { urlFor } from "../route.js";
 import { h } from "../dom.js";
 
 export function pageHead(title, sub, ...actions) {
@@ -19,7 +20,7 @@ export function noData(ctx, id, what) {
   else if (ctx.status.tenant?.configError) msg = `Not connected: ${ctx.status.tenant.configError}.`;
   const admin = !ctx.me || ctx.me.role === "admin";
   return h("div", { class: "banner " + (m && m.state === "error" ? "error" : "info") }, h("span", {}, msg + " "),
-    admin ? h("a", { href: "#sources", text: "Open Data sources" }) : null);
+    admin ? h("a", { href: urlFor("sources"), text: "Open Data sources" }) : null);
 }
 
 export const makerFlow = (f) => `https://make.powerautomate.com/environments/${encodeURIComponent(f.env)}/flows/${encodeURIComponent(f.id)}/details`;
