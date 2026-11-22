@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DG1SB2ZNCW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DG1SB2ZNCW');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Echo Vue by Illy Robotic Instruments: IoT room intelligence from the WiFi you already have. No camera, no microphone, no speaker.">
+  <title>Echo Vue — Illy Robotic Instruments</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/echo-vue/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/illy-shield.png" />
+  <meta name="theme-color" content="#0c1a2e" />
+  <script src="/assets/echo-vue/favicon.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fb; --surface: #ffffff; --ink: #0c1a2e; --ink-2: #34445c; --muted: #5d6b82;
+      --line: #e1e6ef; --blue: #0f5fb8; --blue-ink: #0b4a92; --blue-soft: #e8f1fb; --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { color: var(--blue); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: -0.01em; }
+
+    .topbar { background: rgba(255,255,255,0.94); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+    .topbar .wrap { height: 68px; display: flex; align-items: center; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 700; }
+    .brand img { height: 44px; width: auto; }
+    .back { margin-left: auto; text-decoration: none; color: var(--ink-2); font-weight: 500; padding: 0.5rem 0.8rem; border-radius: 8px; }
+    .back:hover { color: var(--blue); background: var(--blue-soft); }
+
+    .hero { padding: 80px 0 64px; background: radial-gradient(ellipse 80% 60% at 80% 0%, #e4eefb 0%, var(--bg) 60%); }
+    .eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.9rem; }
+    .hero-row { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    .hero-row > div { flex: 1 1 480px; }
+    h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); line-height: 1.12; font-weight: 700; }
+    .lead { font-size: 1.15rem; color: var(--ink-2); margin-top: 1.1rem; max-width: 640px; }
+    .logo { width: 180px; height: auto; flex: 0 0 auto; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
+    .btn { display: inline-flex; align-items: center; font-weight: 600; text-decoration: none; padding: 0.85rem 1.5rem; border-radius: 10px; border: 1.5px solid transparent; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-ink); }
+    .btn-ghost { color: var(--ink); border-color: #c9d2e0; }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+    section.block { padding: 72px 0; }
+    section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .head { max-width: 760px; margin-bottom: 36px; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); line-height: 1.2; font-weight: 700; margin-bottom: 0.6rem; }
+    .muted { color: var(--muted); }
+
+    .devices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .device { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .device-art { background: #eef2f7; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .device-art img { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+    .device figcaption, .device .cap { padding: 18px 22px 22px; }
+    .device h3 { margin-bottom: 0.3rem; }
+    .device p { color: var(--muted); font-size: 0.97rem; }
+
+    .points { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 28px; }
+    .point { display: flex; gap: 14px; align-items: flex-start; }
+    .point::before { content: ""; flex: 0 0 9px; height: 9px; margin-top: 0.55rem; border-radius: 50%; background: var(--blue); }
+    .point p { color: var(--ink-2); }
+    .point strong { color: var(--ink); }
+
+    .cta { background: var(--ink); color: #fff; padding: 72px 0; }
+    .cta h2 { color: #fff; }
+    .cta p { color: #b7c4d8; }
+    .cta .btn-row { margin-top: 1.5rem; }
+    .cta .btn-light { background: #fff; color: var(--ink); }
+    .cta .btn-line { color: #fff; border-color: rgba(255,255,255,0.35); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--line); padding: 28px 0; font-size: 0.9rem; color: var(--muted); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; justify-content: space-between; }
+    footer a { color: var(--ink-2); text-decoration: none; }
+
+    @media (max-width: 820px) {
+      .devices, .points { grid-template-columns: 1fr; }
+      .logo { width: 120px; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 18px; }
+      .hero { padding: 56px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Illy Robotic Instruments home">
+        <img src="/assets/illy-shield.png" alt="" height="44">
+        <span>Illy Robotic Instruments</span>
+      </a>
+      <a class="back" href="/">← Back to home</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-row">
+        <div>
+          <span class="eyebrow">Flagship · Echo Vue</span>
+          <h1>Room intelligence from the WiFi you already have.</h1>
+          <p class="lead">Echo Vue is IoT intelligence and automation for commercial spaces and homes. A small bridge on the wall turns existing WiFi signals into anonymised occupancy counts, with no camera, no microphone and no speaker.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://illmedicine.github.io/ECHO-MAPS/" target="_blank" rel="noopener">Explore Echo Vue →</a>
+            <a class="btn btn-ghost" href="https://illmedicine.github.io/ECHO-MAPS/research/" target="_blank" rel="noopener">Read the research</a>
+          </div>
+        </div>
+        <img class="logo" src="/assets/echo-vue/logo.svg" alt="Echo Vue logo">
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">The devices</span>
+        <h2>A plate on the wall, and the dashboard behind it.</h2>
+        <p class="muted">Sensing runs on the WiFi already in the building. The dashboard shows counts, never addresses.</p>
+      </div>
+      <div class="devices">
+        <figure class="device">
+          <div class="device-art"><img src="/assets/echo-vue/bridge-2-wall.svg" alt="Illy Bridge 2 mounted on a wall beside a light switch"></div>
+          <figcaption class="cap">
+            <h3>Illy Bridge 2 on the wall</h3>
+            <p>A plate beside the light switch. Sensing runs on the WiFi already in the building.</p>
+          </figcaption>
+        </figure>
+        <figure class="device">
+          <div class="device-art"><img src="/assets/echo-vue/bridge-pro-concept.svg" alt="Illy Bridge Pro premium bridge concept render"></div>
+          <figcaption class="cap">
+            <h3>Illy Bridge Pro</h3>
+            <p>The premium bridge for larger commercial sites. Shown as a concept render.</p>
+          </figcaption>
+        </figure>
+        <figure class="device">
+          <div class="device-art"><img src="/assets/echo-vue/bridge-2-dashboard.svg" alt="Bridge 2 dashboard screen showing anonymised device counts"></div>
+          <figcaption class="cap">
+            <h3>Bridge 2 dashboard</h3>
+            <p>Anonymised counts per zone, with a likely range and a confidence level on every estimate.</p>
+          </figcaption>
+        </figure>
+        <figure class="device">
+          <div class="device-art"><img src="/assets/echo-vue/bridge-pro-dashboard.svg" alt="Bridge Pro dashboard screen with per-minute aggregates"></div>
+          <figcaption class="cap">
+            <h3>Bridge Pro dashboard</h3>
+            <p>Per-minute aggregates kept for 90 days. No raw radio data, addresses or identities.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Privacy by design</span>
+        <h2>Built to count spaces, not people.</h2>
+      </div>
+      <div class="points">
+        <div class="point"><p><strong>No camera, no images.</strong> There is no camera input in the product at all. Occupancy was the goal, not identity.</p></div>
+        <div class="point"><p><strong>Public areas only.</strong> Hallways, lobbies, pools and laundries. Sensing zones named like a room, suite or bathroom are rejected.</p></div>
+        <div class="point"><p><strong>Estimates say so.</strong> Every figure carries a likely range and a confidence level. With no usable signal, the screen says so instead of guessing.</p></div>
+        <div class="point"><p><strong>Short, aggregated memory.</strong> History is anonymous per-minute counts, kept 90 days, with no raw radio data and no identities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#7fb4f0">Get in touch</span>
+      <h2>Bring Echo Vue to your building.</h2>
+      <p>Book a briefing on sensing, dashboards and deployment for commercial spaces and homes.</p>
+      <div class="btn-row">
+        <a class="btn btn-light" href="https://calendar.app.google/KbygymCietHJbKBb8" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="btn btn-line" href="/">Back to home</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 Illy Robotic Instruments · Buffalo, NY</div>
+      <nav><a href="/">Home</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>
