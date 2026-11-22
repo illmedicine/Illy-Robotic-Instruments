@@ -193,6 +193,28 @@
       display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-weight: 700;
     }
     .feature p { color: var(--muted); font-size: 0.97rem; }
+    .control { margin-top: 56px; max-width: 820px; }
+    .control h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.2; margin-bottom: 0.7rem; }
+    .control .lead { font-size: 1.05rem; }
+    .cap-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 48px; align-items: center; margin-top: 64px; }
+    .cap-row.reverse { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+    .cap-row.reverse .cap-text { order: 2; }
+    .cap-row.reverse .cap-shot { order: 1; }
+    .cap-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem; }
+    .cap-text h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.25; margin-bottom: 0.7rem; }
+    .cap-text p { color: var(--ink-2); font-size: 1rem; }
+    .cap-shot { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 0 16px 40px rgba(12,26,46,0.08); }
+    .cap-shot img { width: 100%; height: auto; }
+    .cap-shot figcaption { padding: 12px 18px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); }
+    .selfhelp { margin-top: 64px; padding: 36px 40px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--orange); border-radius: var(--radius); max-width: 900px; }
+    .selfhelp h3 { font-size: clamp(1.3rem, 2.2vw, 1.6rem); margin-bottom: 0.6rem; }
+    .selfhelp p { color: var(--ink-2); }
+    .selfhelp .cap-tag { color: var(--orange); }
+    @media (max-width: 820px) {
+      .cap-row, .cap-row.reverse { grid-template-columns: 1fr; gap: 28px; margin-top: 48px; }
+      .cap-row.reverse .cap-text, .cap-row.reverse .cap-shot { order: 0; }
+      .selfhelp { padding: 26px 24px; }
+    }
 
     /* ── Echo Vue ── */
     .echo-points { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 28px; margin-top: 44px; }
@@ -474,22 +496,51 @@
         <a class="btn btn-light" href="/PlatformManager/">Open Platform Manager →</a>
       </div>
 
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">R</div>
-          <h3>Read-only by design</h3>
-          <p>Platform Manager reads from your tenant and never changes it. Changes are drafted for you to review and run with your own rights.</p>
+      <div class="control">
+        <h3>Unleash AI safely, with complete control.</h3>
+        <p class="lead">Every agent has an owner, a model, a daily request limit and a switch to turn it off. Knowledge is held and shown per agent, and every change is recorded in the audit trail. Platform Manager reads your tenant and never changes it: anything it drafts is reviewed and run by your team, with its own rights.</p>
+      </div>
+
+      <div class="cap-row">
+        <div class="cap-text">
+          <span class="cap-tag">Vendor contracts</span>
+          <h3>Renewals negotiated with evidence.</h3>
+          <p>See every renewal coming, compare purchased seats with real usage, and let the renewal advisor turn what Platform Manager measured into negotiating levers, each with the evidence behind it. Contract review reads the agreements and price sheets you give it inside your browser, so nothing is uploaded to a server.</p>
         </div>
-        <div class="feature">
-          <div class="feature-icon">A</div>
-          <h3>Governed AI agents</h3>
-          <p>Agents run in the Azure AI Foundry hub under role-based access and policy, with spend tracked by agent and model.</p>
+        <figure class="cap-shot">
+          <img src="assets/platform-manager/screens/renewal-advisor.png" alt="Renewal advisor showing a leverage score, the evidence behind each negotiating lever and the decisions needed" width="1920" height="1080">
+          <figcaption>Renewal advisor · sample data</figcaption>
+        </figure>
+      </div>
+
+      <div class="cap-row reverse">
+        <div class="cap-text">
+          <span class="cap-tag">Agent building and configuration</span>
+          <h3>Configure each agent for its domain.</h3>
+          <p>Choose the model, tune temperature and answer length, write instructions, and give each agent its own files and live data sources. Per-person and daily limits protect paid models from runaway use. A knowledge meter shows how much each agent holds and how well it is taught.</p>
         </div>
-        <div class="feature">
-          <div class="feature-icon">$</div>
-          <h3>Licence and spend visibility</h3>
-          <p>Compare what you pay for Microsoft licences with what people use, and walk into each renewal with evidence.</p>
+        <figure class="cap-shot">
+          <img src="assets/platform-manager/screens/agent-administration.png" alt="Agent administration screen with the Contract Renewal Agent selected, its model, parameters and knowledge meter" width="1920" height="1080">
+          <figcaption>Agent administration · sample data</figcaption>
+        </figure>
+      </div>
+
+      <div class="cap-row">
+        <div class="cap-text">
+          <span class="cap-tag">Learning agents</span>
+          <h3>One agent for each domain, learning with use.</h3>
+          <p>Microsoft 365, Power Platform, Power BI and Fabric, Dynamics 365, SharePoint and Copilot each get their own agents. They learn from the files admins teach them and from answers people rate useful, and the overview shows how well each one is informed.</p>
         </div>
+        <figure class="cap-shot">
+          <img src="assets/platform-manager/screens/agent-overview.png" alt="Agent overview listing every AI agent with its knowledge meter and who has used it" width="1920" height="1080">
+          <figcaption>Agent overview · sample data</figcaption>
+        </figure>
+      </div>
+
+      <div class="selfhelp">
+        <span class="cap-tag">Self-help AI builders</span>
+        <h3>Employees build their own agents, inside the guardrails.</h3>
+        <p>General users describe what they need in plain language and the self-help AI builder drafts it: a report, a SharePoint site or a Power Automate flow. Each draft runs through the same policy, ownership and audit controls as every other agent, so people get a working answer without waiting for an administrator.</p>
       </div>
     </div>
   </section>
