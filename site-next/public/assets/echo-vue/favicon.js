@@ -1,8 +1,11 @@
 // The Echo Vue mark in the browser tab, turning like the header logo. Browsers ignore animation inside a favicon, so this
 // draws the SVG onto a canvas at each step of the turn and swaps it in. The static favicon stays as the fallback.
 (function () {
-  var link = document.querySelector('link[rel~="icon"]');
-  if (!link) { link = document.createElement("link"); link.rel = "icon"; document.head.appendChild(link); }
+  function iconLink() {
+    var link = document.querySelector('link[rel~="icon"]');
+    if (!link) { link = document.createElement("link"); link.rel = "icon"; document.head.appendChild(link); }
+    return link;
+  }
   var canvas = document.createElement("canvas"), size = 64, ctx = canvas.getContext && canvas.getContext("2d");
   if (!ctx) return;
   canvas.width = canvas.height = size;
@@ -23,6 +26,7 @@
           ctx.rotate(angle);
           ctx.drawImage(img, -size / 2, -size / 2, size, size);
           ctx.restore();
+          var link = iconLink();
           link.type = "image/png";
           link.href = canvas.toDataURL("image/png");
         }
