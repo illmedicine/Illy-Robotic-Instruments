@@ -57,7 +57,7 @@ const PAGES = [
   { hidden: true, id: "personuse", label: "Person activity", icon: "users", render: personuse.page },
   { hidden: true, id: "privacy", label: "Privacy & security", icon: "shield", render: privacy.render },
   { product: "Settings", id: "support", label: "Updates & support", icon: "shield", render: support.render },
-  { id: "showcase", label: "Platform showcase", icon: "app", external: ROOT + "assets/showcase" },
+  { id: "showcase", label: "Platform showcase", icon: "app", external: ROOT },
 
   { product: "Microsoft 365", section: "Monitor", id: "m365activity", label: "App activity", icon: "chart", render: m365.render },
   { section: "People", id: "m365people", label: "Usage", icon: "users", render: peoplePage("m365", "Microsoft 365 usage by person", "Who has used Teams, Exchange, SharePoint, OneDrive, Copilot and the other Microsoft 365 apps, and when. Licensed people with no activity show as No activity.", "m365-usage") },
