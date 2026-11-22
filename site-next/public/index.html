@@ -129,10 +129,9 @@
     .hero-badge {
       display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
       padding: 30px 34px 26px; min-width: 260px; text-decoration: none; color: var(--ink);
-      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-      box-shadow: 0 16px 40px rgba(12,26,46,0.08); transition: border-color 0.2s, transform 0.2s;
+      background: transparent; border: 0; box-shadow: none; transition: transform 0.3s ease;
     }
-    .hero-badge:hover { border-color: #b8c9e2; transform: translateY(-2px); }
+    .hero-badge:hover { transform: translateY(-4px); }
     .hero-badge img { width: 150px; height: 150px; }
     .hero-badge-title { font-weight: 700; font-size: 1.15rem; margin-top: 4px; }
     .hero-badge-sub { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
