@@ -75,9 +75,9 @@
     }
     .topnav.scrolled { border-bottom-color: var(--line); box-shadow: 0 2px 16px rgba(12,26,46,0.06); }
     .topnav-inner { height: 72px; display: flex; align-items: center; gap: 24px; }
-    .brand { position: relative; display: flex; align-items: center; text-decoration: none; color: var(--ink); padding-left: 118px; min-height: 72px; }
+    .brand { position: relative; display: block; text-decoration: none; width: 103px; height: 72px; flex: 0 0 auto; }
     .brand img {
-      position: absolute; left: 0; top: 2px; height: 104px; width: auto; z-index: 2;
+      position: absolute; left: 0; top: 0; height: 103px; width: 103px; z-index: 2;
       filter: drop-shadow(0 6px 14px rgba(12,26,46,0.28));
       transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.3s ease;
     }
@@ -271,8 +271,7 @@
       section { padding: 72px 0; }
       .hero { padding: 132px 0 72px; }
       .burger { display: flex; }
-      .brand { padding-left: 92px; }
-      .brand img { height: 80px; top: 4px; }
+      .brand img { height: 84px; width: 84px; }
       .menu {
         position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch;
         background: var(--surface); border-bottom: 1px solid var(--line); padding: 0 24px;
@@ -308,8 +307,7 @@
   <header class="topnav" id="topnav">
     <div class="wrap topnav-inner">
       <a class="brand" href="#top" aria-label="Illy Robotic Instruments — home">
-        <img src="assets/illy-shield.png" alt="" height="52">
-        <span>Illy Robotic<small>Instruments</small></span>
+        <img src="assets/illy-nav-logo.png" alt="" width="103" height="103">
       </a>
       <button class="burger" id="navBurger" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
         <span></span><span></span><span></span>
