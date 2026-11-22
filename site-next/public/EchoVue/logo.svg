@@ -1,19 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <!-- House shape (Google Home inspired) -->
-  <path d="M24 4L4 20h6v20h28V20h6L24 4z" fill="#4285F4"/>
-  <path d="M24 4L4 20h6v20h14V4z" fill="#4285F4"/>
-  <path d="M24 4l20 16h-6v20H24V4z" fill="#34A853"/>
-  <path d="M10 20v20h14V28h-4v12H14V22l10-8 10 8v18h-4V28h-4v12" fill="none" stroke="#0a0e1a" stroke-width="0.5"/>
-  <!-- WiFi waves left (blue) -->
-  <path d="M8 18c-3-2-5-5-5-9" stroke="#4285F4" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M6 16c-2-1.5-3.5-3.5-3.5-6.5" stroke="#4285F4" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <!-- WiFi waves right (red) -->
-  <path d="M40 18c3-2 5-5 5-9" stroke="#EA4335" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M42 16c2-1.5 3.5-3.5 3.5-6.5" stroke="#EA4335" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <!-- Eye (center) -->
-  <circle cx="24" cy="26" r="6" fill="#FBBC05"/>
-  <circle cx="24" cy="26" r="3.5" fill="#4285F4"/>
-  <circle cx="24" cy="26" r="1.5" fill="#0a0e1a"/>
-  <!-- Ear (listening) -->
-  <path d="M30 24c2 0 3.5 1.5 3.5 3.5S32 31 30 31" stroke="#FBBC05" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <!-- Each signal is centred on the tile's inner corner (the corner nearest the grid centre), so it faces outward. -->
+    <g id="signal" fill="none" stroke-linecap="round">
+      <!-- Top-left tile: strongest -->
+      <path d="M15.5 19.5 A4 4 0 0 1 19.5 15.5"/>
+      <path d="M11.5 19.5 A8 8 0 0 1 19.5 11.5"/>
+      <path d="M7.5 19.5 A12 12 0 0 1 19.5 7.5"/>
+      <!-- Top-right tile: strong -->
+      <path d="M28.5 15.5 A4 4 0 0 1 32.5 19.5"/>
+      <path d="M28.5 11.5 A8 8 0 0 1 36.5 19.5"/>
+      <path d="M28.5 7.5 A12 12 0 0 1 40.5 19.5" opacity="0.25"/>
+      <!-- Bottom-left tile: weak -->
+      <path d="M15.5 28.5 A4 4 0 0 0 19.5 32.5"/>
+      <path d="M11.5 28.5 A8 8 0 0 0 19.5 36.5" opacity="0.25"/>
+      <path d="M7.5 28.5 A12 12 0 0 0 19.5 40.5" opacity="0.25"/>
+      <!-- Bottom-right tile: no usable signal -->
+      <path d="M32.5 28.5 A4 4 0 0 1 28.5 32.5" opacity="0.15"/>
+      <path d="M36.5 28.5 A8 8 0 0 1 28.5 36.5" opacity="0.15"/>
+      <path d="M40.5 28.5 A12 12 0 0 1 28.5 40.5" opacity="0.15"/>
+    </g>
+  </defs>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="16s" repeatCount="indefinite"/>
+    <!-- Panes use the Windows logo colours: red, green, blue, yellow -->
+    <rect x="4" y="4" width="18" height="18" rx="2" fill="#F25022"/>
+    <rect x="26" y="4" width="18" height="18" rx="2" fill="#7FBA00"/>
+    <rect x="4" y="26" width="18" height="18" rx="2" fill="#00A4EF"/>
+    <rect x="26" y="26" width="18" height="18" rx="2" fill="#FFB900"/>
+    <!-- Dark halo keeps the orange readable on the yellow and green tiles -->
+    <use href="#signal" stroke="#0b1d33" stroke-opacity="0.35" stroke-width="4.4"/>
+    <use href="#signal" stroke="#ff8a1f" stroke-width="2.4"/>
+    <!-- Sensor dots in each tile's inner corner -->
+    <g fill="#ff8a1f">
+      <circle cx="19.5" cy="19.5" r="1.9"/>
+      <circle cx="28.5" cy="19.5" r="1.9"/>
+      <circle cx="19.5" cy="28.5" r="1.9"/>
+      <circle cx="28.5" cy="28.5" r="1.9" opacity="0.5"/>
+    </g>
+  </g>
 </svg>
