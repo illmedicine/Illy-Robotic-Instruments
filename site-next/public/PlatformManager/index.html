@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform Manager — Illy Robotic Instruments</title>
+  <link rel="icon" href="/assets/illy-robotic.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #04050d;
+      --surface: #0b0d14;
+      --border: rgba(255,168,85,0.14);
+      --orange: #ff8c42;
+      --orange-dim: rgba(255,140,66,0.18);
+      --text: #e8eaf6;
+      --muted: #7a8ab0;
+    }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* ── top bar ── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px; display: flex; align-items: center;
+      padding: 0 1.5rem;
+      background: rgba(4,5,13,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .topbar-brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .topbar-brand span { font-size: 0.95rem; font-weight: 600; color: var(--orange); letter-spacing: 0.03em; }
+    .topbar-back {
+      margin-left: auto;
+      font-size: 0.85rem; color: var(--muted); text-decoration: none;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(255,168,85,0.2);
+      border-radius: 8px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .topbar-back:hover { color: var(--orange); border-color: rgba(255,140,66,0.5); }
+
+    /* ── hero ── */
+    .hero {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 7rem 1.5rem 4rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 40%, rgba(255,140,66,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--orange); background: var(--orange-dim);
+      border: 1px solid rgba(255,140,66,0.28);
+      border-radius: 100px; padding: 0.3rem 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; line-height: 1.1;
+      color: #fff; margin-bottom: 1rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #ffa855 0%, #ff6b2b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      max-width: 520px; color: var(--muted); font-size: 1.05rem; line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── status badge ── */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 500;
+      color: #60e085; background: rgba(60,200,100,0.1);
+      border: 1px solid rgba(60,200,100,0.25);
+      border-radius: 100px; padding: 0.4rem 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #60e085;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* ── card grid ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; max-width: 680px; width: 100%;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.25rem 1.5rem;
+      text-align: left; transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(255,140,66,0.4); }
+    .card-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+    .card-value { font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .card-value.orange { color: var(--orange); }
+
+    /* ── CTA button ── */
+    .cta {
+      display: inline-block;
+      background: var(--orange); color: #0b0d14;
+      font-size: 0.95rem; font-weight: 700;
+      padding: 0.85rem 2.2rem; border-radius: 10px;
+      text-decoration: none; letter-spacing: 0.02em;
+      box-shadow: 0 4px 24px rgba(255,140,66,0.35);
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .cta:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    /* ── footer ── */
+    footer {
+      padding: 1.5rem; text-align: center;
+      font-size: 0.78rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar-brand" href="/">
+      <img src="/assets/illy-robotic.png" alt="Illy Robotic" />
+      <span>Platform Manager</span>
+    </a>
+    <a class="topbar-back" href="/">← Back to Site</a>
+  </header>
+
+  <main class="hero">
+    <div class="hero-eyebrow">Illy Robotic Instruments</div>
+    <h1>Platform<br><span>Manager</span></h1>
+    <p class="hero-sub">Central command for all Illy Robotic products. Manage your ecosystem, monitor performance, and configure your stack from one place.</p>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Endpoint ready — awaiting app connection
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Products</div>
+        <div class="card-value orange">13</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Ecosystem</div>
+        <div class="card-value">IllySocial</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Status</div>
+        <div class="card-value" style="color:#60e085;font-size:1.1rem;">Online</div>
+      </div>
+    </div>
+    <a class="cta" href="/">Explore Portfolio →</a>
+  </main>
+
+  <footer>
+    &copy; 2026 <a href="/">Illy Robotic Instruments</a> · Buffalo, NY
+  </footer>
+</body>
+</html>

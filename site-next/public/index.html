@@ -2546,6 +2546,14 @@
       <a class="topnav-brand" href="#top" aria-label="Illy Robotic Instruments — Home">
         <img src="assets/illy-robotic.png" alt="Illy Robotic Instruments" />
       </a>
+      <button class="topnav-burger" id="navBurger" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav-menu" id="navMenu">
+        <a href="#portfolio">Portfolio</a>
+        <a href="/founder-insights/">Founder Insights</a>
+        <a href="/PlatformManager/" style="color:#ff8c42;font-weight:600;border:1px solid rgba(255,140,66,0.35);border-radius:8px;padding:0.4rem 0.9rem;">Platform Manager</a>
+      </div>
     </div>
   </nav>
 
@@ -3480,6 +3488,21 @@
       if (window.scrollY > 20) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
     });
+
+    /* Mobile burger toggle */
+    (function () {
+      const burger = document.getElementById('navBurger');
+      const menu   = document.getElementById('navMenu');
+      if (!burger || !menu) return;
+      burger.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open);
+      });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }));
+    })();
 
     /* Product Card Slider */
     let pCurrent = 0;
