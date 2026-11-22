@@ -75,8 +75,13 @@
     }
     .topnav.scrolled { border-bottom-color: var(--line); box-shadow: 0 2px 16px rgba(12,26,46,0.06); }
     .topnav-inner { height: 72px; display: flex; align-items: center; gap: 24px; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-    .brand img { height: 52px; width: auto; }
+    .brand { position: relative; display: flex; align-items: center; text-decoration: none; color: var(--ink); padding-left: 118px; min-height: 72px; }
+    .brand img {
+      position: absolute; left: 0; top: 2px; height: 104px; width: auto; z-index: 2;
+      filter: drop-shadow(0 6px 14px rgba(12,26,46,0.28));
+      transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.3s ease;
+    }
+    .brand:hover img { transform: translateY(-4px) scale(1.06); filter: drop-shadow(0 12px 24px rgba(15,95,184,0.45)); }
     .brand span { font-weight: 700; font-size: 1.05rem; line-height: 1.1; }
     .brand small { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
     .menu { margin-left: auto; display: flex; align-items: center; gap: 4px; }
@@ -267,6 +272,8 @@
       section { padding: 72px 0; }
       .hero { padding: 132px 0 72px; }
       .burger { display: flex; }
+      .brand { padding-left: 92px; }
+      .brand img { height: 80px; top: 4px; }
       .menu {
         position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch;
         background: var(--surface); border-bottom: 1px solid var(--line); padding: 0 24px;
