@@ -1,0 +1,17 @@
+{
+  "name": "Platform Manager",
+  "short_name": "Platform Manager",
+  "description": "Cloud command for Microsoft: one view of Microsoft 365, Power Platform, Power BI, Dynamics, SharePoint, Copilot and Azure AI Foundry.",
+  "start_url": "../",
+  "scope": "../",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f6cbd",
+  "icons": [
+    { "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "My overview", "url": "../#me", "icons": [{ "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }] },
+    { "name": "Platform showcase", "url": "showcase", "icons": [{ "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }] }
+  ]
+}

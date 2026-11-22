@@ -1,176 +1,186 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Platform Manager — Illy Robotic Instruments</title>
-  <link rel="icon" href="/assets/illy-robotic.png" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #04050d;
-      --surface: #0b0d14;
-      --border: rgba(255,168,85,0.14);
-      --orange: #ff8c42;
-      --orange-dim: rgba(255,140,66,0.18);
-      --text: #e8eaf6;
-      --muted: #7a8ab0;
-    }
-    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; }
-    body { display: flex; flex-direction: column; min-height: 100vh; }
-
-    /* ── top bar ── */
-    .topbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 56px; display: flex; align-items: center;
-      padding: 0 1.5rem;
-      background: rgba(4,5,13,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .topbar-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-    .topbar-brand img { width: 36px; height: 36px; border-radius: 8px; }
-    .topbar-brand span { font-size: 0.95rem; font-weight: 600; color: var(--orange); letter-spacing: 0.03em; }
-    .topbar-back {
-      margin-left: auto;
-      font-size: 0.85rem; color: var(--muted); text-decoration: none;
-      padding: 0.4rem 0.9rem;
-      border: 1px solid rgba(255,168,85,0.2);
-      border-radius: 8px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .topbar-back:hover { color: var(--orange); border-color: rgba(255,140,66,0.5); }
-
-    /* ── hero ── */
-    .hero {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 7rem 1.5rem 4rem;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 40% at 50% 40%, rgba(255,140,66,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--orange); background: var(--orange-dim);
-      border: 1px solid rgba(255,140,66,0.28);
-      border-radius: 100px; padding: 0.3rem 0.9rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; line-height: 1.1;
-      color: #fff; margin-bottom: 1rem;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, #ffa855 0%, #ff6b2b 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      max-width: 520px; color: var(--muted); font-size: 1.05rem; line-height: 1.65;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ── status badge ── */
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.82rem; font-weight: 500;
-      color: #60e085; background: rgba(60,200,100,0.1);
-      border: 1px solid rgba(60,200,100,0.25);
-      border-radius: 100px; padding: 0.4rem 1rem;
-      margin-bottom: 2.5rem;
-    }
-    .status-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #60e085;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.7); }
-    }
-
-    /* ── card grid ── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem; max-width: 680px; width: 100%;
-      margin-bottom: 2.5rem;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.25rem 1.5rem;
-      text-align: left; transition: border-color 0.2s;
-    }
-    .card:hover { border-color: rgba(255,140,66,0.4); }
-    .card-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
-    .card-value { font-size: 1.5rem; font-weight: 700; color: #fff; }
-    .card-value.orange { color: var(--orange); }
-
-    /* ── CTA button ── */
-    .cta {
-      display: inline-block;
-      background: var(--orange); color: #0b0d14;
-      font-size: 0.95rem; font-weight: 700;
-      padding: 0.85rem 2.2rem; border-radius: 10px;
-      text-decoration: none; letter-spacing: 0.02em;
-      box-shadow: 0 4px 24px rgba(255,140,66,0.35);
-      transition: filter 0.2s, transform 0.2s;
-    }
-    .cta:hover { filter: brightness(1.1); transform: translateY(-2px); }
-
-    /* ── footer ── */
-    footer {
-      padding: 1.5rem; text-align: center;
-      font-size: 0.78rem; color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-    footer a { color: var(--orange); text-decoration: none; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Manager | Illy Robotic Instruments</title>
+<meta name="description" content="Platform Manager connects your Microsoft data sources, puts governed AI agents in every user's hands, and gets smarter with every question.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<script src="js/favicon.js"></script>
+<link rel="stylesheet" href="css/showcase.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="topbar-brand" href="/">
-      <img src="/assets/illy-robotic.png" alt="Illy Robotic" />
-      <span>Platform Manager</span>
-    </a>
-    <a class="topbar-back" href="/">← Back to Site</a>
-  </header>
 
-  <main class="hero">
-    <div class="hero-eyebrow">Illy Robotic Instruments</div>
-    <h1>Platform<br><span>Manager</span></h1>
-    <p class="hero-sub">Central command for all Illy Robotic products. Manage your ecosystem, monitor performance, and configure your stack from one place.</p>
-    <div class="status-badge">
-      <span class="status-dot"></span>
-      Endpoint ready — awaiting app connection
-    </div>
-    <div class="cards">
-      <div class="card">
-        <div class="card-label">Products</div>
-        <div class="card-value orange">13</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Ecosystem</div>
-        <div class="card-value">IllySocial</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Status</div>
-        <div class="card-value" style="color:#60e085;font-size:1.1rem;">Online</div>
-      </div>
-    </div>
-    <a class="cta" href="/">Explore Portfolio →</a>
-  </main>
+<header class="bar" id="bar">
+  <a class="brand" id="brand" href="/PlatformManager/me" aria-label="Platform Manager: back to My overview in the app">
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="16s" repeatCount="indefinite"/>
+        <rect x="4" y="4" width="18" height="18" rx="2" fill="#0f6cbd"/>
+        <rect x="26" y="4" width="18" height="18" rx="2" fill="#2b88d8"/>
+        <rect x="4" y="26" width="18" height="18" rx="2" fill="#84c341"/>
+        <rect x="26" y="26" width="18" height="18" rx="2" fill="#9db7d2"/>
+      </g>
+    </svg>
+    <span class="word">Platform Manager<small>Cloud command for Microsoft</small></span>
+  </a>
+  <nav class="chev" aria-label="Chapters">
+    <a href="#core" data-i="0"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>The core</span></a>
+    <a href="#agents" data-i="1"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>AI agents</span></a>
+    <a href="#fabric" data-i="2"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Fabric</span></a>
+    <a href="#contracts" data-i="3"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Contracts</span></a>
+    <a href="#builders" data-i="4"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Builders</span></a>
+    <a href="#start" data-i="5"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Start</span></a>
+  </nav>
+  <a class="btn btn-get bar-get" href="/PlatformManager/Overview">Get started</a>
+</header>
 
-  <footer>
-    &copy; 2026 <a href="/">Illy Robotic Instruments</a> · Buffalo, NY
-  </footer>
+<!-- 01 · THE CORE -->
+<section class="slide" id="core" aria-labelledby="t1">
+  <img class="bg" src="img/showcase/hero-core.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">The core</div>
+      <h1 id="t1">One view of <em>every</em> Microsoft tenant</h1>
+      <p class="lede">Platform Manager connects the API sources behind Microsoft 365 and the Power Platform, sweeps them on a schedule, and reads deeply when you ask. Administrators get answers about usage, licences, workflows and spend, from data that is current.</p>
+      <div class="tags"><span class="tag">One tenant or many</span><span class="tag">24-hour sweeps, or tighter</span><span class="tag">Read-only by design</span></div>
+      <a class="btn btn-get" href="/PlatformManager/Overview">Get started</a>
+    </div>
+    <div class="panel">
+      <div class="card infra" data-diagram="core"></div>
+      <aside class="card">
+        <h3>Who it is for</h3>
+        <ul>
+          <li><b>Microsoft 365 and Power Platform administrators</b> who need the answer now.</li>
+          <li><b>Platform and network teams</b> watching capacity, adoption and risk.</li>
+          <li><b>Business content publishers</b>: BI creators, flow publishers and anyone who publishes to shared workspaces and environments.</li>
+          <li><b>IT, finance and business leaders</b> who gain the insight to make strategic adjustments to operations, spend and capabilities.</li>
+          <li><b>Managed-service teams</b> running several tenants from one setup, each kept separate.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · AGENTS -->
+<section class="slide" id="agents" aria-labelledby="t2">
+  <img class="bg" src="img/showcase/hero-agents.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">AI agents &amp; builders</div>
+      <h2 id="t2">Copilot, <em>that does the work</em></h2>
+      <p class="lede">Agents tuned to your environment and to each Microsoft product (SharePoint, Power Platform, Power BI, Dynamics, Copilot) act on a person's behalf instead of only advising. Every agent is managed in one place, in the Azure AI Foundry hub, so the organisation gets more capability and spends less on language models.</p>
+      <div class="tags"><span class="tag">Foundry hub</span><span class="tag">Role-based access</span><span class="tag">Policy &amp; governance</span></div>
+    </div>
+    <div class="panel">
+      <div class="card infra" data-diagram="agents"></div>
+      <aside class="card">
+        <p class="big">Smarter agents, one control point.</p>
+        <ul>
+          <li><b>Right model, right task.</b> Route work to the model that fits, and watch the spend by agent.</li>
+          <li><b>Governed by default.</b> RBAC and policy decide who can use which agent and what it may touch.</li>
+          <li><b>Learns your estate.</b> What the platform stores makes every later answer sharper.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · FABRIC -->
+<section class="slide" id="fabric" aria-labelledby="t3">
+  <img class="bg" src="img/showcase/hero-fabric.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Fabric &amp; Power BI</div>
+      <h2 id="t3">Your data, <em>wired</em> end to end</h2>
+      <p class="lede">See how Microsoft Fabric is laid out in your tenant, then build on it. The topology map shows what feeds what, and the Fabric builder helps plan new workspaces and pipelines, so the estate grows on purpose.</p>
+      <div class="tags"><span class="tag">Topology map</span><span class="tag">Fabric builder</span><span class="tag">Plan before you build</span></div>
+    </div>
+    <div class="panel">
+      <div class="card infra" data-diagram="fabric"></div>
+      <aside class="card">
+        <h3>What you get</h3>
+        <ul>
+          <li><b>A live map</b> of workspaces, capacities and the links between them.</li>
+          <li><b>A guided builder</b> that turns an intent into a reviewable plan.</li>
+          <li><b>Capacity and cost in view</b> beside the architecture, not in another tool.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · CONTRACTS -->
+<section class="slide" id="contracts" aria-labelledby="t4">
+  <img class="bg" src="img/showcase/hero-contracts.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Contracts &amp; renewals</div>
+      <h2 id="t4">Renew <em>on your terms</em></h2>
+      <p class="lede">Contract management built into the platform. See every renewal coming, compare what you pay with what people actually use, and walk into the negotiation with evidence.</p>
+      <div class="tags"><span class="tag">Renewal position</span><span class="tag">Contract analysis</span><span class="tag">Vendor leverage</span></div>
+    </div>
+    <div class="panel">
+      <div class="card infra" data-diagram="contracts"></div>
+      <aside class="card">
+        <h3>Built to negotiate</h3>
+        <ul>
+          <li><b>Renewals on one calendar</b>, with owners and lead times.</li>
+          <li><b>Spend against usage</b> shows where seats and licences go unused.</li>
+          <li><b>A contract agent</b> reads terms and flags what to push back on.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · BUILDERS -->
+<section class="slide" id="builders" aria-labelledby="t5">
+  <img class="bg" src="img/showcase/hero-builders.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Flows, sites &amp; apps</div>
+      <h2 id="t5">Say it. <em>Ship it.</em></h2>
+      <p class="lede">End users describe what they want and the agents build it: automations, SharePoint sites and the applications around them. A broken flow gets a repair agent that finds the fault and proposes the fix.</p>
+      <div class="tags"><span class="tag">Flow builder</span><span class="tag">Flow repair</span><span class="tag">SharePoint site builder</span></div>
+    </div>
+    <div class="panel">
+      <div class="card infra" data-diagram="builders"></div>
+      <aside class="card">
+        <h3>For every builder and publisher</h3>
+        <ul>
+          <li><b>Build</b> flows, Power BI reports and SharePoint sites from a plain-language brief.</li>
+          <li><b>Publish</b> to shared workspaces and environments with the same checks every time.</li>
+          <li><b>Repair</b> the flows you already own, with a preview before anything changes.</li>
+          <li><b>Stay inside policy.</b> The same governance that guards the agents guards what they build.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · START -->
+<section class="slide s6" id="start" aria-labelledby="t6">
+  <img class="bg" src="img/showcase/hero-start.jpg" alt="" aria-hidden="true">
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Start</div>
+      <h2 id="t6">It gets <em>smarter</em> every day</h2>
+      <p class="lede">Platform Manager keeps what it learns from every sweep and every question. Explore the working demo, which uses synthetic data only.</p>
+      <div class="panel panel-start">
+        <div class="card infra" data-diagram="start"></div>
+      </div>
+      <a class="btn" href="/PlatformManager/Overview">Open the live demo</a>
+    </div>
+  </div>
+</section>
+
+<script src="js/showcase.js"></script>
 </body>
 </html>

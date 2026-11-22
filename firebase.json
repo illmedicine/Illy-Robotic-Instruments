@@ -9,14 +9,34 @@
     "cleanUrls": false,
     "trailingSlash": true,
     "redirects": [
-      { "source": "/livepay", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 },
-      { "source": "/livepay/**", "destination": "https://illmedicine.github.io/LivePay/", "type": 302 }
+      {
+        "source": "/livepay",
+        "destination": "https://illmedicine.github.io/LivePay/",
+        "type": 302
+      },
+      {
+        "source": "/livepay/**",
+        "destination": "https://illmedicine.github.io/LivePay/",
+        "type": 302
+      }
     ],
     "rewrites": [
-      { "source": "/api/**", "function": "api" },
-      { "source": "/isocial/**", "destination": "/isocial/index.html" },
-      { "source": "/IR-AIcademy/**", "destination": "/IR-AIcademy/index.html" },
-      { "source": "/PlatformManager/**", "destination": "/PlatformManager/index.html" }
+      {
+        "source": "/api/**",
+        "function": "api"
+      },
+      {
+        "source": "/isocial/**",
+        "destination": "/isocial/index.html"
+      },
+      {
+        "source": "/IR-AIcademy/**",
+        "destination": "/IR-AIcademy/index.html"
+      },
+      {
+        "source": "/PlatformManager/**",
+        "destination": "/PlatformManager/app.html"
+      }
     ]
   },
   "functions": {
