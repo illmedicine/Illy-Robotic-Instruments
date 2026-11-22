@@ -2,6 +2,7 @@ import { h, icon } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
 import { finder } from "./person.js";
+import { currentRoute, go as navigate } from "../route.js";
 import { viewBlock, personUseHref } from "./productview.js";
 
 export const PRODUCT_TITLE = {
@@ -19,7 +20,7 @@ const HELP = {
 const RESTART = "The running server does not have the per-product lookup yet: restart it to turn it on.";
 
 export function openProduct(product, upn) {
-  location.hash = personUseHref(product, upn).slice(1);
+  navigate(personUseHref(product, upn).slice(1));
 }
 
 // The lookup that sits on a product's own People pages: it opens that product's view, not the cross-product overview.
@@ -53,7 +54,7 @@ function aiCompare(upn) {
 
 // #personuse/<product>/<upn>: one person inside one product.
 export async function page(ctx) {
-  const [, product, enc] = location.hash.split("/");
+  const [, product, enc] = currentRoute().split("/");
   const upn = decodeURIComponent(enc || "");
   const admin = !ctx?.me || ctx.me.role === "admin"; // everyone else sees only their own activity, so there is nobody to look up
   if (!PRODUCT_TITLE[product]) return h("div", { class: "banner error", text: "Unknown product." });

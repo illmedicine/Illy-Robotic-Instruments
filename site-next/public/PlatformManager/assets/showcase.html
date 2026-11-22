@@ -13,7 +13,7 @@
 <body>
 
 <header class="bar" id="bar">
-  <a class="brand" id="brand" href="/PlatformManager/me" aria-label="Platform Manager: back to My overview in the app">
+  <a class="brand" id="brand" href="#" data-id="me" data-slug="my-overview" aria-label="Platform Manager: back to My overview in the app">
     <svg class="mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
       <g>
         <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="16s" repeatCount="indefinite"/>
@@ -33,6 +33,7 @@
     <a href="#builders" data-i="4"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Builders</span></a>
     <a href="#start" data-i="5"><svg viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7.5 7l-6 5.5"/></svg><span>Start</span></a>
   </nav>
+  <a class="btn btn-get bar-get" href="#" data-id="overview" data-slug="overview">Get started</a>
 </header>
 
 <!-- 01 · THE CORE -->
@@ -45,6 +46,7 @@
       <h1 id="t1">One view of <em>every</em> Microsoft tenant</h1>
       <p class="lede">Platform Manager connects the API sources behind Microsoft 365 and the Power Platform, sweeps them on a schedule, and reads deeply when you ask. Administrators get answers about usage, licences, workflows and spend, from data that is current.</p>
       <div class="tags"><span class="tag">One tenant or many</span><span class="tag">24-hour sweeps, or tighter</span><span class="tag">Read-only by design</span></div>
+      <a class="btn btn-get" href="#" data-id="overview" data-slug="overview">Get started</a>
     </div>
     <div class="panel">
       <div class="card infra" data-diagram="core"></div>
@@ -175,7 +177,7 @@
       <div class="panel panel-start">
         <div class="card infra" data-diagram="start"></div>
       </div>
-      <a class="btn" href="/PlatformManager/Overview">Open the live demo</a>
+      <a class="btn" href="#" data-id="overview" data-slug="overview">Open the live demo</a>
     </div>
   </div>
 </section>

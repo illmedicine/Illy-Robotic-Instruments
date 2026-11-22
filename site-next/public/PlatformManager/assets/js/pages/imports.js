@@ -2,6 +2,7 @@ import { h, icon, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { dataTable, openDrawer } from "../ui.js";
 import { pageHead } from "./common.js";
+import { currentRoute, go as navigate } from "../route.js";
 import { insightsPanel } from "./insights.js";
 
 const VERDICT = {
@@ -57,7 +58,7 @@ export async function imports(ctx) {
         ["Columns", r.columns.join(", ")],
       ], [
         r.profile === "renewal-decisions"
-          ? h("button", { class: "btn primary", type: "button", onclick: () => { location.hash = `triage/${r.dsId}/${encodeURIComponent(r.name)}`; } }, icon("shield"), "Check decisions")
+          ? h("button", { class: "btn primary", type: "button", onclick: () => navigate(`triage/${r.dsId}/${encodeURIComponent(r.name)}`) }, icon("shield"), "Check decisions")
           : null,
         r.profile === "signin-log"
           ? h("p", { class: "muted", text: "Entra sign-in log. Successful sign-ins to the Dataverse resource, interactive or not, are used as Dynamics usage evidence when checking decisions." })
@@ -180,7 +181,7 @@ export async function triage(ctx) {
       empty("No decision data imported yet.",
         "Import an export that has a UPN column and a decision column, then come back to check it against live data."));
   }
-  const parts = location.hash.split("/");
+  const parts = currentRoute().split("/");
   const wanted = parts[1] ? { id: parts[1], sheet: decodeURIComponent(parts[2] || "") } : null;
   let pick = (wanted && checkable.find((c) => c.id === wanted.id && (!wanted.sheet || c.sheet === wanted.sheet))) || checkable[0];
   // A link from an insight tile carries the insight id and the no-use threshold.
@@ -209,8 +210,8 @@ export async function triage(ctx) {
       h("span", {}, h("b", { text: `${r.insight.title}: ` }),
         `${fmt.n(r.checked)} rows, no-use threshold ${r.insight.idleDays} days. `,
         hasLive ? "" : "No live data has been synced, so the live verdict is unavailable; the workbook's own usage figure is shown. "),
-      h("button", { class: "btn sm", type: "button", onclick: () => { location.hash = `triage/${pick.id}/${encodeURIComponent(pick.sheet)}`; } }, "Show all decisions"),
-      h("button", { class: "btn sm", type: "button", onclick: () => { location.hash = "imports"; } }, "Back to insights")) : null;
+      h("button", { class: "btn sm", type: "button", onclick: () => navigate(`triage/${pick.id}/${encodeURIComponent(pick.sheet)}`) }, "Show all decisions"),
+      h("button", { class: "btn sm", type: "button", onclick: () => navigate("imports") }, "Back to insights")) : null;
     const sources = r.usageSources || [];
     const sourceBar = h("div", { class: "banner info" }, icon("shield"), h("span", {}, sources.length
       ? sources.map((u) => `${u.label} usage evidence: ${fmt.n(u.users)} people, ${u.from} to ${u.to} (${u.windowDays} days). Source: ${u.source}.`).join(" ")

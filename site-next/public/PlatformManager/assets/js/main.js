@@ -1,5 +1,6 @@
 import { h, icon, fmt } from "./dom.js";
 import { api } from "./api.js";
+import { ROOT, HASH_ROUTES, urlFor, currentRoute, routeFromHref, go as navigate, onRoute, replaceRoute } from "./route.js";
 import { initSound } from "./sound.js";
 import * as overview from "./pages/overview.js";
 import * as inv from "./pages/inventory.js";
@@ -56,7 +57,7 @@ const PAGES = [
   { hidden: true, id: "personuse", label: "Person activity", icon: "users", render: personuse.page },
   { hidden: true, id: "privacy", label: "Privacy & security", icon: "shield", render: privacy.render },
   { product: "Settings", id: "support", label: "Updates & support", icon: "shield", render: support.render },
-  { id: "showcase", label: "Platform showcase", icon: "app", external: "/PlatformManager/assets/showcase.html" },
+  { id: "showcase", label: "Platform showcase", icon: "app", external: ROOT + "assets/showcase" },
 
   { product: "Microsoft 365", section: "Monitor", id: "m365activity", label: "App activity", icon: "chart", render: m365.render },
   { section: "People", id: "m365people", label: "Usage", icon: "users", render: peoplePage("m365", "Microsoft 365 usage by person", "Who has used Teams, Exchange, SharePoint, OneDrive, Copilot and the other Microsoft 365 apps, and when. Licensed people with no activity show as No activity.", "m365-usage") },
@@ -134,7 +135,7 @@ const main = document.getElementById("main");
 const nav = document.getElementById("nav");
 const ctx = {
   status: null,
-  go: (id) => { location.hash = id; },
+  go: (route) => navigate(route),
   // Why the manual sync and deep-read buttons are disabled, or "" when they work.
   manualOff() {
     const s = this.status;
@@ -248,7 +249,7 @@ document.getElementById("brand")?.addEventListener("click", (e) => {
   e.preventDefault();
   openGroups = [];
   store.set("ppm-nav-products", openGroups);
-  if (location.hash === "#me") show(); else location.hash = "me";
+  navigate("me");
 });
 
 function applyPin() {
@@ -273,7 +274,7 @@ function closeFlyout() {
 
 function buildNav(findings = 0) {
   const focusKey = document.activeElement?.dataset?.navKey;
-  const link = (p) => h("a", p.external ? { href: p.external, target: "_blank", rel: "noopener", onclick: closeFlyout } : { href: "#" + p.id, "aria-current": p.id === current ? "page" : null, onclick: closeFlyout }, icon(p.icon), p.label,
+  const link = (p) => h("a", p.external ? { href: p.external, target: "_blank", rel: "noopener", onclick: closeFlyout } : { href: urlFor(p.id), "aria-current": p.id === current ? "page" : null, onclick: closeFlyout }, icon(p.icon), p.label,
     p.badge && findings ? h("span", { class: "badge", text: findings }) : null);
   const pinLabel = pinned ? "Unpin navigation (use the full width)" : "Pin navigation open";
   nav.replaceChildren(
@@ -294,12 +295,12 @@ function buildNav(findings = 0) {
 }
 
 async function show() {
-  const id = (location.hash.slice(1) || LANDING).split("/")[0];
+  const id = (currentRoute() || LANDING).split("/")[0];
   const found = PAGES.find((p) => p.id === id && !p.external);
   const refused = found && !mayOpen(found);
   const page = found && !refused ? found : PAGES.find((p) => p.id === LANDING);
   // A person's product view sits under that product's own Usage page in the navigation; without that page it sits under the profile.
-  current = page.id === "personuse" ? (isAdmin ? PRODUCT_USAGE_PAGE[location.hash.split("/")[1]] : "me") || page.id : page.id;
+  current = page.id === "personuse" ? (isAdmin ? PRODUCT_USAGE_PAGE[currentRoute().split("/")[1]] : "me") || page.id : page.id;
   const g = groupOf(current);
   if (g && openGroups && !openGroups.includes(g)) {
     openGroups = [...openGroups, g];
@@ -324,12 +325,12 @@ async function show() {
 // The last thing on every screen: where people read how sign-in works and what is recorded.
 function siteFoot() {
   // Shown at the foot of every page for every role: a single centred link, not a menu item.
-  return h("footer", { class: "sitefoot" }, h("a", { href: "#privacy", text: "Privacy & security" }));
+  return h("footer", { class: "sitefoot" }, h("a", { href: urlFor("privacy"), text: "Privacy & security" }));
 }
 
 function demoBanner() {
   return h("div", { class: "banner demo" }, icon("alert"), h("span", {}, h("b", { text: "DEMO DATA. " }),
-    "Not connected to a tenant. Copy config/powerplatform.example.json to config/powerplatform.json and restart to go live. "), h("a", { href: "#connect", text: "Connect your tenant" }));
+    "Not connected to a tenant. Copy config/powerplatform.example.json to config/powerplatform.json and restart to go live. "), h("a", { href: urlFor("connect"), text: "Connect your tenant" }));
 }
 
 const livechip = document.getElementById("livechip"), livetext = document.getElementById("livetext");
@@ -388,7 +389,18 @@ themebtn.addEventListener("click", () => {
 paintTheme();
 initSound(document.getElementById("soundbtn"), icon);
 
-window.addEventListener("hashchange", show);
+onRoute(show);
+// A click on a link to one of the app's pages opens it in the app (no page load, Back works); other links behave as usual.
+document.addEventListener("click", (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest?.("a[href]");
+  if (!a || a.target) return;
+  const route = routeFromHref(a.getAttribute("href"));
+  if (!route || !PAGES.some((p) => p.id === route.split("/")[0] && !p.external)) return;
+  e.preventDefault();
+  closeFlyout();
+  navigate(route);
+});
 menubtn.addEventListener("click", () => { flyoutOpen = !flyoutOpen; applyPin(); if (flyoutOpen) nav.querySelector(".grp-head, a")?.focus(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !pinned && flyoutOpen) { closeFlyout(); menubtn.focus(); } });
 document.addEventListener("click", (e) => {
@@ -412,8 +424,14 @@ if (me.upn) {
 try {
   const back = sessionStorage.getItem("ppm-return");
   sessionStorage.removeItem("ppm-return");
-  if (back && !location.hash) location.hash = back;
+  if (back && !currentRoute()) navigate(back, { replace: true, quiet: true });
 } catch { /* storage blocked */ }
+// An old "#page" address opens that page at its clean address; a clean address is written in its one canonical form.
+const legacy = location.hash.length > 1 ? decodeURIComponent(location.hash.slice(1)) : "";
+if (legacy && !HASH_ROUTES) navigate(legacy, { replace: true, quiet: true });
+else if (!HASH_ROUTES) replaceRoute(currentRoute());
+// The logo in the header leads to My overview, from any address.
+document.getElementById("brand")?.setAttribute("href", urlFor("me"));
 await show();
 if (isAdmin) (async function poll() {
   await new Promise((r) => setTimeout(r, ctx.status?.syncing ? 3000 : 15000));

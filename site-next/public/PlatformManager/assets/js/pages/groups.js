@@ -1,6 +1,7 @@
 import { h, icon, fmt, pill, download, toCsv, copyText } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 const MEMBER_COLS = [{ key: "name", label: "Name" }, { key: "address", label: "Address" }, { key: "dept", label: "Department" }, { key: "title", label: "Job title" },
   { key: "type", label: "Type" }, { key: "state", label: "State", csv: (m) => [m.nested ? "Nested" : "", m.guest ? "Guest" : "", m.enabled === false ? "Disabled" : ""].filter(Boolean).join(", ") }];
@@ -48,7 +49,7 @@ export async function render() {
   root.append(h("div", { class: "card" }, h("div", { class: "actions" }, q, go), results), view);
 
   async function open(id, nested = false) {
-    history.replaceState(null, "", `#groups/${encodeURIComponent(id)}`);
+    replaceRoute(`groups/${encodeURIComponent(id)}`);
     view.replaceChildren(h("div", { class: "loading", text: "Reading the group from Microsoft..." }));
     try { view.replaceChildren(detail(await api.groupDetail(id, nested), (n) => open(id, n))); } catch (e) { view.replaceChildren(h("div", { class: "banner error", text: e.message })); }
   }
@@ -75,7 +76,7 @@ export async function render() {
   go.addEventListener("click", search);
   q.addEventListener("keydown", (ev) => { if (ev.key === "Enter") search(); });
 
-  const id = decodeURIComponent(location.hash.split("/")[1] || "");
+  const id = decodeURIComponent(currentRoute().split("/")[1] || "");
   if (id) open(id);
   return root;
 }

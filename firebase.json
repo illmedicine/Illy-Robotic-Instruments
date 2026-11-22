@@ -18,6 +18,36 @@
         "source": "/livepay/**",
         "destination": "https://illmedicine.github.io/LivePay/",
         "type": 302
+      },
+      {
+        "source": "/PlatformManager/index.html",
+        "destination": "/PlatformManager/",
+        "type": 301
+      },
+      {
+        "source": "/PlatformManager/app.html",
+        "destination": "/PlatformManager/overview",
+        "type": 301
+      },
+      {
+        "source": "/PlatformManager/app",
+        "destination": "/PlatformManager/overview",
+        "type": 301
+      },
+      {
+        "source": "/PlatformManager/app/**",
+        "destination": "/PlatformManager/overview",
+        "type": 301
+      },
+      {
+        "source": "/PlatformManager/assets/showcase",
+        "destination": "/PlatformManager/",
+        "type": 301
+      },
+      {
+        "source": "/PlatformManager/assets/showcase.html",
+        "destination": "/PlatformManager/",
+        "type": 301
       }
     ],
     "rewrites": [
@@ -36,6 +66,17 @@
       {
         "source": "/PlatformManager/**",
         "destination": "/PlatformManager/app.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/PlatformManager/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ]
   },

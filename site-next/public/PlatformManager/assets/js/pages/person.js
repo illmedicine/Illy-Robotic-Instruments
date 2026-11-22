@@ -1,6 +1,7 @@
 import { h, icon, fmt, pill } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
+import { currentRoute, go as navigate } from "../route.js";
 import { appName, skuName } from "./names.js";
 import { caret, summaryBlock } from "./productview.js";
 
@@ -156,7 +157,7 @@ export function personBody(p, { renewal = true } = {}) {
 
 // The person page: licences, groups sorted by how widely they are held, people with the same access, and the last trace per application.
 export async function page() {
-  const upn = decodeURIComponent(location.hash.split("/")[1] || "");
+  const upn = decodeURIComponent(currentRoute().split("/")[1] || "");
   const root = h("div", { class: "person-page" }, personSearch());
   if (!upn) return root;
   let p;
@@ -172,7 +173,7 @@ export async function page() {
 }
 
 export function openPerson(upn) {
-  location.hash = personHref(upn).slice(1);
+  navigate(personHref(upn).slice(1));
 }
 
 // A search box: type a name or address, pick a person, and onPick opens the view that fits where the box sits.

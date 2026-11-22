@@ -1,6 +1,7 @@
 import { h, icon, pill } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 // Interactive Power BI to Fabric target topology: pick a run and watch it move through the estate step by step.
 // The diagram and runs come from /api/fabric/topology (made by the topology generator from a read-only admin API scan).
@@ -190,7 +191,7 @@ export async function render() {
       panes[x.id].hidden = x.id !== id;
     });
     const want = id === "topology" ? (run ? `fabrictopology/${run.id}` : "fabrictopology") : `fabrictopology/${id}`;
-    if (!init && location.hash.slice(1).split("/").slice(0, 2).join("/") !== want) history.replaceState(null, "", "#" + want);
+    if (!init && currentRoute().split("/").slice(0, 2).join("/") !== want) replaceRoute(want);
   }
   DOCS.forEach((x) => switcher.append(h("button", { type: "button", role: "tab", "aria-pressed": "false", onclick: () => show(x.id) },
     h("b", { text: x.label }), h("small", { text: x.sub }))));
@@ -213,7 +214,7 @@ export async function render() {
         detail)),
     panes.separation, panes.setup);
 
-  const [, rid, st] = location.hash.slice(1).split("/");
+  const [, rid, st] = currentRoute().split("/");
   const first = DOCS.some((x) => x.id === rid) ? rid : "topology";
   show(first, true);
   if (rid && first === "topology") setTimeout(() => choose(decodeURIComponent(rid), Number(st) || 0), 0);

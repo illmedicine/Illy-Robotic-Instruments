@@ -2,6 +2,7 @@ import { h, icon, pill, fmt } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
 import { patch, meter } from "./foundrykit.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 // Azure AI Foundry > Agent administration: choose each agent's model, tune its parameters, give it instructions, teach it with files and live data, and see what it has learned.
 
@@ -11,7 +12,7 @@ const kb = (n) => (n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1,
 
 export async function render() {
   const ov = await api.foundry.overview();
-  const wanted = location.hash.slice(1).split("/")[1];
+  const wanted = currentRoute().split("/")[1];
   let id = ov.agents.some((a) => a.id === wanted) ? wanted : ov.agents[0].id, tab = "model", d = null;
   const list = h("div", { class: "fa-list" }), main = h("div", { class: "fa-main" });
   const root = h("div", { class: "fa" }, pageHead("Agent administration", "Choose the model for each AI Builder and Ask agent, tune it, give it instructions, and teach it with files and live data. Changes take effect on the next request and are recorded in the audit trail."),
@@ -30,7 +31,7 @@ export async function render() {
     try { d = await api.foundry.agent(id); } catch (e) { main.replaceChildren(h("div", { class: "banner error", text: e.message })); return; }
     const row = ov.agents.find((a) => a.id === id);
     if (row) Object.assign(row, { learning: d.learning, enabled: d.enabled, model: d.model, usage: d.usage, knowledge: d.knowledge });
-    history.replaceState(null, "", "#foundryagents/" + id);
+    replaceRoute("foundryagents/" + id);
     paintList();
     paint();
   }

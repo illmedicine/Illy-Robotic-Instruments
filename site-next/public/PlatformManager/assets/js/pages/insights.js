@@ -1,5 +1,6 @@
 import { h, icon, fmt } from "../dom.js";
 import { api } from "../api.js";
+import { go as navigate } from "../route.js";
 
 const usd = (v) => `$${fmt.n(Math.round(v || 0))}`;
 const ARROW = { up: "\u25B2", down: "\u25BC", flat: "\u25AC" };
@@ -55,7 +56,7 @@ export async function insightsPanel(datasets) {
   let days = 365;
   const body = h("div", {});
 
-  const open = (ins) => { location.hash = `triage/${pick.id}/${encodeURIComponent(pick.sheet)}/${ins.id}/${days}`; };
+  const open = (ins) => navigate(`triage/${pick.id}/${encodeURIComponent(pick.sheet)}/${ins.id}/${days}`);
 
   async function load() {
     body.replaceChildren(h("div", { class: "loading", text: "Reading decisions..." }));

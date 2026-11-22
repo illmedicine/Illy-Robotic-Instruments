@@ -1,4 +1,9 @@
 (function(){
+  // Links into the app: clean addresses (/PlatformManager/overview on the website, /overview on a local server). GitHub Pages cannot serve those, so there they keep the "#" form.
+  var gh=/(^|\.)github\.io$/i.test(location.hostname), root=location.pathname.indexOf("/PlatformManager/")===0?"/PlatformManager/":"/";
+  [].forEach.call(document.querySelectorAll("a[data-slug]"),function(a){a.setAttribute("href",gh?root+"#"+a.getAttribute("data-id"):root+a.getAttribute("data-slug"))});
+  // The chapter links scroll to their chapter without putting a "#" in the address.
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".chev a");if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth"})}});
   // The logo leads back into the app: My overview, with every product menu collapsed for a fresh start.
   var brand=document.getElementById("brand");
   if(brand)brand.addEventListener("click",function(){try{localStorage.setItem("ppm-nav-products","[]")}catch(err){}});

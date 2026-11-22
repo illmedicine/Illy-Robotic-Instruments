@@ -1,3 +1,5 @@
+import { currentRoute } from "./route.js";
+
 const cache = new Map();
 
 // The session ended (or never began): remember where the person was, go through the company sign-in, and come back to the same page.
@@ -5,7 +7,7 @@ let leaving = false;
 function toSignIn() {
   if (!leaving) {
     leaving = true;
-    try { sessionStorage.setItem("ppm-return", location.hash); } catch { /* storage blocked */ }
+    try { sessionStorage.setItem("ppm-return", currentRoute()); } catch { /* storage blocked */ }
     location.assign("/auth/login");
   }
   return new Promise(() => {}); // the page is leaving: nothing downstream should run or show an error

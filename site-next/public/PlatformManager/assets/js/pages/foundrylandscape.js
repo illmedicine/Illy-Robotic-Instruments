@@ -5,6 +5,7 @@ import { usd, vendorMark } from "./foundrykit.js";
 import { story } from "./foundrystory.js";
 import { pathCards } from "./foundryspend.js";
 import { kpi } from "./foundry.js";
+import { currentRoute, replaceRoute } from "../route.js";
 
 // Azure AI Foundry > AI topology. Two animated infographics under one switch:
 //   Today:  the scattered landscape of Copilot on the web, the builder Copilots inside each app, the pilots and the E7 proposal. Platform Manager is not in it.
@@ -258,13 +259,13 @@ export async function render() {
     tabs.forEach((t, i) => { sw.children[i].setAttribute("aria-pressed", String(t.id === id)); sw.children[i].setAttribute("aria-selected", String(t.id === id)); panes[t.id].hidden = t.id !== id; });
     Object.entries(stories).forEach(([k, s]) => { if (k !== id) s.stop(); });
     setTimeout(() => stories[id].start(), 80); // a story only plays while it is on screen, and the page may not be attached yet
-    if (!init) history.replaceState(null, "", "#foundrytopology/" + id);
+    if (!init) replaceRoute("foundrytopology/" + id);
   }
   tabs.forEach((t) => sw.append(h("button", { type: "button", role: "tab", "aria-pressed": "false", onclick: () => show(t.id) }, h("b", { text: t.label }), h("small", { text: t.sub }))));
   const view = h("div", { class: "topo ftopo" },
     pageHead("AI topology", "How AI is used here today, and the governed Foundry strategy that replaces it, including department and AD-group access paths, sensitivity labels, Purview and Fabric governance."),
     land.ai.demo ? h("div", { class: "banner demo" }, icon("alert"), h("b", { text: "DEMO. " }), "Usage figures are sample data.") : null,
     sw, panes.today, panes.target);
-  show((location.hash.slice(1).split("/")[1] || "today") === "target" ? "target" : "today", true);
+  show((currentRoute().split("/")[1] || "today") === "target" ? "target" : "today", true);
   return view;
 }
