@@ -198,15 +198,22 @@
     /* ── Practice areas ── */
     .practice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .practice {
-      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+      position: relative; isolation: isolate; overflow: hidden; min-height: 340px;
+      background: #f4ecd9; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
       border-top: 4px solid var(--blue); transition: border-color 0.2s, transform 0.2s;
     }
+    .practice::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(250,246,236,0.6) 0%, rgba(250,246,236,0.42) 50%, rgba(250,246,236,0.7) 100%);
+    }
+    .practice-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
     .practice:nth-child(2) { border-top-color: #2b88d8; }
     .practice:nth-child(3) { border-top-color: #84c341; }
     .practice:nth-child(4) { border-top-color: var(--orange); }
     .practice:hover { transform: translateY(-2px); }
-    .practice-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.7rem; }
-    .practice p { color: var(--muted); font-size: 0.97rem; }
+    .practice-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: #3d4f6b; margin-bottom: 0.7rem; }
+    .practice h3 { color: #0c1a2e; }
+    .practice p { color: #1f2b40; font-size: 0.97rem; font-weight: 500; }
 
     /* ── Services ── */
     .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -360,21 +367,25 @@
 
       <div class="practice-grid">
         <div class="practice">
+          <img class="practice-art" src="assets/practice/01-control-plane.svg" alt="" aria-hidden="true">
           <div class="practice-num">01</div>
           <h3>Microsoft 365 administration</h3>
           <p>Tenant health, licences, sign-ins and audit activity in one read-only control plane, with any change drafted for review.</p>
         </div>
         <div class="practice">
+          <img class="practice-art" src="assets/practice/02-contracts.svg" alt="" aria-hidden="true">
           <div class="practice-num">02</div>
           <h3>Vendor &amp; licence contract management</h3>
           <p>Contracts, purchased seats and renewal dates matched to real usage, so every negotiation starts with evidence.</p>
         </div>
         <div class="practice">
+          <img class="practice-art" src="assets/practice/03-ai-governance.svg" alt="" aria-hidden="true">
           <div class="practice-num">03</div>
           <h3>AI end-to-end governance</h3>
           <p>Azure AI Foundry agents, model routing, spend and policy, governed from design through to production.</p>
         </div>
         <div class="practice">
+          <img class="practice-art" src="assets/practice/04-deployment.svg" alt="" aria-hidden="true">
           <div class="practice-num">04</div>
           <h3>Deployment management &amp; administration</h3>
           <p>Repeatable rollouts, runbooks and change control for Microsoft platforms, administered with least-privilege access.</p>
