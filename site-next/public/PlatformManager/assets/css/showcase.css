@@ -110,30 +110,5 @@ h2 em,h1 em{font-style:normal;color:var(--blue)}
 .s6 .scrim{background:rgba(246,248,251,.9)}
 .s2 .bg{object-position:50% 40%}
 .panel-start{margin-top:24px}
-/* Store stamp: a gold seal with a red ribbon, linking to the Microsoft Store listing */
 .store-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:22px}
-.store-stamp{position:relative;width:184px;height:184px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#4a2f06;flex:0 0 auto;background:radial-gradient(circle at 32% 28%,#fff6c2 0 8%,#e9c05c 34%,#b98a2e 68%,#7a5216 100%);box-shadow:inset 0 0 0 5px #f7e08f,inset 0 0 0 9px #8a5e1f,0 10px 26px rgba(0,0,0,.35);transition:transform .2s ease}
-.store-stamp::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:3px dashed #d8a949;pointer-events:none}
-.store-stamp:hover,.store-stamp:focus-visible{transform:scale(1.04) rotate(-3deg)}
-.store-stamp:focus-visible{outline:3px solid #fff;outline-offset:8px}
-.stamp-top{position:absolute;top:30px;left:0;right:0;text-align:center;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;line-height:1}
-.stamp-ribbon{position:absolute;left:-24px;right:-24px;top:50%;transform:translateY(-50%) rotate(-7deg);background:linear-gradient(#e8362b,#a8160e);color:#fff;font-size:12px;font-weight:800;letter-spacing:.04em;line-height:1.2;text-transform:uppercase;text-align:center;padding:7px 6px;border-top:2px solid #ffd3cd;border-bottom:2px solid #6b0c07;box-shadow:0 3px 8px rgba(0,0,0,.4)}
-.stamp-name{position:absolute;bottom:26px;left:0;right:0;padding:0 18px;font-size:11px;font-weight:700;line-height:1.25;text-align:center}
 .partner-note{margin:14px 0 0;font-size:15px;color:var(--ink)}
-/* Header seal: a gold ring around the rotating logo (the logo stays visible through the ring), a red ribbon across its foot */
-.brand-wrap{position:relative;display:flex;align-items:center}
-.brand-wrap .word{margin-left:12px}
-.store-seal{position:absolute;left:-12px;top:-12px;width:64px;height:64px;z-index:3;display:block;text-decoration:none;transition:transform .2s ease}
-.seal-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c2 0,#e9c05c 38%,#b98a2e 72%,#7a5216 100%);-webkit-mask:radial-gradient(circle,transparent 0 21px,#000 22px);mask:radial-gradient(circle,transparent 0 21px,#000 22px);filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
-.seal-ribbon{position:absolute;left:-4px;right:-4px;top:50%;transform:translateY(-50%) rotate(-12deg);background:linear-gradient(#e8362b,#a8160e);color:#fff;font-size:8px;font-weight:800;line-height:1;letter-spacing:.06em;text-transform:uppercase;text-align:center;white-space:nowrap;padding:4px 0;border-top:1px solid #ffd3cd;border-bottom:1px solid #6b0c07;box-shadow:0 2px 5px rgba(0,0,0,.4)}
-.store-seal:hover,.store-seal:focus-visible{transform:scale(1.1)}
-.store-seal:focus-visible{outline:2px solid #0f6cbd;outline-offset:3px;border-radius:50%}
-/* Hero stamp, livelier: a shine that sweeps across the gold and a pulsing glow */
-.store-stamp{width:200px;height:200px;margin:0 30px;animation:stampGlow 2.8s ease-in-out infinite}
-.store-stamp::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);background-size:250% 100%;animation:stampShine 3.2s linear infinite;pointer-events:none;mix-blend-mode:overlay}
-.stamp-top{top:34px;font-size:13px}
-.stamp-ribbon{left:-30px;right:-30px;font-size:15px;padding:9px 8px;letter-spacing:.03em}
-.stamp-name{bottom:28px;font-size:12px}
-@keyframes stampShine{from{background-position:150% 0}to{background-position:-150% 0}}
-@keyframes stampGlow{0%,100%{box-shadow:inset 0 0 0 5px #f7e08f,inset 0 0 0 9px #8a5e1f,0 10px 26px rgba(0,0,0,.35),0 0 0 0 rgba(233,192,92,0)}50%{box-shadow:inset 0 0 0 5px #f7e08f,inset 0 0 0 9px #8a5e1f,0 10px 26px rgba(0,0,0,.35),0 0 36px 8px rgba(233,192,92,.6)}}
-@media (prefers-reduced-motion: reduce){.store-stamp,.store-stamp::after{animation:none}}
