@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="kXiwt4wwQhrGmiq9HxTOVBp56QrdiI4zvsWB1Xr0Boc" />
-  <meta name="description" content="Illy Robotic Instruments designs, develops and publishes award worthy Microsoft solutions for Microsoft 365 administration, vendor and licence contract management, and AI governance. Platform Manager is now featured on the Microsoft Store.">
+  <meta name="description" content="Illy Robotic Instruments designs, develops and publishes award worthy Microsoft solutions for Microsoft 365 administration, vendor and licence contract management, and AI governance. Platform Manager SE Pro is now featured on the Microsoft App Store, and Illy Robotic Instruments is an official Microsoft partner.">
   <title>Illy Robotic Instruments — award worthy Microsoft Solutions</title>
   <link rel="icon" type="image/png" href="assets/illy-shield.png" />
   <link rel="shortcut icon" type="image/png" href="assets/illy-shield.png" />
@@ -136,6 +136,10 @@
     .hero-badge img { width: 150px; height: 150px; }
     .hero-badge-title { font-weight: 700; font-size: 1.15rem; margin-top: 4px; }
     .hero-badge-sub { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
+    .btn-store { background: var(--ink); color: #fff; }
+    .btn-store:hover { background: #1c2b44; transform: translateY(-1px); }
+    .partner-row { display: flex; align-items: center; margin-top: 1.75rem; }
+    .partner-stamp { width: 150px; height: 150px; flex: 0 0 auto; transform: rotate(-6deg); filter: drop-shadow(0 10px 18px rgba(12,26,46,0.28)); }
     .stats {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
       margin-top: 64px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
@@ -379,12 +383,45 @@
           <div class="btn-row">
             <a class="btn btn-primary" href="/PlatformManager/">Explore Platform Manager</a>
             <a class="btn btn-ghost" href="/EchoVue/">Explore Echo Vue</a>
+            <a class="btn btn-store" href="https://apps.microsoft.com/search?query=Illy+Robotic+Instruments" target="_blank" rel="noopener">Get Platform Manager SE Pro on the Microsoft Store</a>
+          </div>
+          <div class="partner-row">
+            <svg class="partner-stamp" viewBox="-6 -6 232 232" role="img" aria-label="Illy Robotic Instruments is a certified Microsoft partner" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="pm-gold" cx="38%" cy="32%" r="75%">
+                  <stop offset="0%" stop-color="#fff4b8"/>
+                  <stop offset="40%" stop-color="#e6bf55"/>
+                  <stop offset="78%" stop-color="#b98a2b"/>
+                  <stop offset="100%" stop-color="#7a5714"/>
+                </radialGradient>
+                <linearGradient id="pm-red" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e5323b"/>
+                  <stop offset="100%" stop-color="#9c0d15"/>
+                </linearGradient>
+                <path id="pm-arc-top" d="M 26 110 A 84 84 0 0 1 194 110"/>
+                <path id="pm-arc-bot" d="M 40 110 A 70 70 0 0 0 180 110"/>
+              </defs>
+              <circle cx="110" cy="110" r="104" fill="url(#pm-gold)" stroke="#6b4c10" stroke-width="3"/>
+              <circle cx="110" cy="110" r="95" fill="none" stroke="#fff1b0" stroke-width="2" opacity="0.7"/>
+              <circle cx="110" cy="110" r="56" fill="url(#pm-gold)" stroke="#6b4c10" stroke-width="2"/>
+              <text font-family="Georgia, 'Times New Roman', serif" font-size="12.5" font-weight="700" letter-spacing="1" fill="#3d2a06">
+                <textPath href="#pm-arc-top" startOffset="50%" text-anchor="middle">ILLY ROBOTIC INSTRUMENTS</textPath>
+              </text>
+              <text font-family="Georgia, 'Times New Roman', serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#3d2a06">
+                <textPath href="#pm-arc-bot" startOffset="50%" text-anchor="middle">MICROSOFT PARTNER</textPath>
+              </text>
+              <path d="M110 68 L112.9 75.95 L121.4 76.3 L114.75 81.55 L117.06 89.7 L110 85 L102.94 89.7 L105.25 81.55 L98.6 76.3 L107.06 75.95 Z" fill="#3d2a06"/>
+              <path d="M -2 104 L 18 104 L 18 132 L -2 132 L 8 118 Z" fill="#7d0a11"/>
+              <path d="M 222 104 L 202 104 L 202 132 L 222 132 L 212 118 Z" fill="#7d0a11"/>
+              <rect x="12" y="99" width="196" height="28" fill="url(#pm-red)" stroke="#6a0810" stroke-width="1.5"/>
+              <text x="110" y="118" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="700" letter-spacing="2.5" fill="#ffffff">CERTIFIED</text>
+            </svg>
           </div>
         </div>
-        <a class="hero-badge" href="/PlatformManager/" aria-label="Platform Manager, now featured on the Microsoft Store">
+        <a class="hero-badge" href="/PlatformManager/" aria-label="Platform Manager SE Pro, now featured on the Microsoft App Store">
           <img src="PlatformManager/assets/img/favicon.svg" alt="" width="150" height="150">
           <span class="hero-badge-title">Platform Manager</span>
-          <span class="hero-badge-sub">Now featured on the Microsoft Store</span>
+          <span class="hero-badge-sub">SE Pro · Featured on the Microsoft App Store</span>
         </a>
       </div>
 
@@ -398,8 +435,8 @@
           <div class="stat-l">FTEs supported by a live Platform Manager deployment at an undisclosed US enterprise</div>
         </div>
         <div class="stat">
-          <div class="stat-n stat-n-sm">Microsoft Store</div>
-          <div class="stat-l">Platform Manager is now featured in the Microsoft Store listing</div>
+          <div class="stat-n stat-n-sm">Microsoft Partner</div>
+          <div class="stat-l">Illy Robotic Instruments is an official Microsoft partner, and Platform Manager SE Pro is featured on the Microsoft App Store</div>
         </div>
         <div class="stat">
           <div class="stat-n">6</div>
@@ -449,7 +486,7 @@
   <section id="platform-manager" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Platform Manager · Featured on the Microsoft Store</span>
+        <span class="eyebrow">Platform Manager SE Pro · Featured on the Microsoft App Store</span>
         <h2>One control plane for your Microsoft estate.</h2>
         <p class="lead">Platform Manager connects the APIs behind Microsoft 365, Power Platform, Fabric and Copilot, sweeps them on a schedule and answers questions about usage, licences, workflows and spend. It is read-only by design.</p>
       </div>

@@ -36,7 +36,7 @@ function textForm(feature, onSent, placeholder) {
 }
 
 export async function render() {
-  const root = h("div", {}, pageHead("Updates & support", "Platform Manager is free to use in full. A Microsoft Store subscription adds official updates, support and feature requests."));
+  const root = h("div", {}, pageHead("Updates & support", "Platform Manager SE Pro is now featured on the Microsoft App Store. Platform Manager is free to use in full, and a Microsoft Store subscription adds official updates, support and feature requests."));
   let sub, up;
   try { sub = await api.subscription(); } catch (e) { return root.append(h("div", { class: "banner error", text: e.message })), root; }
   const paid = sub.tier === "subscriber";
