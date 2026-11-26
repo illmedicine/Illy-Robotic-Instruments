@@ -67,10 +67,6 @@ button { font: inherit; }
 .brand img { width: 28px; height: 28px; }
 .brand small { font-weight: 400; opacity: .75; font-size: 12px; margin-left: 4px; }
 .spacer { flex: 1; }
-.illy-mark { display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 6px; line-height: 0; transition: background .12s var(--ease); }
-.illy-mark img { width: 22px; height: 22px; display: block; }
-.illy-mark:hover { background: rgba(255, 255, 255, .16); }
-.illy-mark:focus-visible { outline: 2px solid var(--brand-lime); outline-offset: 2px; }
 .titlebar .btn { color: var(--ink-inv); background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .22); }
 .titlebar .btn:hover { background: rgba(255, 255, 255, .22); }
 .livechip { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, .14); }
@@ -603,13 +599,17 @@ canvas.remote-screen { display: block; width: 100%; max-width: 1280px; height: a
 canvas.remote-screen:focus { outline: 2px solid var(--brand-light); outline-offset: 2px; }
 
 /* Footer link on every screen, and layout helpers for the roster */
-.sitefoot { margin-top: auto; padding: 14px 0 4px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 14px; text-align: center; font-size: 12px; }
+.sitefoot { margin-top: auto; padding: 14px 0 4px; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; font-size: 12px; }
 .main > :nth-last-child(2) { margin-bottom: 40px; }
 .sitefoot a { font-weight: 600; }
-.sitefoot .sep { color: var(--ink-3); }
 .illy-powered { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
 .illy-powered img { width: 18px; height: 18px; display: block; }
 .illy-powered:hover span { text-decoration: underline; }
+/* Illy shield in the title bar, linking to the company homepage */
+.illy-mark { display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 6px; line-height: 0; transition: background .12s var(--ease); }
+.illy-mark img { width: 22px; height: 22px; display: block; }
+.illy-mark:hover { background: rgba(255, 255, 255, .16); }
+.illy-mark:focus-visible { outline: 2px solid var(--brand-lime); outline-offset: 2px; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
 .scroll-y { max-height: 320px; overflow: auto; }
 
@@ -729,6 +729,35 @@ canvas.remote-screen:focus { outline: 2px solid var(--brand-light); outline-offs
 .fcap-row.bad { border-color: var(--risk); } .fcap-row.good { border-color: var(--ok); }
 .fcap-row small { color: var(--ink-3); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: .04em; }
 .fcap-row p { margin: 2px 0 0; font-size: 12.5px; }
+
+/* ---- Estate diagram (pages/fabricestate.js): an illustrative picture with invented names and figures ---- */
+.est-group { fill: #f1f6fb; stroke: #b9c8db; stroke-width: 1.2; }
+.est-group.fabric { stroke: #e07a1f; stroke-width: 2; }
+.est-group.dash { stroke-dasharray: 7 5; }
+.est-gtitle { font: 700 14px var(--font); fill: #0b2a4a; }
+.est-box { fill: #fff; stroke: #c7d3e3; stroke-width: 1.2; }
+.est-label { font: 600 13px var(--font); fill: #0b2a4a; }
+.est-label.narrow { font-size: 12px; }
+.est-sub { font: 500 11px var(--font); fill: #4b5b70; }
+.est-node { cursor: pointer; outline: none; }
+.est-node:focus-visible .est-box, .est-node.sel .est-box { stroke: #0f6cbd; stroke-width: 2.4; }
+.est-edge { fill: none; stroke-width: 1.6; opacity: .85; }
+.est-edge.k-data { stroke: #0f6cbd; }
+.est-edge.k-govern { stroke: #7a3dd6; stroke-dasharray: 6 4; }
+.est-edge.k-identity { stroke: #0f766e; stroke-dasharray: 2 4; }
+.est-edge.k-cost { stroke: #107c41; stroke-dasharray: 9 4 2 4; }
+.est-edge.hot { stroke-width: 3; opacity: 1; }
+.est-svg.flowing .est-node:not(.on):not(.seen), .est-svg.flowing .est-edge:not(.on):not(.seen) { opacity: .16; }
+.est-svg.flowing .est-node.seen, .est-svg.flowing .est-edge.seen { opacity: .55; }
+.est-node.on .est-box { stroke: #e07a1f; stroke-width: 3; }
+.est-edge.on { stroke-width: 3.4; opacity: 1; }
+.est-token { fill: #e07a1f; stroke: #fff; stroke-width: 2; }
+.est-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-3); margin: 8px 0 12px; }
+.est-sw { display: inline-block; width: 22px; height: 0; border-top: 3px solid; vertical-align: middle; margin-right: 6px; }
+.est-sw.k-data { border-color: #0f6cbd; }
+.est-sw.k-govern { border-color: #7a3dd6; border-top-style: dashed; }
+.est-sw.k-identity { border-color: #0f766e; border-top-style: dotted; }
+.est-sw.k-cost { border-color: #107c41; border-top-style: dashed; }
 
 /* the topology stories (pages/foundrystory.js) reuse the .topo-* rules above */
 .fstory .lane { fill: #f1f5f9; stroke: #dde5ed; } .fstory .lane.bad { fill: #fdf1ef; stroke: #f0c9c4; }

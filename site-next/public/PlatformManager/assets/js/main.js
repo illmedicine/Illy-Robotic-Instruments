@@ -28,6 +28,7 @@ import * as personuse from "./pages/personuse.js";
 import * as products from "./pages/products.js";
 import * as spend from "./pages/spend.js";
 import * as flowrepair from "./pages/flowrepair.js";
+import { STORE_URL, STORE_NAME, PARTNER_NOTE } from "./listing.js";
 import * as flowbrowser from "./pages/flowbrowser.js";
 import * as privacy from "./pages/privacy.js";
 import * as groups from "./pages/groups.js";
@@ -324,14 +325,16 @@ async function show() {
 
 // The last thing on every screen: where people read how sign-in works and what is recorded.
 const ILLY_HOME = "https://www.illyrobotic-ai.com/";
+
 function siteFoot() {
-  // Shown at the foot of every page for every role: the privacy link, then the maker's credit. The credit goes to the Illy homepage.
+  // Shown at the foot of every page for every role: the privacy link and the maker's credit, then the Store listing.
   return h("footer", { class: "sitefoot" },
-    h("a", { href: urlFor("privacy"), text: "Privacy & security" }),
-    h("span", { class: "sep", "aria-hidden": "true", text: "·" }),
-    h("a", { class: "illy-powered", href: ILLY_HOME, title: "Illy Robotic Instruments" },
-      h("img", { src: "/PlatformManager/assets/img/illy-shield.png", alt: "", width: 18, height: 18 }),
-      h("span", { text: "Powered by Illy Robotic Instruments" })));
+    h("div", {},
+      h("a", { href: urlFor("privacy"), text: "Privacy & security" }), " · ",
+      h("a", { class: "illy-powered", href: ILLY_HOME, title: "Illy Robotic Instruments" },
+        h("img", { src: ROOT + "assets/img/illy-shield.png", alt: "", width: 18, height: 18 }),
+        h("span", { text: "Powered by Illy Robotic Instruments" }))),
+    h("div", {}, h("a", { href: STORE_URL, target: "_blank", rel: "noopener", text: `${STORE_NAME} is featured on Microsoft Store` }), " · ", PARTNER_NOTE));
 }
 
 function demoBanner() {

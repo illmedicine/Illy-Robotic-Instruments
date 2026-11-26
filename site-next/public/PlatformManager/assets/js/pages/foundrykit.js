@@ -92,6 +92,13 @@ const MARKS = {
   shadow: { bg: "#b91c1c", d: ["M12 3l10 18H2z", "M12 10v5", "M12 18h.01"] },
   door: { bg: "#0067b1", d: ["M5 3h10v18H5z", "M15 7l5 2v10l-5 2", "M12 12h.01"] },
   copilotchat: { bg: "#3b82f6", d: ["M4 5h16v11H9l-5 4z"] },
+  onelake: { bg: "#117865", t: "OL" },
+  sql: { bg: "#cc2927", t: "SQL" },
+  devops: { bg: "#0078d4", t: "DO" },
+  teams: { bg: "#5b5fc7", t: "T" },
+  azure: { bg: "#0078d4", t: "A" },
+  files: { bg: "#8a6d1d", d: ["M3 7h7l2 2h9v10H3z"] },
+  database: { bg: "#334155", d: ["M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z", "M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6", "M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"] },
   empty: { bg: "#94a3b8", d: ["M4 4h16v16H4z", "M4 9h16", "M9 4v16"] },
   saving: { bg: "#15803d", d: ["M4.5 12.5l5 5L20 7"] },
 };

@@ -13,8 +13,9 @@ import { results } from "../analyze/engines/advisor.js";
 import { priceTab } from "./proposalprice.js";
 import { mapperCard, tableRows, guess, readLines } from "./tablemap.js";
 import { packageView, redlinePanel } from "./renewalcase.js";
+import { alertsCard, registerEntry, registerTab, REGISTER_KEY } from "./contractregister.js";
 
-const HISTORY = "contracts.history";
+const HISTORY = REGISTER_KEY;
 const POSTURE = { "needs-attention": "risk", caution: "warn", reasonable: "ok", "price-sheet": "info" };
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
@@ -24,6 +25,7 @@ const session = { docs: [], view: "package", seq: 0, notice: "" };
 export async function render() {
   let filter = "all";
   const out = h("div", {});
+  const alerts = h("div", {});
   const lens = select(ROLES.map((r) => [r.id, r.label]), getProfile().role, {
     "aria-label": "Audience lens", onchange: () => { saveProfile({ role: lens.value }); paint(); },
   });
@@ -32,8 +34,8 @@ export async function render() {
 
   function saveHistory(a) {
     const hist = store.get(HISTORY, []);
-    hist.unshift({ name: a.name, hash: a.hash, at: a.analyzedAt, counts: a.counts, coverage: a.coverage, posture: a.posture });
-    store.set(HISTORY, hist.slice(0, 25));
+    hist.unshift(registerEntry(a));
+    store.set(HISTORY, hist.slice(0, 100));
     results.set("contracts", { name: a.name, counts: a.counts, coverage: a.coverage, posture: a.posture });
   }
 
@@ -279,7 +281,8 @@ export async function render() {
   }
 
   function paint() {
-    if (!session.docs.length) { fill(out, tabs({ History: historyTab })); return; }
+    fill(alerts, alertsCard(paint));
+    if (!session.docs.length) { fill(out, tabs({ Register: () => registerTab(paint), History: historyTab }, "Register")); return; }
     const d = session.docs.find((x) => x.id === session.view);
     fill(out, session.notice ? note(session.notice) : null, docsCard(), d ? docView(d) : packageView(session.docs, paint));
   }
@@ -290,7 +293,7 @@ export async function render() {
     h("div", { class: "card" }, h("div", { class: "grid g-2" },
       filePicker(`Documents (${ACCEPTED}, up to 25 MB each; choose several)`, ACCEPTED, onFiles, true),
       h("div", {}, field("Paste text or a table", pasteText), h("div", { class: "toolbar" }, pasteName, h("button", { class: "btn primary", type: "button", onclick: onPaste }, icon("search"), "Review pasted text"))))),
-    out);
+    alerts, out);
   paint();
   return view;
 }

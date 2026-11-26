@@ -2,6 +2,7 @@ import { h, icon, pill } from "../dom.js";
 import { api } from "../api.js";
 import { pageHead } from "./common.js";
 import { currentRoute, replaceRoute } from "../route.js";
+import { estateView } from "./fabricestate.js";
 
 // Interactive Power BI to Fabric target topology: pick a run and watch it move through the estate step by step.
 // The diagram and runs come from /api/fabric/topology (made by the topology generator from a read-only admin API scan).
@@ -28,17 +29,17 @@ function parseSvg(text) {
 }
 
 export async function render() {
-  let t;
+  // The estate diagram does not need the generated topology, so the page still opens without it and says what is missing.
+  let t = null, missing = null;
   try {
     t = await api.fabricTopology();
   } catch (e) {
-    return h("div", {}, pageHead("Migration topology", "The target Power BI and Fabric estate, with runs you can play from start to finish."),
-      h("div", { class: "banner" }, icon("alert"), e.status === 404
-        ? "No topology has been generated yet. Run the topology generator; it writes data\\docs\\fabric-topology, which Install-OnServer copies to the server."
-        : e.message));
+    missing = e.status === 404
+      ? "No topology has been generated yet. Run the topology generator; it writes data\\docs\\fabric-topology, which Install-OnServer copies to the server."
+      : e.message;
   }
-  const runs = t.runs || [];
-  const svg = parseSvg(t.svg);
+  const runs = t?.runs || [];
+  const svg = t ? parseSvg(t.svg) : document.createElementNS(SVGNS, "svg");
   svg.classList.add("topo-svg");
   svg.setAttribute("role", "img");
   svg.setAttribute("aria-label", "Target topology: data sources, gateways, Fabric capacities, Azure services, Entra and Purview");
@@ -177,6 +178,7 @@ export async function render() {
     return h("div", { class: "card topo-stage" }, d);
   };
   const DOCS = [
+    { id: "estate", label: "Estate diagram", sub: "the estate, with invented figures" },
     { id: "topology", label: "Topology and runs", sub: "the target estate; play a run" },
     { id: "separation", label: "Separating runs from production", sub: "refresh load, three capacities, release flow, baseline plan" },
     { id: "setup", label: "What to turn on", sub: "every Azure, Fabric, Entra and Purview step, in order" },
@@ -195,14 +197,16 @@ export async function render() {
   }
   DOCS.forEach((x) => switcher.append(h("button", { type: "button", role: "tab", "aria-pressed": "false", onclick: () => show(x.id) },
     h("b", { text: x.label }), h("small", { text: x.sub }))));
-  panes.separation = doc(t.svgSeparation, "Separating runs from production: refresh load by hour, three capacities, how content is promoted, and the baseline plan");
-  panes.setup = doc(t.svgSetup, "What to turn on, in order: Azure, Fabric admin, Entra ID and Purview steps with owners");
+  panes.separation = doc(t?.svgSeparation, "Separating runs from production: refresh load by hour, three capacities, how content is promoted, and the baseline plan");
+  panes.setup = doc(t?.svgSetup, "What to turn on, in order: Azure, Fabric admin, Entra ID and Purview steps with owners");
+  panes.estate = estateView();
   const view = h("div", { class: "topo" },
     pageHead("Migration topology",
-      `The target Power BI and Fabric estate after the P1 move, with Azure, Entra and Purview, in three documents. Counts from the read-only scan of ${t.scannedAt || "the tenant"}.`,
+      `The target Power BI and Fabric estate after the P1 move, with Azure, Entra and Purview. The estate diagram uses invented figures; the other documents count the read-only scan of ${t?.scannedAt || "the tenant"}.`,
       h("a", { class: "btn", href: "/api/docs/fabric-topology/Fabric-Target-Topology.pdf", download: "Fabric-Target-Topology.pdf" }, icon("download"), "PDF (3 pages)")),
     switcher,
-    panes.topology = h("div", { class: "topo-grid" },
+    panes.estate,
+    panes.topology = h("div", {}, missing ? h("div", { class: "banner" }, icon("alert"), missing) : null, h("div", { class: "topo-grid" },
       h("div", { class: "card topo-stage" }, svg,
         h("p", { class: "muted", text: "Orange outline: the step now. Faded: earlier steps. The orange dot travels along every line the step uses; each line starts at a dot on the box it comes from and ends with an arrow on the box it reaches." })),
       h("div", { class: "card topo-side" },
@@ -211,11 +215,11 @@ export async function render() {
           h("button", { class: "btn", type: "button", onclick: () => { stop(); go(at - 1); } }, "Back"),
           h("button", { class: "btn", type: "button", onclick: () => { stop(); go(at + 1); } }, "Next step"),
           h("button", { class: "btn", type: "button", onclick: clear }, "Clear"), speed),
-        detail)),
+        detail))),
     panes.separation, panes.setup);
 
   const [, rid, st] = currentRoute().split("/");
-  const first = DOCS.some((x) => x.id === rid) ? rid : "topology";
+  const first = DOCS.some((x) => x.id === rid) ? rid : rid ? "topology" : "estate";
   show(first, true);
   if (rid && first === "topology") setTimeout(() => choose(decodeURIComponent(rid), Number(st) || 0), 0);
   return view;
