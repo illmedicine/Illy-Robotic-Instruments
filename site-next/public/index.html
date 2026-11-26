@@ -138,8 +138,6 @@
     @media (min-width: 821px) { .hero-badge.pm-badge { align-self: start; padding-top: 28px; } }
     .hero-badge-title { font-weight: 700; font-size: 1.15rem; margin-top: 4px; }
     .hero-badge-sub { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
-    .btn-store { background: var(--ink); color: #fff; }
-    .btn-store:hover { background: #1c2b44; transform: translateY(-1px); }
     .stats {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
       margin-top: 64px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
@@ -384,7 +382,16 @@
           <div class="btn-row">
             <a class="btn btn-primary" href="/PlatformManager/">Explore Platform Manager</a>
             <a class="btn btn-ghost" href="/EchoVue/">Explore Echo Vue</a>
-            <a class="btn btn-store" href="https://apps.microsoft.com/detail/9PHR976QBHKZ" target="_blank" rel="noopener">Get Platform Manager SE Pro on the Microsoft Store</a>
+            <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+            <ms-store-badge
+              productid="9phr976qbhkz"
+              productname="Platform Manager SE Pro"
+              window-mode="direct"
+              theme="auto"
+              size="large"
+              language="en-us"
+              animation="on">
+            </ms-store-badge>
           </div>
         </div>
         <a class="hero-badge pm-badge" href="/PlatformManager/" aria-label="Platform Manager SE Pro, now featured on the Microsoft App Store">
